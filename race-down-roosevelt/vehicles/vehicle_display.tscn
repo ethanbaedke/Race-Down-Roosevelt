@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://bbkwtwbnl2ge1"]
+
+[ext_resource type="PackedScene" uid="uid://dbpvto7rrusgi" path="res://vehicles/racer_vehicles/ambulance.glb" id="1_nt7xy"]
+[ext_resource type="PackedScene" uid="uid://dvfkavds4pv02" path="res://vehicles/racer_vehicles/firetruck.glb" id="2_2d7vx"]
+[ext_resource type="PackedScene" uid="uid://c2a3strqtmfk3" path="res://vehicles/racer_vehicles/delivery-truck-flat.glb" id="2_6tujd"]
+[ext_resource type="PackedScene" uid="uid://buwwxc5u5ym37" path="res://vehicles/racer_vehicles/race_car.glb" id="4_svgoj"]
+[ext_resource type="PackedScene" uid="uid://bfr7ir7lt1yp8" path="res://vehicles/racer_vehicles/sedan.glb" id="5_svgoj"]
+[ext_resource type="PackedScene" uid="uid://bm4s7bia48fib" path="res://vehicles/racer_vehicles/sports_car.glb" id="6_dtm1w"]
+[ext_resource type="PackedScene" uid="uid://dngas7vt1mu7j" path="res://vehicles/traffic_vehicles/delivery_truck.glb" id="7_uxdqm"]
+[ext_resource type="PackedScene" uid="uid://c86jqinojnkva" path="res://vehicles/traffic_vehicles/garbage-truck.glb" id="8_fedj0"]
+[ext_resource type="PackedScene" uid="uid://bx2ih5a4lxen5" path="res://vehicles/traffic_vehicles/hatchback.glb" id="9_eqyf3"]
+[ext_resource type="PackedScene" uid="uid://caxwxm47bu0f4" path="res://vehicles/traffic_vehicles/pickup_truck.glb" id="10_dunx0"]
+[ext_resource type="PackedScene" uid="uid://dgk7uf8r6h0aa" path="res://vehicles/traffic_vehicles/suv.glb" id="11_yyiug"]
+[ext_resource type="PackedScene" uid="uid://dclh2i81c448o" path="res://vehicles/traffic_vehicles/tractor.glb" id="12_3wgmm"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_uxdqm"]
+size = Vector2(20, 10)
+
+[node name="VehicleDisplay" type="Node3D" unique_id=1268700602]
+
+[node name="RacerVehicles" type="Node3D" parent="." unique_id=1746408370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="AmbulanceModel" parent="RacerVehicles" unique_id=918524078 instance=ExtResource("1_nt7xy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, 0)
+
+[node name="DeliveryTruckFlatModel" parent="RacerVehicles" unique_id=1065771022 instance=ExtResource("2_6tujd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, 0)
+
+[node name="FiretruckModel" parent="RacerVehicles" unique_id=571150751 instance=ExtResource("2_2d7vx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+
+[node name="RaceCarModel" parent="RacerVehicles" unique_id=58396974 instance=ExtResource("4_svgoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
+
+[node name="SedanModel" parent="RacerVehicles" unique_id=1862978739 instance=ExtResource("5_svgoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 0)
+
+[node name="SportsCarModel" parent="RacerVehicles" unique_id=175060110 instance=ExtResource("6_dtm1w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 0)
+
+[node name="TrafficVehicles" type="Node3D" parent="." unique_id=1636909265]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+
+[node name="DeliveryTruckModel" parent="TrafficVehicles" unique_id=1876274815 instance=ExtResource("7_uxdqm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, 0)
+
+[node name="GarbageTruckModel" parent="TrafficVehicles" unique_id=739965136 instance=ExtResource("8_fedj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, 0)
+
+[node name="HatchbackModel" parent="TrafficVehicles" unique_id=847265483 instance=ExtResource("9_eqyf3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+
+[node name="PickupTruckModel" parent="TrafficVehicles" unique_id=606537528 instance=ExtResource("10_dunx0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
+
+[node name="SuvModel" parent="TrafficVehicles" unique_id=362483127 instance=ExtResource("11_yyiug")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 0)
+
+[node name="TractorModel" parent="TrafficVehicles" unique_id=712968821 instance=ExtResource("12_3wgmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=360122430]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 0, 7, 8)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1406052397]
+mesh = SubResource("PlaneMesh_uxdqm")

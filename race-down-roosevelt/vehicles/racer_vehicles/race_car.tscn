@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://r88y3pb7b0q"]
+
+[ext_resource type="PackedScene" uid="uid://buwwxc5u5ym37" path="res://vehicles/racer_vehicles/race_car.glb" id="1_x1hy7"]
+
+[node name="RaceCar" type="Node3D" unique_id=1093534000]
+
+[node name="Model" parent="." unique_id=1015639436 instance=ExtResource("1_x1hy7")]

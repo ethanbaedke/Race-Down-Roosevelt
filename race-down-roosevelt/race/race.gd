@@ -1,14 +1,14 @@
-extends Node3D
+class_name Race extends Node3D
 
 @export var race_parameters:RaceParameters = null
 
 func setup_race() -> void:
 	
-	print("Setting up race.")
+	RdrLogger.log(self, "Setting up race.")
 	
 	_validate_race_parameters()
 	
-	print("Race setup complete.")
+	RdrLogger.log(self, "Race setup complete.")
 
 # Ensure race parameters are set up correctly to be used during race setup.
 func _validate_race_parameters() -> void:
@@ -23,7 +23,7 @@ func _validate_race_parameters() -> void:
 	# If the race parameters show conflicts at this point, they must be resolved so the race can start.
 	# We will not back out of a race once it's begun setup.
 	if (!race_parameters.validate_parameters()):
-		printerr("Race parameters were invalid while setting up the race. Forcefully resolving conflicts.")
+		RdrLogger.error(self, "Race parameters were invalid while setting up the race. Forcefully resolving conflicts.")
 		race_parameters.force_resolve_conflicts()
 
 func _ready() -> void:

@@ -18,6 +18,8 @@ func validate_parameters() -> bool:
 	# Two racers should never have the same device index, unless it's -2, signaling that it's AI controlled.
 	var device_index_dict:Dictionary = {}
 	for i:int in range(racer_objects.size()):
+		if (racer_objects[i] == null):
+			continue
 		var index:int = racer_objects[i].device_index
 		if (index == -2):
 			continue

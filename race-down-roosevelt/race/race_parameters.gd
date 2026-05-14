@@ -30,6 +30,26 @@ func validate_parameters() -> bool:
 			# True means nothing here. Just need the key to exist in the dictionary.
 			device_index_dict[index] = true
 	
+	# If a racer has a scene reference for their vehicle, ensure it has the racer vehicle object type.
+	for racer:RacerObject in racer_objects:
+		if (racer == null || racer.vehicle == null):
+			continue
+		else:
+			var vehicle:Object = racer.vehicle.instantiate()
+			if (vehicle == null):
+				var racer_name:String = racer.name
+				var expected_type:String = (RacerVehicle as GDScript).get_global_name()
+				RdrLogger.error(self, "Racer " + racer_name + " vehicle scene reference could not be instantiated. Ensure reference is of type " + expected_type + ".")
+				return false
+			if (vehicle is not RacerVehicle):
+				var racer_name:String = racer.name
+				var current_type:String = vehicle.get_class()
+				if (vehicle.get_script() != null):
+					current_type = vehicle.get_script().get_global_name()
+				var expected_type:String = (RacerVehicle as GDScript).get_global_name()
+				RdrLogger.error(self, "Racer " + racer_name + " vehicle scene reference is type " + current_type + ", but should be of type " + expected_type + ".")
+				return false
+	
 	RdrLogger.log(self, "Race parameter validation succeeded.")
 	return true
 
@@ -66,7 +86,19 @@ func force_resolve_conflicts() -> void:
 		else:
 			# True means nothing here. Just need the key to exist in the dictionary.
 			device_index_dict[index] = true
-			
+	
+	# If a racer has a scene reference for their vehicle that isn't of type racer vehicle, remove their vehicle reference.
+	for racer:RacerObject in racer_objects:
+		if (racer == null || racer.vehicle == null):
+			continue
+		else:
+			var vehicle:Object = racer.vehicle.instantiate()
+			if (vehicle is not RacerVehicle):
+				var racer_name:String = racer.name
+				var expected_type:String = (RacerVehicle as GDScript).get_global_name()
+				RdrLogger.warn(self, "Racer " + racer_name + " vehicle scene reference is not of type " + expected_type + ". Setting vehicle to null.")
+				racer.vehicle = null
+	
 	RdrLogger.log(self, "Conflict resolution on race parameters complete.")
 			
 func handle_duplicate_names() -> void:

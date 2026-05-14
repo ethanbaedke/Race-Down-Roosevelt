@@ -36,6 +36,9 @@ func _spawn_racer_vehicles() -> void:
 # Ensure race parameters are set up correctly to be used during race setup.
 func _validate_race_parameters() -> void:
 	
+	RdrLogger.log(self, "Beginning race parameter validation.")
+	
+	# Ensure race parameters exist.
 	if (race_parameters == null):
 		# If no race parameters are set, try and load the default race parameters.
 		race_parameters = load("res://race/default_race_parameters.tres")
@@ -48,6 +51,19 @@ func _validate_race_parameters() -> void:
 	if (!race_parameters.validate_parameters()):
 		RdrLogger.error(self, "Race parameters were invalid while setting up the race. Forcefully resolving conflicts.")
 		race_parameters.force_resolve_conflicts()
+		
+	# If any racer has a null vehicle, it should be considered a random selection.
+	for racer:RacerObject in race_parameters.racer_objects:
+		if (racer == null):
+			continue
+		if (racer.vehicle == null):
+			var vehicle_scene:PackedScene = Globals.get_random_racer_vehicle()
+			var racer_name:String = racer.name
+			var vehicle_name:String = vehicle_scene.get_state().get_node_name(0)
+			RdrLogger.log(self, "Assigning random vehicle to " + racer_name + ": " + vehicle_name + ".")
+			racer.vehicle = Globals.get_random_racer_vehicle()
+			
+	RdrLogger.log(self, "Race parameter validation finished.")
 
 func _ready() -> void:
 	

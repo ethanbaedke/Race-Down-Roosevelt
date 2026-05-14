@@ -49,7 +49,7 @@ func _validate_race_parameters() -> void:
 	# If the race parameters show conflicts at this point, they must be resolved so the race can start.
 	# We will not back out of a race once it's begun setup.
 	if (!race_parameters.validate_parameters()):
-		RdrLogger.error(self, "Race parameters were invalid while setting up the race. Forcefully resolving conflicts.")
+		RdrLogger.error(self, "Race parameters were invalid. Forcefully resolving conflicts.")
 		race_parameters.force_resolve_conflicts()
 		
 	# If any racer has a null vehicle, it should be considered a random selection.

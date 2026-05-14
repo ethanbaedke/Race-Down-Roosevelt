@@ -5,14 +5,14 @@ class_name RaceParameters extends Resource
 # Ensures there are no conflics with the current parameter setup.
 func validate_parameters() -> bool:
 	
-	RdrLogger.log(self, "Beginning race parameter validation.")
+	RdrLogger.log(self, "Beginning validation.")
 	
 	# Duplicate names is not considered invalid, we just handle fixing them here.
 	handle_duplicate_names()
 	
 	# The racer array must have a size a four. Null entries are okay, and in some cases, expected.
 	if (racer_objects.size() != 4):
-		RdrLogger.error(self, "Race parameter validation failed: must contain exactly 4 racer objects, but " + str(racer_objects.size()) + " are present.")
+		RdrLogger.error(self, "Validation failed: must contain exactly 4 racer objects, but " + str(racer_objects.size()) + " are present.")
 		return false
 	
 	# Two racers should never have the same device index, unless it's -2, signaling that it's AI controlled.
@@ -24,7 +24,7 @@ func validate_parameters() -> bool:
 		if (index == -2):
 			continue
 		if (device_index_dict.has(index)):
-			RdrLogger.error(self, "Race parameter validation failed: multiple racers are attempting to use device with index " + str(index) + ".")
+			RdrLogger.error(self, "Validation failed: multiple racers are attempting to use device with index " + str(index) + ".")
 			return false
 		else:
 			# True means nothing here. Just need the key to exist in the dictionary.
@@ -50,23 +50,23 @@ func validate_parameters() -> bool:
 				RdrLogger.error(self, "Racer " + racer_name + " vehicle scene reference is type " + current_type + ", but should be of type " + expected_type + ".")
 				return false
 	
-	RdrLogger.log(self, "Race parameter validation succeeded.")
+	RdrLogger.log(self, "Validation succeeded.")
 	return true
 
 # Modifies the race parameters so no conflicts exits.
 # This could involve removing racers.
 func force_resolve_conflicts() -> void:
 	
-	RdrLogger.log(self, "Beginning conflict resolution on race parameters.")
+	RdrLogger.log(self, "Beginning conflict resolution.")
 	
 	# Add or remove racers until there are exactly four.
 	if (racer_objects.size() < 4):
 		for i:int in range(racer_objects.size(), 4):
-			RdrLogger.warn(self, "Race parameters contain less than four racers, adding null racer.")
+			RdrLogger.warn(self, "Less than four racers exist, adding null racer.")
 			racer_objects.append(null)
 	if (racer_objects.size() > 4):
 		for i:int in range(racer_objects.size() - 1, 3, -1):
-			RdrLogger.warn(self, "Race parameters contain more than four racers, removing last racer.")
+			RdrLogger.warn(self, "More than four racers exist, removing last racer.")
 			racer_objects.remove_at(i)
 			
 	# Ensure names are unique.
@@ -99,7 +99,7 @@ func force_resolve_conflicts() -> void:
 				RdrLogger.warn(self, "Racer " + racer_name + " vehicle scene reference is not of type " + expected_type + ". Setting vehicle to null.")
 				racer.vehicle = null
 	
-	RdrLogger.log(self, "Conflict resolution on race parameters complete.")
+	RdrLogger.log(self, "Conflict resolution complete.")
 			
 func handle_duplicate_names() -> void:
 	
@@ -111,7 +111,7 @@ func handle_duplicate_names() -> void:
 		var name:String = racer_objects[i].name
 		if (name_dict.has(name)):
 			var new_name:String = name + " (" + str(name_dict[name]) + ")"
-			RdrLogger.log(self, "Duplicate name detected on race parameters: changing " + name + " to " + new_name + ".")
+			RdrLogger.log(self, "Duplicate name detected: changing " + name + " to " + new_name + ".")
 			racer_objects[i].name = new_name
 			name_dict[name] += 1
 		else:

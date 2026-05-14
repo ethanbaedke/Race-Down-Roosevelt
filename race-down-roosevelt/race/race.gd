@@ -61,7 +61,7 @@ func _validate_race_parameters() -> void:
 			var racer_name:String = racer.name
 			var vehicle_name:String = vehicle_scene.get_state().get_node_name(0)
 			RdrLogger.log(self, "Assigning random vehicle to " + racer_name + ": " + vehicle_name + ".")
-			racer.vehicle = Globals.get_random_racer_vehicle()
+			racer.vehicle = vehicle_scene
 			
 	RdrLogger.log(self, "Race parameter validation finished.")
 

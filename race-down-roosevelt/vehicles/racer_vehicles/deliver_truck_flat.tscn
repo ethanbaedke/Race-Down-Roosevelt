@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://hofvt6lo27ny"]
+
+[ext_resource type="Script" uid="uid://b30kj0jrm85yt" path="res://vehicles/racer_vehicles/racer_vehicle.gd" id="1_alup5"]
+[ext_resource type="PackedScene" uid="uid://c2a3strqtmfk3" path="res://vehicles/racer_vehicles/delivery_truck_flat.glb" id="2_alup5"]
+
+[node name="DeliveryTruckFlat" type="Node3D" unique_id=1093534000]
+script = ExtResource("1_alup5")
+
+[node name="DeliveryTruckFlatModel" parent="." unique_id=1932823465 instance=ExtResource("2_alup5")]

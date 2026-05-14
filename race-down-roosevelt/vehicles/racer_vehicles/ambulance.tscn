@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://jca2kr1g6q1t"]
+
+[ext_resource type="Script" uid="uid://b30kj0jrm85yt" path="res://vehicles/racer_vehicles/racer_vehicle.gd" id="1_gwnj3"]
+[ext_resource type="PackedScene" uid="uid://dbpvto7rrusgi" path="res://vehicles/racer_vehicles/ambulance.glb" id="2_gwnj3"]
+
+[node name="Ambulance" type="Node3D" unique_id=1093534000]
+script = ExtResource("1_gwnj3")
+
+[node name="AmbulanceModel" parent="." unique_id=747674363 instance=ExtResource("2_gwnj3")]

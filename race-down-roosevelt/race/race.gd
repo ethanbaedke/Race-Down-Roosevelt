@@ -2,13 +2,36 @@ class_name Race extends Node3D
 
 @export var race_parameters:RaceParameters = null
 
+@onready var _racer_vehicle_spawn_points:Array[Node3D] = [
+	$"RacerVehicleSpawnPoints/1",
+	$"RacerVehicleSpawnPoints/2",
+	$"RacerVehicleSpawnPoints/3",
+	$"RacerVehicleSpawnPoints/4",
+]
+
 func setup_race() -> void:
 	
 	RdrLogger.log(self, "Setting up race.")
 	
 	_validate_race_parameters()
+	_spawn_racer_vehicles()
 	
 	RdrLogger.log(self, "Race setup complete.")
+
+# This function expects race parameters to be valid, and four racer vehicle spawn points to exist.
+func _spawn_racer_vehicles() -> void:
+	
+	RdrLogger.log(self, "Spawning racer vehicles.")
+	
+	for i:int in range(4):
+		if (race_parameters.racer_objects[i] == null):
+			continue
+		else:
+			var racer:RacerVehicle = race_parameters.racer_objects[i].vehicle.instantiate()
+			self.add_child(racer)
+			racer.global_position = _racer_vehicle_spawn_points[i].global_position
+	
+	RdrLogger.log(self, "Racer vehicle spawning complete.")
 
 # Ensure race parameters are set up correctly to be used during race setup.
 func _validate_race_parameters() -> void:

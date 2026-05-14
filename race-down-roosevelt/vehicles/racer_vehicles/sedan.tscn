@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dec6xpvrfpmbf"]
+
+[ext_resource type="Script" uid="uid://b30kj0jrm85yt" path="res://vehicles/racer_vehicles/racer_vehicle.gd" id="1_4rng7"]
+[ext_resource type="PackedScene" uid="uid://bfr7ir7lt1yp8" path="res://vehicles/racer_vehicles/sedan.glb" id="2_4rng7"]
+
+[node name="Sedan" type="Node3D" unique_id=1093534000]
+script = ExtResource("1_4rng7")
+
+[node name="SedanModel" parent="." unique_id=1496115204 instance=ExtResource("2_4rng7")]

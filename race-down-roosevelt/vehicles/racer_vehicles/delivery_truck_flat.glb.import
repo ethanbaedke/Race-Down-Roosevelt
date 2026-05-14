@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c2a3strqtmfk3"
-path="res://.godot/imported/delivery-truck-flat.glb-1fc3873105bb12567728b52afbf3635a.scn"
+path="res://.godot/imported/delivery_truck_flat.glb-d70bad28cfc070cf1f6b7dc479b477ce.scn"
 
 [deps]
 
-source_file="res://vehicles/racer_vehicles/delivery-truck-flat.glb"
-dest_files=["res://.godot/imported/delivery-truck-flat.glb-1fc3873105bb12567728b52afbf3635a.scn"]
+source_file="res://vehicles/racer_vehicles/delivery_truck_flat.glb"
+dest_files=["res://.godot/imported/delivery_truck_flat.glb-d70bad28cfc070cf1f6b7dc479b477ce.scn"]
 
 [params]
 

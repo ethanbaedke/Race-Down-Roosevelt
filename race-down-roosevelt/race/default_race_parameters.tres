@@ -2,21 +2,32 @@
 
 [ext_resource type="Script" uid="uid://c8hh1wvayq5by" path="res://race/race_parameters.gd" id="1_aemwy"]
 [ext_resource type="Script" uid="uid://dp5p80aakxu84" path="res://race/racer_object.gd" id="1_npa6x"]
+[ext_resource type="PackedScene" uid="uid://r88y3pb7b0q" path="res://vehicles/racer_vehicles/race_car.tscn" id="2_81wdo"]
+[ext_resource type="PackedScene" uid="uid://bs74u5kijhvhc" path="res://vehicles/racer_vehicles/sports_car.tscn" id="3_xvt8s"]
+[ext_resource type="PackedScene" uid="uid://dec6xpvrfpmbf" path="res://vehicles/racer_vehicles/sedan.tscn" id="4_xvt8s"]
+[ext_resource type="PackedScene" uid="uid://hofvt6lo27ny" path="res://vehicles/racer_vehicles/deliver_truck_flat.tscn" id="5_3johs"]
 
 [sub_resource type="Resource" id="Resource_npa6x"]
 script = ExtResource("1_npa6x")
+vehicle = ExtResource("2_81wdo")
+device_index = -1
 metadata/_custom_type_script = "uid://dp5p80aakxu84"
 
-[sub_resource type="Resource" id="Resource_81wdo"]
+[sub_resource type="Resource" id="Resource_npf4w"]
 script = ExtResource("1_npa6x")
-device_index = 1
+vehicle = ExtResource("3_xvt8s")
 metadata/_custom_type_script = "uid://dp5p80aakxu84"
 
-[sub_resource type="Resource" id="Resource_qwtg1"]
+[sub_resource type="Resource" id="Resource_aviwa"]
 script = ExtResource("1_npa6x")
-device_index = 1
+vehicle = ExtResource("4_xvt8s")
+metadata/_custom_type_script = "uid://dp5p80aakxu84"
+
+[sub_resource type="Resource" id="Resource_0kby5"]
+script = ExtResource("1_npa6x")
+vehicle = ExtResource("5_3johs")
 metadata/_custom_type_script = "uid://dp5p80aakxu84"
 
 [resource]
 script = ExtResource("1_aemwy")
-racer_objects = Array[ExtResource("1_npa6x")]([SubResource("Resource_npa6x"), SubResource("Resource_81wdo"), SubResource("Resource_qwtg1")])
+racer_objects = Array[ExtResource("1_npa6x")]([SubResource("Resource_npa6x"), SubResource("Resource_npf4w"), SubResource("Resource_aviwa"), SubResource("Resource_0kby5")])

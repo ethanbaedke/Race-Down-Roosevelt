@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bs74u5kijhvhc"]
+
+[ext_resource type="Script" uid="uid://b30kj0jrm85yt" path="res://vehicles/racer_vehicles/racer_vehicle.gd" id="1_meqtm"]
+[ext_resource type="PackedScene" uid="uid://bm4s7bia48fib" path="res://vehicles/racer_vehicles/sports_car.glb" id="2_meqtm"]
+
+[node name="SportsCar" type="Node3D" unique_id=1093534000]
+script = ExtResource("1_meqtm")
+
+[node name="SportsCarModel" parent="." unique_id=617761759 instance=ExtResource("2_meqtm")]

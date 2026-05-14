@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dbs3n4nor3rdt"]
+
+[ext_resource type="Script" uid="uid://b30kj0jrm85yt" path="res://vehicles/racer_vehicles/racer_vehicle.gd" id="1_htnkw"]
+[ext_resource type="PackedScene" uid="uid://dvfkavds4pv02" path="res://vehicles/racer_vehicles/firetruck.glb" id="2_htnkw"]
+
+[node name="Firetruck" type="Node3D" unique_id=1093534000]
+script = ExtResource("1_htnkw")
+
+[node name="FiretruckModel" parent="." unique_id=1882874970 instance=ExtResource("2_htnkw")]

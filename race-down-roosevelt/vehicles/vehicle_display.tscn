@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dbpvto7rrusgi" path="res://vehicles/racer_vehicles/ambulance.glb" id="1_nt7xy"]
 [ext_resource type="PackedScene" uid="uid://dvfkavds4pv02" path="res://vehicles/racer_vehicles/firetruck.glb" id="2_2d7vx"]
-[ext_resource type="PackedScene" uid="uid://c2a3strqtmfk3" path="res://vehicles/racer_vehicles/delivery-truck-flat.glb" id="2_6tujd"]
+[ext_resource type="PackedScene" uid="uid://c2a3strqtmfk3" path="res://vehicles/racer_vehicles/delivery_truck_flat.glb" id="2_6tujd"]
 [ext_resource type="PackedScene" uid="uid://buwwxc5u5ym37" path="res://vehicles/racer_vehicles/race_car.glb" id="4_svgoj"]
 [ext_resource type="PackedScene" uid="uid://bfr7ir7lt1yp8" path="res://vehicles/racer_vehicles/sedan.glb" id="5_svgoj"]
 [ext_resource type="PackedScene" uid="uid://bm4s7bia48fib" path="res://vehicles/racer_vehicles/sports_car.glb" id="6_dtm1w"]

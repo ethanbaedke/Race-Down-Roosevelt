@@ -1,0 +1,1 @@
+class_name RacerVehicle extends Node3D

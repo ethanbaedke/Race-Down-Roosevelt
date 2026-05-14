@@ -2,29 +2,19 @@
 
 [ext_resource type="Script" uid="uid://c8hh1wvayq5by" path="res://race/race_parameters.gd" id="1_aemwy"]
 [ext_resource type="Script" uid="uid://dp5p80aakxu84" path="res://race/racer_object.gd" id="1_npa6x"]
-[ext_resource type="PackedScene" uid="uid://d381mmv3sxx7j" path="res://race/race.tscn" id="2_npf4w"]
-[ext_resource type="PackedScene" uid="uid://dgk7uf8r6h0aa" path="res://vehicles/traffic_vehicles/suv.glb" id="2_xvt8s"]
-[ext_resource type="PackedScene" uid="uid://dec6xpvrfpmbf" path="res://vehicles/racer_vehicles/sedan.tscn" id="4_xvt8s"]
 
-[sub_resource type="Resource" id="Resource_3johs"]
+[sub_resource type="Resource" id="Resource_npa6x"]
 script = ExtResource("1_npa6x")
-vehicle = ExtResource("2_xvt8s")
-device_index = 1
 metadata/_custom_type_script = "uid://dp5p80aakxu84"
 
 [sub_resource type="Resource" id="Resource_81wdo"]
 script = ExtResource("1_npa6x")
-vehicle = ExtResource("2_npf4w")
-device_index = 1
 metadata/_custom_type_script = "uid://dp5p80aakxu84"
 
-[sub_resource type="Resource" id="Resource_npf4w"]
+[sub_resource type="Resource" id="Resource_qwtg1"]
 script = ExtResource("1_npa6x")
-vehicle = ExtResource("4_xvt8s")
-name = "Ethan"
-device_index = -1
 metadata/_custom_type_script = "uid://dp5p80aakxu84"
 
 [resource]
 script = ExtResource("1_aemwy")
-racer_objects = Array[ExtResource("1_npa6x")]([SubResource("Resource_3johs"), SubResource("Resource_81wdo"), null, SubResource("Resource_npf4w")])
+racer_objects = Array[ExtResource("1_npa6x")]([SubResource("Resource_npa6x"), SubResource("Resource_81wdo"), SubResource("Resource_qwtg1")])

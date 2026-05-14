@@ -52,6 +52,18 @@ func _validate_race_parameters() -> void:
 		RdrLogger.error(self, "Race parameters were invalid. Forcefully resolving conflicts.")
 		race_parameters.force_resolve_conflicts()
 		
+	# If all racers are null or AI, replace the first racer with a new one, and give it keyboard controlls.
+	# Fully AI races are not supported.
+	var all_racers_null_or_ai:bool = true
+	for racer:RacerObject in race_parameters.racer_objects:
+		if (racer != null && racer.device_index != -2):
+			all_racers_null_or_ai = false
+			break
+	if (all_racers_null_or_ai):
+		var racer:RacerObject = RacerObject.new()
+		racer.device_index = -1
+		race_parameters.racer_objects[0] = racer
+		
 	# If any racer has a null vehicle, it should be considered a random selection.
 	for racer:RacerObject in race_parameters.racer_objects:
 		if (racer == null):
@@ -62,7 +74,7 @@ func _validate_race_parameters() -> void:
 			var vehicle_name:String = vehicle_scene.get_state().get_node_name(0)
 			RdrLogger.log(self, "Assigning random vehicle to " + racer_name + ": " + vehicle_name + ".")
 			racer.vehicle = vehicle_scene
-			
+
 	RdrLogger.log(self, "Race parameter validation finished.")
 
 func _ready() -> void:

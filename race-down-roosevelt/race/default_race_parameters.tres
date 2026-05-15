@@ -5,16 +5,24 @@
 
 [sub_resource type="Resource" id="Resource_npa6x"]
 script = ExtResource("1_npa6x")
-metadata/_custom_type_script = "uid://dp5p80aakxu84"
-
-[sub_resource type="Resource" id="Resource_81wdo"]
-script = ExtResource("1_npa6x")
+device_index = -1
 metadata/_custom_type_script = "uid://dp5p80aakxu84"
 
 [sub_resource type="Resource" id="Resource_qwtg1"]
 script = ExtResource("1_npa6x")
+device_index = 0
+metadata/_custom_type_script = "uid://dp5p80aakxu84"
+
+[sub_resource type="Resource" id="Resource_81wdo"]
+script = ExtResource("1_npa6x")
+device_index = 1
+metadata/_custom_type_script = "uid://dp5p80aakxu84"
+
+[sub_resource type="Resource" id="Resource_npf4w"]
+script = ExtResource("1_npa6x")
+device_index = 2
 metadata/_custom_type_script = "uid://dp5p80aakxu84"
 
 [resource]
 script = ExtResource("1_aemwy")
-racer_objects = Array[ExtResource("1_npa6x")]([SubResource("Resource_npa6x"), SubResource("Resource_81wdo"), SubResource("Resource_qwtg1")])
+racer_objects = Array[ExtResource("1_npa6x")]([SubResource("Resource_npa6x"), SubResource("Resource_qwtg1"), SubResource("Resource_81wdo"), SubResource("Resource_npf4w")])

@@ -25,6 +25,11 @@ Globals="*uid://bfgwv77cqwhuk"
 gdscript/warnings/unused_parameter=0
 gdscript/warnings/untyped_declaration=2
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

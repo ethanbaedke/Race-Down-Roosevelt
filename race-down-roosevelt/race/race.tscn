@@ -19,5 +19,215 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 [node name="4" type="Node3D" parent="RacerVehicleSpawnPoints" unique_id=1242191265]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=771495943]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 3, -8)
+[node name="ViewportSetup1p" type="Control" parent="." unique_id=1270194998]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="P1SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup1p" unique_id=1013092802]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ViewportSetup1p/P1SubViewportContainer" unique_id=495757156]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 0
+
+[node name="P1Cam1p" type="Camera3D" parent="ViewportSetup1p/P1SubViewportContainer/SubViewport" unique_id=368035240]
+
+[node name="ViewportSetup2p" type="Control" parent="." unique_id=1816943001]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SplitContainer" type="SplitContainer" parent="ViewportSetup2p" unique_id=1783777825]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+dragger_visibility = 2
+vertical = true
+
+[node name="P1SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup2p/SplitContainer" unique_id=1161227815]
+layout_mode = 2
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ViewportSetup2p/SplitContainer/P1SubViewportContainer" unique_id=1124966520]
+handle_input_locally = false
+size = Vector2i(1920, 540)
+render_target_update_mode = 0
+
+[node name="P1Cam2p" type="Camera3D" parent="ViewportSetup2p/SplitContainer/P1SubViewportContainer/SubViewport" unique_id=1614703854]
+
+[node name="P2SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup2p/SplitContainer" unique_id=811511113]
+layout_mode = 2
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ViewportSetup2p/SplitContainer/P2SubViewportContainer" unique_id=2138917841]
+handle_input_locally = false
+size = Vector2i(1920, 540)
+render_target_update_mode = 0
+
+[node name="P2Cam2p" type="Camera3D" parent="ViewportSetup2p/SplitContainer/P2SubViewportContainer/SubViewport" unique_id=950310841]
+
+[node name="ViewportSetup3p" type="Control" parent="." unique_id=412423473]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SplitContainer" type="SplitContainer" parent="ViewportSetup3p" unique_id=491390015]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+dragger_visibility = 2
+vertical = true
+
+[node name="P1SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup3p/SplitContainer" unique_id=2008084985]
+layout_mode = 2
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ViewportSetup3p/SplitContainer/P1SubViewportContainer" unique_id=1933646717]
+handle_input_locally = false
+size = Vector2i(1920, 540)
+render_target_update_mode = 0
+
+[node name="P1Cam3p" type="Camera3D" parent="ViewportSetup3p/SplitContainer/P1SubViewportContainer/SubViewport" unique_id=279638826]
+
+[node name="SplitContainer" type="SplitContainer" parent="ViewportSetup3p/SplitContainer" unique_id=962487105]
+layout_mode = 2
+size_flags_vertical = 3
+dragger_visibility = 2
+
+[node name="P2SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup3p/SplitContainer/SplitContainer" unique_id=1243543346]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ViewportSetup3p/SplitContainer/SplitContainer/P2SubViewportContainer" unique_id=110053399]
+handle_input_locally = false
+size = Vector2i(960, 540)
+render_target_update_mode = 0
+
+[node name="P2Cam3p" type="Camera3D" parent="ViewportSetup3p/SplitContainer/SplitContainer/P2SubViewportContainer/SubViewport" unique_id=1010377993]
+
+[node name="P3SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup3p/SplitContainer/SplitContainer" unique_id=1035557721]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ViewportSetup3p/SplitContainer/SplitContainer/P3SubViewportContainer" unique_id=1461339796]
+handle_input_locally = false
+size = Vector2i(960, 540)
+render_target_update_mode = 0
+
+[node name="P3Cam3p" type="Camera3D" parent="ViewportSetup3p/SplitContainer/SplitContainer/P3SubViewportContainer/SubViewport" unique_id=484191211]
+
+[node name="ViewportSetup4p" type="Control" parent="." unique_id=86277851]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SplitContainer" type="SplitContainer" parent="ViewportSetup4p" unique_id=401981938]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offsets = PackedInt32Array(40)
+dragger_visibility = 2
+vertical = true
+split_offset = 40
+
+[node name="SplitContainerTop" type="SplitContainer" parent="ViewportSetup4p/SplitContainer" unique_id=996727786]
+layout_mode = 2
+size_flags_vertical = 3
+dragger_visibility = 2
+
+[node name="P1SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup4p/SplitContainer/SplitContainerTop" unique_id=1734390034]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ViewportSetup4p/SplitContainer/SplitContainerTop/P1SubViewportContainer" unique_id=1551899885]
+handle_input_locally = false
+size = Vector2i(960, 580)
+render_target_update_mode = 0
+
+[node name="P1Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerTop/P1SubViewportContainer/SubViewport" unique_id=1962248314]
+
+[node name="P2SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup4p/SplitContainer/SplitContainerTop" unique_id=629965026]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ViewportSetup4p/SplitContainer/SplitContainerTop/P2SubViewportContainer" unique_id=326561824]
+handle_input_locally = false
+size = Vector2i(960, 580)
+render_target_update_mode = 0
+
+[node name="P2Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerTop/P2SubViewportContainer/SubViewport" unique_id=14345126]
+
+[node name="SplitContainerBottom" type="SplitContainer" parent="ViewportSetup4p/SplitContainer" unique_id=437469594]
+layout_mode = 2
+size_flags_vertical = 3
+dragger_visibility = 2
+
+[node name="P3SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom" unique_id=1983900006]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P3SubViewportContainer" unique_id=2120210250]
+handle_input_locally = false
+size = Vector2i(960, 500)
+render_target_update_mode = 0
+
+[node name="P3Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P3SubViewportContainer/SubViewport" unique_id=1996853780]
+
+[node name="P4SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom" unique_id=117659262]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P4SubViewportContainer" unique_id=971782923]
+handle_input_locally = false
+size = Vector2i(960, 500)
+render_target_update_mode = 0
+
+[node name="P4Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P4SubViewportContainer/SubViewport" unique_id=1975362]

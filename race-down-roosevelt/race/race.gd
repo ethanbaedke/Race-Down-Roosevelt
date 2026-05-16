@@ -34,7 +34,7 @@ func _move_racers(delta:float) -> void:
 		
 	# Debugging
 	for vehicle:RacerVehicle in order:
-		RdrLogger.log(self, vehicle.racer.name + " z-pos: " + str(vehicle.position.z))
+		RdrLogger.spam_log(self, vehicle.racer.name + " z-pos: " + str(vehicle.position.z))
 
 #region Race Setup
 

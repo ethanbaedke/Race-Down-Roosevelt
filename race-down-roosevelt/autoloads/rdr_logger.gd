@@ -1,10 +1,21 @@
 extends Node
 
+const SPAM_LOGGING_ENABLED:bool = true
+
 func log(source:Object, contents:String) -> void:
 	
 	var prefix:String = _get_prefix(source)
 	print(prefix + " " + contents)
 
+# Same as log, but for messages that will be printed extremely often (~every frame).
+func spam_log(source:Object, contents:String) -> void:
+
+	if (!SPAM_LOGGING_ENABLED):
+		return
+
+	var prefix:String = _get_prefix(source)
+	print(prefix + " " + contents)
+	
 func warn(source:Object, contents:String) -> void:
 	
 	var prefix:String = _get_prefix(source)

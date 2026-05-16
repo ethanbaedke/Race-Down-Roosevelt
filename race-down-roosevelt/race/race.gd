@@ -50,6 +50,12 @@ const ROAD_ROW_SPACING:float = 3.0
 
 @onready var _road_parent:Node3D = $Road
 
+# Holds arrays of recycled road row instances. Each array is a different road type and mimics the road row array on the spawn table.
+var _road_row_pool:Array[Array] = []
+# Used for recycling.
+var _active_road_row_instances:Array[Node3D] = []
+var _active_road_row_pool_indices:Array[int] = []
+
 # What z-coordinate the next road row should be spawned at.
 var _next_road_row_z:float = 0.0
 
@@ -59,16 +65,49 @@ func _move_road_back(amount:float) -> void:
 		node.position.z -= amount
 	_next_road_row_z -= amount
 
+# The index is representitive of the type of road row that should be retrieved.
+# The indices match the road row types in the spawn table road rows list.
+# Expects index to be in the range of the road row pool and for road row pool and the spawn table road rows list to have the same size.
+func _get_road_row_from_pool(index:int) -> Node3D:
+	
+	if (_road_row_pool.size() != road_spawn_table.road_rows.size()):
+		RdrLogger.fatal(self, _get_road_row_from_pool.get_method() + " expects the road row pool and the spawn tables road row list to have the same size.")
+		return null
+	
+	if (index < 0 || index >= _road_row_pool.size()):
+		RdrLogger.error(self, "Attempting to grab instance from road row pool, but index " + str(index) + " is outside the range of the pool.")
+		return null
+	
+	# Pool is empty for this road row type, create a new instance.
+	if (_road_row_pool[index].size() == 0):
+		RdrLogger.log(self, "Creating new road row instance (total = " + str(_active_road_row_instances.size()) + ").")
+		var instance:Node3D = road_spawn_table.road_rows[index].scene.instantiate()
+		_active_road_row_instances.append(instance)
+		_active_road_row_pool_indices.append(index)
+		_road_parent.add_child(instance)
+		return instance
+	# Pool contains an entry for this road type, remove and return it.
+	else:
+		RdrLogger.log(self, "Reusing road row instance from pool.")
+		var end_ind:int = _road_row_pool[index].size() - 1
+		var instance:Node3D = _road_row_pool[index][end_ind]
+		_active_road_row_instances.append(instance)
+		_active_road_row_pool_indices.append(index)
+		_road_row_pool[index].remove_at(end_ind)
+		return instance
+
 func _place_road_row() -> void:
 	
 	if (road_spawn_table.road_rows.size() == 0):
 		RdrLogger.fatal(self, _place_road_row.get_method() + " expects at least one road row to exist on the road spawn table.")
 
-	var row_scene:PackedScene = road_spawn_table.get_random_road_row_weighted()
+	var entry_ind:int = road_spawn_table.get_random_road_row_index_weighted()
+	var row_scene:PackedScene = road_spawn_table.road_rows[entry_ind].scene
 	if (row_scene == null):
 		return
-	var row:Node3D = row_scene.instantiate()
-	_road_parent.add_child(row)
+	var row:Node3D = _get_road_row_from_pool(entry_ind)
+	if (row == null):
+		return
 	row.position.z = _next_road_row_z
 
 func _handle_road_placement() -> void:
@@ -82,7 +121,19 @@ func _handle_road_placement() -> void:
 		_next_road_row_z += ROAD_ROW_SPACING
 	
 func _handle_road_cleanup() -> void:
-	pass
+	
+	var order:Array[RacerVehicle] = get_racer_order()
+	
+	var last_place_z:float = order[order.size() - 1].position.z
+	var i:int = 0
+	while (i < _active_road_row_instances.size()):
+		if (_active_road_row_instances[i].position.z < last_place_z - ROAD_CLEANUP_DIST):
+			RdrLogger.log(self, "Recycling road row instance.")
+			_road_row_pool[_active_road_row_pool_indices[i]].append(_active_road_row_instances[i])
+			_active_road_row_instances.remove_at(i)
+			_active_road_row_pool_indices.remove_at(i)
+		else:
+			i += 1
 	
 func _validate_road_spawn_table() -> void:
 	
@@ -101,7 +152,10 @@ func _validate_road_spawn_table() -> void:
 	if (!road_spawn_table.validate_parameters()):
 		RdrLogger.error(self, "Road spawn table was invalid. Forcefully resolving conflicts.")
 		road_spawn_table.force_resolve_conflicts()
-		
+	
+	# Setup the road row pool to have space for all road row types on the spawn table.
+	_road_row_pool.resize(road_spawn_table.road_rows.size())
+	
 	RdrLogger.log(self, "Road spawn table validation finished.")
 	
 #endregion
@@ -279,4 +333,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 
 	_move_racers(delta)
+	
+	# Cleanup before placement so placement will include any road that may have been cleaned up this frame.
+	_handle_road_cleanup()
 	_handle_road_placement()

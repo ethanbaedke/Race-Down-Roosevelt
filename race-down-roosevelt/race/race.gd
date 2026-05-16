@@ -1,5 +1,8 @@
 class_name Race extends Node3D
 
+const NUM_LANES:int = 9
+const LANE_SPACING:float = 3.0
+
 var _racer_vehicles:Array[RacerVehicle] = []
 
 # Returns all racer vehicles in order of 1st place -> 4th place.
@@ -272,7 +275,9 @@ func _spawn_racer_vehicles() -> void:
 			continue
 		else:
 			var racer:RacerVehicle = race_parameters.racer_objects[i].vehicle.instantiate()
+			racer.race = self
 			racer.racer = race_parameters.racer_objects[i]
+			racer.lane_number = (i + 1) * 2
 			_racer_vehicles.append(racer)
 			self.add_child(racer)
 			racer.global_position = _racer_vehicle_spawn_points[i].global_position

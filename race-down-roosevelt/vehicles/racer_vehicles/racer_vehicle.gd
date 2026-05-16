@@ -1,8 +1,7 @@
 class_name RacerVehicle extends Node3D
 
-const LANE_SWITCH_DIST:float = 3.0
-
-# This must be set when a racer vehicle is instantiated.
+# These must be set when a racer vehicle is instantiated.
+var race:Race = null
 var racer:RacerObject = null
 
 var speed:float = 0
@@ -11,13 +10,39 @@ func calculate_speed() -> float:
 	
 	return speed
 
+#region Lane Switching
+
+# 1-indexed, initialized as 0 since its an invalid lane number.
+var lane_number:int = 0
+
 func try_switch_lanes(dir:int) -> bool:
 	
-	position.x += dir * -1 * LANE_SWITCH_DIST
-	return true
+	if (lane_number == 0):
+		RdrLogger.error(self, "Lane number is not initialized for " + racer.name + ".")
+		return false
+	
+	# Moving left.
+	if (dir > 0):
+		if (lane_number < race.NUM_LANES):
+			lane_number += 1
+			position.x -= race.LANE_SPACING
+			return true
+	# Moving right.
+	else:
+		if (lane_number > 1):
+			lane_number -= 1
+			position.x += race.LANE_SPACING
+			return true
+			
+	return false
 
+#endregion
+
+# Expects race to be set.
 func _ready() -> void:
 	
+	if (race == null):
+		RdrLogger.fatal(self, _ready.get_method() + " expects race to be set.")
 	if (racer == null):
 		RdrLogger.warn(self, "Racer object not set. Creating default instance.")
 		racer = RacerObject.new()

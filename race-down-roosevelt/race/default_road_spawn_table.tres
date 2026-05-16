@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoadSpawnTable" format=3 uid="uid://dbqn44fmqlvwt"]
+
+[ext_resource type="PackedScene" uid="uid://bgx4sb7ysypif" path="res://road/road_row_straight.tscn" id="1_7xn3e"]
+[ext_resource type="Script" uid="uid://4xpetlewbrgg" path="res://race/road_spawn_table.gd" id="1_438wm"]
+
+[resource]
+script = ExtResource("1_438wm")
+road_rows = Dictionary[PackedScene, int]({
+ExtResource("1_7xn3e"): 0
+})
+metadata/_custom_type_script = "uid://4xpetlewbrgg"

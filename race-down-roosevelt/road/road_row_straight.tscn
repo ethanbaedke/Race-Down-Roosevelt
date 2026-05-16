@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bgx4sb7ysypif"]
+
+[ext_resource type="PackedScene" uid="uid://cyset5pjlgqq0" path="res://road/road_straight.glb" id="1_f3j74"]
+
+[node name="RoadRowStraight" type="Node3D" unique_id=1504721551]
+
+[node name="RoadStraight" parent="." unique_id=142417426 instance=ExtResource("1_f3j74")]
+transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, 9.75, 0, 0)
+
+[node name="RoadStraight2" parent="." unique_id=1914994684 instance=ExtResource("1_f3j74")]
+transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, 6.75, 0, 0)
+
+[node name="RoadStraight3" parent="." unique_id=1909730164 instance=ExtResource("1_f3j74")]
+transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, 3.75, 0, 0)
+
+[node name="RoadStraight4" parent="." unique_id=926914645 instance=ExtResource("1_f3j74")]
+transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, 0.75, 0, 0)
+
+[node name="RoadStraight5" parent="." unique_id=1300254679 instance=ExtResource("1_f3j74")]
+transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, -2.25, 0, 0)
+
+[node name="RoadStraight6" parent="." unique_id=1315416649 instance=ExtResource("1_f3j74")]
+transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, -5.25, 0, 0)
+
+[node name="RoadStraight7" parent="." unique_id=1873364365 instance=ExtResource("1_f3j74")]
+transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, -8.25, 0, 0)
+
+[node name="RoadStraight8" parent="." unique_id=1520977478 instance=ExtResource("1_f3j74")]
+transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, -11.25, 0, 0)
+
+[node name="RoadStraight9" parent="." unique_id=1644657925 instance=ExtResource("1_f3j74")]
+transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, -14.25, 0, 0)

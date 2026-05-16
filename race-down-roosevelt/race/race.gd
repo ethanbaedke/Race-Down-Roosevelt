@@ -31,10 +31,80 @@ func _move_racers(delta:float) -> void:
 		to_move_back = z_last + (diff * 0.5)
 	for vehicle:RacerVehicle in _racer_vehicles:
 		vehicle.position.z -= to_move_back
+	_move_road_back(to_move_back)
 		
 	# Debugging
 	for vehicle:RacerVehicle in order:
 		RdrLogger.spam_log(self, vehicle.racer.name + " z-pos: " + str(vehicle.position.z))
+
+#region Road Management
+
+# Distance in front of the 1st place racer road should be placed up to.
+const ROAD_PLACE_DIST:int = 100
+# Distance behind the last place racer road needs to be to be cleaned up.
+const ROAD_CLEANUP_DIST:int = 10
+# Z-distance between road rows.
+const ROAD_ROW_SPACING:float = 3.0
+
+@export var road_spawn_table:RoadSpawnTable = null
+
+@onready var _road_parent:Node3D = $Road
+
+# What z-coordinate the next road row should be spawned at.
+var _next_road_row_z:float = 0.0
+
+func _move_road_back(amount:float) -> void:
+	
+	for node:Node3D in _road_parent.get_children():
+		node.position.z -= amount
+	_next_road_row_z -= amount
+
+func _place_road_row() -> void:
+	
+	if (road_spawn_table.road_rows.size() == 0):
+		RdrLogger.fatal(self, _place_road_row.get_method() + " expects at least one road row to exist on the road spawn table.")
+
+	var row_scene:PackedScene = road_spawn_table.get_random_road_row_weighted()
+	if (row_scene == null):
+		return
+	var row:Node3D = row_scene.instantiate()
+	_road_parent.add_child(row)
+	row.position.z = _next_road_row_z
+
+func _handle_road_placement() -> void:
+	
+	var order:Array[RacerVehicle] = get_racer_order()
+	
+	# Place road in front of first place racer.
+	var first_place_z:float = order[0].position.z
+	while (_next_road_row_z - first_place_z < ROAD_PLACE_DIST):
+		_place_road_row()
+		_next_road_row_z += ROAD_ROW_SPACING
+	
+func _handle_road_cleanup() -> void:
+	pass
+	
+func _validate_road_spawn_table() -> void:
+	
+	RdrLogger.log(self, "Beginning road spawn table validation.")
+	
+	# Ensure road spawn table exists.
+	if (road_spawn_table == null):
+		# If no road spawn table is set, try and load the default road spawn table.
+		road_spawn_table = load("res://race/default_road_spawn_table.tres")
+		# If the default road spawn table couldn't be found, use an empty resource, which will be handeled below.
+		if (road_spawn_table == null):
+			road_spawn_table = RoadSpawnTable.new()
+	
+	# If the road spawn table shows conflicts at this point, they must be resolved so the race can start.
+	# We will not back out of a race once it's begun setup.
+	if (!road_spawn_table.validate_parameters()):
+		RdrLogger.error(self, "Road spawn table was invalid. Forcefully resolving conflicts.")
+		road_spawn_table.force_resolve_conflicts()
+		
+	RdrLogger.log(self, "Road spawn table validation finished.")
+	
+#endregion
 
 #region Race Setup
 
@@ -75,6 +145,8 @@ const CAMERA_CONTROLLER_ROTATION:Vector3 = Vector3(deg_to_rad(-10.0), deg_to_rad
 func setup_race() -> void:
 	
 	RdrLogger.log(self, "Setting up race.")
+	
+	_validate_road_spawn_table()
 	
 	_validate_race_parameters()
 	_spawn_racer_vehicles()
@@ -207,3 +279,4 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 
 	_move_racers(delta)
+	_handle_road_placement()

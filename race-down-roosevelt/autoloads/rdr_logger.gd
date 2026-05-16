@@ -15,6 +15,13 @@ func error(source:Object, contents:String) -> void:
 	var prefix:String = _get_prefix(source)
 	print_rich("[color=SALMON]" + prefix + " " + contents + "[/color]")
 
+# A fatal log will crash the game.
+func fatal(source:Object, contents:String) -> void:
+	
+	var prefix:String = _get_prefix(source)
+	print_rich("[color=FUCHSIA]" + prefix + " " + contents + "[/color]")
+	get_tree().quit(1)
+
 func _get_prefix(source:Object) -> String:
 	
 	var script_type:String = source.get_script().get_global_name()

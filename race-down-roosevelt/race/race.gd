@@ -1,5 +1,43 @@
 class_name Race extends Node3D
 
+var _racer_vehicles:Array[RacerVehicle] = []
+
+# Returns all racer vehicles in order of 1st place -> 4th place.
+func get_racer_order() -> Array[RacerVehicle]:
+	
+	var _ordered_vehicles:Array[RacerVehicle] = _racer_vehicles.duplicate()
+	_ordered_vehicles.sort_custom(func(v1:RacerVehicle, v2:RacerVehicle) -> bool:
+		return v1.position.z > v2.position.z)
+	return _ordered_vehicles
+
+# Expects at least one racer vehicle to exist.
+func _move_racers(delta:float) -> void:
+	
+	if (_racer_vehicles.size() == 0):
+		RdrLogger.fatal(self, _move_racers.get_method() + " expects at least one racer vehicle to exist.")
+	
+	# Have each racer vehicle calculate its speed and move them accordingly.
+	for vehicle:RacerVehicle in _racer_vehicles:
+		var speed:float = vehicle.calculate_speed()
+		vehicle.position.z += speed * delta
+	
+	# Move all racers and world back to keep racers centered around z=0.
+	var order:Array[RacerVehicle] = get_racer_order()
+	var to_move_back:float = order[0].position.z
+	if (order.size() > 1):
+		var z_first:float = order[0].position.z
+		var z_last:float = order[order.size() - 1].position.z
+		var diff:float = z_first - z_last
+		to_move_back = z_last + (diff * 0.5)
+	for vehicle:RacerVehicle in _racer_vehicles:
+		vehicle.position.z -= to_move_back
+		
+	# Debugging
+	for vehicle:RacerVehicle in order:
+		RdrLogger.log(self, vehicle.racer.name + " z-pos: " + str(vehicle.position.z))
+
+#region Race Setup
+
 const CAMERA_CONTROLLER_POSITION:Vector3 = Vector3(0.0, 2.0, -4.0)
 const CAMERA_CONTROLLER_ROTATION:Vector3 = Vector3(deg_to_rad(-10.0), deg_to_rad(180.0), 0.0)
 
@@ -34,8 +72,6 @@ const CAMERA_CONTROLLER_ROTATION:Vector3 = Vector3(deg_to_rad(-10.0), deg_to_rad
 @onready var _p3_cam_4p:Camera3D = $ViewportSetup4p/SplitContainer/SplitContainerBottom/P3SubViewportContainer/SubViewport/P3Cam4p
 @onready var _p4_cam_4p:Camera3D = $ViewportSetup4p/SplitContainer/SplitContainerBottom/P4SubViewportContainer/SubViewport/P4Cam4p
 
-var _racer_vehicles:Array[RacerVehicle] = []
-
 func setup_race() -> void:
 	
 	RdrLogger.log(self, "Setting up race.")
@@ -59,8 +95,7 @@ func _setup_player_viewports() -> void:
 		player_vehicles.append(vehicle)
 	
 	if (player_vehicles.size() == 0):
-		RdrLogger.error(self, _setup_player_viewports.get_method() + " expects at least one racer to be player controlled.")
-		get_tree().quit(1)
+		RdrLogger.fatal(self, _setup_player_viewports.get_method() + " expects at least one racer to be player controlled.")
 	
 	# Enable viewport setup that corresponds to the number of players and store sub-viewports that should be used.
 	var cameras:Array[Camera3D] = []
@@ -84,8 +119,7 @@ func _setup_player_viewports() -> void:
 			cameras.append(_p3_cam_4p)
 			cameras.append(_p4_cam_4p)
 		_:
-			RdrLogger.error(self, _setup_player_viewports.get_method() + " expects 1-4 racer vehicles to exist.")
-			get_tree().quit(1)
+			RdrLogger.fatal(self, _setup_player_viewports.get_method() + " expects 1-4 racer vehicles to exist.")
 	
 	# Attach cameras to all sub-viewports and associated camera controllers to all player controlled vehicles.
 	for i:int in range(player_vehicles.size()):
@@ -101,6 +135,11 @@ func _setup_player_viewports() -> void:
 func _spawn_racer_vehicles() -> void:
 	
 	RdrLogger.log(self, "Spawning racer vehicles.")
+	
+	if (!race_parameters.validate_parameters()):
+		RdrLogger.fatal(self, _spawn_racer_vehicles.get_method() + " expects race parameters to be valid.")
+	if (_racer_vehicle_spawn_points.size() != 4):
+		RdrLogger.fatal(self, _spawn_racer_vehicles.get_method() + " expects four vehicle spawn points to exist.")
 	
 	for i:int in range(4):
 		if (race_parameters.racer_objects[i] == null):
@@ -158,7 +197,13 @@ func _validate_race_parameters() -> void:
 
 	RdrLogger.log(self, "Race parameter validation finished.")
 
+#endregion
+
 func _ready() -> void:
 	
 	# NOTE: This is temporary. Should be called by whoever creates the race.
 	setup_race()
+
+func _process(delta: float) -> void:
+
+	_move_racers(delta)

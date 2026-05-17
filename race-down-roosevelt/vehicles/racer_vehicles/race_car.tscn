@@ -5,5 +5,7 @@
 
 [node name="RaceCar" type="Node3D" unique_id=1093534000]
 script = ExtResource("1_1y6v6")
+top_speed = 21
+acceleration = 11
 
 [node name="RaceCarModel" parent="." unique_id=1702229935 instance=ExtResource("1_x1hy7")]

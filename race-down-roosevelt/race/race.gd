@@ -21,7 +21,7 @@ func _move_racers(delta:float) -> void:
 	
 	# Have each racer vehicle calculate its speed and move them accordingly.
 	for vehicle:RacerVehicle in _racer_vehicles:
-		var speed:float = vehicle.calculate_speed()
+		var speed:float = vehicle.calculate_speed(delta)
 		vehicle.position.z += speed * delta
 	
 	# Move all racers and world back to keep racers centered around z=0.

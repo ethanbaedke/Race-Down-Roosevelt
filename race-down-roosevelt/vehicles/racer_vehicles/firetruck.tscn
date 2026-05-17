@@ -5,5 +5,9 @@
 
 [node name="Firetruck" type="Node3D" unique_id=1093534000]
 script = ExtResource("1_htnkw")
+top_speed = 9
+acceleration = 1
+durability = 6
+weight = 6
 
 [node name="FiretruckModel" parent="." unique_id=1882874970 instance=ExtResource("2_htnkw")]

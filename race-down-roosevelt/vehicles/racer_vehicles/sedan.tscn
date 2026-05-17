@@ -5,5 +5,9 @@
 
 [node name="Sedan" type="Node3D" unique_id=1093534000]
 script = ExtResource("1_4rng7")
+top_speed = 5
+acceleration = 7
+durability = 3
+weight = 2
 
 [node name="SedanModel" parent="." unique_id=1496115204 instance=ExtResource("2_4rng7")]

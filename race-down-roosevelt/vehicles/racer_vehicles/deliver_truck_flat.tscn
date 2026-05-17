@@ -5,5 +5,9 @@
 
 [node name="DeliveryTruckFlat" type="Node3D" unique_id=1093534000]
 script = ExtResource("1_alup5")
+top_speed = 1
+acceleration = 5
+durability = 5
+weight = 4
 
 [node name="DeliveryTruckFlatModel" parent="." unique_id=1932823465 instance=ExtResource("2_alup5")]

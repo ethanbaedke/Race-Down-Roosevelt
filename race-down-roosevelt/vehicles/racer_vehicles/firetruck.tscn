@@ -5,8 +5,8 @@
 
 [node name="Firetruck" type="Node3D" unique_id=1093534000]
 script = ExtResource("1_htnkw")
-top_speed = 9
-acceleration = 1
+top_speed = 17
+acceleration = 5
 durability = 6
 weight = 6
 

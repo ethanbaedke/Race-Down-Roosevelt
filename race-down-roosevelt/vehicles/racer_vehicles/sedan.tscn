@@ -5,8 +5,8 @@
 
 [node name="Sedan" type="Node3D" unique_id=1093534000]
 script = ExtResource("1_4rng7")
-top_speed = 5
-acceleration = 7
+top_speed = 16
+acceleration = 8
 durability = 3
 weight = 2
 

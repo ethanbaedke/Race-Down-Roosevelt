@@ -5,8 +5,8 @@
 
 [node name="Ambulance" type="Node3D" unique_id=1093534000]
 script = ExtResource("1_gwnj3")
-top_speed = 13
-acceleration = 3
+top_speed = 18
+acceleration = 6
 durability = 4
 weight = 5
 

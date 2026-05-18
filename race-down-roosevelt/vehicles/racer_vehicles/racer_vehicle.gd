@@ -7,10 +7,14 @@ var racer:RacerObject = null
 # 1-indexed, initialized as 0 since its an invalid lane number.
 var lane_number:int = 0
 
-const MAX_TOP_SPEED:int = 21
-const MAX_ACCELERATION:int = 11
+const MAX_TOP_SPEED:int = 20
+const MIN_TOP_SPEED:int = 15
+const MAX_ACCELERATION:int = 10
+const MIN_ACCELERATION:int = 5
 const MAX_DURABILITY:int = 6
+const MIN_DURABILITY:int = 1
 const MAX_WEIGHT:int = 6
+const MIN_WEIGHT:int = 1
 
 @export_range(1, MAX_TOP_SPEED) var top_speed:int = 10
 @export_range(1, MAX_ACCELERATION) var acceleration:int = 2

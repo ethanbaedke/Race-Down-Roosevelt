@@ -5,7 +5,7 @@
 
 [node name="SportsCar" type="Node3D" unique_id=1093534000]
 script = ExtResource("1_meqtm")
-top_speed = 17
+top_speed = 19
 acceleration = 9
 durability = 2
 weight = 3

@@ -103,6 +103,44 @@ func _cast_vehicle_shape_to_position(world_pos:Vector3) -> Array[Node3D]:
 
 	return overlapping_nodes
 
+# Called when this racer bumps a racer in front of it.
+func _handle_racer_bump(other:RacerVehicle) -> void:
+	
+	var m1:float = self.weight
+	var m2:float = other.weight
+	var s1:float = self.speed
+	var s2:float = other.speed
+
+	# v1' = ((m1 - m2) * v1 + 2 * m2 * v2) / (m1 + m2)
+	# v2' = ((m2 - m1) * v2 + 2 * m1 * v1) / (m1 + m2)
+	var total_weight:float = m1 + m2
+	var new_s1:float = ((m1 - m2) * s1 + 2.0 * m2 * s2) / total_weight
+	var new_s2:float = ((m2 - m1) * s2 + 2.0 * m1 * s1) / total_weight
+	
+	# The minimum amount of speed the reciever must have over the hitter after collision.
+	# This removes sticking, which can cause vehicles to clip inside each other.
+	const MIN_SPEED_DIFF:float = 3.0
+	var diff:float = new_s2 - new_s1
+	if (diff < MIN_SPEED_DIFF):
+		# The speed that needs to be added/subtracted from each racers final speed to ensure the minimum speed difference.
+		var half_dist_to_min:float = (MIN_SPEED_DIFF - diff) * 0.5
+		new_s1 -= half_dist_to_min
+		new_s2 += half_dist_to_min
+		
+	self.speed = new_s1
+	other.speed = new_s2
+
+func _collision_area_entered(area: Area3D) -> void:
+	
+	# Handle bumping other racers.
+	var parent:Node3D = area.get_parent_node_3d()
+	if (parent is RacerVehicle):
+		# Ignore if this racer is in front of the racer is hit.
+		# Racer bumps are always handeled by the behind vehicle.
+		if (area.global_position.z < _collision_area.global_position.z):
+			return
+		_handle_racer_bump(parent)
+
 # Expects race to be set.
 func _ready() -> void:
 	
@@ -111,6 +149,8 @@ func _ready() -> void:
 	if (racer == null):
 		RdrLogger.warn(self, "Racer object not set. Creating default instance.")
 		racer = RacerObject.new()
+		
+	_collision_area.area_entered.connect(_collision_area_entered)
 
 # These are used to get single inputs instead of a continuous stream.
 var _left_key_active:bool = false

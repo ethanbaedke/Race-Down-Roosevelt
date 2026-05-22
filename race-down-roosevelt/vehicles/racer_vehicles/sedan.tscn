@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://b30kj0jrm85yt" path="res://vehicles/racer_vehicles/racer_vehicle.gd" id="1_4rng7"]
 [ext_resource type="PackedScene" uid="uid://bfr7ir7lt1yp8" path="res://vehicles/racer_vehicles/sedan.glb" id="2_4rng7"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_4rng7"]
+size = Vector3(1, 1, 2.55)
+
 [node name="Sedan" type="Node3D" unique_id=1093534000]
 script = ExtResource("1_4rng7")
 top_speed = 16
@@ -11,3 +14,10 @@ durability = 3
 weight = 2
 
 [node name="SedanModel" parent="." unique_id=1496115204 instance=ExtResource("2_4rng7")]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=407952649]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.025)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1446051688]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.1552734e-05, 0, 0)
+shape = SubResource("BoxShape3D_4rng7")

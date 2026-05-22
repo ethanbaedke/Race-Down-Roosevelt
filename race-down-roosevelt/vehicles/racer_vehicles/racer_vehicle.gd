@@ -21,6 +21,9 @@ const MIN_WEIGHT:int = 1
 @export_range(1, MAX_DURABILITY) var durability:int = 1
 @export_range(1, MAX_WEIGHT) var weight:int = 1
 
+@onready var _collision_area:Area3D = $Area3D
+@onready var _collision_shape:CollisionShape3D = $Area3D/CollisionShape3D
+
 var speed:float = 0
 
 # Just does a boost for now.
@@ -44,20 +47,61 @@ func try_switch_lanes(dir:int) -> bool:
 		RdrLogger.error(self, "Lane number is not initialized for " + racer.name + ".")
 		return false
 	
-	# Moving left.
+	# Moving right.
 	if (dir > 0):
 		if (lane_number < race.NUM_LANES):
-			lane_number += 1
-			position.x -= race.LANE_SPACING
-			return true
-	# Moving right.
+			if (is_right_lane_open()):
+				lane_number += 1
+				position.x -= race.LANE_SPACING
+				return true
+			else:
+				RdrLogger.log(self, racer.name + " attempted to move right, but the lane was blocked.")
+	# Moving left.
 	else:
 		if (lane_number > 1):
-			lane_number -= 1
-			position.x += race.LANE_SPACING
-			return true
+			if (is_left_lane_open()):
+				lane_number -= 1
+				position.x += race.LANE_SPACING
+				return true
+			else:
+				RdrLogger.log(self, racer.name + " attempted to move left, but the lane was blocked.")
 			
 	return false
+
+# Returns true if this vehicle can move left (nothing in the way).
+func is_left_lane_open() -> bool:
+	
+	var hits:Array[Node3D] = _cast_vehicle_shape_to_position(_collision_area.global_position + Vector3(race.LANE_SPACING, 0.0, 0.0))
+	return hits.size() == 0
+
+# Returns true if this vehicle can move right (nothing in the way).
+func is_right_lane_open() -> bool:
+	
+	var hits:Array[Node3D] = _cast_vehicle_shape_to_position(_collision_area.global_position - Vector3(race.LANE_SPACING, 0.0, 0.0))
+	return hits.size() == 0
+
+# The input position should be in world space.
+func _cast_vehicle_shape_to_position(world_pos:Vector3) -> Array[Node3D]:
+	
+	var space_state:PhysicsDirectSpaceState3D = self.get_world_3d().direct_space_state
+
+	var shape_params:PhysicsShapeQueryParameters3D = PhysicsShapeQueryParameters3D.new()
+	shape_params.shape = _collision_shape.shape
+	# Using identity here since the shape shouldn't ever be rotated anyways.
+	# If the shape ends up being rotated, this may need to be changed.
+	shape_params.transform = Transform3D(Basis.IDENTITY, world_pos)
+	shape_params.collision_mask = _collision_area.collision_mask
+	shape_params.collide_with_areas = true
+	shape_params.collide_with_bodies = false
+	shape_params.exclude = [_collision_area.get_rid()]
+
+	var results:Array[Dictionary] = space_state.intersect_shape(shape_params)
+
+	var overlapping_nodes:Array[Node3D] = []
+	for result in results:
+		overlapping_nodes.append(result.collider)
+
+	return overlapping_nodes
 
 # Expects race to be set.
 func _ready() -> void:

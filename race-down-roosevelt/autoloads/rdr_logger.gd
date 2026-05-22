@@ -1,6 +1,6 @@
 extends Node
 
-const SPAM_LOGGING_ENABLED:bool = true
+const SPAM_LOGGING_ENABLED:bool = false
 
 func log(source:Object, contents:String) -> void:
 	

@@ -237,3 +237,5 @@ render_target_update_mode = 0
 [node name="P4Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P4SubViewportContainer/SubViewport" unique_id=1975362]
 
 [node name="Road" type="Node3D" parent="." unique_id=1549239541]
+
+[node name="Traffic" type="Node3D" parent="." unique_id=282542112]

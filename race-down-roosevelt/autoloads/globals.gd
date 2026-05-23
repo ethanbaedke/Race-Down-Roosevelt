@@ -2,7 +2,7 @@ extends Node
 
 @onready var racer_vehicle_scenes:Array[PackedScene] = [
 	preload("res://vehicles/racer_vehicles/ambulance.tscn"),
-	preload("res://vehicles/racer_vehicles/deliver_truck_flat.tscn"),
+	preload("res://vehicles/racer_vehicles/delivery_truck_flat.tscn"),
 	preload("res://vehicles/racer_vehicles/firetruck.tscn"),
 	preload("res://vehicles/racer_vehicles/race_car.tscn"),
 	preload("res://vehicles/racer_vehicles/sedan.tscn"),

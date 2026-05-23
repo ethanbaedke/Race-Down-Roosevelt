@@ -34,13 +34,13 @@ func _move_racers(delta:float) -> void:
 		to_move_back = z_last + (diff * 0.5)
 	for vehicle:RacerVehicle in _racer_vehicles:
 		vehicle.position.z -= to_move_back
-	_move_road_back(to_move_back)
+	_move_world_back(to_move_back)
 		
 	# Debugging
 	for vehicle:RacerVehicle in order:
 		RdrLogger.spam_log(self, vehicle.racer.name + " z-pos: " + str(vehicle.position.z))
 
-#region Road Management
+#region Road/Traffic Management
 
 # Distance in front of the 1st place racer road should be placed up to.
 const ROAD_PLACE_DIST:int = 100
@@ -49,9 +49,30 @@ const ROAD_CLEANUP_DIST:int = 10
 # Z-distance between road rows.
 const ROAD_ROW_SPACING:float = 3.0
 
+const TRAFFIC_VEHICLES:Array[PackedScene] = [
+	preload("res://vehicles/traffic_vehicles/delivery_truck.tscn"),
+	preload("res://vehicles/traffic_vehicles/garbage_truck.tscn"),
+	preload("res://vehicles/traffic_vehicles/hatchback.tscn"),
+	preload("res://vehicles/traffic_vehicles/pickup_truck.tscn"),
+	preload("res://vehicles/traffic_vehicles/suv.tscn"),
+	preload("res://vehicles/traffic_vehicles/tractor.tscn")
+]
+const TRAFFIC_SPAWN_COOLDOWN:int = 10
+
 @export var road_spawn_table:RoadSpawnTable = null
 
 @onready var _road_parent:Node3D = $Road
+@onready var _traffic_parent:Node3D = $Traffic
+
+var traffic_spawn_chance:float = 0.1
+
+# Tracks how many road rows need to be placed before a lane is allowed to spawn another traffic vehicle.
+# Lanes with a value of 0 at their index are allowed to spawn a vehicle.
+var _traffic_spawn_cooldowns:Array[int] = []
+# Holds arrays of recycled traffic vehicle instances. Each array is a different traffic vehicle type and mimics the traffic vehicles array.
+var _traffic_vehicle_pool:Array[Array] = []
+var _active_traffic_vehicle_instances:Array[Node3D] = []
+var _active_traffic_vehicle_pool_indices:Array[int] = []
 
 # Holds arrays of recycled road row instances. Each array is a different road type and mimics the road row array on the spawn table.
 var _road_row_pool:Array[Array] = []
@@ -62,15 +83,63 @@ var _active_road_row_pool_indices:Array[int] = []
 # What z-coordinate the next road row should be spawned at.
 var _next_road_row_z:float = 0.0
 
-# Tracks how many road rows need to be placed before a lane is allowed to spawn another traffic vehicle.
-# Lanes with a value of 0 at their index are allowed to spawn a vehicle.
-var _traffic_spawn_cooldowns:Array[int] = []
-
-func _move_road_back(amount:float) -> void:
+func _move_world_back(amount:float) -> void:
 	
 	for node:Node3D in _road_parent.get_children():
 		node.position.z -= amount
+	for node:Node3D in _traffic_parent.get_children():
+		node.position.z -= amount
 	_next_road_row_z -= amount
+
+# Expects traffic spawn cooldowns array to have size equal to the number of lanes.
+func _place_traffic_row(z_pos:float) -> void:
+	
+	if (_traffic_spawn_cooldowns.size() != NUM_LANES):
+		RdrLogger.fatal(self, _place_road_row.get_method() + " expects traffic spawn cooldowns array to have size equal to number of lanes.")
+	
+	for i:int in range(NUM_LANES):
+		if (_traffic_spawn_cooldowns[i] == 0):
+			# Lane is off cooldown, roll to spawn.
+			if (randf_range(0.0, 1.0) <= traffic_spawn_chance):
+				var vehicle_ind:int = randi_range(0, TRAFFIC_VEHICLES.size() - 1)
+				var vehicle:Node3D = _get_traffic_vehicle_from_pool(vehicle_ind)
+				if (vehicle == null):
+					return
+				_traffic_spawn_cooldowns[i] = TRAFFIC_SPAWN_COOLDOWN
+				vehicle.position.x = ((NUM_LANES - 1 - i) * LANE_SPACING) - (NUM_LANES * LANE_SPACING * 0.5) + (LANE_SPACING * 0.5)
+				vehicle.position.z = z_pos
+		else:
+			# Lane is on cooldown, decrement.
+			_traffic_spawn_cooldowns[i] -= 1
+
+# Expects traffic vehicle pool to have size equal to the traffic vehicle array.
+func _get_traffic_vehicle_from_pool(index:int) -> Node3D:
+	
+	if (_traffic_vehicle_pool.size() != TRAFFIC_VEHICLES.size()):
+		RdrLogger.fatal(self, _get_road_row_from_pool.get_method() + " expects traffic vehicle pool to have size equal to the traffic vehicle array.")
+		return null
+		
+	if (index < 0 || index >= _traffic_vehicle_pool.size()):
+		RdrLogger.error(self, "Attempting to grab instance from traffic vehicle pool, but index " + str(index) + " is outside the range of the pool.")
+		return null
+	
+	# Pool is empty for this traffic vehicle type, create a new instance.
+	if (_traffic_vehicle_pool[index].size() == 0):
+		RdrLogger.log(self, "Creating new traffic vehicle instance (total = " + str(_active_traffic_vehicle_instances.size()) + ").")
+		var instance:Node3D = TRAFFIC_VEHICLES[index].instantiate()
+		_active_traffic_vehicle_instances.append(instance)
+		_active_traffic_vehicle_pool_indices.append(index)
+		_traffic_parent.add_child(instance)
+		return instance
+	# Pool contains an entry for this traffic vehicle, remove and return it.
+	else:
+		RdrLogger.log(self, "Reusing traffic vehicle instance from pool.")
+		var end_ind:int = _traffic_vehicle_pool[index].size() - 1
+		var instance:Node3D = _traffic_vehicle_pool[index][end_ind]
+		_active_traffic_vehicle_instances.append(instance)
+		_active_traffic_vehicle_pool_indices.append(index)
+		_traffic_vehicle_pool[index].remove_at(end_ind)
+		return instance
 
 # The index is representitive of the type of road row that should be retrieved.
 # The indices match the road row types in the spawn table road rows list.
@@ -116,6 +185,8 @@ func _place_road_row() -> void:
 	if (row == null):
 		return
 	row.position.z = _next_road_row_z
+	if (row.allow_traffic_spawning):
+		_place_traffic_row(_next_road_row_z)
 
 func _handle_road_placement() -> void:
 	
@@ -127,18 +198,30 @@ func _handle_road_placement() -> void:
 		_place_road_row()
 		_next_road_row_z += ROAD_ROW_SPACING
 	
-func _handle_road_cleanup() -> void:
+func _handle_cleanup() -> void:
 	
 	var order:Array[RacerVehicle] = get_racer_order()
-	
 	var last_place_z:float = order[order.size() - 1].position.z
+	# Anything at or behind this can be cleaned up.
+	var cleanup_z:float = last_place_z - ROAD_CLEANUP_DIST
+	
 	var i:int = 0
 	while (i < _active_road_row_instances.size()):
-		if (_active_road_row_instances[i].position.z < last_place_z - ROAD_CLEANUP_DIST):
+		if (_active_road_row_instances[i].position.z < cleanup_z):
 			RdrLogger.log(self, "Recycling road row instance.")
 			_road_row_pool[_active_road_row_pool_indices[i]].append(_active_road_row_instances[i])
 			_active_road_row_instances.remove_at(i)
 			_active_road_row_pool_indices.remove_at(i)
+		else:
+			i += 1
+			
+	i = 0
+	while (i < _active_traffic_vehicle_instances.size()):
+		if (_active_traffic_vehicle_instances[i].position.z < cleanup_z):
+			RdrLogger.log(self, "Recycling traffic vehicle instance.")
+			_traffic_vehicle_pool[_active_traffic_vehicle_pool_indices[i]].append(_active_traffic_vehicle_instances[i])
+			_active_traffic_vehicle_instances.remove_at(i)
+			_active_traffic_vehicle_pool_indices.remove_at(i)
 		else:
 			i += 1
 	
@@ -209,6 +292,7 @@ func setup_race() -> void:
 	
 	_validate_road_spawn_table()
 	_traffic_spawn_cooldowns.resize(NUM_LANES)
+	_traffic_vehicle_pool.resize(TRAFFIC_VEHICLES.size())
 	
 	_validate_race_parameters()
 	_spawn_racer_vehicles()
@@ -344,6 +428,6 @@ func _process(delta: float) -> void:
 
 	_move_racers(delta)
 	
-	# Cleanup before placement so placement will include any road that may have been cleaned up this frame.
-	_handle_road_cleanup()
+	# Cleanup first so pool can be filled before placement happens.
+	_handle_cleanup()
 	_handle_road_placement()

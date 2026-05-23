@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bfr7ir7lt1yp8" path="res://vehicles/racer_vehicles/sedan.glb" id="5_svgoj"]
 [ext_resource type="PackedScene" uid="uid://bm4s7bia48fib" path="res://vehicles/racer_vehicles/sports_car.glb" id="6_dtm1w"]
 [ext_resource type="PackedScene" uid="uid://dngas7vt1mu7j" path="res://vehicles/traffic_vehicles/delivery_truck.glb" id="7_uxdqm"]
-[ext_resource type="PackedScene" uid="uid://c86jqinojnkva" path="res://vehicles/traffic_vehicles/garbage-truck.glb" id="8_fedj0"]
+[ext_resource type="PackedScene" uid="uid://c86jqinojnkva" path="res://vehicles/traffic_vehicles/garbage_truck.glb" id="8_fedj0"]
 [ext_resource type="PackedScene" uid="uid://bx2ih5a4lxen5" path="res://vehicles/traffic_vehicles/hatchback.glb" id="9_eqyf3"]
 [ext_resource type="PackedScene" uid="uid://caxwxm47bu0f4" path="res://vehicles/traffic_vehicles/pickup_truck.glb" id="10_dunx0"]
 [ext_resource type="PackedScene" uid="uid://dgk7uf8r6h0aa" path="res://vehicles/traffic_vehicles/suv.glb" id="11_yyiug"]

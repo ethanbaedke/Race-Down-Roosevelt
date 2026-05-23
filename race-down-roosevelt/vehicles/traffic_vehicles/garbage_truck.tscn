@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dfvhq5srp11if"]
+
+[ext_resource type="PackedScene" uid="uid://c86jqinojnkva" path="res://vehicles/traffic_vehicles/garbage_truck.glb" id="1_xca71"]
+
+[node name="GarbageTruck" type="Node3D" unique_id=1990659986]
+
+[node name="GarbageTruckModel" parent="." unique_id=737302542 instance=ExtResource("1_xca71")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

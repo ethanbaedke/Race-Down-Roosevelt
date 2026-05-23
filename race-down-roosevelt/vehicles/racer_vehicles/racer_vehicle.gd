@@ -132,14 +132,23 @@ func _handle_racer_bump(other:RacerVehicle) -> void:
 
 func _collision_area_entered(area: Area3D) -> void:
 	
-	# Handle bumping other racers.
+	# Grab the parent of the area 2d, and handle collision based on its type.
 	var parent:Node3D = area.get_parent_node_3d()
+	
+	# Handle bumping other racers.
 	if (parent is RacerVehicle):
 		# Ignore if this racer is in front of the racer is hit.
 		# Racer bumps are always handeled by the behind vehicle.
 		if (area.global_position.z < _collision_area.global_position.z):
 			return
 		_handle_racer_bump(parent)
+		
+	# Handle collision with traffic vehicles.
+	elif (parent is TrafficVehicle):
+		parent.explode()
+		# Reduce speed based on durability (higher = more maintained).
+		# Add one to max durability here to ensure vehicles with max durability still slow down some.
+		speed = speed * ((durability as float) / (MAX_DURABILITY + 1))
 
 # Expects race to be set.
 func _ready() -> void:

@@ -1,8 +1,19 @@
 [gd_scene format=3 uid="uid://cl383nkr52efo"]
 
+[ext_resource type="Script" uid="uid://bqi1740ikajnm" path="res://vehicles/traffic_vehicles/traffic_vehicle.gd" id="1_0f3gt"]
 [ext_resource type="PackedScene" uid="uid://caxwxm47bu0f4" path="res://vehicles/traffic_vehicles/pickup_truck.glb" id="1_oschr"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_oschr"]
+size = Vector3(1, 1, 2.95)
+
 [node name="PickupTruck" type="Node3D" unique_id=1813783315]
+script = ExtResource("1_0f3gt")
 
 [node name="PickupTruckModel" parent="." unique_id=1601011641 instance=ExtResource("1_oschr")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=621999624]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0.025)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=748723268]
+shape = SubResource("BoxShape3D_oschr")

@@ -3,7 +3,7 @@ extends Node
 const SPAM_LOGGING_ENABLED:bool = false
 
 var _ignored_classes:Dictionary[String, bool] = {
-	#(Race as GDScript).get_global_name(): true,
+	(Race as GDScript).get_global_name(): true,
 }
 
 func log(source:Object, contents:String) -> void:

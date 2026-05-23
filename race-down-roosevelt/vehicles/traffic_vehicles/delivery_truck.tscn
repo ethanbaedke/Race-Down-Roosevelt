@@ -1,8 +1,19 @@
 [gd_scene format=3 uid="uid://b4g8quj8iukwa"]
 
+[ext_resource type="Script" uid="uid://bqi1740ikajnm" path="res://vehicles/traffic_vehicles/traffic_vehicle.gd" id="1_n6ejh"]
 [ext_resource type="PackedScene" uid="uid://dngas7vt1mu7j" path="res://vehicles/traffic_vehicles/delivery_truck.glb" id="1_v557o"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_01gl6"]
+size = Vector3(1, 1, 3.25)
+
 [node name="DeliveryTruck" type="Node3D" unique_id=420836042]
+script = ExtResource("1_n6ejh")
 
 [node name="DeliveryTruckModel" parent="." unique_id=1670465579 instance=ExtResource("1_v557o")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=498804773]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0.025)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=104375251]
+shape = SubResource("BoxShape3D_01gl6")

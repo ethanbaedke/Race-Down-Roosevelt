@@ -102,18 +102,19 @@ func _place_traffic_row(z_pos:float) -> void:
 			# Lane is off cooldown, roll to spawn.
 			if (randf_range(0.0, 1.0) <= traffic_spawn_chance):
 				var vehicle_ind:int = randi_range(0, TRAFFIC_VEHICLES.size() - 1)
-				var vehicle:Node3D = _get_traffic_vehicle_from_pool(vehicle_ind)
+				var vehicle:TrafficVehicle = _get_traffic_vehicle_from_pool(vehicle_ind)
 				if (vehicle == null):
 					return
 				_traffic_spawn_cooldowns[i] = TRAFFIC_SPAWN_COOLDOWN
 				vehicle.position.x = ((NUM_LANES - 1 - i) * LANE_SPACING) - (NUM_LANES * LANE_SPACING * 0.5) + (LANE_SPACING * 0.5)
 				vehicle.position.z = z_pos
+				vehicle.enable_vehicle()
 		else:
 			# Lane is on cooldown, decrement.
 			_traffic_spawn_cooldowns[i] -= 1
 
 # Expects traffic vehicle pool to have size equal to the traffic vehicle array.
-func _get_traffic_vehicle_from_pool(index:int) -> Node3D:
+func _get_traffic_vehicle_from_pool(index:int) -> TrafficVehicle:
 	
 	if (_traffic_vehicle_pool.size() != TRAFFIC_VEHICLES.size()):
 		RdrLogger.fatal(self, _get_road_row_from_pool.get_method() + " expects traffic vehicle pool to have size equal to the traffic vehicle array.")
@@ -126,7 +127,7 @@ func _get_traffic_vehicle_from_pool(index:int) -> Node3D:
 	# Pool is empty for this traffic vehicle type, create a new instance.
 	if (_traffic_vehicle_pool[index].size() == 0):
 		RdrLogger.log(self, "Creating new traffic vehicle instance (total = " + str(_active_traffic_vehicle_instances.size()) + ").")
-		var instance:Node3D = TRAFFIC_VEHICLES[index].instantiate()
+		var instance:TrafficVehicle = TRAFFIC_VEHICLES[index].instantiate()
 		_active_traffic_vehicle_instances.append(instance)
 		_active_traffic_vehicle_pool_indices.append(index)
 		_traffic_parent.add_child(instance)
@@ -135,7 +136,7 @@ func _get_traffic_vehicle_from_pool(index:int) -> Node3D:
 	else:
 		RdrLogger.log(self, "Reusing traffic vehicle instance from pool.")
 		var end_ind:int = _traffic_vehicle_pool[index].size() - 1
-		var instance:Node3D = _traffic_vehicle_pool[index][end_ind]
+		var instance:TrafficVehicle = _traffic_vehicle_pool[index][end_ind]
 		_active_traffic_vehicle_instances.append(instance)
 		_active_traffic_vehicle_pool_indices.append(index)
 		_traffic_vehicle_pool[index].remove_at(end_ind)

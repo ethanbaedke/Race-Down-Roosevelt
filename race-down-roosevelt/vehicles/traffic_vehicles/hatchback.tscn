@@ -8,6 +8,7 @@ size = Vector3(1, 1, 2.85)
 
 [node name="Hatchback" type="Node3D" unique_id=1058239849]
 script = ExtResource("1_hnv7o")
+speed = 16
 
 [node name="HatchbackModel" parent="." unique_id=1056378223 instance=ExtResource("1_k17uf")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

@@ -8,6 +8,7 @@ size = Vector3(1, 1, 2.7)
 
 [node name="Suv" type="Node3D" unique_id=81436809]
 script = ExtResource("1_k0c0p")
+speed = 13
 
 [node name="SuvModel" parent="." unique_id=1204516061 instance=ExtResource("1_b56m0")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

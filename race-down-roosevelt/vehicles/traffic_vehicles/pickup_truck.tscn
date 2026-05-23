@@ -8,6 +8,7 @@ size = Vector3(1, 1, 2.95)
 
 [node name="PickupTruck" type="Node3D" unique_id=1813783315]
 script = ExtResource("1_0f3gt")
+speed = 10
 
 [node name="PickupTruckModel" parent="." unique_id=1601011641 instance=ExtResource("1_oschr")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

@@ -42,17 +42,36 @@ func validate_parameters() -> bool:
 	if (road_rows.size() < 1):
 		RdrLogger.error(self, "Validation failed: list of spawnable road rows is empty. Must have at least one road row to spawn.")
 		return false
-		
-	# If there is only one road row, it's weight must be > 0.
-	if (road_rows.size() == 1 && road_rows[0].weight <= 0):
-		RdrLogger.error(self, "Only one road row is present to spawn, but its weight is " + str(road_rows[0].weight) + " and must be greater than 0.")
+	
+	# Ensure at least one road row has a weight > 0.
+	var valid_weight_exists:bool = false
+	for entry:WeightedTableEntry in road_rows:
+		if (entry.weight > 0):
+			valid_weight_exists = true
+	if (!valid_weight_exists):
+		RdrLogger.error(self, "Validation failed: At least one road row must have a weight greater than 0.")
 		return false
-		
+	
 	# Throw a warning if any weight is zero, meaning the road row will never be spawned.
 	for entry:WeightedTableEntry in road_rows:
 		if (entry.weight <= 0):
 			RdrLogger.warn(self, entry.scene.get_state().get_node_name(0) + " in road rows list has weight " + str(entry.weight) + ", so it will never be spawned.")
+	
+	# Ensure all scenes in the table exist and are of the road row type.
+	for entry:WeightedTableEntry in road_rows:
+		if (entry.scene == null):
+			RdrLogger.error(self, "Validation failed: At least one road row scene in the table is null.")
+			return false
+		var scene:Object = entry.scene.instantiate()
+		if (scene is not RoadRow):
+			var current_type:String = scene.get_class()
+			if (scene.get_script() != null):
+				current_type = scene.get_script().get_global_name()
+			var expected_type:String = (RoadRow as GDScript).get_global_name()
+			RdrLogger.error(self, "Validation failed: All road row scenes must be of type " + expected_type + ", but a scene of type " + current_type + " was found.")
+			return false
 		
+	
 	RdrLogger.log(self, "Validation succeeded.")
 	return true
 
@@ -60,6 +79,25 @@ func validate_parameters() -> bool:
 func force_resolve_conflicts() -> void:
 	
 	RdrLogger.log(self, "Beginning conflict resolution.")
+	
+	# Remove any road rows with empty scenes or scenes that are not of the road row type.
+	var i:int = 0
+	while (i < road_rows.size()):
+		var entry:WeightedTableEntry = road_rows[i]
+		if (entry.scene == null):
+			RdrLogger.warn(self, "A null scene was found. Removing table entry.")
+			road_rows.remove_at(i)
+			continue
+		var scene:Object = entry.scene.instantiate()
+		if (scene is not RoadRow):
+			var current_type:String = scene.get_class()
+			if (scene.get_script() != null):
+				current_type = scene.get_script().get_global_name()
+			var expected_type:String = (RoadRow as GDScript).get_global_name()
+			RdrLogger.error(self, "All road row scenes must be of type " + expected_type + ", but a scene of type " + current_type + " was found. Removing table entry.")
+			road_rows.remove_at(i)
+			continue
+		i += 1
 	
 	# Ensure at least one road row exists.
 	if (road_rows.size() < 1):
@@ -73,9 +111,13 @@ func force_resolve_conflicts() -> void:
 		else:
 			RdrLogger.fatal(self, "List of spawnable road rows was empty and the straight road row could not be loaded.")
 	
-	# Ensure if only one road row exists, it has weight >0.
-	if (road_rows.size() == 1 && road_rows[0].weight <= 0):
-		RdrLogger.warn(self, "Only one road row is present to spawn, but its weight is " + str(road_rows[0].weight) + ". Setting its weight to 1.")
+	# Ensure at least one road row has a weight > 0.
+	var valid_weight_exists:bool = false
+	for entry:WeightedTableEntry in road_rows:
+		if (entry.weight > 0):
+			valid_weight_exists = true
+	if (!valid_weight_exists):
+		RdrLogger.warn(self, "No road rows have a weight greater than 0. Setting the first road rows weight to 1.")
 		road_rows[0].weight = 1
 	
 	RdrLogger.log(self, "Conflict resolution complete.")

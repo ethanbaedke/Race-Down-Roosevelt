@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://bgx4sb7ysypif"]
 
+[ext_resource type="Script" uid="uid://8ljswlgfw0gs" path="res://road/road_row.gd" id="1_7gm63"]
 [ext_resource type="PackedScene" uid="uid://cyset5pjlgqq0" path="res://road/road_straight.glb" id="1_f3j74"]
 
 [node name="RoadRowStraight" type="Node3D" unique_id=1504721551]
+script = ExtResource("1_7gm63")
 
 [node name="RoadStraight" parent="." unique_id=142417426 instance=ExtResource("1_f3j74")]
 transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, 9.75, 0, 0)

@@ -106,6 +106,8 @@ func _cast_vehicle_shape_to_position(world_pos:Vector3) -> Array[Node3D]:
 # Called when this racer bumps a racer in front of it.
 func _handle_racer_bump(other:RacerVehicle) -> void:
 	
+	RdrLogger.log(self, self.racer.name + " bumped " + other.racer.name + ".")
+	
 	var m1:float = self.weight
 	var m2:float = other.weight
 	var s1:float = self.speed
@@ -130,6 +132,15 @@ func _handle_racer_bump(other:RacerVehicle) -> void:
 	self.speed = new_s1
 	other.speed = new_s2
 
+func _handle_traffic_vehicle_hit(vehicle:TrafficVehicle) -> void:
+	
+	RdrLogger.log(self, racer.name + " hit a traffic vehicle.")
+	
+	vehicle.explode()
+	# Reduce speed based on durability (higher = more maintained).
+	# Add one to max durability here to ensure vehicles with max durability still slow down some.
+	speed = speed * ((durability as float) / (MAX_DURABILITY + 1))
+
 func _collision_area_entered(area: Area3D) -> void:
 	
 	# Grab the parent of the area 2d, and handle collision based on its type.
@@ -145,10 +156,7 @@ func _collision_area_entered(area: Area3D) -> void:
 		
 	# Handle collision with traffic vehicles.
 	elif (parent is TrafficVehicle):
-		parent.explode()
-		# Reduce speed based on durability (higher = more maintained).
-		# Add one to max durability here to ensure vehicles with max durability still slow down some.
-		speed = speed * ((durability as float) / (MAX_DURABILITY + 1))
+		_handle_traffic_vehicle_hit(parent)
 
 # Expects race to be set.
 func _ready() -> void:

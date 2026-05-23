@@ -104,7 +104,7 @@ func force_resolve_conflicts() -> void:
 		# No road rows exist, try to load the straight row.
 		var straight_row:PackedScene = load("res://road/road_row_straight.tscn")
 		if (straight_row != null):
-			RdrLogger.warn(self, "List of spawnable road rows was empty, adding the stright road row.")
+			RdrLogger.warn(self, "List of spawnable road rows was empty, adding the straight road row.")
 			var entry:WeightedTableEntry = WeightedTableEntry.new()
 			entry.scene = straight_row
 			road_rows.append(entry)

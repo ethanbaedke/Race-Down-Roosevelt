@@ -2,6 +2,8 @@ class_name Race extends Node3D
 
 const NUM_LANES:int = 9
 const LANE_SPACING:float = 3.0
+# Number of road rows to be placed before the finish line.
+const RACE_LENGTH:int = 100
 
 var _racer_vehicles:Array[RacerVehicle] = []
 
@@ -66,6 +68,8 @@ const TRAFFIC_SPAWN_COOLDOWN:int = 10
 
 var traffic_spawn_chance:float = 0.1
 
+var _finish_line_scene:PackedScene = preload("res://road/road_row_finish_line.tscn")
+
 # Tracks how many road rows need to be placed before a lane is allowed to spawn another traffic vehicle.
 # Lanes with a value of 0 at their index are allowed to spawn a vehicle.
 var _traffic_spawn_cooldowns:Array[int] = []
@@ -82,6 +86,7 @@ var _active_road_row_pool_indices:Array[int] = []
 
 # What z-coordinate the next road row should be spawned at.
 var _next_road_row_z:float = 0.0
+var _road_rows_placed:int = 0
 
 func _move_world_back(amount:float) -> void:
 	
@@ -191,13 +196,32 @@ func _place_road_row() -> void:
 
 func _handle_road_placement() -> void:
 	
+	if (_road_rows_placed == RACE_LENGTH):
+		return
+	
 	var order:Array[RacerVehicle] = get_racer_order()
 	
 	# Place road in front of first place racer.
 	var first_place_z:float = order[0].position.z
 	while (_next_road_row_z - first_place_z < ROAD_PLACE_DIST):
-		_place_road_row()
-		_next_road_row_z += ROAD_ROW_SPACING
+		if (_road_rows_placed < RACE_LENGTH):
+			_place_road_row()
+			_next_road_row_z += ROAD_ROW_SPACING
+			_road_rows_placed += 1
+			if (_road_rows_placed == RACE_LENGTH):
+				_place_finish_line()
+				return
+		else:
+			_place_finish_line()
+			return
+	
+func _place_finish_line() -> void:
+	
+	var finish:RoadRowFinishLine = _finish_line_scene.instantiate()
+	finish.racer_crossed.connect(func (racer:RacerVehicle) -> void:
+		RdrLogger.log(self, "Finish line crossed by " + racer.racer.name + "."))
+	_road_parent.add_child(finish)
+	finish.position.z = _next_road_row_z
 	
 func _handle_cleanup() -> void:
 	

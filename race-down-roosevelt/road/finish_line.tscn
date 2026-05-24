@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cufy38ikqpci6"]
+
+[ext_resource type="Script" uid="uid://8ljswlgfw0gs" path="res://road/road_row.gd" id="1_iwkgy"]
+
+[node name="FinishLine" type="Node3D" unique_id=1019797400]
+script = ExtResource("1_iwkgy")
+metadata/_custom_type_script = "uid://8ljswlgfw0gs"

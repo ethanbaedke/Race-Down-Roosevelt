@@ -1,9 +1,17 @@
 [gd_scene format=3 uid="uid://d381mmv3sxx7j"]
 
 [ext_resource type="Script" uid="uid://c4j85t8xu0nvo" path="res://race/race.gd" id="1_6dlvr"]
+[ext_resource type="Script" uid="uid://clyn63xl4tio5" path="res://helpers/weighted_table_entry.gd" id="2_ddpug"]
+[ext_resource type="Script" uid="uid://4xpetlewbrgg" path="res://race/road_spawn_table.gd" id="3_lip1t"]
+
+[sub_resource type="Resource" id="Resource_iqn4a"]
+script = ExtResource("3_lip1t")
+road_rows = Array[ExtResource("2_ddpug")]([null])
+metadata/_custom_type_script = "uid://4xpetlewbrgg"
 
 [node name="Race" type="Node3D" unique_id=1363738947]
 script = ExtResource("1_6dlvr")
+road_spawn_table = SubResource("Resource_iqn4a")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=327752361]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)

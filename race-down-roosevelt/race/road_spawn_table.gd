@@ -42,6 +42,12 @@ func validate_parameters() -> bool:
 	if (road_rows.size() < 1):
 		RdrLogger.error(self, "Validation failed: list of spawnable road rows is empty. Must have at least one road row to spawn.")
 		return false
+		
+	# No entry in the table should be null.
+	for entry:WeightedTableEntry in road_rows:
+		if (entry == null):
+			RdrLogger.error(self, "Validation failed: a null entry exists in the table.")
+			return false
 	
 	# Ensure at least one road row has a weight > 0.
 	var valid_weight_exists:bool = false
@@ -80,8 +86,17 @@ func force_resolve_conflicts() -> void:
 	
 	RdrLogger.log(self, "Beginning conflict resolution.")
 	
-	# Remove any road rows with empty scenes or scenes that are not of the road row type.
+	# Remove any null entries.
 	var i:int = 0
+	while (i < road_rows.size()):
+		if (road_rows[i] == null):
+			RdrLogger.warn(self, "Null entry found. Removing entry.")
+			road_rows.remove_at(i)
+		else:
+			i += 1
+	
+	# Remove any road rows with empty scenes or scenes that are not of the road row type.
+	i = 0
 	while (i < road_rows.size()):
 		var entry:WeightedTableEntry = road_rows[i]
 		if (entry.scene == null):

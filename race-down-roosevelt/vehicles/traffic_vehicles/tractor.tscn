@@ -10,10 +10,9 @@ size = Vector3(1, 1.05, 2.3)
 script = ExtResource("1_dlk8n")
 
 [node name="TractorModel" parent="." unique_id=171008216 instance=ExtResource("1_6830s")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="Area3D" type="Area3D" parent="." unique_id=762813446]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0.08)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.08)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1881022167]
 shape = SubResource("BoxShape3D_6830s")

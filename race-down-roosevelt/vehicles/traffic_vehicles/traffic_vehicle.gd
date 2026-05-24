@@ -44,4 +44,4 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
-	position.z -= speed * delta
+	position.z += speed * delta

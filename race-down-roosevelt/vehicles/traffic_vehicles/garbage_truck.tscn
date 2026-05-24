@@ -11,10 +11,9 @@ script = ExtResource("1_pqwpp")
 speed = 4
 
 [node name="GarbageTruckModel" parent="." unique_id=737302542 instance=ExtResource("1_xca71")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1307706381]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.025)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0.025)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1662255117]
 shape = SubResource("BoxShape3D_2lu8d")

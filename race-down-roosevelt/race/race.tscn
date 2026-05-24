@@ -2,11 +2,23 @@
 
 [ext_resource type="Script" uid="uid://c4j85t8xu0nvo" path="res://race/race.gd" id="1_6dlvr"]
 [ext_resource type="Script" uid="uid://clyn63xl4tio5" path="res://helpers/weighted_table_entry.gd" id="2_ddpug"]
+[ext_resource type="PackedScene" uid="uid://bgx4sb7ysypif" path="res://road/road_row_straight.tscn" id="3_iqn4a"]
 [ext_resource type="Script" uid="uid://4xpetlewbrgg" path="res://race/road_spawn_table.gd" id="3_lip1t"]
+[ext_resource type="PackedScene" uid="uid://bcn1ytr5saki7" path="res://road/road_row_empty.tscn" id="4_iqn4a"]
+
+[sub_resource type="Resource" id="Resource_ddpug"]
+script = ExtResource("2_ddpug")
+scene = ExtResource("3_iqn4a")
+metadata/_custom_type_script = "uid://clyn63xl4tio5"
+
+[sub_resource type="Resource" id="Resource_lip1t"]
+script = ExtResource("2_ddpug")
+scene = ExtResource("4_iqn4a")
+metadata/_custom_type_script = "uid://clyn63xl4tio5"
 
 [sub_resource type="Resource" id="Resource_iqn4a"]
 script = ExtResource("3_lip1t")
-road_rows = Array[ExtResource("2_ddpug")]([null])
+road_rows = Array[ExtResource("2_ddpug")]([SubResource("Resource_ddpug"), SubResource("Resource_lip1t")])
 metadata/_custom_type_script = "uid://4xpetlewbrgg"
 
 [node name="Race" type="Node3D" unique_id=1363738947]

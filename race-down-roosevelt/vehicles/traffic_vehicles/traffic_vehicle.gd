@@ -5,6 +5,9 @@ class_name TrafficVehicle extends Node3D
 @onready var _collision_area:Area3D = $Area3D
 @onready var _collision_shape:CollisionShape3D = $Area3D/CollisionShape3D
 
+# The actual speed used. This allows it to be modified without changing the original speed variable.
+var _speed:float = speed
+
 func explode() -> void:
 	
 	# We don't destroy this object since the race will recycle it.
@@ -12,11 +15,14 @@ func explode() -> void:
 
 func disable_vehicle() -> void:
 	
+	# Stop the vehicle when disabled so it can fall behind quicker and be cleaned up sooner.
+	_speed = 0
 	_collision_shape.disabled = true
 	self.visible = false
 
 func enable_vehicle() -> void:
 	
+	_speed = speed
 	_collision_shape.disabled = false
 	self.visible = true
 
@@ -48,4 +54,4 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
-	position.z += speed * delta
+	position.z += _speed * delta

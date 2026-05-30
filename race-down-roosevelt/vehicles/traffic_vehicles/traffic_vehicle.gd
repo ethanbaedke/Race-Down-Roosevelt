@@ -31,12 +31,16 @@ func _handle_traffic_vehicle_bump(other:TrafficVehicle) -> void:
 func _collision_area_entered(area: Area3D) -> void:
 	
 	var parent:Node3D = area.get_parent_node_3d()
+	# Handle hitting another traffic vehicle.
 	if (parent is TrafficVehicle):
 		# Ignore if this collision if this vehicle is in front of the vehicle it hit.
 		# Traffic vehicle bumps are always handeled by the behind vehicle.
 		if (area.global_position.z < _collision_area.global_position.z):
 			return
 		_handle_traffic_vehicle_bump(parent)
+	# Handle hitting the finish line.
+	if (parent is RoadRowFinishLine):
+		disable_vehicle()
 
 func _ready() -> void:
 	

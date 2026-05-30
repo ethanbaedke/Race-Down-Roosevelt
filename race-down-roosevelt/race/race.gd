@@ -223,6 +223,10 @@ func _place_finish_line() -> void:
 	_road_parent.add_child(finish)
 	finish.position.z = _next_road_row_z
 	
+	for vehicle:TrafficVehicle in _active_traffic_vehicle_instances:
+		if (vehicle.global_position.z > finish.global_position.z):
+			vehicle.disable_vehicle()
+	
 func _handle_cleanup() -> void:
 	
 	var order:Array[RacerVehicle] = get_racer_order()
@@ -449,7 +453,7 @@ func _ready() -> void:
 	# NOTE: This is temporary. Should be called by whoever creates the race.
 	setup_race()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 
 	_move_racers(delta)
 	

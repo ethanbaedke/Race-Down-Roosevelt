@@ -32,7 +32,7 @@ func _handle_traffic_vehicle_bump(other:TrafficVehicle) -> void:
 	RdrLogger.log(self, "Traffic vehicle rear ended another traffic vehicle. Set to tailgate.")
 
 	# Simply set the behind vehicles speed equal to the bumped vehicles speed and let it tailgate.
-	self.speed = other.speed
+	self._speed = other._speed
 
 func _collision_area_entered(area: Area3D) -> void:
 	
@@ -45,13 +45,13 @@ func _collision_area_entered(area: Area3D) -> void:
 			return
 		_handle_traffic_vehicle_bump(parent)
 	# Handle hitting the finish line.
-	if (parent is RoadRowFinishLine):
+	elif (parent is RoadRowFinishLine):
 		disable_vehicle()
 
 func _ready() -> void:
 	
 	_collision_area.area_entered.connect(_collision_area_entered)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	
 	position.z += _speed * delta

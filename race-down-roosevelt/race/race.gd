@@ -7,6 +7,8 @@ const RACE_LENGTH:int = 100
 
 var _racer_vehicles:Array[RacerVehicle] = []
 
+var _leaderboard:Array[RacerObject] = []
+
 # Returns all racer vehicles in order of 1st place -> 4th place.
 func get_racer_order() -> Array[RacerVehicle]:
 	
@@ -41,6 +43,55 @@ func _move_racers(delta:float) -> void:
 	# Debugging
 	for vehicle:RacerVehicle in order:
 		RdrLogger.spam_log(self, vehicle.racer.name + " z-pos: " + str(vehicle.position.z))
+
+func _on_finish_line_crossed(racer:RacerVehicle) -> void:
+	
+	# If this racer somehow crossed twice, ignore them.
+	if (_leaderboard.has(racer.racer)):
+		return
+		
+	_leaderboard.append(racer.racer)
+	
+	# All but one racer have finished, append the missing racer and end the race.
+	if (_leaderboard.size() == _racer_vehicles.size() - 1):
+		var last_place:RacerObject = null
+		for vehicle:RacerVehicle in _racer_vehicles:
+			if (!_leaderboard.has(vehicle.racer)):
+				last_place = vehicle.racer
+				break
+		if (last_place == null):
+			RdrLogger.warn(self, "Race ending since one racer remains but no racer can be found that isn't already on the leaderboard.")
+		else:
+			_leaderboard.append(last_place)
+		_finish_race()
+		
+	# At least two racers are left.
+	else:
+		# If all remaining racers are AI, add them to the leaderboard based on position and end the race.
+		var all_ai:bool = true
+		for vehicle:RacerVehicle in _racer_vehicles:
+			if (!_leaderboard.has(vehicle.racer) && vehicle.racer.device_index != -2):
+				all_ai = false
+				break
+		if (all_ai):
+			var remaining:Array[RacerVehicle] = []
+			for vehicle:RacerVehicle in _racer_vehicles:
+				if (!_leaderboard.has(vehicle.racer)):
+					# Keep remaining in order of distance to finish line while adding vehicles.
+					var i:int = 0
+					while (i < remaining.size() && remaining[i].position.z < vehicle.position.z):
+						i += 1
+					remaining.insert(i, vehicle)
+			for vehicle:RacerVehicle in remaining:
+				_leaderboard.append(vehicle.racer)
+			_finish_race()
+	
+# Expects leaderboard to be filled out correctly.
+func _finish_race() -> void:
+	
+	RdrLogger.log(self, "Race finished.")
+	for i:int in range(_leaderboard.size()):
+		RdrLogger.log(self, "Position " + str(i + 1) + ": " + _leaderboard[i].name + ".")
 
 #region Road/Traffic Management
 
@@ -218,15 +269,15 @@ func _handle_road_placement() -> void:
 func _place_finish_line() -> void:
 	
 	var finish:RoadRowFinishLine = _finish_line_scene.instantiate()
-	finish.racer_crossed.connect(func (racer:RacerVehicle) -> void:
-		RdrLogger.log(self, "Finish line crossed by " + racer.racer.name + "."))
+	finish.racer_crossed.connect(_on_finish_line_crossed)
 	_road_parent.add_child(finish)
 	finish.position.z = _next_road_row_z
 	
+	# Disable any traffic vehicles beyond the finish line when it spawns.
 	for vehicle:TrafficVehicle in _active_traffic_vehicle_instances:
 		if (vehicle.global_position.z > finish.global_position.z):
 			vehicle.disable_vehicle()
-	
+
 func _handle_cleanup() -> void:
 	
 	var order:Array[RacerVehicle] = get_racer_order()

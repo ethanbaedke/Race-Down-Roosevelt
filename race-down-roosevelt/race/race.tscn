@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bgx4sb7ysypif" path="res://road/road_row_straight.tscn" id="3_iqn4a"]
 [ext_resource type="Script" uid="uid://4xpetlewbrgg" path="res://race/road_spawn_table.gd" id="3_lip1t"]
 [ext_resource type="PackedScene" uid="uid://bcn1ytr5saki7" path="res://road/road_row_empty.tscn" id="4_iqn4a"]
+[ext_resource type="Script" uid="uid://dp5p80aakxu84" path="res://race/racer_object.gd" id="6_g1gks"]
+[ext_resource type="Script" uid="uid://c8hh1wvayq5by" path="res://race/race_parameters.gd" id="7_c8320"]
 
 [sub_resource type="Resource" id="Resource_ddpug"]
 script = ExtResource("2_ddpug")
@@ -21,9 +23,37 @@ script = ExtResource("3_lip1t")
 road_rows = Array[ExtResource("2_ddpug")]([SubResource("Resource_ddpug"), SubResource("Resource_lip1t")])
 metadata/_custom_type_script = "uid://4xpetlewbrgg"
 
+[sub_resource type="Resource" id="Resource_g1gks"]
+script = ExtResource("6_g1gks")
+name = "Player 1"
+device_index = -1
+metadata/_custom_type_script = "uid://dp5p80aakxu84"
+
+[sub_resource type="Resource" id="Resource_c8320"]
+script = ExtResource("6_g1gks")
+name = "Player 2"
+device_index = 0
+metadata/_custom_type_script = "uid://dp5p80aakxu84"
+
+[sub_resource type="Resource" id="Resource_01boi"]
+script = ExtResource("6_g1gks")
+name = "AI 1"
+metadata/_custom_type_script = "uid://dp5p80aakxu84"
+
+[sub_resource type="Resource" id="Resource_hkrbr"]
+script = ExtResource("6_g1gks")
+name = "AI 2"
+metadata/_custom_type_script = "uid://dp5p80aakxu84"
+
+[sub_resource type="Resource" id="Resource_vhq2c"]
+script = ExtResource("7_c8320")
+racer_objects = Array[ExtResource("6_g1gks")]([SubResource("Resource_g1gks"), SubResource("Resource_c8320"), SubResource("Resource_01boi"), SubResource("Resource_hkrbr")])
+metadata/_custom_type_script = "uid://c8hh1wvayq5by"
+
 [node name="Race" type="Node3D" unique_id=1363738947]
 script = ExtResource("1_6dlvr")
 road_spawn_table = SubResource("Resource_iqn4a")
+race_parameters = SubResource("Resource_vhq2c")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=327752361]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)

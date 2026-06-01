@@ -55,7 +55,9 @@ func _on_finish_line_crossed(racer:RacerVehicle) -> void:
 	# If this racer somehow crossed twice, ignore them.
 	if (_leaderboard_data.has(racer.racer)):
 		return
-		
+	
+	racer.input_enabled = false
+	
 	_leaderboard_data.append(racer.racer)
 	
 	# All but one racer have finished, append the missing racer and end the race.
@@ -387,6 +389,10 @@ func setup_race() -> void:
 	_validate_race_parameters()
 	_spawn_racer_vehicles()
 	_setup_player_viewports()
+	
+	# Enable input for all racers
+	for vehicle:RacerVehicle in _racer_vehicles:
+		vehicle.input_enabled = true
 	
 	RdrLogger.log(self, "Race setup complete.")
 

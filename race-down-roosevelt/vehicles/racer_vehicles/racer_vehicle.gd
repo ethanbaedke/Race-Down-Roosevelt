@@ -25,6 +25,7 @@ const MIN_WEIGHT:int = 1
 @onready var _collision_shape:CollisionShape3D = $Area3D/CollisionShape3D
 
 var speed:float = 0
+var input_enabled:bool = false
 
 # Just does a boost for now.
 func use_powerup() -> void:
@@ -177,6 +178,9 @@ var _joystick_active:bool = false
 var _powerup_button_active:bool = false
 
 func _unhandled_input(event: InputEvent) -> void:
+	
+	if (!input_enabled):
+		return
 	
 	if (event is InputEventKey):
 		if (racer.device_index != -1):

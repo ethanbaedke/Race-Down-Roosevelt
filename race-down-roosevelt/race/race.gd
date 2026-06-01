@@ -5,9 +5,11 @@ const LANE_SPACING:float = 3.0
 # Number of road rows to be placed before the finish line.
 const RACE_LENGTH:int = 100
 
+@onready var _leaderboard:Scoreboard = $Scoreboard
+
 var _racer_vehicles:Array[RacerVehicle] = []
 
-var _leaderboard:Array[RacerObject] = []
+var _leaderboard_data:Array[RacerObject] = []
 
 # Returns all racer vehicles in order of 1st place -> 4th place.
 func get_racer_order() -> Array[RacerVehicle]:
@@ -47,22 +49,22 @@ func _move_racers(delta:float) -> void:
 func _on_finish_line_crossed(racer:RacerVehicle) -> void:
 	
 	# If this racer somehow crossed twice, ignore them.
-	if (_leaderboard.has(racer.racer)):
+	if (_leaderboard_data.has(racer.racer)):
 		return
 		
-	_leaderboard.append(racer.racer)
+	_leaderboard_data.append(racer.racer)
 	
 	# All but one racer have finished, append the missing racer and end the race.
-	if (_leaderboard.size() == _racer_vehicles.size() - 1):
+	if (_leaderboard_data.size() == _racer_vehicles.size() - 1):
 		var last_place:RacerObject = null
 		for vehicle:RacerVehicle in _racer_vehicles:
-			if (!_leaderboard.has(vehicle.racer)):
+			if (!_leaderboard_data.has(vehicle.racer)):
 				last_place = vehicle.racer
 				break
 		if (last_place == null):
 			RdrLogger.warn(self, "Race ending since one racer remains but no racer can be found that isn't already on the leaderboard.")
 		else:
-			_leaderboard.append(last_place)
+			_leaderboard_data.append(last_place)
 		_finish_race()
 		
 	# At least two racers are left.
@@ -70,28 +72,30 @@ func _on_finish_line_crossed(racer:RacerVehicle) -> void:
 		# If all remaining racers are AI, add them to the leaderboard based on position and end the race.
 		var all_ai:bool = true
 		for vehicle:RacerVehicle in _racer_vehicles:
-			if (!_leaderboard.has(vehicle.racer) && vehicle.racer.device_index != -2):
+			if (!_leaderboard_data.has(vehicle.racer) && vehicle.racer.device_index != -2):
 				all_ai = false
 				break
 		if (all_ai):
 			var remaining:Array[RacerVehicle] = []
 			for vehicle:RacerVehicle in _racer_vehicles:
-				if (!_leaderboard.has(vehicle.racer)):
+				if (!_leaderboard_data.has(vehicle.racer)):
 					# Keep remaining in order of distance to finish line while adding vehicles.
 					var i:int = 0
 					while (i < remaining.size() && remaining[i].position.z < vehicle.position.z):
 						i += 1
 					remaining.insert(i, vehicle)
 			for vehicle:RacerVehicle in remaining:
-				_leaderboard.append(vehicle.racer)
+				_leaderboard_data.append(vehicle.racer)
 			_finish_race()
 	
 # Expects leaderboard to be filled out correctly.
 func _finish_race() -> void:
 	
 	RdrLogger.log(self, "Race finished.")
-	for i:int in range(_leaderboard.size()):
-		RdrLogger.log(self, "Position " + str(i + 1) + ": " + _leaderboard[i].name + ".")
+	for i:int in range(_leaderboard_data.size()):
+		RdrLogger.log(self, "Position " + str(i + 1) + ": " + _leaderboard_data[i].name + ".")
+		
+	_leaderboard.load_data(_leaderboard_data)
 
 #region Road/Traffic Management
 

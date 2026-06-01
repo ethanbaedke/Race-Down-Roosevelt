@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Race Down Roosevelt"
-run/main_scene="uid://d381mmv3sxx7j"
+run/main_scene="uid://dswofibvmv63a"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

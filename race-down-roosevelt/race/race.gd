@@ -1,9 +1,13 @@
 class_name Race extends Node3D
 
+# Called when the race is ready to be cleaned up.
+signal ready_for_cleanup
+
 const NUM_LANES:int = 9
 const LANE_SPACING:float = 3.0
 # Number of road rows to be placed before the finish line.
 const RACE_LENGTH:int = 100
+const LEADERBOARD_DISPLAY_TIME:float = 5.0
 
 @onready var _leaderboard:Scoreboard = $Scoreboard
 
@@ -96,6 +100,8 @@ func _finish_race() -> void:
 		RdrLogger.log(self, "Position " + str(i + 1) + ": " + _leaderboard_data[i].name + ".")
 		
 	_leaderboard.load_data(_leaderboard_data)
+	await get_tree().create_timer(LEADERBOARD_DISPLAY_TIME).timeout
+	ready_for_cleanup.emit()
 
 #region Road/Traffic Management
 
@@ -502,11 +508,6 @@ func _validate_race_parameters() -> void:
 	RdrLogger.log(self, "Race parameter validation finished.")
 
 #endregion
-
-func _ready() -> void:
-	
-	# NOTE: This is temporary. Should be called by whoever creates the race.
-	setup_race()
 
 func _physics_process(delta: float) -> void:
 

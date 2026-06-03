@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://djam2485dh0fm"]
+
+[ext_resource type="PackedScene" uid="uid://d381mmv3sxx7j" path="res://race/race.tscn" id="1_7iufo"]
+[ext_resource type="Script" uid="uid://cw2dydgemlskt" path="res://race/race_debug.gd" id="1_78imr"]
+
+[node name="RaceDebug" type="Node3D" unique_id=443175199]
+script = ExtResource("1_78imr")
+
+[node name="Race" parent="." unique_id=1363738947 instance=ExtResource("1_7iufo")]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1883248558]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1726973785]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=1803003207]
+transform = Transform3D(-0.0069434517, -0.8584727, 0.5128121, 0, 0.5128245, 0.8584934, -0.9999758, 0.005960907, -0.003560772, 67.847275, 86.35268, -0.16928999)

@@ -11,6 +11,8 @@ const LEADERBOARD_DISPLAY_TIME:float = 5.0
 
 @onready var _leaderboard:Scoreboard = $Scoreboard
 
+var _race_setup:bool = false
+
 var _racer_vehicles:Array[RacerVehicle] = []
 
 var _leaderboard_data:Array[RacerObject] = []
@@ -110,7 +112,7 @@ func _finish_race() -> void:
 # Distance in front of the 1st place racer road should be placed up to.
 const ROAD_PLACE_DIST:int = 100
 # Distance behind the last place racer road needs to be to be cleaned up.
-const ROAD_CLEANUP_DIST:int = 100
+const ROAD_CLEANUP_DIST:int = 10
 # Z-distance between road rows.
 const ROAD_ROW_SPACING:float = 3.0
 
@@ -140,7 +142,7 @@ var _finish_line_scene:PackedScene = preload("res://road/road_row_finish_line.ts
 var _traffic_spawn_cooldowns:Array[int] = []
 # Holds arrays of recycled traffic vehicle instances. Each array is a different traffic vehicle type and mimics the traffic vehicles array.
 var _traffic_vehicle_pool:Array[Array] = []
-var _active_traffic_vehicle_instances:Array[Node3D] = []
+var _active_traffic_vehicle_instances:Array[TrafficVehicle] = []
 var _active_traffic_vehicle_pool_indices:Array[int] = []
 
 # What z-coordinate the next road row should be spawned at.
@@ -271,6 +273,7 @@ func _handle_cleanup() -> void:
 	while (i < _active_traffic_vehicle_instances.size()):
 		if (_active_traffic_vehicle_instances[i].position.z < cleanup_z):
 			RdrLogger.log(self, "Recycling traffic vehicle instance.")
+			_active_traffic_vehicle_instances[i].disable_vehicle()
 			_traffic_vehicle_pool[_active_traffic_vehicle_pool_indices[i]].append(_active_traffic_vehicle_instances[i])
 			_active_traffic_vehicle_instances.remove_at(i)
 			_active_traffic_vehicle_pool_indices.remove_at(i)
@@ -332,6 +335,7 @@ func setup_race() -> void:
 	for vehicle:RacerVehicle in _racer_vehicles:
 		vehicle.input_enabled = true
 	
+	_race_setup = true
 	RdrLogger.log(self, "Race setup complete.")
 
 # This function expects there to be 1-4 racer vehicles, with at least one being player controlled.
@@ -454,6 +458,9 @@ func _validate_race_parameters() -> void:
 #endregion
 
 func _physics_process(delta: float) -> void:
+
+	if (!_race_setup):
+		return
 
 	_move_racers(delta)
 	

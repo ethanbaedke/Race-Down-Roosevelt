@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://clyn63xl4tio5" path="res://helpers/weighted_table_entry.gd" id="2_ddpug"]
 [ext_resource type="PackedScene" uid="uid://bgx4sb7ysypif" path="res://road/road_row_straight.tscn" id="3_iqn4a"]
 [ext_resource type="Script" uid="uid://4xpetlewbrgg" path="res://race/road_spawn_table.gd" id="3_lip1t"]
-[ext_resource type="PackedScene" uid="uid://bcn1ytr5saki7" path="res://road/road_row_empty.tscn" id="4_iqn4a"]
 [ext_resource type="Script" uid="uid://dp5p80aakxu84" path="res://race/racer_object.gd" id="6_g1gks"]
 [ext_resource type="Script" uid="uid://c8hh1wvayq5by" path="res://race/race_parameters.gd" id="7_c8320"]
 [ext_resource type="Script" uid="uid://7psf6ks7j2k4" path="res://race/scoreboard.gd" id="8_c8320"]
@@ -14,14 +13,9 @@ script = ExtResource("2_ddpug")
 scene = ExtResource("3_iqn4a")
 metadata/_custom_type_script = "uid://clyn63xl4tio5"
 
-[sub_resource type="Resource" id="Resource_lip1t"]
-script = ExtResource("2_ddpug")
-scene = ExtResource("4_iqn4a")
-metadata/_custom_type_script = "uid://clyn63xl4tio5"
-
 [sub_resource type="Resource" id="Resource_iqn4a"]
 script = ExtResource("3_lip1t")
-road_rows = Array[ExtResource("2_ddpug")]([SubResource("Resource_ddpug"), SubResource("Resource_lip1t")])
+road_rows = Array[ExtResource("2_ddpug")]([SubResource("Resource_ddpug")])
 metadata/_custom_type_script = "uid://4xpetlewbrgg"
 
 [sub_resource type="Resource" id="Resource_g1gks"]

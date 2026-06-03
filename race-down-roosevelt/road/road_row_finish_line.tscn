@@ -1,43 +1,41 @@
 [gd_scene format=3 uid="uid://bvvor71m3be11"]
 
 [ext_resource type="Script" uid="uid://b32i4uigj5g5i" path="res://road/road_row_finish_line.gd" id="1_vtf4o"]
-[ext_resource type="PackedScene" uid="uid://klynnsb81xne" path="res://road/road_barier_2a.glb" id="2_3mep1"]
+[ext_resource type="Texture2D" uid="uid://bj4cbg15hs8rp" path="res://road/finish_line.png" id="2_3mep1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3mep1"]
 size = Vector3(27.25, 1, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gghjk"]
+albedo_texture = ExtResource("2_3mep1")
+uv1_scale = Vector3(9, 1, 1)
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yscba"]
+material = SubResource("StandardMaterial3D_gghjk")
+size = Vector2(9, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3mep1"]
+size = Vector3(0.2, 0.2, 3)
+
 [node name="RoadRowFinishLine" type="Node3D" unique_id=741640470]
 script = ExtResource("1_vtf4o")
 metadata/_custom_type_script = "uid://8ljswlgfw0gs"
-
-[node name="RoadBarierModel" parent="." unique_id=395198042 instance=ExtResource("2_3mep1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
-
-[node name="RoadBarierModel2" parent="." unique_id=1926038309 instance=ExtResource("2_3mep1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
-
-[node name="RoadBarierModel3" parent="." unique_id=195651949 instance=ExtResource("2_3mep1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
-
-[node name="RoadBarierModel4" parent="." unique_id=1822745222 instance=ExtResource("2_3mep1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
-
-[node name="RoadBarierModel5" parent="." unique_id=230221829 instance=ExtResource("2_3mep1")]
-
-[node name="RoadBarierModel6" parent="." unique_id=1856493847 instance=ExtResource("2_3mep1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
-
-[node name="RoadBarierModel7" parent="." unique_id=885272762 instance=ExtResource("2_3mep1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
-
-[node name="RoadBarierModel8" parent="." unique_id=1153093136 instance=ExtResource("2_3mep1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 0)
-
-[node name="RoadBarierModel9" parent="." unique_id=620674690 instance=ExtResource("2_3mep1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1025912092]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=969080983]
 shape = SubResource("BoxShape3D_3mep1")
+
+[node name="Road" type="MeshInstance3D" parent="." unique_id=447222206]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = SubResource("PlaneMesh_yscba")
+
+[node name="LeftEdge" type="MeshInstance3D" parent="." unique_id=1740354718]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.50941, 0, 0)
+mesh = SubResource("BoxMesh_3mep1")
+
+[node name="RightEdge" type="MeshInstance3D" parent="." unique_id=1307283357]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.49059, 0, 0)
+mesh = SubResource("BoxMesh_3mep1")

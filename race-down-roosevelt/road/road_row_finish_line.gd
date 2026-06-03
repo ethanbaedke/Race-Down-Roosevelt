@@ -1,4 +1,4 @@
-class_name RoadRowFinishLine extends RoadRow
+class_name RoadRowFinishLine extends Node3D
 
 signal racer_crossed(racer:RacerVehicle)
 

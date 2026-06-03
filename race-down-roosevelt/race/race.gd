@@ -110,7 +110,7 @@ func _finish_race() -> void:
 # Distance in front of the 1st place racer road should be placed up to.
 const ROAD_PLACE_DIST:int = 100
 # Distance behind the last place racer road needs to be to be cleaned up.
-const ROAD_CLEANUP_DIST:int = 10
+const ROAD_CLEANUP_DIST:int = 100
 # Z-distance between road rows.
 const ROAD_ROW_SPACING:float = 3.0
 
@@ -124,10 +124,12 @@ const TRAFFIC_VEHICLES:Array[PackedScene] = [
 ]
 const TRAFFIC_SPAWN_COOLDOWN:int = 10
 
-@export var road_spawn_table:RoadSpawnTable = null
-
 @onready var _road_parent:Node3D = $Road
 @onready var _traffic_parent:Node3D = $Traffic
+
+@onready var _road_asphalt:MeshInstance3D = $Road/Asphalt
+@onready var _road_left_barrier:MeshInstance3D = $Road/LeftBarrier
+@onready var _road_right_barrier:MeshInstance3D = $Road/RightBarrier
 
 var traffic_spawn_chance:float = 0.1
 
@@ -141,14 +143,8 @@ var _traffic_vehicle_pool:Array[Array] = []
 var _active_traffic_vehicle_instances:Array[Node3D] = []
 var _active_traffic_vehicle_pool_indices:Array[int] = []
 
-# Holds arrays of recycled road row instances. Each array is a different road type and mimics the road row array on the spawn table.
-var _road_row_pool:Array[Array] = []
-# Used for recycling.
-var _active_road_row_instances:Array[Node3D] = []
-var _active_road_row_pool_indices:Array[int] = []
-
 # What z-coordinate the next road row should be spawned at.
-var _next_road_row_z:float = 0.0
+var _next_road_row_z:float = ROAD_ROW_SPACING
 var _road_rows_placed:int = 0
 
 func _move_world_back(amount:float) -> void:
@@ -165,6 +161,20 @@ func _place_traffic_row(z_pos:float) -> void:
 	if (_traffic_spawn_cooldowns.size() != NUM_LANES):
 		RdrLogger.fatal(self, _place_road_row.get_method() + " expects traffic spawn cooldowns array to have size equal to number of lanes.")
 	
+	# Extend road.
+	_road_asphalt.position.z += ROAD_ROW_SPACING / 2
+	var asphalt_mesh:PlaneMesh = _road_asphalt.mesh
+	asphalt_mesh.size.y += ROAD_ROW_SPACING
+	var asphalt_material:StandardMaterial3D = asphalt_mesh.material
+	asphalt_material.uv1_scale.y = asphalt_mesh.size.y / 3
+	_road_left_barrier.position.z += ROAD_ROW_SPACING / 2
+	var left_barrier_mesh:BoxMesh = _road_left_barrier.mesh
+	left_barrier_mesh.size.z += ROAD_ROW_SPACING
+	_road_right_barrier.position.z += ROAD_ROW_SPACING / 2
+	var right_barrier_mesh:BoxMesh = _road_right_barrier.mesh
+	right_barrier_mesh.size.z += ROAD_ROW_SPACING
+	
+	# Spawn traffic.
 	for i:int in range(NUM_LANES):
 		if (_traffic_spawn_cooldowns[i] == 0):
 			# Lane is off cooldown, roll to spawn.
@@ -185,7 +195,7 @@ func _place_traffic_row(z_pos:float) -> void:
 func _get_traffic_vehicle_from_pool(index:int) -> TrafficVehicle:
 	
 	if (_traffic_vehicle_pool.size() != TRAFFIC_VEHICLES.size()):
-		RdrLogger.fatal(self, _get_road_row_from_pool.get_method() + " expects traffic vehicle pool to have size equal to the traffic vehicle array.")
+		RdrLogger.fatal(self, _get_traffic_vehicle_from_pool.get_method() + " expects traffic vehicle pool to have size equal to the traffic vehicle array.")
 		return null
 		
 	if (index < 0 || index >= _traffic_vehicle_pool.size()):
@@ -210,52 +220,9 @@ func _get_traffic_vehicle_from_pool(index:int) -> TrafficVehicle:
 		_traffic_vehicle_pool[index].remove_at(end_ind)
 		return instance
 
-# The index is representitive of the type of road row that should be retrieved.
-# The indices match the road row types in the spawn table road rows list.
-# Expects index to be in the range of the road row pool and for road row pool and the spawn table road rows list to have the same size.
-func _get_road_row_from_pool(index:int) -> RoadRow:
-	
-	if (_road_row_pool.size() != road_spawn_table.road_rows.size()):
-		RdrLogger.fatal(self, _get_road_row_from_pool.get_method() + " expects the road row pool and the spawn tables road row list to have the same size.")
-		return null
-	
-	if (index < 0 || index >= _road_row_pool.size()):
-		RdrLogger.error(self, "Attempting to grab instance from road row pool, but index " + str(index) + " is outside the range of the pool.")
-		return null
-	
-	# Pool is empty for this road row type, create a new instance.
-	if (_road_row_pool[index].size() == 0):
-		RdrLogger.log(self, "Creating new road row instance (total = " + str(_active_road_row_instances.size()) + ").")
-		var instance:RoadRow = road_spawn_table.road_rows[index].scene.instantiate()
-		_active_road_row_instances.append(instance)
-		_active_road_row_pool_indices.append(index)
-		_road_parent.add_child(instance)
-		return instance
-	# Pool contains an entry for this road type, remove and return it.
-	else:
-		RdrLogger.log(self, "Reusing road row instance from pool.")
-		var end_ind:int = _road_row_pool[index].size() - 1
-		var instance:RoadRow = _road_row_pool[index][end_ind]
-		_active_road_row_instances.append(instance)
-		_active_road_row_pool_indices.append(index)
-		_road_row_pool[index].remove_at(end_ind)
-		return instance
-
 func _place_road_row() -> void:
 	
-	if (road_spawn_table.road_rows.size() == 0):
-		RdrLogger.fatal(self, _place_road_row.get_method() + " expects at least one road row to exist on the road spawn table.")
-
-	var entry_ind:int = road_spawn_table.get_random_road_row_index_weighted()
-	var row_scene:PackedScene = road_spawn_table.road_rows[entry_ind].scene
-	if (row_scene == null):
-		return
-	var row:RoadRow = _get_road_row_from_pool(entry_ind)
-	if (row == null):
-		return
-	row.position.z = _next_road_row_z
-	if (row.allow_traffic_spawning):
-		_place_traffic_row(_next_road_row_z)
+	_place_traffic_row(_next_road_row_z)
 
 func _handle_road_placement() -> void:
 	
@@ -297,17 +264,10 @@ func _handle_cleanup() -> void:
 	# Anything at or behind this can be cleaned up.
 	var cleanup_z:float = last_place_z - ROAD_CLEANUP_DIST
 	
+	# TODO: Shrink road.
+	
+	# Pool traffic.
 	var i:int = 0
-	while (i < _active_road_row_instances.size()):
-		if (_active_road_row_instances[i].position.z < cleanup_z):
-			RdrLogger.log(self, "Recycling road row instance.")
-			_road_row_pool[_active_road_row_pool_indices[i]].append(_active_road_row_instances[i])
-			_active_road_row_instances.remove_at(i)
-			_active_road_row_pool_indices.remove_at(i)
-		else:
-			i += 1
-			
-	i = 0
 	while (i < _active_traffic_vehicle_instances.size()):
 		if (_active_traffic_vehicle_instances[i].position.z < cleanup_z):
 			RdrLogger.log(self, "Recycling traffic vehicle instance.")
@@ -316,29 +276,6 @@ func _handle_cleanup() -> void:
 			_active_traffic_vehicle_pool_indices.remove_at(i)
 		else:
 			i += 1
-	
-func _validate_road_spawn_table() -> void:
-	
-	RdrLogger.log(self, "Beginning road spawn table validation.")
-	
-	# Ensure road spawn table exists.
-	if (road_spawn_table == null):
-		# If no road spawn table is set, try and load the default road spawn table.
-		road_spawn_table = load("res://race/default_road_spawn_table.tres")
-		# If the default road spawn table couldn't be found, use an empty resource, which will be handeled below.
-		if (road_spawn_table == null):
-			road_spawn_table = RoadSpawnTable.new()
-	
-	# If the road spawn table shows conflicts at this point, they must be resolved so the race can start.
-	# We will not back out of a race once it's begun setup.
-	if (!road_spawn_table.validate_parameters()):
-		RdrLogger.error(self, "Road spawn table was invalid. Forcefully resolving conflicts.")
-		road_spawn_table.force_resolve_conflicts()
-	
-	# Setup the road row pool to have space for all road row types on the spawn table.
-	_road_row_pool.resize(road_spawn_table.road_rows.size())
-	
-	RdrLogger.log(self, "Road spawn table validation finished.")
 	
 #endregion
 
@@ -382,9 +319,10 @@ func setup_race() -> void:
 	
 	RdrLogger.log(self, "Setting up race.")
 	
-	_validate_road_spawn_table()
 	_traffic_spawn_cooldowns.resize(NUM_LANES)
 	_traffic_vehicle_pool.resize(TRAFFIC_VEHICLES.size())
+	
+	# TODO: Reset asphalt/barrier mesh and material properties here.
 	
 	_validate_race_parameters()
 	_spawn_racer_vehicles()

@@ -1,22 +1,10 @@
 [gd_scene format=3 uid="uid://d381mmv3sxx7j"]
 
 [ext_resource type="Script" uid="uid://c4j85t8xu0nvo" path="res://race/race.gd" id="1_6dlvr"]
-[ext_resource type="Script" uid="uid://clyn63xl4tio5" path="res://helpers/weighted_table_entry.gd" id="2_ddpug"]
-[ext_resource type="PackedScene" uid="uid://bgx4sb7ysypif" path="res://road/road_row_straight.tscn" id="3_iqn4a"]
-[ext_resource type="Script" uid="uid://4xpetlewbrgg" path="res://race/road_spawn_table.gd" id="3_lip1t"]
+[ext_resource type="Texture2D" uid="uid://bphsvdqsicl7h" path="res://road/road_straight.png" id="4_iqn4a"]
 [ext_resource type="Script" uid="uid://dp5p80aakxu84" path="res://race/racer_object.gd" id="6_g1gks"]
 [ext_resource type="Script" uid="uid://c8hh1wvayq5by" path="res://race/race_parameters.gd" id="7_c8320"]
 [ext_resource type="Script" uid="uid://7psf6ks7j2k4" path="res://race/scoreboard.gd" id="8_c8320"]
-
-[sub_resource type="Resource" id="Resource_ddpug"]
-script = ExtResource("2_ddpug")
-scene = ExtResource("3_iqn4a")
-metadata/_custom_type_script = "uid://clyn63xl4tio5"
-
-[sub_resource type="Resource" id="Resource_iqn4a"]
-script = ExtResource("3_lip1t")
-road_rows = Array[ExtResource("2_ddpug")]([SubResource("Resource_ddpug")])
-metadata/_custom_type_script = "uid://4xpetlewbrgg"
 
 [sub_resource type="Resource" id="Resource_g1gks"]
 script = ExtResource("6_g1gks")
@@ -45,9 +33,23 @@ script = ExtResource("7_c8320")
 racer_objects = Array[ExtResource("6_g1gks")]([SubResource("Resource_g1gks"), SubResource("Resource_c8320"), SubResource("Resource_01boi"), SubResource("Resource_hkrbr")])
 metadata/_custom_type_script = "uid://c8hh1wvayq5by"
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g0dry"]
+albedo_texture = ExtResource("4_iqn4a")
+uv1_scale = Vector3(9, 1, 1)
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g1gks"]
+material = SubResource("StandardMaterial3D_g0dry")
+size = Vector2(27, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_iqn4a"]
+size = Vector3(0.2, 0.2, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g0dry"]
+size = Vector3(0.2, 0.2, 3)
+
 [node name="Race" type="Node3D" unique_id=1363738947]
 script = ExtResource("1_6dlvr")
-road_spawn_table = SubResource("Resource_iqn4a")
 race_parameters = SubResource("Resource_vhq2c")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=327752361]
@@ -282,6 +284,17 @@ render_target_update_mode = 0
 [node name="P4Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P4SubViewportContainer/SubViewport" unique_id=1975362]
 
 [node name="Road" type="Node3D" parent="." unique_id=1549239541]
+
+[node name="Asphalt" type="MeshInstance3D" parent="Road" unique_id=362303329]
+mesh = SubResource("PlaneMesh_g1gks")
+
+[node name="LeftBarrier" type="MeshInstance3D" parent="Road" unique_id=2118898070]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 0, 0)
+mesh = SubResource("BoxMesh_iqn4a")
+
+[node name="RightBarrier" type="MeshInstance3D" parent="Road" unique_id=989704898]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 0)
+mesh = SubResource("BoxMesh_g0dry")
 
 [node name="Traffic" type="Node3D" parent="." unique_id=282542112]
 

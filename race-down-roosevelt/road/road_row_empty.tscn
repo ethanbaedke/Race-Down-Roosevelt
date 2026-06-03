@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://bcn1ytr5saki7"]
-
-[ext_resource type="Script" uid="uid://8ljswlgfw0gs" path="res://road/road_row.gd" id="1_3dpmc"]
-
-[node name="RoadRowEmpty" type="Node3D" unique_id=1166657948]
-script = ExtResource("1_3dpmc")
-allow_traffic_spawning = false
-metadata/_custom_type_script = "uid://8ljswlgfw0gs"

@@ -27,8 +27,7 @@ const MIN_WEIGHT:int = 1
 var speed:float = 0
 var input_enabled:bool = false
 
-# Just does a boost for now.
-func use_powerup() -> void:
+func boost() -> void:
 	
 	speed += 5.0
 
@@ -91,7 +90,7 @@ func _cast_vehicle_shape_to_position(world_pos:Vector3) -> Array[Node3D]:
 	# Using identity here since the shape shouldn't ever be rotated anyways.
 	# If the shape ends up being rotated, this may need to be changed.
 	shape_params.transform = Transform3D(Basis.IDENTITY, world_pos)
-	shape_params.collision_mask = _collision_area.collision_mask
+	shape_params.collision_mask = 1
 	shape_params.collide_with_areas = true
 	shape_params.collide_with_bodies = false
 	shape_params.exclude = [_collision_area.get_rid()]
@@ -204,7 +203,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				_powerup_key_active = false
 			elif (!_powerup_key_active):
 				_powerup_key_active = true
-				use_powerup()
+				boost()
 				
 	
 	elif (event.device != racer.device_index):
@@ -228,4 +227,4 @@ func _unhandled_input(event: InputEvent) -> void:
 				_powerup_button_active = false
 			elif (!_powerup_button_active):
 				_powerup_button_active = true
-				use_powerup()
+				boost()

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://8t5pwnixghwp"]
+
+[ext_resource type="Script" uid="uid://jdvpsbssyamm" path="res://road/boost_pad_row.gd" id="1_q36fp"]
+
+[node name="BoostPadRow" type="Node3D" unique_id=1690735168]
+script = ExtResource("1_q36fp")

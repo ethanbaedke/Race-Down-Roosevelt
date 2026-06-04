@@ -134,6 +134,9 @@ func _handle_racer_bump(other:RacerVehicle) -> void:
 
 func _handle_traffic_vehicle_hit(vehicle:TrafficVehicle) -> void:
 	
+	if (vehicle.global_position.z < self.global_position.z):
+		return
+	
 	RdrLogger.log(self, racer.name + " hit a traffic vehicle.")
 	
 	vehicle.explode()

@@ -275,7 +275,7 @@ func _handle_cleanup() -> void:
 	# This isn't necessary, but I would prefer the road to never have a partial row.
 	var num_rows_to_shrink:int = (to_shrink / ROAD_ROW_SPACING) as int
 	var to_shrink_final:float = num_rows_to_shrink * ROAD_ROW_SPACING
-	print(to_shrink_final)
+
 	_shrink_road(to_shrink_final)
 	
 	# Cleanup traffic vehicles.

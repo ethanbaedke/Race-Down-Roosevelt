@@ -144,6 +144,7 @@ var _traffic_spawn_cooldowns:Array[int] = []
 var _traffic_vehicle_pool:Array[Array] = []
 var _active_traffic_vehicle_instances:Array[TrafficVehicle] = []
 var _active_traffic_vehicle_pool_indices:Array[int] = []
+var _can_spawn_traffic:bool = true
 
 # What z-coordinate the next road row should be spawned at.
 var _next_road_row_z:float = ROAD_ROW_SPACING
@@ -160,21 +161,10 @@ func _move_world_back(amount:float) -> void:
 # Expects traffic spawn cooldowns array to have size equal to the number of lanes.
 func _place_traffic_row(z_pos:float) -> void:
 	
+	if (!_can_spawn_traffic):
+		return
 	if (_traffic_spawn_cooldowns.size() != NUM_LANES):
-		RdrLogger.fatal(self, _place_road_row.get_method() + " expects traffic spawn cooldowns array to have size equal to number of lanes.")
-	
-	# Extend road.
-	_road_asphalt.position.z += ROAD_ROW_SPACING / 2
-	var asphalt_mesh:PlaneMesh = _road_asphalt.mesh
-	asphalt_mesh.size.y += ROAD_ROW_SPACING
-	var asphalt_material:StandardMaterial3D = asphalt_mesh.material
-	asphalt_material.uv1_scale.y = asphalt_mesh.size.y / 3
-	_road_left_barrier.position.z += ROAD_ROW_SPACING / 2
-	var left_barrier_mesh:BoxMesh = _road_left_barrier.mesh
-	left_barrier_mesh.size.z += ROAD_ROW_SPACING
-	_road_right_barrier.position.z += ROAD_ROW_SPACING / 2
-	var right_barrier_mesh:BoxMesh = _road_right_barrier.mesh
-	right_barrier_mesh.size.z += ROAD_ROW_SPACING
+		RdrLogger.fatal(self, _place_traffic_row.get_method() + " expects traffic spawn cooldowns array to have size equal to number of lanes.")
 	
 	# Spawn traffic.
 	for i:int in range(NUM_LANES):
@@ -192,6 +182,36 @@ func _place_traffic_row(z_pos:float) -> void:
 		else:
 			# Lane is on cooldown, decrement.
 			_traffic_spawn_cooldowns[i] -= 1
+
+# Preferably, amount is a multiple of the road row spacing to avoid partial rows.
+# Extends in the +z direction (adds road to the front).
+func _extend_road(amount:float) -> void:
+	_road_asphalt.position.z += amount / 2
+	var asphalt_mesh:PlaneMesh = _road_asphalt.mesh
+	asphalt_mesh.size.y += amount
+	var asphalt_material:StandardMaterial3D = asphalt_mesh.material
+	asphalt_material.uv1_scale.y = asphalt_mesh.size.y / 3
+	_road_left_barrier.position.z += amount / 2
+	var left_barrier_mesh:BoxMesh = _road_left_barrier.mesh
+	left_barrier_mesh.size.z += amount
+	_road_right_barrier.position.z += amount / 2
+	var right_barrier_mesh:BoxMesh = _road_right_barrier.mesh
+	right_barrier_mesh.size.z += amount
+
+# Preferably, amount is a multiple of the road row spacing to avoid partial rows.
+# Shrinks in the +z direction (removes road from the back).
+func _shrink_road(amount:float) -> void:
+	_road_asphalt.position.z += amount / 2
+	var asphalt_mesh:PlaneMesh = _road_asphalt.mesh
+	asphalt_mesh.size.y -= amount
+	var asphalt_material:StandardMaterial3D = asphalt_mesh.material
+	asphalt_material.uv1_scale.y = asphalt_mesh.size.y / 3
+	_road_left_barrier.position.z += amount / 2
+	var left_barrier_mesh:BoxMesh = _road_left_barrier.mesh
+	left_barrier_mesh.size.z -= amount
+	_road_right_barrier.position.z += amount / 2
+	var right_barrier_mesh:BoxMesh = _road_right_barrier.mesh
+	right_barrier_mesh.size.z -= amount
 
 # Expects traffic vehicle pool to have size equal to the traffic vehicle array.
 func _get_traffic_vehicle_from_pool(index:int) -> TrafficVehicle:
@@ -222,30 +242,24 @@ func _get_traffic_vehicle_from_pool(index:int) -> TrafficVehicle:
 		_traffic_vehicle_pool[index].remove_at(end_ind)
 		return instance
 
-func _place_road_row() -> void:
-	
-	_place_traffic_row(_next_road_row_z)
-
 func _handle_road_placement() -> void:
-	
-	if (_road_rows_placed == RACE_LENGTH):
-		return
 	
 	var order:Array[RacerVehicle] = get_racer_order()
 	
 	# Place road in front of first place racer.
 	var first_place_z:float = order[0].position.z
 	while (_next_road_row_z - first_place_z < ROAD_PLACE_DIST):
-		if (_road_rows_placed < RACE_LENGTH):
-			_place_road_row()
+		if (_road_rows_placed != RACE_LENGTH):
+			_extend_road(ROAD_ROW_SPACING)
+			_place_traffic_row(_next_road_row_z)
 			_next_road_row_z += ROAD_ROW_SPACING
 			_road_rows_placed += 1
-			if (_road_rows_placed == RACE_LENGTH):
-				_place_finish_line()
-				return
 		else:
+			_extend_road(ROAD_ROW_SPACING)
 			_place_finish_line()
-			return
+			# Do not spawn traffic beyond the finish line.
+			_can_spawn_traffic = false
+			_road_rows_placed += 1
 	
 func _place_finish_line() -> void:
 	
@@ -266,7 +280,15 @@ func _handle_cleanup() -> void:
 	# Anything at or behind this can be cleaned up.
 	var cleanup_z:float = last_place_z - ROAD_CLEANUP_DIST
 	
-	# TODO: Shrink road.
+	# Shrink road.
+	var asphalt_mesh:PlaneMesh = _road_asphalt.mesh
+	var road_back:float = _road_asphalt.position.z - (asphalt_mesh.size.y * 0.5)
+	var to_shrink:float = cleanup_z - road_back
+	# Purposefully cast float->int->float to ensure our final shrink amount is a multiple of the road row size.
+	# This isn't necessary, but I would prefer the road to never have a partial row.
+	var num_rows_to_shrink:int = (to_shrink / ROAD_ROW_SPACING) as int
+	var to_shrink_final:float = num_rows_to_shrink * ROAD_ROW_SPACING
+	_shrink_road(to_shrink_final)
 	
 	# Pool traffic.
 	var i:int = 0

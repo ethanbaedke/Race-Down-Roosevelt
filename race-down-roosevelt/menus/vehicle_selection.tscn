@@ -18,18 +18,21 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xxnxd")
 
-[node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=334265903]
+[node name="HSplitContainer" type="VSplitContainer" parent="." unique_id=1476228867]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+dragging_enabled = false
 dragger_visibility = 2
 
 [node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer" unique_id=1845636498]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
+dragging_enabled = false
 dragger_visibility = 2
 
 [node name="VehicleSelectionPanel1" parent="HSplitContainer/HSplitContainer" unique_id=1970937734 instance=ExtResource("1_htcmw")]
@@ -43,6 +46,8 @@ size_flags_horizontal = 3
 [node name="HSplitContainer2" type="HSplitContainer" parent="HSplitContainer" unique_id=1729112726]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
+dragging_enabled = false
 dragger_visibility = 2
 
 [node name="VehicleSelectionPanel3" parent="HSplitContainer/HSplitContainer2" unique_id=1819280359 instance=ExtResource("1_htcmw")]

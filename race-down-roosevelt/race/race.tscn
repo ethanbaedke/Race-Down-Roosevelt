@@ -171,6 +171,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+dragging_enabled = false
 dragger_visibility = 2
 vertical = true
 
@@ -214,6 +215,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+dragging_enabled = false
 dragger_visibility = 2
 vertical = true
 
@@ -232,6 +234,7 @@ render_target_update_mode = 0
 [node name="SplitContainer" type="SplitContainer" parent="ViewportSetup3p/SplitContainer" unique_id=962487105]
 layout_mode = 2
 size_flags_vertical = 3
+dragging_enabled = false
 dragger_visibility = 2
 
 [node name="P2SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup3p/SplitContainer/SplitContainer" unique_id=1243543346]
@@ -277,6 +280,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 split_offsets = PackedInt32Array(40)
+dragging_enabled = false
 dragger_visibility = 2
 vertical = true
 split_offset = 40
@@ -284,6 +288,7 @@ split_offset = 40
 [node name="SplitContainerTop" type="SplitContainer" parent="ViewportSetup4p/SplitContainer" unique_id=996727786]
 layout_mode = 2
 size_flags_vertical = 3
+dragging_enabled = false
 dragger_visibility = 2
 
 [node name="P1SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup4p/SplitContainer/SplitContainerTop" unique_id=1734390034]
@@ -315,6 +320,7 @@ render_target_update_mode = 0
 [node name="SplitContainerBottom" type="SplitContainer" parent="ViewportSetup4p/SplitContainer" unique_id=437469594]
 layout_mode = 2
 size_flags_vertical = 3
+dragging_enabled = false
 dragger_visibility = 2
 
 [node name="P3SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom" unique_id=1983900006]

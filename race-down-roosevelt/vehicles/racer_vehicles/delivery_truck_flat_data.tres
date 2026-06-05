@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RacerVehicleData" format=3 uid="uid://48tuhxlikw"]
+
+[ext_resource type="PackedScene" uid="uid://hofvt6lo27ny" path="res://vehicles/racer_vehicles/delivery_truck_flat.tscn" id="1_reug5"]
+[ext_resource type="Script" uid="uid://cng61qyitlqib" path="res://vehicles/racer_vehicle_data.gd" id="1_ugjdp"]
+
+[resource]
+script = ExtResource("1_ugjdp")
+scene = ExtResource("1_reug5")
+metadata/_custom_type_script = "uid://cng61qyitlqib"

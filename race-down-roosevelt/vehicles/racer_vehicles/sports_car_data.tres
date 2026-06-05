@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RacerVehicleData" format=3 uid="uid://y23s0ila87ir"]
+
+[ext_resource type="PackedScene" uid="uid://bs74u5kijhvhc" path="res://vehicles/racer_vehicles/sports_car.tscn" id="1_nlgip"]
+[ext_resource type="Script" uid="uid://cng61qyitlqib" path="res://vehicles/racer_vehicle_data.gd" id="1_q1jj1"]
+
+[resource]
+script = ExtResource("1_q1jj1")
+scene = ExtResource("1_nlgip")
+metadata/_custom_type_script = "uid://cng61qyitlqib"

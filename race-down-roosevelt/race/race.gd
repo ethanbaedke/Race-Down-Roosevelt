@@ -469,6 +469,17 @@ func _validate_race_parameters() -> void:
 			var vehicle_name:String = data.scene.get_state().get_node_name(0)
 			RdrLogger.log(self, "Assigning random vehicle to " + racer_name + ": " + vehicle_name + ".")
 			racer.vehicle_data = data
+			
+	# If any racer has an empty name, give them a random one.
+	var num_empty_names:int = 0
+	var empty_named_racers:Array[RacerObject]
+	for racer:RacerObject in race_parameters.racer_objects:
+		if (racer.name.is_empty()):
+			num_empty_names += 1
+			empty_named_racers.append(racer)
+	var names:Array[String] = Globals.get_random_unique_names(num_empty_names)
+	for i:int in range(num_empty_names):
+		empty_named_racers[i].name = names[i]
 
 	RdrLogger.log(self, "Race parameter validation finished.")
 

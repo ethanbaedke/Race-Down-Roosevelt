@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://cc26mgstv85qb" path="res://vehicles/traffic_vehicles/suv.tscn" id="7_ru474"]
 [ext_resource type="Script" uid="uid://7psf6ks7j2k4" path="res://race/scoreboard.gd" id="8_c8320"]
 [ext_resource type="PackedScene" uid="uid://ky3hthej5g56" path="res://vehicles/traffic_vehicles/tractor.tscn" id="8_xt8ap"]
-[ext_resource type="PackedScene" uid="uid://r88y3pb7b0q" path="res://vehicles/racer_vehicles/race_car.tscn" id="12_xiy3d"]
 
 [sub_resource type="Resource" id="Resource_0lns8"]
 script = ExtResource("2_c8320")
@@ -65,25 +64,20 @@ metadata/_custom_type_script = "uid://bonfni7lag8hs"
 
 [sub_resource type="Resource" id="Resource_g1gks"]
 script = ExtResource("6_g1gks")
-vehicle = ExtResource("12_xiy3d")
-name = "Player 1"
 device_index = -1
 metadata/_custom_type_script = "uid://dp5p80aakxu84"
 
 [sub_resource type="Resource" id="Resource_c8320"]
 script = ExtResource("6_g1gks")
-name = "Player 2"
 device_index = 0
 metadata/_custom_type_script = "uid://dp5p80aakxu84"
 
 [sub_resource type="Resource" id="Resource_01boi"]
 script = ExtResource("6_g1gks")
-name = "AI 1"
 metadata/_custom_type_script = "uid://dp5p80aakxu84"
 
 [sub_resource type="Resource" id="Resource_hkrbr"]
 script = ExtResource("6_g1gks")
-name = "AI 2"
 metadata/_custom_type_script = "uid://dp5p80aakxu84"
 
 [sub_resource type="Resource" id="Resource_vhq2c"]

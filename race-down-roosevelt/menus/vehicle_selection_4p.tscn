@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bfr7ir7lt1yp8" path="res://vehicles/racer_vehicles/sedan.glb" id="7_y3wau"]
 [ext_resource type="PackedScene" uid="uid://bm4s7bia48fib" path="res://vehicles/racer_vehicles/sports_car.glb" id="8_4fs7a"]
 
-[node name="VehicleSelection" type="Control" unique_id=334173602]
+[node name="VehicleSelection4P" type="Control" unique_id=334173602 node_paths=PackedStringArray("_panels")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xxnxd")
+_panels = [NodePath("HSplitContainer/HSplitContainer/VehicleSelectionPanel1"), NodePath("HSplitContainer/HSplitContainer/VehicleSelectionPanel2"), NodePath("HSplitContainer/HSplitContainer2/VehicleSelectionPanel3"), NodePath("HSplitContainer/HSplitContainer2/VehicleSelectionPanel4")]
 
 [node name="HSplitContainer" type="VSplitContainer" parent="." unique_id=1476228867]
 layout_mode = 1

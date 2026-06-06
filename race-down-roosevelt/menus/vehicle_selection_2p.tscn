@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://insoy3ybemp6"]
+
+[ext_resource type="Script" uid="uid://bj11itykefsaa" path="res://menus/vehicle_selection.gd" id="1_03rah"]
+[ext_resource type="PackedScene" uid="uid://u34626h5i7lp" path="res://menus/vehicle_selection_panel.tscn" id="2_6aqfg"]
+[ext_resource type="PackedScene" uid="uid://dbpvto7rrusgi" path="res://vehicles/racer_vehicles/ambulance.glb" id="3_ohwb4"]
+[ext_resource type="PackedScene" uid="uid://c2a3strqtmfk3" path="res://vehicles/racer_vehicles/delivery_truck_flat.glb" id="4_534ja"]
+[ext_resource type="PackedScene" uid="uid://dvfkavds4pv02" path="res://vehicles/racer_vehicles/firetruck.glb" id="5_obhqa"]
+[ext_resource type="PackedScene" uid="uid://buwwxc5u5ym37" path="res://vehicles/racer_vehicles/race_car.glb" id="6_b5tbk"]
+[ext_resource type="PackedScene" uid="uid://bfr7ir7lt1yp8" path="res://vehicles/racer_vehicles/sedan.glb" id="7_u2mwg"]
+[ext_resource type="PackedScene" uid="uid://bm4s7bia48fib" path="res://vehicles/racer_vehicles/sports_car.glb" id="8_y5nbl"]
+
+[node name="VehicleSelection2P" type="Control" unique_id=334173602 node_paths=PackedStringArray("_panels")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_03rah")
+_panels = [NodePath("HSplitContainer/VehicleSelectionPanel1"), NodePath("HSplitContainer/VehicleSelectionPanel2")]
+
+[node name="HSplitContainer" type="VSplitContainer" parent="." unique_id=1476228867]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+dragging_enabled = false
+dragger_visibility = 2
+
+[node name="VehicleSelectionPanel1" parent="HSplitContainer" unique_id=1970937734 instance=ExtResource("2_6aqfg")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VehicleSelectionPanel2" parent="HSplitContainer" unique_id=1003487227 instance=ExtResource("2_6aqfg")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AmbulanceModel" parent="." unique_id=984385486 instance=ExtResource("3_ohwb4")]
+
+[node name="DeliveryTruckFlatModel" parent="." unique_id=63463541 instance=ExtResource("4_534ja")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+
+[node name="FiretruckModel" parent="." unique_id=1718053397 instance=ExtResource("5_obhqa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0)
+
+[node name="RaceCarModel" parent="." unique_id=1333151254 instance=ExtResource("6_b5tbk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 0)
+
+[node name="SedanModel" parent="." unique_id=1268807936 instance=ExtResource("7_u2mwg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 0)
+
+[node name="SportsCarModel" parent="." unique_id=2036222389 instance=ExtResource("8_y5nbl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)

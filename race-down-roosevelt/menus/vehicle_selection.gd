@@ -1,11 +1,6 @@
 class_name VehicleSelection extends Control
 
-@onready var _panels:Array[VehicleSelectionPanel] = [
-	$HSplitContainer/HSplitContainer/VehicleSelectionPanel1,
-	$HSplitContainer/HSplitContainer/VehicleSelectionPanel2,
-	$HSplitContainer/HSplitContainer2/VehicleSelectionPanel3,
-	$HSplitContainer/HSplitContainer2/VehicleSelectionPanel4
-]
+@export var _panels:Array[VehicleSelectionPanel] = []
 
 func _unhandled_input(event: InputEvent) -> void:
 	

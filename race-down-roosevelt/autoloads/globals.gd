@@ -1,15 +1,15 @@
 extends Node
 
-@onready var racer_vehicle_scenes:Array[PackedScene] = [
-	preload("res://vehicles/racer_vehicles/ambulance.tscn"),
-	preload("res://vehicles/racer_vehicles/delivery_truck_flat.tscn"),
-	preload("res://vehicles/racer_vehicles/firetruck.tscn"),
-	preload("res://vehicles/racer_vehicles/race_car.tscn"),
-	preload("res://vehicles/racer_vehicles/sedan.tscn"),
-	preload("res://vehicles/racer_vehicles/sports_car.tscn")
+@onready var racer_vehicle_data:Array[RacerVehicleData] = [
+	preload("res://vehicles/racer_vehicles/ambulance_data.tres"),
+	preload("res://vehicles/racer_vehicles/delivery_truck_flat_data.tres"),
+	preload("res://vehicles/racer_vehicles/firetruck_data.tres"),
+	preload("res://vehicles/racer_vehicles/race_car_data.tres"),
+	preload("res://vehicles/racer_vehicles/sedan_data.tres"),
+	preload("res://vehicles/racer_vehicles/sports_car_data.tres")
 ]
 
-func get_random_racer_vehicle() -> PackedScene:
+func get_random_racer_vehicle_data() -> RacerVehicleData:
 	
-	var index:int = randi_range(0, racer_vehicle_scenes.size() - 1)
-	return racer_vehicle_scenes[index]
+	var index:int = randi_range(0, racer_vehicle_data.size() - 1)
+	return racer_vehicle_data[index]

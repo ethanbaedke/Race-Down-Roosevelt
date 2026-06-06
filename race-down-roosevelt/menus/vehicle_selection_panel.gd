@@ -15,6 +15,8 @@ enum PanelState {
 	READY
 }
 
+signal player_ready
+
 @onready var _vehicle_model_viewport:SubViewportContainer = $VehicleModelViewport
 @onready var _vehicle_model_camera:Camera3D = $VehicleModelViewport/SubViewport/VehicleModelCamera
 
@@ -22,19 +24,18 @@ enum PanelState {
 @onready var _vehicle_selection_ui:Control = $VehicleSelection
 @onready var _ready_ui:Control = $Ready
 
-var device:int = -2
+var state:PanelState = PanelState.WAITING_FOR_DEVICE
+var racer:RacerObject = RacerObject.new()
 
-var _state:PanelState = PanelState.WAITING_FOR_DEVICE
 var _vehicle_ind:int = 4
-var _chosen_vehicle:RacerVehicleData = null
 
-func transition_state(new_state:PanelState) -> void:
+func transition_state(newstate:PanelState) -> void:
 	
-	if (_state == new_state):
+	if (state == newstate):
 		return
 	
 	# Cleanup old state.
-	match (_state):
+	match (state):
 		
 		PanelState.WAITING_FOR_DEVICE:
 			_waiting_for_device_ui.visible = false
@@ -47,10 +48,10 @@ func transition_state(new_state:PanelState) -> void:
 			_ready_ui.visible = false
 			_vehicle_model_viewport.visible = false
 			
-	_state = new_state
+	state = newstate
 	
 	# Setup new state.
-	match (_state):
+	match (state):
 		
 		PanelState.WAITING_FOR_DEVICE:
 			_waiting_for_device_ui.visible = true
@@ -63,24 +64,26 @@ func transition_state(new_state:PanelState) -> void:
 		PanelState.READY:
 			_ready_ui.visible = true
 			_vehicle_model_viewport.visible = true
+			player_ready.emit()
 
 func set_device(index:int) -> void:
 	
+	var previous:int = racer.device_index
+	racer.device_index = index
+	
 	if (index == -2):
 		transition_state(PanelState.WAITING_FOR_DEVICE)
-	elif (device == -2):
+	elif (previous == -2):
 		transition_state(PanelState.VEHICLE_SELECTION)
-		
-	device = index
 
 func set_chosen_vehicle(data:RacerVehicleData) -> void:
+	
+	racer.vehicle_data = data
 	
 	if (data == null):
 		transition_state(PanelState.VEHICLE_SELECTION)
 	else:
 		transition_state(PanelState.READY)
-		
-	_chosen_vehicle = data
 
 func move_vehicle_selection_left() -> void:
 	_vehicle_ind = _vehicle_ind - 1
@@ -109,7 +112,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif (event is InputEventJoypadButton || event is InputEventJoypadMotion):
 		device_ind = event.device
 		
-	if (device_ind == -2 || device_ind != device):
+	if (racer.device_index == -2 || device_ind != racer.device_index):
 		return
 	
 	if (event is InputEventKey):
@@ -118,7 +121,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if (!event.is_pressed()):
 			return
 		
-		match (_state):
+		match (state):
 		
 			PanelState.WAITING_FOR_DEVICE:
 				pass
@@ -148,7 +151,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if (!event.is_pressed()):
 			return
 		
-		match (_state):
+		match (state):
 		
 			PanelState.WAITING_FOR_DEVICE:
 				pass
@@ -174,7 +177,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 	elif (event is InputEventJoypadMotion):
 		
-		match (_state):
+		match (state):
 		
 			PanelState.WAITING_FOR_DEVICE:
 				pass

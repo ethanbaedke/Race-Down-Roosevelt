@@ -417,7 +417,7 @@ func _spawn_racer_vehicles() -> void:
 		if (race_parameters.racer_objects[i] == null):
 			continue
 		else:
-			var racer:RacerVehicle = race_parameters.racer_objects[i].vehicle.instantiate()
+			var racer:RacerVehicle = race_parameters.racer_objects[i].vehicle_data.scene.instantiate()
 			racer.race = self
 			racer.racer = race_parameters.racer_objects[i]
 			racer.lane_number = (i + 1) * 2
@@ -454,20 +454,21 @@ func _validate_race_parameters() -> void:
 			all_racers_null_or_ai = false
 			break
 	if (all_racers_null_or_ai):
+		RdrLogger.warn(self, "All racers are AI controlled. Replacing first racer with keyboard controlled racer.")
 		var racer:RacerObject = RacerObject.new()
 		racer.device_index = -1
 		race_parameters.racer_objects[0] = racer
 		
-	# If any racer has a null vehicle, it should be considered a random selection.
+	# If any racer has null vehicle data, it should be considered a random selection.
 	for racer:RacerObject in race_parameters.racer_objects:
 		if (racer == null):
 			continue
-		if (racer.vehicle == null):
-			var vehicle_scene:PackedScene = Globals.get_random_racer_vehicle()
+		if (racer.vehicle_data == null):
+			var data:RacerVehicleData = Globals.get_random_racer_vehicle_data()
 			var racer_name:String = racer.name
-			var vehicle_name:String = vehicle_scene.get_state().get_node_name(0)
+			var vehicle_name:String = data.scene.get_state().get_node_name(0)
 			RdrLogger.log(self, "Assigning random vehicle to " + racer_name + ": " + vehicle_name + ".")
-			racer.vehicle = vehicle_scene
+			racer.vehicle_data = data
 
 	RdrLogger.log(self, "Race parameter validation finished.")
 

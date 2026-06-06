@@ -1,6 +1,6 @@
 class_name PlayerCountSelection extends Control
 
-signal count_chosen(num:int)
+signal count_chosen(count:int)
 
 @onready var _button_1p:Button = $MarginContainer/VBoxContainer/Button1P
 @onready var _button_2p:Button = $MarginContainer/VBoxContainer/Button2P

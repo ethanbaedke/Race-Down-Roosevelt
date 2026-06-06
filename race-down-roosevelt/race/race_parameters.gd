@@ -1,11 +1,19 @@
 class_name RaceParameters extends Resource
 
 @export var racer_objects:Array[RacerObject] = [null, null, null, null]
+@export var include_ai_racers:bool = true
 
 # Ensures there are no conflics with the current parameter setup.
 func validate_parameters() -> bool:
 	
 	RdrLogger.log(self, "Beginning validation.")
+	
+	# If set to include ai racers, ensure no racers are null.
+	if (include_ai_racers):
+		for i:int in range(racer_objects.size()):
+			if (racer_objects[i] == null):
+				RdrLogger.log(self, "Validation failed: set to include ai-racers but found a null racer. Null racers should not exist if using AI racers.")
+				racer_objects[i] = RacerObject.new()
 	
 	# Duplicate names is not considered invalid, we just handle fixing them here.
 	handle_duplicate_names()
@@ -30,26 +38,6 @@ func validate_parameters() -> bool:
 			# True means nothing here. Just need the key to exist in the dictionary.
 			device_index_dict[index] = true
 	
-	# If a racer has a scene reference for their vehicle, ensure it has the racer vehicle object type.
-	for racer:RacerObject in racer_objects:
-		if (racer == null || racer.vehicle == null):
-			continue
-		else:
-			var vehicle:Object = racer.vehicle.instantiate()
-			if (vehicle == null):
-				var racer_name:String = racer.name
-				var expected_type:String = (RacerVehicle as GDScript).get_global_name()
-				RdrLogger.error(self, "Racer " + racer_name + " vehicle scene reference could not be instantiated. Ensure reference is of type " + expected_type + ".")
-				return false
-			if (vehicle is not RacerVehicle):
-				var racer_name:String = racer.name
-				var current_type:String = vehicle.get_class()
-				if (vehicle.get_script() != null):
-					current_type = vehicle.get_script().get_global_name()
-				var expected_type:String = (RacerVehicle as GDScript).get_global_name()
-				RdrLogger.error(self, "Racer " + racer_name + " vehicle scene reference is type " + current_type + ", but should be of type " + expected_type + ".")
-				return false
-	
 	RdrLogger.log(self, "Validation succeeded.")
 	return true
 
@@ -68,7 +56,14 @@ func force_resolve_conflicts() -> void:
 		for i:int in range(racer_objects.size() - 1, 3, -1):
 			RdrLogger.warn(self, "More than four racers exist, removing last racer.")
 			racer_objects.remove_at(i)
-			
+	
+	# If set to include ai racers, replace any null racers with ai racer objects.
+	if (include_ai_racers):
+		for i:int in range(racer_objects.size()):
+			if (racer_objects[i] == null):
+				RdrLogger.log(self, "Replacing null racer with ai racer.")
+				racer_objects[i] = RacerObject.new()
+	
 	# Ensure names are unique.
 	handle_duplicate_names()
 	
@@ -86,18 +81,6 @@ func force_resolve_conflicts() -> void:
 		else:
 			# True means nothing here. Just need the key to exist in the dictionary.
 			device_index_dict[index] = true
-	
-	# If a racer has a scene reference for their vehicle that isn't of type racer vehicle, remove their vehicle reference.
-	for racer:RacerObject in racer_objects:
-		if (racer == null || racer.vehicle == null):
-			continue
-		else:
-			var vehicle:Object = racer.vehicle.instantiate()
-			if (vehicle is not RacerVehicle):
-				var racer_name:String = racer.name
-				var expected_type:String = (RacerVehicle as GDScript).get_global_name()
-				RdrLogger.warn(self, "Racer " + racer_name + " vehicle scene reference is not of type " + expected_type + ". Setting vehicle to null.")
-				racer.vehicle = null
 	
 	RdrLogger.log(self, "Conflict resolution complete.")
 			

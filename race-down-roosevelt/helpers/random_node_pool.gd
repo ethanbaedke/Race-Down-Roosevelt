@@ -11,12 +11,7 @@ var _active_instance_indices:Array[int] = []
 func initialize() -> void:
 	
 	# Cleanup any existing data. Will only matter if pool is initialized more than once.
-	for n_list:Array[Node] in _pool:
-		for n:Node in n_list:
-			n.queue_free()
 	_pool.clear()
-	for n:Node in _active_instances:
-		n.queue_free()
 	_active_instances.clear()
 	_active_instance_indices.clear()
 	

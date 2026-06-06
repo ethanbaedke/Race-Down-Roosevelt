@@ -1,6 +1,23 @@
 class_name VehicleSelection extends Control
 
+signal all_players_ready(racer_objects:Array[RacerObject])
+
 @export var _panels:Array[VehicleSelectionPanel] = []
+
+func _on_player_ready() -> void:
+	
+	# Signal if all players are ready.
+	var racers:Array[RacerObject] = []
+	for panel:VehicleSelectionPanel in _panels:
+		if (panel.state == panel.PanelState.READY):
+			racers.append(panel.racer)
+	if (racers.size() == _panels.size()):
+		all_players_ready.emit(racers)
+
+func _ready() -> void:
+	
+	for panel:VehicleSelectionPanel in _panels:
+		panel.player_ready.connect(_on_player_ready)
 
 func _unhandled_input(event: InputEvent) -> void:
 	
@@ -19,7 +36,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 	# Try to find a panel using this device.
 	var i:int = 0
-	while (i < _panels.size() && _panels[i].device != device_ind):
+	while (i < _panels.size() && _panels[i].racer.device_index != device_ind):
 		i += 1
 	
 	# Device is being used by one of the panels, let it handle the input.
@@ -28,7 +45,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 	# Device is not being used, try to find an available panel for the new device.
 	i = 0
-	while (i < _panels.size() && _panels[i].device != -2):
+	while (i < _panels.size() && _panels[i].racer.device_index != -2):
 		i += 1
 		
 	# Found an available panel.

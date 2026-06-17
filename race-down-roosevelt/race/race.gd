@@ -54,7 +54,7 @@ func _move_racers(delta:float) -> void:
 		
 	# Debugging
 	for vehicle:RacerVehicle in order:
-		RdrLogger.spam_log(self, vehicle.racer.name + " z-pos: " + str(vehicle.position.z))
+		RdrLogger.spam_log(self, vehicle.racer.profile.name + " z-pos: " + str(vehicle.position.z))
 
 func _on_finish_line_crossed(racer:RacerVehicle) -> void:
 	
@@ -105,7 +105,7 @@ func _finish_race() -> void:
 	
 	RdrLogger.log(self, "Race finished.")
 	for i:int in range(_leaderboard_data.size()):
-		RdrLogger.log(self, "Position " + str(i + 1) + ": " + _leaderboard_data[i].name + ".")
+		RdrLogger.log(self, "Position " + str(i + 1) + ": " + _leaderboard_data[i].profile.name + ".")
 	
 	_leaderboard.load_data(_leaderboard_data)
 	
@@ -349,17 +349,22 @@ func setup_race() -> void:
 	
 	# If ai racers are enabled, fill them into any open racer slots.
 	if (game_state.include_ai_racers):
-		var names:Array[String] = Globals.get_random_unique_names(4 - game_state.num_players)
+		var profiles:Array[Profile] = Globals.get_random_unique_ai_profiles(4 - game_state.num_players)
 		for i:int in range(game_state.num_players, 4):
 			var ai_racer:RacerObject = RacerObject.new()
-			ai_racer.name = names[names.size() - 1]
-			names.remove_at(names.size() - 1)
+			ai_racer.profile = profiles[profiles.size() - 1]
+			profiles.remove_at(profiles.size() - 1)
 			game_state.racer_objects.append(ai_racer)
 	
 	# If any racer has null vehicle data, give them a random vehicle.
 	for racer:RacerObject in game_state.racer_objects:
 		if (racer.vehicle_data == null):
 			racer.vehicle_data = Globals.get_random_racer_vehicle_data()
+			
+	# If any racer has a null profile, fill it with an empty object.
+	for racer:RacerObject in game_state.racer_objects:
+		if (racer.profile == null):
+			racer.profile = Profile.new()
 	
 	# DEPRECATED _validate_race_parameters()
 	_spawn_racer_vehicles()

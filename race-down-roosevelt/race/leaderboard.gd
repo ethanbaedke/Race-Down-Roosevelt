@@ -1,17 +1,24 @@
 class_name Leaderboard extends Control
 
 @onready var _names:Array[Label] = [
-	$"MarginContainer/VBoxContainer/1stPlace/1stPlacePanel/HBoxContainer/Name",
-	$"MarginContainer/VBoxContainer/2ndPlace/2ndPlacePanel/HBoxContainer/Name",
-	$"MarginContainer/VBoxContainer/3rdPlace/3rdPlacePanel/HBoxContainer/Name",
-	$"MarginContainer/VBoxContainer/4thPlace/4thPlacePanel/HBoxContainer/Name"
+	$"MarginContainer/VBoxContainer/1stPlace/PanelContainer/MarginContainer/HBoxContainer/Name",
+	$"MarginContainer/VBoxContainer/2ndPlace/PanelContainer/MarginContainer/HBoxContainer/Name",
+	$"MarginContainer/VBoxContainer/3rdPlace/PanelContainer/MarginContainer/HBoxContainer/Name",
+	$"MarginContainer/VBoxContainer/4thPlace/PanelContainer/MarginContainer/HBoxContainer/Name"
+]
+
+@onready var _pictures:Array[TextureRect] = [
+	$"MarginContainer/VBoxContainer/1stPlace/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/TextureRect",
+	$"MarginContainer/VBoxContainer/2ndPlace/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/TextureRect",
+	$"MarginContainer/VBoxContainer/3rdPlace/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/TextureRect",
+	$"MarginContainer/VBoxContainer/4thPlace/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/TextureRect"
 ]
 
 @onready var _panels:Array[PanelContainer] = [
-	$"MarginContainer/VBoxContainer/1stPlace/1stPlacePanel",
-	$"MarginContainer/VBoxContainer/2ndPlace/2ndPlacePanel",
-	$"MarginContainer/VBoxContainer/3rdPlace/3rdPlacePanel",
-	$"MarginContainer/VBoxContainer/4thPlace/4thPlacePanel",
+	$"MarginContainer/VBoxContainer/1stPlace/PanelContainer",
+	$"MarginContainer/VBoxContainer/2ndPlace/PanelContainer",
+	$"MarginContainer/VBoxContainer/3rdPlace/PanelContainer",
+	$"MarginContainer/VBoxContainer/4thPlace/PanelContainer",
 ]
 
 func load_data(racers:Array[RacerObject]) -> void:
@@ -20,7 +27,8 @@ func load_data(racers:Array[RacerObject]) -> void:
 	
 	var i:int = 0
 	while (i < racers.size()):
-		_names[i].text = racers[i].name
+		_names[i].text = racers[i].profile.name
+		_pictures[i].texture = racers[i].profile.picture
 		i += 1
 	while (i < 4):
 		_panels[i].visible = false

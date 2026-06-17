@@ -37,14 +37,14 @@ func calculate_speed(delta:float) -> float:
 		speed = min(speed + (acceleration * delta), top_speed)
 	elif (speed > top_speed):
 		speed = max(speed - (((MAX_WEIGHT + 1) - weight) * delta), top_speed)
-	RdrLogger.spam_log(self, racer.name + " speed: " + str(speed))
+	RdrLogger.spam_log(self, racer.profile.name + " speed: " + str(speed))
 	
 	return speed
 
 func try_switch_lanes(dir:int) -> bool:
 	
 	if (lane_number == 0):
-		RdrLogger.error(self, "Lane number is not initialized for " + racer.name + ".")
+		RdrLogger.error(self, "Lane number is not initialized for " + racer.profile.name + ".")
 		return false
 	
 	# Moving right.
@@ -55,7 +55,7 @@ func try_switch_lanes(dir:int) -> bool:
 				position.x -= race.LANE_SPACING
 				return true
 			else:
-				RdrLogger.log(self, racer.name + " attempted to move right, but the lane was blocked.")
+				RdrLogger.log(self, racer.profile.name + " attempted to move right, but the lane was blocked.")
 	# Moving left.
 	else:
 		if (lane_number > 1):
@@ -64,7 +64,7 @@ func try_switch_lanes(dir:int) -> bool:
 				position.x += race.LANE_SPACING
 				return true
 			else:
-				RdrLogger.log(self, racer.name + " attempted to move left, but the lane was blocked.")
+				RdrLogger.log(self, racer.profile.name + " attempted to move left, but the lane was blocked.")
 			
 	return false
 
@@ -106,7 +106,7 @@ func _cast_vehicle_shape_to_position(world_pos:Vector3) -> Array[Node3D]:
 # Called when this racer bumps a racer in front of it.
 func _handle_racer_bump(other:RacerVehicle) -> void:
 	
-	RdrLogger.log(self, self.racer.name + " bumped " + other.racer.name + ".")
+	RdrLogger.log(self, self.racer.profile.name + " bumped " + other.racer.profile.name + ".")
 	
 	var m1:float = self.weight
 	var m2:float = other.weight
@@ -137,7 +137,7 @@ func _handle_traffic_vehicle_hit(vehicle:TrafficVehicle) -> void:
 	if (vehicle.global_position.z < self.global_position.z):
 		return
 	
-	RdrLogger.log(self, racer.name + " hit a traffic vehicle.")
+	RdrLogger.log(self, racer.profile.name + " hit a traffic vehicle.")
 	
 	vehicle.explode()
 	# Reduce speed based on durability (higher = more maintained).

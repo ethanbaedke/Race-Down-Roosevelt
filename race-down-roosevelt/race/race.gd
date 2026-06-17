@@ -349,8 +349,11 @@ func setup_race() -> void:
 	
 	# If ai racers are enabled, fill them into any open racer slots.
 	if (game_state.include_ai_racers):
+		var names:Array[String] = Globals.get_random_unique_names(4 - game_state.num_players)
 		for i:int in range(game_state.num_players, 4):
 			var ai_racer:RacerObject = RacerObject.new()
+			ai_racer.name = names[names.size() - 1]
+			names.remove_at(names.size() - 1)
 			game_state.racer_objects.append(ai_racer)
 	
 	# If any racer has null vehicle data, give them a random vehicle.

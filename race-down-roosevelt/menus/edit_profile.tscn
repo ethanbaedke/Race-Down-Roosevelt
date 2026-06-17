@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://dtl5swjkwa6ra"]
+
+[ext_resource type="Script" uid="uid://dsjwco4kyuqf" path="res://menus/edit_profile.gd" id="1_ukwib"]
+[ext_resource type="Texture2D" uid="uid://bkju8odrm63cv" path="res://profiles/empty_profile_picture.png" id="2_ukwib"]
+
+[node name="EditProfile" type="Control" unique_id=447221519]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ukwib")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2119804497]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=453736334]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1297302663]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=973451610]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_ukwib")
+expand_mode = 3
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1576282575]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 64
+text = "New Player"
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1266795223]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="DefaultOptions" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer" unique_id=1312389358]
+layout_mode = 2
+theme_override_constants/margin_left = 600
+theme_override_constants/margin_right = 600
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/DefaultOptions" unique_id=1124018389]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer" unique_id=107503551]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 6.0
+theme_override_constants/separation = 50
+
+[node name="ChangeNameButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/VBoxContainer" unique_id=1939663945]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Change Name"
+
+[node name="ChangeIconButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/VBoxContainer" unique_id=1055759844]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Change Profile Picture"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer" unique_id=1330648335]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/separation = 50
+
+[node name="DiscardChangesButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/HBoxContainer" unique_id=1138258764]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Discard Changes"
+
+[node name="SaveChangesButton2" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/HBoxContainer" unique_id=720457625]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Save Changes"

@@ -1,8 +1,7 @@
 class_name PlayerCountSelection extends Control
 
+signal back_requested
 signal count_chosen(count:int)
-
-signal selection_exited
 
 @onready var _button_1p:Button = $MarginContainer/VBoxContainer/Button1P
 @onready var _button_2p:Button = $MarginContainer/VBoxContainer/Button2P
@@ -38,11 +37,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if (event is InputEventKey):
 		if (event.keycode == KEY_ESCAPE):
-			selection_exited.emit()
+			back_requested.emit()
 			get_viewport().set_input_as_handled()
 			return
 	elif (event is InputEventJoypadButton):
 		if (event.button_index == JOY_BUTTON_B):
-			selection_exited.emit()
+			back_requested.emit()
 			get_viewport().set_input_as_handled()
 			return

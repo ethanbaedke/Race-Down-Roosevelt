@@ -7,6 +7,8 @@ enum MenuType {
 	MAIN_MENU,
 	PLAYER_COUNT_SELECTION,
 	VEHICLE_SELECTION,
+	MANAGE_PROFILES,
+	EDIT_PROFILE
 }
 
 const CAMERA_OFFSET:Vector2 = Vector2(1920.0 * 0.5, 1080.0 * 0.5)
@@ -19,10 +21,14 @@ const CAMERA_OFFSET:Vector2 = Vector2(1920.0 * 0.5, 1080.0 * 0.5)
 @onready var _vehicle_selection_2p_scene:PackedScene = preload("res://menus/vehicle_selection_2p.tscn")
 @onready var _vehicle_selection_3p_scene:PackedScene = preload("res://menus/vehicle_selection_3p.tscn")
 @onready var _vehicle_selection_4p_scene:PackedScene = preload("res://menus/vehicle_selection_4p.tscn")
+@onready var _manage_profiles_scene:PackedScene = preload("res://menus/manage_profiles.tscn")
+@onready var _edit_profile_scene:PackedScene = preload("res://menus/edit_profile.tscn")
 
 var _main_menu:MainMenu = null
 var _player_count_selection:PlayerCountSelection = null
 var _vehicle_selection:VehicleSelection = null
+var _manage_profiles:ManageProfiles = null
+var _edit_profile:EditProfile = null
 
 var game_state:GameState = null
 
@@ -62,6 +68,10 @@ func _go_to_new_menu(type:MenuType, back_navigate:bool = false) -> void:
 			new_menu = _setup_player_count_selection()
 		MenuType.VEHICLE_SELECTION:
 			new_menu = _setup_vehicle_selection()
+		MenuType.MANAGE_PROFILES:
+			new_menu = _setup_manage_profiles()
+		MenuType.EDIT_PROFILE:
+			new_menu = _setup_edit_profile()
 			
 	if (new_menu != null):
 		_current_menu = new_menu
@@ -89,11 +99,16 @@ func _setup_main_menu() -> Control:
 	
 	_main_menu = _main_menu_scene.instantiate()
 	_main_menu.single_race_selected.connect(_on_main_menu_single_race_selected)
+	_main_menu.manage_profiles_selected.connect(_on_main_menu_manage_profiles_selected)
 	return _main_menu
 	
 func _on_main_menu_single_race_selected() -> void:
 	
 	_go_to_new_menu(MenuType.PLAYER_COUNT_SELECTION)
+	
+func _on_main_menu_manage_profiles_selected() -> void:
+	
+	_go_to_new_menu(MenuType.MANAGE_PROFILES)
 	
 #endregion
 
@@ -102,18 +117,18 @@ func _on_main_menu_single_race_selected() -> void:
 func _setup_player_count_selection() -> Control:
 	
 	_player_count_selection = _player_count_selection_scene.instantiate()
+	_player_count_selection.back_requested.connect(_on_player_count_selection_back_requested)
 	_player_count_selection.count_chosen.connect(_on_player_count_selection_count_chosen)
-	_player_count_selection.selection_exited.connect(_on_player_count_selection_exited)
 	return _player_count_selection
+
+func _on_player_count_selection_back_requested() -> void:
+	
+	_go_to_new_menu(MenuType.NONE, true)
 
 func _on_player_count_selection_count_chosen(count:int) -> void:
 	
 	game_state.num_players = count
 	_go_to_new_menu(MenuType.VEHICLE_SELECTION)
-
-func _on_player_count_selection_exited() -> void:
-	
-	_go_to_new_menu(MenuType.NONE, true)
 
 #endregion
 
@@ -138,17 +153,52 @@ func _setup_vehicle_selection() -> Control:
 		RdrLogger.fatal(self, _setup_vehicle_selection.get_method() + " could not create the vehicle selection scene.")
 		return
 	
+	# TODO: Make "back requested" an interface between all menus
+	_vehicle_selection.back_requested.connect(_on_vehicle_selection_back_requested)
 	_vehicle_selection.all_players_ready.connect(_on_vehicle_selection_all_players_ready)
-	# TODO: Make "exited" an interface between all menus
-	_vehicle_selection.selection_exited.connect(_on_vehicle_selection_exited)
 	return _vehicle_selection
+
+func _on_vehicle_selection_back_requested() -> void:
+	
+	_go_to_new_menu(MenuType.NONE, true)
 
 func _on_vehicle_selection_all_players_ready(racer_objects:Array[RacerObject]) -> void:
 	
 	game_state.racer_objects = racer_objects
 	ready_for_race.emit()
 
-func _on_vehicle_selection_exited() -> void:
+#endregion
+
+#region Manage Profiles
+
+func _setup_manage_profiles() -> Control:
+	
+	_manage_profiles = _manage_profiles_scene.instantiate()
+	_manage_profiles.game_state = game_state
+	_manage_profiles.back_requested.connect(_on_manage_profiles_back_requested)
+	_manage_profiles.add_new_requested.connect(_on_manage_profiles_add_new_requested)
+	return _manage_profiles
+
+func _on_manage_profiles_back_requested() -> void:
+	
+	_go_to_new_menu(MenuType.NONE, true)
+
+func _on_manage_profiles_add_new_requested() -> void:
+	
+	_go_to_new_menu(MenuType.EDIT_PROFILE)
+
+#endregion
+
+#region Edit Profile
+
+func _setup_edit_profile() -> Control:
+	
+	_edit_profile = _edit_profile_scene.instantiate()
+	_edit_profile.game_state = game_state
+	_edit_profile.back_requested.connect(_on_add_profile_back_requested)
+	return _edit_profile
+
+func _on_add_profile_back_requested() -> void:
 	
 	_go_to_new_menu(MenuType.NONE, true)
 

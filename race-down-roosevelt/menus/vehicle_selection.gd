@@ -1,8 +1,8 @@
 class_name VehicleSelection extends Control
 
-signal all_players_ready(racer_objects:Array[RacerObject])
 # Fired when no users have joined and a back button is pressed.
-signal selection_exited
+signal back_requested
+signal all_players_ready(racer_objects:Array[RacerObject])
 
 @export var _panels:Array[VehicleSelectionPanel] = []
 
@@ -25,7 +25,7 @@ func _try_exit_selection() -> bool:
 			all_panels_unused = false
 			break
 	if (all_panels_unused):
-		selection_exited.emit()
+		back_requested.emit()
 		return true
 	else:
 		return false

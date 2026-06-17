@@ -28,7 +28,8 @@ const AI_RACER_NAMES:Array[String] = [
 ]
 
 const PROFILE_PICTURES:Array[CompressedTexture2D] = [
-	preload("res://profiles/skull_and_crossbones_profile_picture.png")
+	preload("res://profiles/skull_and_crossbones_profile_picture.png"),
+	preload("res://profiles/gas_mask_profile_picture.png")
 ]
 
 @onready var racer_vehicle_data:Array[RacerVehicleData] = [

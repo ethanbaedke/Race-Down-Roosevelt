@@ -6,5 +6,7 @@ signal single_race_selected
 
 func _ready() -> void:
 	
+	_single_race_button.grab_focus()
+	
 	_single_race_button.pressed.connect(func() -> void:
 		single_race_selected.emit())

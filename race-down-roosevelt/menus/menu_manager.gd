@@ -26,12 +26,31 @@ var _vehicle_selection:VehicleSelection = null
 
 var game_state:GameState = null
 
+var _menu_type_stack:Array[MenuType] = []
+var _current_menu:Control = null
 var _next_menu_position:Vector2 = Vector2.ZERO
+var _previous_menu_position:Vector2 = Vector2(-1920.0 * 2.0, 0.0)
 
 # TODO: Cleanup old menu.
 # TODO: Keep stack of old menu types to allow back navigation from any menu.
 # TODO: Disable old input/input-navigation from previous menu IMMEDIATELY after the menu begins moving.
-func _go_to_new_menu(type:MenuType) -> void:
+func _go_to_new_menu(type:MenuType, back_navigate:bool = false) -> void:
+	
+	# If we are going forward, append our new menu type to our stack.
+	if (!back_navigate):
+		_menu_type_stack.append(type)
+	else:
+		if (_menu_type_stack.size() < 2):
+			return
+		# If we are going backwards, remove our current page from the front of the stack and navigate back to the previous page on the stack.
+		else:
+			_menu_type_stack.remove_at(_menu_type_stack.size() - 1)
+			type = _menu_type_stack[_menu_type_stack.size() - 1]
+	
+	# Disable input navigation on the old menu so we can't get back to it during the transition.
+	if (_current_menu != null):
+		_current_menu.focus_behavior_recursive = Control.FOCUS_BEHAVIOR_DISABLED
+		_queue_menu_for_cleanup(_current_menu)
 	
 	var new_menu:Control = null
 	match (type):
@@ -45,10 +64,24 @@ func _go_to_new_menu(type:MenuType) -> void:
 			new_menu = _setup_vehicle_selection()
 			
 	if (new_menu != null):
+		_current_menu = new_menu
 		self.add_child(new_menu)
-		new_menu.position = _next_menu_position
-		_camera.position = _next_menu_position + CAMERA_OFFSET
-		_next_menu_position.x += 1920.0
+		if (!back_navigate):
+			new_menu.position = _next_menu_position
+			_camera.position = _next_menu_position + CAMERA_OFFSET
+			_next_menu_position.x += 1920.0
+			_previous_menu_position.x += 1920.0
+		else:
+			new_menu.position = _previous_menu_position
+			_camera.position = _previous_menu_position + CAMERA_OFFSET
+			_next_menu_position.x -= 1920.0
+			_previous_menu_position.x -= 1920.0
+
+func _queue_menu_for_cleanup(menu:Control) -> void:
+	
+	# This is lazy, but is probably fine given our use case.
+	await get_tree().create_timer(0.25).timeout
+	menu.queue_free()
 
 #region Main Menu
 
@@ -70,12 +103,17 @@ func _setup_player_count_selection() -> Control:
 	
 	_player_count_selection = _player_count_selection_scene.instantiate()
 	_player_count_selection.count_chosen.connect(_on_player_count_selection_count_chosen)
+	_player_count_selection.selection_exited.connect(_on_player_count_selection_exited)
 	return _player_count_selection
 
 func _on_player_count_selection_count_chosen(count:int) -> void:
 	
 	game_state.num_players = count
 	_go_to_new_menu(MenuType.VEHICLE_SELECTION)
+
+func _on_player_count_selection_exited() -> void:
+	
+	_go_to_new_menu(MenuType.NONE, true)
 
 #endregion
 
@@ -101,12 +139,18 @@ func _setup_vehicle_selection() -> Control:
 		return
 	
 	_vehicle_selection.all_players_ready.connect(_on_vehicle_selection_all_players_ready)
+	# TODO: Make "exited" an interface between all menus
+	_vehicle_selection.selection_exited.connect(_on_vehicle_selection_exited)
 	return _vehicle_selection
 
 func _on_vehicle_selection_all_players_ready(racer_objects:Array[RacerObject]) -> void:
 	
 	game_state.racer_objects = racer_objects
 	ready_for_race.emit()
+
+func _on_vehicle_selection_exited() -> void:
+	
+	_go_to_new_menu(MenuType.NONE, true)
 
 #endregion
 

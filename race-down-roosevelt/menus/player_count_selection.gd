@@ -2,12 +2,16 @@ class_name PlayerCountSelection extends Control
 
 signal count_chosen(count:int)
 
+signal selection_exited
+
 @onready var _button_1p:Button = $MarginContainer/VBoxContainer/Button1P
 @onready var _button_2p:Button = $MarginContainer/VBoxContainer/Button2P
 @onready var _button_3p:Button = $MarginContainer/VBoxContainer/Button3P
 @onready var _button_4p:Button = $MarginContainer/VBoxContainer/Button4P
 
 func _ready() -> void:
+
+	_button_1p.grab_focus()
 
 	_button_1p.pressed.connect(func() -> void:
 		RdrLogger.log(self, "Player count chosen: 1 player.")
@@ -25,3 +29,20 @@ func _ready() -> void:
 		RdrLogger.log(self, "Player count chosen: 4 player.")
 		count_chosen.emit(4)
 	)
+	
+func _unhandled_input(event: InputEvent) -> void:
+
+	# Ignore holding and releases.
+	if (event.is_echo() || !event.is_pressed()):
+		return
+
+	if (event is InputEventKey):
+		if (event.keycode == KEY_ESCAPE):
+			selection_exited.emit()
+			get_viewport().set_input_as_handled()
+			return
+	elif (event is InputEventJoypadButton):
+		if (event.button_index == JOY_BUTTON_B):
+			selection_exited.emit()
+			get_viewport().set_input_as_handled()
+			return

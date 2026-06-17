@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RacerVehicleData" format=3 uid="uid://b7xg37xosblg3"]
+
+[ext_resource type="PackedScene" uid="uid://bkdshlcm7ss5w" path="res://vehicles/racer_vehicles/subaru_forester.tscn" id="1_kos67"]
+[ext_resource type="Script" uid="uid://cng61qyitlqib" path="res://vehicles/racer_vehicle_data.gd" id="2_k5hx7"]
+
+[resource]
+script = ExtResource("2_k5hx7")
+scene = ExtResource("1_kos67")
+metadata/_custom_type_script = "uid://cng61qyitlqib"

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cvkcos6bwew0n"]
+
+[ext_resource type="Script" uid="uid://bqi1740ikajnm" path="res://vehicles/traffic_vehicles/traffic_vehicle.gd" id="1_by02n"]
+[ext_resource type="PackedScene" uid="uid://uvhx5awql1e8" path="res://vehicles/honda_civic.glb" id="2_ugfde"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4rng7"]
+size = Vector3(1, 1, 2.55)
+
+[node name="HondaCivic" type="Node3D" unique_id=1093534000]
+script = ExtResource("1_by02n")
+speed = 8
+
+[node name="Area3D" type="Area3D" parent="." unique_id=407952649]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.025)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1446051688]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.1552734e-05, 0, 0)
+shape = SubResource("BoxShape3D_4rng7")
+
+[node name="HondaCivicModel" parent="." unique_id=114766186 instance=ExtResource("2_ugfde")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.4615922, 0, 1.1404314)

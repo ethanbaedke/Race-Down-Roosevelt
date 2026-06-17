@@ -1,6 +1,8 @@
 class_name VehicleSelection extends Control
 
 signal all_players_ready(racer_objects:Array[RacerObject])
+# Fired when no users have joined and a back button is pressed.
+signal selection_exited
 
 @export var _panels:Array[VehicleSelectionPanel] = []
 
@@ -13,6 +15,20 @@ func _on_player_ready() -> void:
 			racers.append(panel.racer)
 	if (racers.size() == _panels.size()):
 		all_players_ready.emit(racers)
+
+# Exits selection if no panels are being used.
+func _try_exit_selection() -> bool:
+	
+	var all_panels_unused:bool = true
+	for panel:VehicleSelectionPanel in _panels:
+		if (panel.racer.device_index != -2):
+			all_panels_unused = false
+			break
+	if (all_panels_unused):
+		selection_exited.emit()
+		return true
+	else:
+		return false
 
 func _ready() -> void:
 	
@@ -42,7 +58,19 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Device is being used by one of the panels, let it handle the input.
 	if (i < _panels.size()):
 		return
-		
+	
+	# Device in not being used, if back was pressed and no panels are being used, exit selection.
+	if (event is InputEventKey):
+		if (event.keycode == KEY_ESCAPE):
+			_try_exit_selection()
+			get_viewport().set_input_as_handled()
+			return
+	elif (event is InputEventJoypadButton):
+		if (event.button_index == JOY_BUTTON_B):
+			_try_exit_selection()
+			get_viewport().set_input_as_handled()
+			return
+	
 	# Device is not being used, try to find an available panel for the new device.
 	i = 0
 	while (i < _panels.size() && _panels[i].racer.device_index != -2):

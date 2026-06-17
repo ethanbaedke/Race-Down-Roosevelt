@@ -92,7 +92,7 @@ size = Vector2i(1920, 1080)
 render_target_update_mode = 0
 
 [node name="VehicleModelCamera" type="Camera3D" parent="VehicleModelViewport/SubViewport" unique_id=1334040832]
-transform = Transform3D(0.6474821, -0.34179825, 0.6811321, 0, 0.8937795, 0.44850665, -0.76208067, -0.29040003, 0.57870626, 1, 1.5, 0.75)
+transform = Transform3D(0.6474821, -0.34179825, 0.6811321, 0, 0.8937795, 0.44850665, -0.76208067, -0.29040003, 0.57870626, 2, 1.5, 1.5)
 environment = SubResource("Environment_1u52o")
 projection = 1
 size = 8.0

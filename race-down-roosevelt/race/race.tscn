@@ -2,52 +2,28 @@
 
 [ext_resource type="Script" uid="uid://c4j85t8xu0nvo" path="res://race/race.gd" id="1_6dlvr"]
 [ext_resource type="Script" uid="uid://clyn63xl4tio5" path="res://helpers/random_node_pool_entry.gd" id="2_c8320"]
-[ext_resource type="PackedScene" uid="uid://b4g8quj8iukwa" path="res://vehicles/traffic_vehicles/delivery_truck.tscn" id="3_c8320"]
+[ext_resource type="PackedScene" uid="uid://cvkcos6bwew0n" path="res://vehicles/traffic_vehicles/honda_civic_traffic.tscn" id="3_01boi"]
 [ext_resource type="Script" uid="uid://bonfni7lag8hs" path="res://helpers/random_node_pool.gd" id="4_01boi"]
-[ext_resource type="PackedScene" uid="uid://dfvhq5srp11if" path="res://vehicles/traffic_vehicles/garbage_truck.tscn" id="4_cyu3u"]
+[ext_resource type="PackedScene" uid="uid://buplbimw5vl7v" path="res://vehicles/traffic_vehicles/subaru_forester_traffic.tscn" id="4_hkrbr"]
 [ext_resource type="Texture2D" uid="uid://bphsvdqsicl7h" path="res://road/road_straight.png" id="4_iqn4a"]
 [ext_resource type="PackedScene" uid="uid://8t5pwnixghwp" path="res://road/boost_pad_row.tscn" id="5_g0dry"]
-[ext_resource type="PackedScene" uid="uid://cke0aayvgrwgx" path="res://vehicles/traffic_vehicles/hatchback.tscn" id="5_g7srd"]
 [ext_resource type="Script" uid="uid://dp5p80aakxu84" path="res://race/racer_object.gd" id="6_g1gks"]
-[ext_resource type="PackedScene" uid="uid://cl383nkr52efo" path="res://vehicles/traffic_vehicles/pickup_truck.tscn" id="6_xiy3d"]
 [ext_resource type="Script" uid="uid://c8hh1wvayq5by" path="res://race/race_parameters.gd" id="7_c8320"]
-[ext_resource type="PackedScene" uid="uid://cc26mgstv85qb" path="res://vehicles/traffic_vehicles/suv.tscn" id="7_ru474"]
 [ext_resource type="Script" uid="uid://7psf6ks7j2k4" path="res://race/scoreboard.gd" id="8_c8320"]
-[ext_resource type="PackedScene" uid="uid://ky3hthej5g56" path="res://vehicles/traffic_vehicles/tractor.tscn" id="8_xt8ap"]
 
 [sub_resource type="Resource" id="Resource_0lns8"]
 script = ExtResource("2_c8320")
-scene = ExtResource("3_c8320")
+scene = ExtResource("3_01boi")
 metadata/_custom_type_script = "uid://clyn63xl4tio5"
 
-[sub_resource type="Resource" id="Resource_yiuc0"]
+[sub_resource type="Resource" id="Resource_ru474"]
 script = ExtResource("2_c8320")
-scene = ExtResource("4_cyu3u")
-metadata/_custom_type_script = "uid://clyn63xl4tio5"
-
-[sub_resource type="Resource" id="Resource_klqtr"]
-script = ExtResource("2_c8320")
-scene = ExtResource("5_g7srd")
-metadata/_custom_type_script = "uid://clyn63xl4tio5"
-
-[sub_resource type="Resource" id="Resource_g63gw"]
-script = ExtResource("2_c8320")
-scene = ExtResource("6_xiy3d")
-metadata/_custom_type_script = "uid://clyn63xl4tio5"
-
-[sub_resource type="Resource" id="Resource_mudrt"]
-script = ExtResource("2_c8320")
-scene = ExtResource("7_ru474")
-metadata/_custom_type_script = "uid://clyn63xl4tio5"
-
-[sub_resource type="Resource" id="Resource_yqwes"]
-script = ExtResource("2_c8320")
-scene = ExtResource("8_xt8ap")
+scene = ExtResource("4_hkrbr")
 metadata/_custom_type_script = "uid://clyn63xl4tio5"
 
 [sub_resource type="Resource" id="Resource_cyu3u"]
 script = ExtResource("4_01boi")
-entries = Array[ExtResource("2_c8320")]([SubResource("Resource_0lns8"), SubResource("Resource_yiuc0"), SubResource("Resource_klqtr"), SubResource("Resource_g63gw"), SubResource("Resource_mudrt"), SubResource("Resource_yqwes")])
+entries = Array[ExtResource("2_c8320")]([SubResource("Resource_0lns8"), SubResource("Resource_ru474")])
 debug_name = "Traffic Vehicle"
 metadata/_custom_type_script = "uid://bonfni7lag8hs"
 

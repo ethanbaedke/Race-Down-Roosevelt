@@ -3,18 +3,18 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://buwwxc5u5ym37"
-path="res://.godot/imported/race_car.glb-4c5e48f2fc8ac91c2c45add00be1ad13.scn"
+uid="uid://uvhx5awql1e8"
+path="res://.godot/imported/honda_civic.glb-71d4ed75fffd07756fd0531ecb01e122.scn"
 
 [deps]
 
-source_file="res://vehicles/racer_vehicles/race_car.glb"
-dest_files=["res://.godot/imported/race_car.glb-4c5e48f2fc8ac91c2c45add00be1ad13.scn"]
+source_file="res://vehicles/honda_civic.glb"
+dest_files=["res://.godot/imported/honda_civic.glb-71d4ed75fffd07756fd0531ecb01e122.scn"]
 
 [params]
 
 nodes/root_type=""
-nodes/root_name="RaceCarModel"
+nodes/root_name="HondaCivicModel"
 nodes/root_script=null
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -37,14 +37,6 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={
-"materials": {
-"colormap": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://vehicles/vehicle_color_map.tres",
-"use_external/path": "uid://bch7fcm8tecoj"
-}
-}
-}
+_subresources={}
 gltf/naming_version=2
 gltf/embedded_image_handling=1

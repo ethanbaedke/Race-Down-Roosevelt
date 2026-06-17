@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RacerVehicleData" format=3 uid="uid://bmv17kfedcg8y"]
+
+[ext_resource type="PackedScene" uid="uid://wk7eji5glhus" path="res://vehicles/racer_vehicles/honda_civic.tscn" id="1_gpc34"]
+[ext_resource type="Script" uid="uid://cng61qyitlqib" path="res://vehicles/racer_vehicle_data.gd" id="2_qpssr"]
+
+[resource]
+script = ExtResource("2_qpssr")
+scene = ExtResource("1_gpc34")
+metadata/_custom_type_script = "uid://cng61qyitlqib"

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bkdshlcm7ss5w"]
+
+[ext_resource type="Script" uid="uid://b30kj0jrm85yt" path="res://vehicles/racer_vehicles/racer_vehicle.gd" id="1_ce1kl"]
+[ext_resource type="PackedScene" uid="uid://40efplcfedui" path="res://vehicles/subaru_forester.glb" id="2_ce1kl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_meqtm"]
+size = Vector3(1, 1, 2.55)
+
+[node name="SubaruForester" type="Node3D" unique_id=1093534000]
+script = ExtResource("1_ce1kl")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=60177497]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.025)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=228510056]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.1552734e-05, 0, 0)
+shape = SubResource("BoxShape3D_meqtm")
+
+[node name="SubaruForesterModel" parent="." unique_id=1946182605 instance=ExtResource("2_ce1kl")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.46786118, 0, 1.1404314)

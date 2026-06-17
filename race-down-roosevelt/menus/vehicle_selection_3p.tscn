@@ -2,12 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bj11itykefsaa" path="res://menus/vehicle_selection.gd" id="1_fson6"]
 [ext_resource type="PackedScene" uid="uid://u34626h5i7lp" path="res://menus/vehicle_selection_panel.tscn" id="2_iggrc"]
-[ext_resource type="PackedScene" uid="uid://dbpvto7rrusgi" path="res://vehicles/racer_vehicles/ambulance.glb" id="3_is1pn"]
-[ext_resource type="PackedScene" uid="uid://c2a3strqtmfk3" path="res://vehicles/racer_vehicles/delivery_truck_flat.glb" id="4_njfbs"]
-[ext_resource type="PackedScene" uid="uid://dvfkavds4pv02" path="res://vehicles/racer_vehicles/firetruck.glb" id="5_o813s"]
-[ext_resource type="PackedScene" uid="uid://buwwxc5u5ym37" path="res://vehicles/racer_vehicles/race_car.glb" id="6_v07yv"]
-[ext_resource type="PackedScene" uid="uid://bfr7ir7lt1yp8" path="res://vehicles/racer_vehicles/sedan.glb" id="7_dxypf"]
-[ext_resource type="PackedScene" uid="uid://bm4s7bia48fib" path="res://vehicles/racer_vehicles/sports_car.glb" id="8_nltai"]
+[ext_resource type="PackedScene" uid="uid://uvhx5awql1e8" path="res://vehicles/honda_civic.glb" id="3_cfq23"]
+[ext_resource type="PackedScene" uid="uid://40efplcfedui" path="res://vehicles/subaru_forester.glb" id="4_eggol"]
 
 [node name="VehicleSelection3P" type="Control" unique_id=334173602 node_paths=PackedStringArray("_panels")]
 layout_mode = 3
@@ -49,19 +45,11 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AmbulanceModel" parent="." unique_id=984385486 instance=ExtResource("3_is1pn")]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1599145703]
+transform = Transform3D(0.7071068, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.7071068, -0.5, 0.5, 0, 10, 0)
 
-[node name="DeliveryTruckFlatModel" parent="." unique_id=63463541 instance=ExtResource("4_njfbs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+[node name="HondaCivicModel" parent="." unique_id=114766186 instance=ExtResource("3_cfq23")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.4615922, 0, 1.1404314)
 
-[node name="FiretruckModel" parent="." unique_id=1718053397 instance=ExtResource("5_o813s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0)
-
-[node name="RaceCarModel" parent="." unique_id=1333151254 instance=ExtResource("6_v07yv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 0)
-
-[node name="SedanModel" parent="." unique_id=1268807936 instance=ExtResource("7_dxypf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 0)
-
-[node name="SportsCarModel" parent="." unique_id=2036222389 instance=ExtResource("8_nltai")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+[node name="SubaruForesterModel" parent="." unique_id=2138444277 instance=ExtResource("4_eggol")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 19.532, 0, 1.14)

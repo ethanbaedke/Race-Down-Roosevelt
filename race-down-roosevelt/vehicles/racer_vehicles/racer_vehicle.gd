@@ -16,10 +16,10 @@ const MIN_DURABILITY:int = 1
 const MAX_WEIGHT:int = 6
 const MIN_WEIGHT:int = 1
 
-@export_range(1, MAX_TOP_SPEED) var top_speed:int = 10
-@export_range(1, MAX_ACCELERATION) var acceleration:int = 2
-@export_range(1, MAX_DURABILITY) var durability:int = 1
-@export_range(1, MAX_WEIGHT) var weight:int = 1
+@export_range(1, MAX_TOP_SPEED) var top_speed:int = 17
+@export_range(1, MAX_ACCELERATION) var acceleration:int = 7
+@export_range(1, MAX_DURABILITY) var durability:int = 3
+@export_range(1, MAX_WEIGHT) var weight:int = 3
 
 @onready var _collision_area:Area3D = $Area3D
 @onready var _collision_shape:CollisionShape3D = $Area3D/CollisionShape3D

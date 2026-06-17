@@ -1,12 +1,8 @@
 class_name VehicleSelectionPanel extends Control
 
 const VEHICLE_DATA:Array[RacerVehicleData] = [
-	preload("res://vehicles/racer_vehicles/ambulance_data.tres"),
-	preload("res://vehicles/racer_vehicles/delivery_truck_flat_data.tres"),
-	preload("res://vehicles/racer_vehicles/firetruck_data.tres"),
-	preload("res://vehicles/racer_vehicles/race_car_data.tres"),
-	preload("res://vehicles/racer_vehicles/sedan_data.tres"),
-	preload("res://vehicles/racer_vehicles/sports_car_data.tres")
+	preload("res://vehicles/racer_vehicles/honda_civic_data.tres"),
+	preload("res://vehicles/racer_vehicles/subaru_forester_data.tres"),
 ]
 
 enum PanelState {
@@ -27,7 +23,7 @@ signal player_ready
 var state:PanelState = PanelState.WAITING_FOR_DEVICE
 var racer:RacerObject = RacerObject.new()
 
-var _vehicle_ind:int = 4
+var _vehicle_ind:int = 0
 
 func transition_state(newstate:PanelState) -> void:
 	
@@ -96,7 +92,7 @@ func move_vehicle_selection_right() -> void:
 	update_vehicle()
 
 func update_vehicle() -> void:
-	_vehicle_model_camera.position.x = 1.0 + (20.0 * _vehicle_ind)
+	_vehicle_model_camera.position.x = 2.0 + (20.0 * _vehicle_ind)
 
 var _left_joystick_active:bool = false
 var _right_joystick_active:bool = false

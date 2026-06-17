@@ -1,5 +1,7 @@
 class_name RaceParameters extends Resource
 
+# DEPRECATED
+
 @export var racer_objects:Array[RacerObject] = [null, null, null, null]
 @export var include_ai_racers:bool = true
 

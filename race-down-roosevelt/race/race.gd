@@ -9,7 +9,9 @@ const LANE_SPACING:float = 3.0
 const RACE_LENGTH:int = 100
 const LEADERBOARD_DISPLAY_TIME:float = 5.0
 
-@onready var _leaderboard:Scoreboard = $Scoreboard
+var game_state:GameState = null
+
+@onready var _leaderboard:Leaderboard = $Leaderboard
 
 var _race_setup:bool = false
 
@@ -295,8 +297,6 @@ func _handle_cleanup() -> void:
 const CAMERA_CONTROLLER_POSITION:Vector3 = Vector3(0.0, 2.0, -4.0)
 const CAMERA_CONTROLLER_ROTATION:Vector3 = Vector3(deg_to_rad(-10.0), deg_to_rad(180.0), 0.0)
 
-@export var race_parameters:RaceParameters = null
-
 @onready var _racer_vehicle_spawn_points:Array[Node3D] = [
 	$"RacerVehicleSpawnPoints/1",
 	$"RacerVehicleSpawnPoints/2",
@@ -330,6 +330,10 @@ func setup_race() -> void:
 	
 	RdrLogger.log(self, "Setting up race.")
 	
+	if (game_state == null):
+		RdrLogger.fatal(self, setup_race.get_method() + " expects to have a reference to GameState.")
+		return
+	
 	if (traffic_vehicle_pool == null):
 		RdrLogger.warn(self, "Traffic vehicle pool is empty. Creating new instance.")
 		traffic_vehicle_pool = RandomNodePool.new()
@@ -343,7 +347,18 @@ func setup_race() -> void:
 	
 	# TODO: Reset asphalt/barrier mesh and material properties here.
 	
-	_validate_race_parameters()
+	# If ai racers are enabled, fill them into any open racer slots.
+	if (game_state.include_ai_racers):
+		for i:int in range(game_state.num_players, 4):
+			var ai_racer:RacerObject = RacerObject.new()
+			game_state.racer_objects.append(ai_racer)
+	
+	# If any racer has null vehicle data, give them a random vehicle.
+	for racer:RacerObject in game_state.racer_objects:
+		if (racer.vehicle_data == null):
+			racer.vehicle_data = Globals.get_random_racer_vehicle_data()
+	
+	# DEPRECATED _validate_race_parameters()
 	_spawn_racer_vehicles()
 	_setup_player_viewports()
 	
@@ -403,23 +418,21 @@ func _setup_player_viewports() -> void:
 		
 	RdrLogger.log(self, "Player viewport setup complete.")
 
-# This function expects race parameters to be valid, and four racer vehicle spawn points to exist.
+# This function expects four racer vehicle spawn points to exist, even if there are not four racers.
 func _spawn_racer_vehicles() -> void:
 	
 	RdrLogger.log(self, "Spawning racer vehicles.")
 	
-	if (!race_parameters.validate_parameters()):
-		RdrLogger.fatal(self, _spawn_racer_vehicles.get_method() + " expects race parameters to be valid.")
 	if (_racer_vehicle_spawn_points.size() != 4):
 		RdrLogger.fatal(self, _spawn_racer_vehicles.get_method() + " expects four vehicle spawn points to exist.")
 	
-	for i:int in range(4):
-		if (race_parameters.racer_objects[i] == null):
+	for i:int in range(game_state.racer_objects.size()):
+		if (game_state.racer_objects[i] == null):
 			continue
 		else:
-			var racer:RacerVehicle = race_parameters.racer_objects[i].vehicle_data.scene.instantiate()
+			var racer:RacerVehicle = game_state.racer_objects[i].vehicle_data.scene.instantiate()
 			racer.race = self
-			racer.racer = race_parameters.racer_objects[i]
+			racer.racer = game_state.racer_objects[i]
 			racer.lane_number = (i + 1) * 2
 			_racer_vehicles.append(racer)
 			self.add_child(racer)
@@ -427,61 +440,62 @@ func _spawn_racer_vehicles() -> void:
 	
 	RdrLogger.log(self, "Racer vehicle spawning complete.")
 
+# DEPRECATED
 # Ensure race parameters are set up correctly to be used during race setup.
-func _validate_race_parameters() -> void:
-	
-	RdrLogger.log(self, "Beginning race parameter validation.")
-	
-	# Ensure race parameters exist.
-	if (race_parameters == null):
-		# If no race parameters are set, try and load the default race parameters.
-		race_parameters = load("res://race/default_race_parameters.tres")
-		# If the default race parameters couldn't be found, use an empty resource, which will be handeled below.
-		if (race_parameters == null):
-			race_parameters = RaceParameters.new()
-	
-	# If the race parameters show conflicts at this point, they must be resolved so the race can start.
-	# We will not back out of a race once it's begun setup.
-	if (!race_parameters.validate_parameters()):
-		RdrLogger.error(self, "Race parameters were invalid. Forcefully resolving conflicts.")
-		race_parameters.force_resolve_conflicts()
-		
-	# If all racers are null or AI, replace the first racer with a new one, and give it keyboard controlls.
-	# Fully AI races are not supported.
-	var all_racers_null_or_ai:bool = true
-	for racer:RacerObject in race_parameters.racer_objects:
-		if (racer != null && racer.device_index != -2):
-			all_racers_null_or_ai = false
-			break
-	if (all_racers_null_or_ai):
-		RdrLogger.warn(self, "All racers are AI controlled. Replacing first racer with keyboard controlled racer.")
-		var racer:RacerObject = RacerObject.new()
-		racer.device_index = -1
-		race_parameters.racer_objects[0] = racer
-		
-	# If any racer has null vehicle data, it should be considered a random selection.
-	for racer:RacerObject in race_parameters.racer_objects:
-		if (racer == null):
-			continue
-		if (racer.vehicle_data == null):
-			var data:RacerVehicleData = Globals.get_random_racer_vehicle_data()
-			var racer_name:String = racer.name
-			var vehicle_name:String = data.scene.get_state().get_node_name(0)
-			RdrLogger.log(self, "Assigning random vehicle to " + racer_name + ": " + vehicle_name + ".")
-			racer.vehicle_data = data
-			
-	# If any racer has an empty name, give them a random one.
-	var num_empty_names:int = 0
-	var empty_named_racers:Array[RacerObject]
-	for racer:RacerObject in race_parameters.racer_objects:
-		if (racer.name.is_empty()):
-			num_empty_names += 1
-			empty_named_racers.append(racer)
-	var names:Array[String] = Globals.get_random_unique_names(num_empty_names)
-	for i:int in range(num_empty_names):
-		empty_named_racers[i].name = names[i]
-
-	RdrLogger.log(self, "Race parameter validation finished.")
+#func _validate_race_parameters() -> void:
+	#
+	#RdrLogger.log(self, "Beginning race parameter validation.")
+	#
+	## Ensure race parameters exist.
+	#if (race_parameters == null):
+		## If no race parameters are set, try and load the default race parameters.
+		#race_parameters = load("res://race/default_race_parameters.tres")
+		## If the default race parameters couldn't be found, use an empty resource, which will be handeled below.
+		#if (race_parameters == null):
+			#race_parameters = RaceParameters.new()
+	#
+	## If the race parameters show conflicts at this point, they must be resolved so the race can start.
+	## We will not back out of a race once it's begun setup.
+	#if (!race_parameters.validate_parameters()):
+		#RdrLogger.error(self, "Race parameters were invalid. Forcefully resolving conflicts.")
+		#race_parameters.force_resolve_conflicts()
+		#
+	## If all racers are null or AI, replace the first racer with a new one, and give it keyboard controlls.
+	## Fully AI races are not supported.
+	#var all_racers_null_or_ai:bool = true
+	#for racer:RacerObject in race_parameters.racer_objects:
+		#if (racer != null && racer.device_index != -2):
+			#all_racers_null_or_ai = false
+			#break
+	#if (all_racers_null_or_ai):
+		#RdrLogger.warn(self, "All racers are AI controlled. Replacing first racer with keyboard controlled racer.")
+		#var racer:RacerObject = RacerObject.new()
+		#racer.device_index = -1
+		#race_parameters.racer_objects[0] = racer
+		#
+	## If any racer has null vehicle data, it should be considered a random selection.
+	#for racer:RacerObject in race_parameters.racer_objects:
+		#if (racer == null):
+			#continue
+		#if (racer.vehicle_data == null):
+			#var data:RacerVehicleData = Globals.get_random_racer_vehicle_data()
+			#var racer_name:String = racer.name
+			#var vehicle_name:String = data.scene.get_state().get_node_name(0)
+			#RdrLogger.log(self, "Assigning random vehicle to " + racer_name + ": " + vehicle_name + ".")
+			#racer.vehicle_data = data
+			#
+	## If any racer has an empty name, give them a random one.
+	#var num_empty_names:int = 0
+	#var empty_named_racers:Array[RacerObject]
+	#for racer:RacerObject in race_parameters.racer_objects:
+		#if (racer.name.is_empty()):
+			#num_empty_names += 1
+			#empty_named_racers.append(racer)
+	#var names:Array[String] = Globals.get_random_unique_names(num_empty_names)
+	#for i:int in range(num_empty_names):
+		#empty_named_racers[i].name = names[i]
+#
+	#RdrLogger.log(self, "Race parameter validation finished.")
 
 #endregion
 

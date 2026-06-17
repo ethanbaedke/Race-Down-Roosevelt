@@ -24,10 +24,7 @@ func _ready() -> void:
 		
 		# Start the race.
 		_race = _race_scene.instantiate()
-		# TODO: Replace racer parameters with passing game state directly to the race.
-		var params:RaceParameters = RaceParameters.new()
-		params.racer_objects = _game_state.racer_objects
-		_race.race_parameters = params
+		_race.game_state = _game_state
 		self.add_child(_race)
 		_race.setup_race()
 		

@@ -4,16 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://40efplcfedui" path="res://vehicles/subaru_forester.glb" id="2_ce1kl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_meqtm"]
-size = Vector3(1, 1, 2.55)
+size = Vector3(0.91748047, 0.6846924, 2.3123658)
 
 [node name="SubaruForester" type="Node3D" unique_id=1093534000]
 script = ExtResource("1_ce1kl")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=60177497]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.025)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5016584, -0.025)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=228510056]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.1552734e-05, 0, 0)
 shape = SubResource("BoxShape3D_meqtm")
 
 [node name="SubaruForesterModel" parent="." unique_id=1946182605 instance=ExtResource("2_ce1kl")]

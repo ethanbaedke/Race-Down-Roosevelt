@@ -49,6 +49,7 @@ func fatal(source:Object, contents:String) -> void:
 		return
 	
 	var prefix:String = _get_prefix(source)
+	# TODO: This does not always print since the engine shuts down the console before the print is processed.
 	print_rich("[color=FUCHSIA]" + prefix + " " + contents + "[/color]")
 	get_tree().quit(1)
 

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bpqhwjkap7iak"]
+
+[ext_resource type="Script" uid="uid://ct418ki6s0o41" path="res://menus/menu_manager.gd" id="1_xrek7"]
+
+[node name="MenuManager" type="Control" unique_id=891136904]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xrek7")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2137746839]
+position = Vector2(960, 540)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0

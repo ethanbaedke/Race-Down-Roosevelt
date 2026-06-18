@@ -35,3 +35,15 @@ text = "Add New"
 [node name="ProfileSelector" parent="MarginContainer/VBoxContainer" unique_id=878384072 instance=ExtResource("2_yuol2")]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="EditProfileButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=521791611]
+layout_mode = 2
+size_flags_vertical = 3
+disabled = true
+text = "Edit Profile"
+
+[node name="DeleteProfileButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1143943515]
+layout_mode = 2
+size_flags_vertical = 3
+disabled = true
+text = "Delete Profile"

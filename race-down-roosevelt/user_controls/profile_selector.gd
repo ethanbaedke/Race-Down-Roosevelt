@@ -1,5 +1,7 @@
 class_name ProfileSelector extends Control
 
+signal profile_selected(profile:Profile)
+
 @onready var _center_container:PanelContainer = $MarginContainer/Control/Center
 @onready var _center_label:Label = $MarginContainer/Control/Center/Label
 @onready var _left_container:PanelContainer = $MarginContainer/Control/Left
@@ -20,6 +22,10 @@ func set_profiles(new_profiles:Array[Profile]) -> void:
 		
 	_update_container_visibilities()
 	_update_container_text()
+
+func get_selected_profile() -> Profile:
+	
+	return profiles[_profile_ind]
 
 func _update_container_visibilities() -> void:
 	
@@ -96,11 +102,22 @@ func _navigate_right() -> void:
 	_update_container_visibilities()
 	_update_container_text()
 
+func _on_focus_entered() -> void:
+	
+	_center_container.scale = Vector2(1.2, 1.2)
+	_center_container.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	_center_label.add_theme_font_size_override("font_size", 72)
+
+func _on_focus_exited() -> void:
+	
+	_center_container.scale = Vector2(1.1, 1.1)
+	_center_container.modulate = Color(0.875, 0.875, 0.875, 1.0)
+	_center_label.add_theme_font_size_override("font_size", 68)
+
 func _ready() -> void:
 	
-	# TESTING
-	#set_profiles(profiles)
-	pass
+	self.focus_entered.connect(_on_focus_entered)
+	self.focus_exited.connect(_on_focus_exited)
 
 var _left_joystick_active:bool = false
 var _right_joystick_active:bool = false
@@ -119,6 +136,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			_navigate_right()
 			get_viewport().set_input_as_handled()
 			return
+		elif (event.keycode == KEY_C):
+			if (self.has_focus()):
+				profile_selected.emit(profiles[_profile_ind])
+				get_viewport().set_input_as_handled()
+				return
 	elif (event is InputEventJoypadButton):
 		if (event.button_index == JOY_BUTTON_DPAD_LEFT):
 			_navigate_left()
@@ -128,6 +150,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			_navigate_right()
 			get_viewport().set_input_as_handled()
 			return
+		elif (event.button_index == JOY_BUTTON_A):
+			if (self.has_focus()):
+				profile_selected.emit(profiles[_profile_ind])
+				get_viewport().set_input_as_handled()
+				return
 	elif (event is InputEventJoypadMotion):
 		if (event.axis == JOY_AXIS_LEFT_X):
 			if (_left_joystick_active):

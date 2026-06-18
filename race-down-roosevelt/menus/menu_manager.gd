@@ -177,6 +177,7 @@ func _setup_manage_profiles() -> Control:
 	_manage_profiles.game_state = game_state
 	_manage_profiles.back_requested.connect(_on_manage_profiles_back_requested)
 	_manage_profiles.add_new_requested.connect(_on_manage_profiles_add_new_requested)
+	_manage_profiles.edit_profile_requested.connect(_on_manage_profiles_edit_profile_requested)
 	return _manage_profiles
 
 func _on_manage_profiles_back_requested() -> void:
@@ -184,6 +185,10 @@ func _on_manage_profiles_back_requested() -> void:
 	_go_to_new_menu(MenuType.NONE, true)
 
 func _on_manage_profiles_add_new_requested() -> void:
+	
+	_go_to_new_menu(MenuType.EDIT_PROFILE)
+	
+func _on_manage_profiles_edit_profile_requested() -> void:
 	
 	_go_to_new_menu(MenuType.EDIT_PROFILE)
 

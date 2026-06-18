@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dtl5swjkwa6ra"]
 
 [ext_resource type="Script" uid="uid://dsjwco4kyuqf" path="res://menus/edit_profile.gd" id="1_ukwib"]
-[ext_resource type="Texture2D" uid="uid://bkju8odrm63cv" path="res://profiles/empty_profile_picture.png" id="2_ukwib"]
+[ext_resource type="Texture2D" uid="uid://bkju8odrm63cv" path="res://profiles/empty_profile_icon.png" id="2_ukwib"]
 
 [node name="EditProfile" type="Control" unique_id=447221519]
 layout_mode = 3
@@ -31,7 +31,7 @@ theme_override_constants/separation = 100
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1297302663]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 100
+theme_override_constants/separation = 50
 alignment = 1
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=973451610]

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ckqhdjgmrgm8s"]
 
 [ext_resource type="Script" uid="uid://dlltxdjohlsig" path="res://menus/manage_profiles.gd" id="1_jkb0r"]
+[ext_resource type="PackedScene" uid="uid://dp7f35xelw7qo" path="res://user_controls/profile_selector.tscn" id="2_yuol2"]
 
 [node name="ManageProfiles" type="Control" unique_id=118366318]
 layout_mode = 3
@@ -23,6 +24,14 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 100
 
-[node name="AddNewButton" type="Button" parent="MarginContainer" unique_id=920305940]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1862977410]
 layout_mode = 2
+
+[node name="AddNewButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=920305940]
+layout_mode = 2
+size_flags_vertical = 3
 text = "Add New"
+
+[node name="ProfileSelector" parent="MarginContainer/VBoxContainer" unique_id=878384072 instance=ExtResource("2_yuol2")]
+layout_mode = 2
+size_flags_vertical = 3

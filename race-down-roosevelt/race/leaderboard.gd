@@ -7,7 +7,7 @@ class_name Leaderboard extends Control
 	$"MarginContainer/VBoxContainer/4thPlace/PanelContainer/MarginContainer/HBoxContainer/Name"
 ]
 
-@onready var _pictures:Array[TextureRect] = [
+@onready var _icons:Array[TextureRect] = [
 	$"MarginContainer/VBoxContainer/1stPlace/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/TextureRect",
 	$"MarginContainer/VBoxContainer/2ndPlace/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/TextureRect",
 	$"MarginContainer/VBoxContainer/3rdPlace/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/TextureRect",
@@ -28,7 +28,7 @@ func load_data(racers:Array[RacerObject]) -> void:
 	var i:int = 0
 	while (i < racers.size()):
 		_names[i].text = racers[i].profile.name
-		_pictures[i].texture = racers[i].profile.picture
+		_icons[i].texture = racers[i].profile.icon
 		i += 1
 	while (i < 4):
 		_panels[i].visible = false

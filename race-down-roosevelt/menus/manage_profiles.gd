@@ -3,7 +3,8 @@ class_name ManageProfiles extends Control
 signal back_requested
 signal add_new_requested
 
-@onready var _add_new_button:Button = $MarginContainer/AddNewButton
+@onready var _add_new_button:Button = $MarginContainer/VBoxContainer/AddNewButton
+@onready var _profile_selector:ProfileSelector = $MarginContainer/VBoxContainer/ProfileSelector
 
 var game_state:GameState = null
 
@@ -16,6 +17,8 @@ func _ready() -> void:
 	
 	_add_new_button.pressed.connect(func() -> void:
 		add_new_requested.emit())
+		
+	_profile_selector.set_profiles(game_state.profiles)
 		
 func _unhandled_input(event: InputEvent) -> void:
 

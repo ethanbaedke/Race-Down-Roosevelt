@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b75uxwdkbh7gr"
-path="res://.godot/imported/skull_and_crossbones_profile_picture.png-0229d9573c0fb10f48cc7013252c0b5b.ctex"
+uid="uid://dpyka6h5rthyv"
+path="res://.godot/imported/gas_mask_profile_icon.png-30863eaa208bdff7d593eeeabea90ff4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://profiles/skull_and_crossbones_profile_picture.png"
-dest_files=["res://.godot/imported/skull_and_crossbones_profile_picture.png-0229d9573c0fb10f48cc7013252c0b5b.ctex"]
+source_file="res://profiles/gas_mask_profile_icon.png"
+dest_files=["res://.godot/imported/gas_mask_profile_icon.png-30863eaa208bdff7d593eeeabea90ff4.ctex"]
 
 [params]
 

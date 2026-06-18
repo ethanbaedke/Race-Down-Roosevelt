@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://dp7f35xelw7qo"]
+
+[ext_resource type="Script" uid="uid://b6h78dxctix2r" path="res://user_controls/profile_selector.gd" id="1_ibjk1"]
+[ext_resource type="Script" uid="uid://ccg7tbkcxql6j" path="res://profiles/profile.gd" id="2_4hree"]
+[ext_resource type="Texture2D" uid="uid://bkju8odrm63cv" path="res://profiles/empty_profile_icon.png" id="3_n68dq"]
+
+[sub_resource type="Resource" id="Resource_d4kfw"]
+script = ExtResource("2_4hree")
+name = "Player 1"
+metadata/_custom_type_script = "uid://ccg7tbkcxql6j"
+
+[sub_resource type="Resource" id="Resource_4hree"]
+script = ExtResource("2_4hree")
+name = "Player 2"
+metadata/_custom_type_script = "uid://ccg7tbkcxql6j"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibjk1"]
+content_margin_left = 60.0
+content_margin_top = 30.0
+content_margin_right = 60.0
+content_margin_bottom = 30.0
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[node name="ProfileSelector" type="Control" unique_id=878384072]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ibjk1")
+profiles = Array[ExtResource("2_4hree")]([SubResource("Resource_d4kfw"), SubResource("Resource_4hree")])
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1863152249]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Control" type="Control" parent="MarginContainer" unique_id=457209359]
+layout_mode = 2
+
+[node name="Left" type="PanelContainer" parent="MarginContainer/Control" unique_id=1983300339]
+modulate = Color(0.75, 0.75, 0.75, 1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -74.0
+offset_right = 545.0
+offset_bottom = 74.0
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ibjk1")
+
+[node name="Label" type="Label" parent="MarginContainer/Control/Left" unique_id=1860260865]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "Example 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Right" type="PanelContainer" parent="MarginContainer/Control" unique_id=199034527]
+modulate = Color(0.75, 0.75, 0.75, 1)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -545.0
+offset_top = -74.0
+offset_bottom = 74.0
+grow_horizontal = 0
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ibjk1")
+
+[node name="Label" type="Label" parent="MarginContainer/Control/Right" unique_id=1301010194]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "Example 3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Center" type="PanelContainer" parent="MarginContainer/Control" unique_id=1115853117]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.5
+offset_top = -74.0
+offset_right = 272.5
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ibjk1")
+
+[node name="Label" type="Label" parent="MarginContainer/Control/Center" unique_id=360410430]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "Example 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NoProfilesLabel" type="Label" parent="MarginContainer" unique_id=528555575]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "No Profiles"
+horizontal_alignment = 1
+vertical_alignment = 1

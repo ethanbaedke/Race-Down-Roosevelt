@@ -3,7 +3,8 @@ class_name EditProfile extends Control
 signal back_requested
 
 @onready var _profile_icon:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/Icon
-@onready var _profile_name:Label = $MarginContainer/VBoxContainer/HBoxContainer/Name
+@onready var _profile_name:LineEdit = $MarginContainer/VBoxContainer/HBoxContainer/Name
+@onready var _change_name_button:Button = $MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/VBoxContainer/ChangeNameButton
 @onready var _discard_changes_button:Button = $MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/HBoxContainer/DiscardChangesButton
 @onready var _save_changes_button:Button = $MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/HBoxContainer/SaveChangesButton2
 
@@ -26,6 +27,23 @@ func _update_profile_ui() -> void:
 	_profile_icon.texture = _profile_copy.icon
 	_profile_name.text = _profile_copy.name
 
+func _on_profile_name_text_submitted(new_text:String) -> void:
+	
+	_profile_name.editable = false
+	_profile_copy.name = _profile_name.text
+	_change_name_button.grab_focus.call_deferred()
+	
+func _on_profile_name_focus_exited() -> void:
+	
+	_profile_name.editable = false
+	_profile_copy.name = _profile_name.text
+
+func _on_change_name_button_pressed() -> void:
+	
+	_profile_name.editable = true
+	_profile_name.caret_column = _profile_name.text.length()
+	_profile_name.grab_focus()
+
 func _on_save_changes_button_pressed() -> void:
 	
 	# Write data from our temporary copy to the actual profile.
@@ -41,7 +59,11 @@ func _ready() -> void:
 	
 	if (game_state == null):
 		RdrLogger.fatal(self, _ready.get_method() + " expects class to have a reference to GameState.")
+		return
 	
+	_profile_name.text_submitted.connect(_on_profile_name_text_submitted)
+	_profile_name.focus_exited.connect(_on_profile_name_focus_exited)
+	_change_name_button.pressed.connect(_on_change_name_button_pressed)
 	_discard_changes_button.pressed.connect(func() -> void:
 		back_requested.emit())
 	_save_changes_button.pressed.connect(_on_save_changes_button_pressed)

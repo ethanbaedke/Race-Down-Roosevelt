@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dsjwco4kyuqf" path="res://menus/edit_profile.gd" id="1_ukwib"]
 [ext_resource type="Texture2D" uid="uid://bkju8odrm63cv" path="res://profiles/empty_profile_icon.png" id="2_ukwib"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ukwib"]
+
 [node name="EditProfile" type="Control" unique_id=447221519]
 layout_mode = 3
 anchors_preset = 15
@@ -40,12 +42,23 @@ layout_mode = 2
 texture = ExtResource("2_ukwib")
 expand_mode = 3
 
-[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1576282575]
+[node name="Name" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=839673888]
 layout_mode = 2
-size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_uneditable_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ukwib")
 text = "New Player"
-vertical_alignment = 1
+max_length = 30
+editable = false
+expand_to_text_length = true
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+drag_and_drop_selection_enabled = false
+flat = true
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1266795223]
 layout_mode = 2

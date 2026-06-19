@@ -16,6 +16,11 @@ func _update_profile_option_disabled_states() -> void:
 	_edit_profile_button.disabled = game_state.profiles.size() == 0
 	_delete_profile_button.disabled = game_state.profiles.size() == 0
 
+func _on_add_new_button_pressed() -> void:
+	
+	game_state.profile_to_edit = null
+	add_new_requested.emit()
+
 func _on_profile_selector_profile_selected() -> void:
 	
 	_edit_profile_button.grab_focus()
@@ -42,8 +47,7 @@ func _ready() -> void:
 	
 	_add_new_button.grab_focus()
 	
-	_add_new_button.pressed.connect(func() -> void:
-		add_new_requested.emit())
+	_add_new_button.pressed.connect(_on_add_new_button_pressed)
 	
 	_profile_selector.profile_selected.connect(_on_profile_selector_profile_selected)
 	_profile_selector.set_profiles(game_state.profiles)

@@ -13,13 +13,26 @@ signal profile_selected(profile:Profile)
 @export var profiles:Array[Profile] = []
 var _profile_ind:int = 0
 
-func set_profiles(new_profiles:Array[Profile]) -> void:
+func set_profiles(new_profiles:Array[Profile], starting_profile:Profile = null) -> void:
 	
 	profiles = new_profiles
 	
 	if (profiles.size() == 0):
 		RdrLogger.warn(self, "No profiles could be displayed since the profiles list on this class is empty.")
 		
+	if (starting_profile != null):
+		var profile_ind:int = new_profiles.find(starting_profile)
+		if (profile_ind == -1):
+			RdrLogger.warn(self, "Starting profile not found in profile list.")
+		else:
+			_profile_ind = profile_ind
+	
+	# Setting profiles may bring the profile index out of bounds. Ensure its clamped.
+	if (profiles.size() != 0):
+		if (_profile_ind < 0):
+			_profile_ind = profiles.size() - 1
+		_profile_ind = _profile_ind % profiles.size()
+	
 	_update_container_visibilities()
 	_update_container_text()
 

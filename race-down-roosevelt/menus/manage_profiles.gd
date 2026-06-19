@@ -50,7 +50,7 @@ func _ready() -> void:
 	_add_new_button.pressed.connect(_on_add_new_button_pressed)
 	
 	_profile_selector.profile_selected.connect(_on_profile_selector_profile_selected)
-	_profile_selector.set_profiles(game_state.profiles)
+	_profile_selector.set_profiles(game_state.profiles, game_state.profile_to_edit)
 	
 	_edit_profile_button.pressed.connect(_on_edit_profile_button_pressed)
 	_delete_profile_button.pressed.connect(_on_delete_profile_button_pressed)

@@ -27,6 +27,12 @@ func _update_profile_ui() -> void:
 	_profile_icon.texture = _profile_copy.icon
 	_profile_name.text = _profile_copy.name
 
+func _go_back() -> void:
+	
+	# Store the profile we were editing so it can be selected if we go back to a menu that needs it.
+	game_state.profile_to_edit = _loaded_profile
+	back_requested.emit()
+
 func _on_profile_name_text_submitted(new_text:String) -> void:
 	
 	_profile_name.editable = false
@@ -53,7 +59,7 @@ func _on_save_changes_button_pressed() -> void:
 	if (game_state.profiles.find(_loaded_profile) == -1):
 		game_state.profiles.append(_loaded_profile)
 	
-	back_requested.emit()
+	_go_back()
 
 func _ready() -> void:
 	
@@ -65,7 +71,7 @@ func _ready() -> void:
 	_profile_name.focus_exited.connect(_on_profile_name_focus_exited)
 	_change_name_button.pressed.connect(_on_change_name_button_pressed)
 	_discard_changes_button.pressed.connect(func() -> void:
-		back_requested.emit())
+		_go_back())
 	_save_changes_button.pressed.connect(_on_save_changes_button_pressed)
 
 	if (game_state.profile_to_edit != null):
@@ -81,11 +87,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if (event is InputEventKey):
 		if (event.keycode == KEY_ESCAPE):
-			back_requested.emit()
+			_go_back()
 			get_viewport().set_input_as_handled()
 			return
 	elif (event is InputEventJoypadButton):
 		if (event.button_index == JOY_BUTTON_B):
-			back_requested.emit()
+			_go_back()
 			get_viewport().set_input_as_handled()
 			return

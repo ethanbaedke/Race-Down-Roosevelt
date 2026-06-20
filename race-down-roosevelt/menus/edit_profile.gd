@@ -5,8 +5,18 @@ signal back_requested
 @onready var _profile_icon:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/Icon
 @onready var _profile_name:LineEdit = $MarginContainer/VBoxContainer/HBoxContainer/Name
 @onready var _change_name_button:Button = $MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/VBoxContainer/ChangeNameButton
+@onready var _change_icon_button:Button = $MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/VBoxContainer/ChangeIconButton
 @onready var _discard_changes_button:Button = $MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/HBoxContainer/DiscardChangesButton
 @onready var _save_changes_button:Button = $MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/HBoxContainer/SaveChangesButton2
+
+@onready var _default_options:MarginContainer = $MarginContainer/VBoxContainer/MarginContainer/DefaultOptions
+@onready var _icon_selection:CenterContainer = $MarginContainer/VBoxContainer/MarginContainer/IconSelection
+
+@onready var _icon_buttons:Array[Button] = [
+	$MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon1/Button,
+	$MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon2/Button,
+	$MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon3/Button,
+]
 
 var game_state:GameState = null
 
@@ -50,6 +60,22 @@ func _on_change_name_button_pressed() -> void:
 	_profile_name.caret_column = _profile_name.text.length()
 	_profile_name.grab_focus()
 
+func _on_change_icon_button_pressed() -> void:
+	
+	_default_options.visible = false
+	_icon_selection.visible = true
+	if (_icon_buttons.size() > 0):
+		_icon_buttons[0].grab_focus()
+
+func _handle_icon_button_pressed(index:int) -> void:
+	
+	var sbt:StyleBoxTexture = _icon_buttons[index].get_theme_stylebox("normal", "")
+	_profile_copy.icon = sbt.texture
+	_update_profile_ui()
+	
+	_icon_selection.visible = false
+	_default_options.visible = true
+
 func _on_save_changes_button_pressed() -> void:
 	
 	# Write data from our temporary copy to the actual profile.
@@ -70,9 +96,14 @@ func _ready() -> void:
 	_profile_name.text_submitted.connect(_on_profile_name_text_submitted)
 	_profile_name.focus_exited.connect(_on_profile_name_focus_exited)
 	_change_name_button.pressed.connect(_on_change_name_button_pressed)
+	_change_icon_button.pressed.connect(_on_change_icon_button_pressed)
 	_discard_changes_button.pressed.connect(func() -> void:
 		_go_back())
 	_save_changes_button.pressed.connect(_on_save_changes_button_pressed)
+
+	for i:int in range(_icon_buttons.size()):
+		_icon_buttons[i].pressed.connect(func() -> void:
+			_handle_icon_button_pressed(i))
 
 	if (game_state.profile_to_edit != null):
 		_load_profile(game_state.profile_to_edit)

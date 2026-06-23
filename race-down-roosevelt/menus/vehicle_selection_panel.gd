@@ -7,6 +7,7 @@ const VEHICLE_DATA:Array[RacerVehicleData] = [
 
 enum PanelState {
 	WAITING_FOR_DEVICE,
+	PROFILE_SELECTION,
 	VEHICLE_SELECTION,
 	READY
 }
@@ -17,8 +18,12 @@ signal player_ready
 @onready var _vehicle_model_camera:Camera3D = $VehicleModelViewport/SubViewport/VehicleModelCamera
 
 @onready var _waiting_for_device_ui:Control = $WaitingForDevice
+@onready var _profile_selection_ui:Control = $ProfileSelection
+@onready var _profile_selector:ProfileSelector = $ProfileSelection/ProfileSelector
 @onready var _vehicle_selection_ui:Control = $VehicleSelection
 @onready var _ready_ui:Control = $Ready
+
+var game_state:GameState = null
 
 var state:PanelState = PanelState.WAITING_FOR_DEVICE
 var racer:RacerObject = RacerObject.new()
@@ -35,6 +40,9 @@ func transition_state(newstate:PanelState) -> void:
 		
 		PanelState.WAITING_FOR_DEVICE:
 			_waiting_for_device_ui.visible = false
+			
+		PanelState.PROFILE_SELECTION:
+			_profile_selection_ui.visible = false
 		
 		PanelState.VEHICLE_SELECTION:
 			_vehicle_selection_ui.visible = false
@@ -51,6 +59,11 @@ func transition_state(newstate:PanelState) -> void:
 		
 		PanelState.WAITING_FOR_DEVICE:
 			_waiting_for_device_ui.visible = true
+			
+		PanelState.PROFILE_SELECTION:
+			_profile_selection_ui.visible = true
+			_profile_selector.set_profiles(game_state.save_data.profiles)
+			_profile_selector.grab_focus()
 		
 		PanelState.VEHICLE_SELECTION:
 			_vehicle_selection_ui.visible = true
@@ -70,6 +83,15 @@ func set_device(index:int) -> void:
 	if (index == -2):
 		transition_state(PanelState.WAITING_FOR_DEVICE)
 	elif (previous == -2):
+		transition_state(PanelState.PROFILE_SELECTION)
+
+func set_profile(profile:Profile) -> void:
+	
+	racer.profile = profile
+	
+	if (profile == null):
+		transition_state(PanelState.PROFILE_SELECTION)
+	else:
 		transition_state(PanelState.VEHICLE_SELECTION)
 
 func set_chosen_vehicle(data:RacerVehicleData) -> void:
@@ -93,6 +115,15 @@ func move_vehicle_selection_right() -> void:
 
 func update_vehicle() -> void:
 	_vehicle_model_camera.position.x = 2.0 + (20.0 * _vehicle_ind)
+
+func _ready() -> void:
+	
+	if (game_state == null):
+		RdrLogger.fatal(self, _ready.get_method() + " expects class to have a reference to GameState.")
+		return
+		
+	_profile_selector.profile_selected.connect(func(profile:Profile) -> void:
+		set_profile(profile))
 
 var _left_joystick_active:bool = false
 var _right_joystick_active:bool = false
@@ -122,6 +153,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			PanelState.WAITING_FOR_DEVICE:
 				pass
 			
+			PanelState.PROFILE_SELECTION:
+				if (event.keycode == KEY_ESCAPE):
+					set_device(-2)
+					get_viewport().set_input_as_handled()
+			
 			PanelState.VEHICLE_SELECTION:
 				if (event.keycode == KEY_A || event.keycode == KEY_LEFT):
 					move_vehicle_selection_left()
@@ -130,7 +166,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					move_vehicle_selection_right()
 					get_viewport().set_input_as_handled()
 				elif (event.keycode == KEY_ESCAPE):
-					set_device(-2)
+					set_profile(null)
 					get_viewport().set_input_as_handled()
 				elif (event.keycode == KEY_C):
 					set_chosen_vehicle(VEHICLE_DATA[_vehicle_ind])
@@ -152,6 +188,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			PanelState.WAITING_FOR_DEVICE:
 				pass
 			
+			PanelState.PROFILE_SELECTION:
+				if (event.button_index == JOY_BUTTON_B):
+					set_device(-2)
+					get_viewport().set_input_as_handled()
+			
 			PanelState.VEHICLE_SELECTION:
 				if (event.button_index == JOY_BUTTON_DPAD_LEFT || event.button_index == JOY_BUTTON_LEFT_SHOULDER):
 					move_vehicle_selection_left()
@@ -160,7 +201,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					move_vehicle_selection_right()
 					get_viewport().set_input_as_handled()
 				elif (event.button_index == JOY_BUTTON_B):
-					set_device(-2)
+					set_profile(null)
 					get_viewport().set_input_as_handled()
 				elif (event.button_index == JOY_BUTTON_A):
 					set_chosen_vehicle(VEHICLE_DATA[_vehicle_ind])

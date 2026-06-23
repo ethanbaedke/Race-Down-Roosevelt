@@ -10,7 +10,15 @@ var _game_state:GameState = null
 
 func _ready() -> void:
 
+	# Try and load save data.
+	var save_data:SaveData = null
+	if (ResourceLoader.exists(Globals.SAVE_DATA_PATH)):
+		save_data = ResourceLoader.load(Globals.SAVE_DATA_PATH)
+	else:
+		save_data = SaveData.new()
+		
 	_game_state = GameState.new()
+	_game_state.save_data = save_data
 
 	while (true):
 		# Create the menu manager.

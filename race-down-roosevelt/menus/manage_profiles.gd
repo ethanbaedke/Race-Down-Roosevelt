@@ -13,8 +13,8 @@ var game_state:GameState = null
 
 func _update_profile_option_disabled_states() -> void:
 
-	_edit_profile_button.disabled = game_state.profiles.size() == 0
-	_delete_profile_button.disabled = game_state.profiles.size() == 0
+	_edit_profile_button.disabled = game_state.save_data.profiles.size() == 0
+	_delete_profile_button.disabled = game_state.save_data.profiles.size() == 0
 
 func _on_add_new_button_pressed() -> void:
 	
@@ -32,12 +32,13 @@ func _on_edit_profile_button_pressed() -> void:
 
 func _on_delete_profile_button_pressed() -> void:
 	
-	var profile_ind:int = game_state.profiles.find(_profile_selector.get_selected_profile())
+	var profile_ind:int = game_state.save_data.profiles.find(_profile_selector.get_selected_profile())
 	if (profile_ind == -1):
 		RdrLogger.error(self, "Could not find profile to delete.")
 		return
-	game_state.profiles.remove_at(profile_ind)
-	_profile_selector.set_profiles(game_state.profiles)
+	game_state.save_data.profiles.remove_at(profile_ind)
+	game_state.save_data.save()
+	_profile_selector.set_profiles(game_state.save_data.profiles)
 	_update_profile_option_disabled_states()
 
 func _ready() -> void:
@@ -50,7 +51,7 @@ func _ready() -> void:
 	_add_new_button.pressed.connect(_on_add_new_button_pressed)
 	
 	_profile_selector.profile_selected.connect(_on_profile_selector_profile_selected)
-	_profile_selector.set_profiles(game_state.profiles, game_state.profile_to_edit)
+	_profile_selector.set_profiles(game_state.save_data.profiles, game_state.profile_to_edit)
 	
 	_edit_profile_button.pressed.connect(_on_edit_profile_button_pressed)
 	_delete_profile_button.pressed.connect(_on_delete_profile_button_pressed)

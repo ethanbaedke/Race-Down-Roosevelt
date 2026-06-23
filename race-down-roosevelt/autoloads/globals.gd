@@ -1,5 +1,7 @@
 extends Node
 
+const SAVE_DATA_PATH:String = "user://save_data.res"
+
 const AI_RACER_NAMES:Array[String] = [
 	"Turbo Tim",
 	"Nitro Nikki",

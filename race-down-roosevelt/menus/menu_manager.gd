@@ -153,6 +153,7 @@ func _setup_vehicle_selection() -> Control:
 		RdrLogger.fatal(self, _setup_vehicle_selection.get_method() + " could not create the vehicle selection scene.")
 		return
 	
+	_vehicle_selection.set_game_state(game_state)
 	# TODO: Make "back requested" an interface between all menus
 	_vehicle_selection.back_requested.connect(_on_vehicle_selection_back_requested)
 	_vehicle_selection.all_players_ready.connect(_on_vehicle_selection_all_players_ready)

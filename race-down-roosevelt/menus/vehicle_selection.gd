@@ -6,6 +6,14 @@ signal all_players_ready(racer_objects:Array[RacerObject])
 
 @export var _panels:Array[VehicleSelectionPanel] = []
 
+var _game_state:GameState = null
+
+func set_game_state(game_state:GameState) -> void:
+	
+	_game_state = game_state
+	for panel:VehicleSelectionPanel in _panels:
+		panel.game_state = game_state
+
 func _on_player_ready() -> void:
 	
 	# Signal if all players are ready.

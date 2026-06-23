@@ -82,8 +82,9 @@ func _on_save_changes_button_pressed() -> void:
 	_loaded_profile.copy_profile(_profile_copy)
 	
 	# If this profile is new, it won't yet exist in our games profile list. Add it.
-	if (game_state.profiles.find(_loaded_profile) == -1):
-		game_state.profiles.append(_loaded_profile)
+	if (game_state.save_data.profiles.find(_loaded_profile) == -1):
+		game_state.save_data.profiles.append(_loaded_profile)
+		game_state.save_data.save()
 	
 	_go_back()
 

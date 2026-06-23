@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://u34626h5i7lp"]
 
 [ext_resource type="Script" uid="uid://4oj3m5ob0bs6" path="res://menus/vehicle_selection_panel.gd" id="1_w2dh7"]
+[ext_resource type="PackedScene" uid="uid://dp7f35xelw7qo" path="res://user_controls/profile_selector.tscn" id="2_1u52o"]
 
 [sub_resource type="Environment" id="Environment_1u52o"]
 background_mode = 1
@@ -37,6 +38,18 @@ text = "Press Any Button to Join"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="ProfileSelection" type="Control" parent="." unique_id=971849128]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProfileSelector" parent="ProfileSelection" unique_id=878384072 instance=ExtResource("2_1u52o")]
+layout_mode = 1
 
 [node name="VehicleSelection" type="Control" parent="." unique_id=2072629490]
 visible = false

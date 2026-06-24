@@ -21,10 +21,6 @@ func _on_add_new_button_pressed() -> void:
 	game_state.profile_to_edit = null
 	add_new_requested.emit()
 
-func _on_profile_selector_profile_selected() -> void:
-	
-	_edit_profile_button.grab_focus()
-
 func _on_edit_profile_button_pressed() -> void:
 	
 	game_state.profile_to_edit = _profile_selector.get_selected_profile()
@@ -50,7 +46,6 @@ func _ready() -> void:
 	
 	_add_new_button.pressed.connect(_on_add_new_button_pressed)
 	
-	_profile_selector.profile_selected.connect(_on_profile_selector_profile_selected)
 	_profile_selector.set_profiles(game_state.save_data.profiles, game_state.profile_to_edit)
 	
 	_edit_profile_button.pressed.connect(_on_edit_profile_button_pressed)

@@ -13,6 +13,9 @@ signal profile_selected(profile:Profile)
 @export var profiles:Array[Profile] = []
 var _profile_ind:int = 0
 
+# This is the device that is controlling the profile selector.
+var device_ind:int = -2
+
 func set_profiles(new_profiles:Array[Profile], starting_profile:Profile = null) -> void:
 	
 	profiles = new_profiles
@@ -115,32 +118,34 @@ func _navigate_right() -> void:
 	_update_container_visibilities()
 	_update_container_text()
 
-func _on_focus_entered() -> void:
-	
-	_center_container.scale = Vector2(1.2, 1.2)
-	_center_container.modulate = Color(1.0, 1.0, 1.0, 1.0)
-	_center_label.add_theme_font_size_override("font_size", 72)
-
-func _on_focus_exited() -> void:
-	
-	_center_container.scale = Vector2(1.1, 1.1)
-	_center_container.modulate = Color(0.875, 0.875, 0.875, 1.0)
-	_center_label.add_theme_font_size_override("font_size", 68)
-
-func _ready() -> void:
-	
-	self.focus_entered.connect(_on_focus_entered)
-	self.focus_exited.connect(_on_focus_exited)
-
 var _left_joystick_active:bool = false
 var _right_joystick_active:bool = false
 func _unhandled_input(event: InputEvent) -> void:
 	
-	# Ignore holding and releases.
-	if (event.is_echo() || !event.is_pressed()):
+	if (!self.visible):
+		return
+	
+	var input_device_ind:int = -2
+	if (event is InputEventKey):
+		input_device_ind = -1
+	elif (event is InputEventJoypadButton || event is InputEventJoypadMotion):
+		input_device_ind = event.device
+	
+	# Only allow input from the device controlling this profile selector.
+	# For the purpose of this selector, a device index of -2 implies that any device can control it.
+	if (device_ind != -2 && input_device_ind != device_ind):
+		return
+	
+	# Ignore holding.
+	if (event.is_echo()):
 		return
 
 	if (event is InputEventKey):
+		
+		# Ignore releases
+		if (!event.is_pressed()):
+			return
+		
 		if (event.keycode == KEY_LEFT || event.keycode == KEY_A):
 			_navigate_left()
 			get_viewport().set_input_as_handled()
@@ -150,11 +155,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			return
 		elif (event.keycode == KEY_C):
-			if (self.has_focus()):
+			if (profiles.size() > 0):
 				profile_selected.emit(profiles[_profile_ind])
 				get_viewport().set_input_as_handled()
 				return
 	elif (event is InputEventJoypadButton):
+		
+		# Ignore releases
+		if (!event.is_pressed()):
+			return
+		
 		if (event.button_index == JOY_BUTTON_DPAD_LEFT):
 			_navigate_left()
 			get_viewport().set_input_as_handled()
@@ -164,7 +174,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			return
 		elif (event.button_index == JOY_BUTTON_A):
-			if (self.has_focus()):
+			if (profiles.size() > 0):
 				profile_selected.emit(profiles[_profile_ind])
 				get_viewport().set_input_as_handled()
 				return

@@ -18,8 +18,7 @@ signal player_ready
 @onready var _vehicle_model_camera:Camera3D = $VehicleModelViewport/SubViewport/VehicleModelCamera
 
 @onready var _waiting_for_device_ui:Control = $WaitingForDevice
-@onready var _profile_selection_ui:Control = $ProfileSelection
-@onready var _profile_selector:ProfileSelector = $ProfileSelection/ProfileSelector
+@onready var _profile_selector:ProfileSelector = $ProfileSelector
 @onready var _vehicle_selection_ui:Control = $VehicleSelection
 @onready var _ready_ui:Control = $Ready
 
@@ -42,7 +41,7 @@ func transition_state(newstate:PanelState) -> void:
 			_waiting_for_device_ui.visible = false
 			
 		PanelState.PROFILE_SELECTION:
-			_profile_selection_ui.visible = false
+			_profile_selector.visible = false
 		
 		PanelState.VEHICLE_SELECTION:
 			_vehicle_selection_ui.visible = false
@@ -61,9 +60,9 @@ func transition_state(newstate:PanelState) -> void:
 			_waiting_for_device_ui.visible = true
 			
 		PanelState.PROFILE_SELECTION:
-			_profile_selection_ui.visible = true
+			_profile_selector.visible = true
 			_profile_selector.set_profiles(game_state.save_data.profiles)
-			_profile_selector.grab_focus()
+			_profile_selector.device_ind = racer.device_index
 		
 		PanelState.VEHICLE_SELECTION:
 			_vehicle_selection_ui.visible = true

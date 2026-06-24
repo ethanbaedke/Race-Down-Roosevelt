@@ -11,6 +11,7 @@ enum MenuType {
 	EDIT_PROFILE,
 	TOURNEMENT_START,
 	TOURNEMENT_SETUP,
+	TOURNEMENT_MENU,
 }
 
 const CAMERA_OFFSET:Vector2 = Vector2(1920.0 * 0.5, 1080.0 * 0.5)
@@ -27,6 +28,7 @@ const CAMERA_OFFSET:Vector2 = Vector2(1920.0 * 0.5, 1080.0 * 0.5)
 @onready var _edit_profile_scene:PackedScene = preload("res://menus/edit_profile.tscn")
 @onready var _tournement_start_scene:PackedScene = preload("res://menus/tournement_start.tscn")
 @onready var _tournement_setup_scene:PackedScene = preload("res://menus/tournement_setup.tscn")
+@onready var _tournement_menu_scene:PackedScene = preload("res://menus/tournement_menu.tscn")
 
 var _main_menu:MainMenu = null
 var _player_count_selection:PlayerCountSelection = null
@@ -35,6 +37,7 @@ var _manage_profiles:ManageProfiles = null
 var _edit_profile:EditProfile = null
 var _tournement_start:TournementStart = null
 var _tournement_setup:TournementSetup = null
+var _tournement_menu:TournementMenu = null
 
 var game_state:GameState = null
 
@@ -82,6 +85,8 @@ func _go_to_new_menu(type:MenuType, back_navigate:bool = false) -> void:
 			new_menu = _setup_tournement_start()
 		MenuType.TOURNEMENT_SETUP:
 			new_menu = _setup_tournement_setup()
+		MenuType.TOURNEMENT_MENU:
+			new_menu = _setup_tournement_menu()
 			
 	if (new_menu != null):
 		_current_menu = new_menu
@@ -252,9 +257,31 @@ func _setup_tournement_setup() -> Control:
 	_tournement_setup = _tournement_setup_scene.instantiate()
 	_tournement_setup.game_state = game_state
 	_tournement_setup.back_requested.connect(_on_tournement_setup_back_requested)
+	_tournement_setup.start_tournement_requested.connect(_on_tournement_setup_start_tournement_requested)
 	return _tournement_setup
 
 func _on_tournement_setup_back_requested() -> void:
+	
+	_go_to_new_menu(MenuType.NONE, true)
+
+func _on_tournement_setup_start_tournement_requested() -> void:
+	
+	_go_to_new_menu(MenuType.TOURNEMENT_MENU)
+	# It doesn't make sense to go back to tournement setup. Remove it from the stack after the tournement menu is created.
+	_menu_type_stack.remove_at(_menu_type_stack.size() - 2)
+
+#endregion
+
+#region Tournement Menu
+
+func _setup_tournement_menu() -> Control:
+	
+	_tournement_menu = _tournement_menu_scene.instantiate()
+	_tournement_menu.game_state = game_state
+	_tournement_menu.back_requested.connect(_on_tournement_menu_back_requested)
+	return _tournement_menu
+
+func _on_tournement_menu_back_requested() -> void:
 	
 	_go_to_new_menu(MenuType.NONE, true)
 

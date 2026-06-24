@@ -27,10 +27,20 @@ theme_override_constants/margin_bottom = 100
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=29613361]
 layout_mode = 2
 
-[node name="ProfileSelector" parent="MarginContainer/HBoxContainer" unique_id=878384072 instance=ExtResource("2_1jmxu")]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1537950094]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
+
+[node name="ProfileSelector" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=878384072 instance=ExtResource("2_1jmxu")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StartTournementButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=62860947]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Start Tournement"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer" unique_id=487530795]
 layout_mode = 2

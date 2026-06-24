@@ -7,3 +7,5 @@ class_name GameState extends Resource
 @export var include_ai_racers:bool = true
 
 @export var profile_to_edit:Profile = null
+
+@export var active_tournement:TournementState = null

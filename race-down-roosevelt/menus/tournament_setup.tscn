@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://co0yr62ka0vtk"]
 
-[ext_resource type="Script" uid="uid://bfxek0hyytvr3" path="res://menus/tournement_setup.gd" id="1_7i231"]
-[ext_resource type="PackedScene" uid="uid://dp7f35xelw7qo" path="res://user_controls/profile_selector.tscn" id="2_1jmxu"]
+[ext_resource type="Script" uid="uid://bfxek0hyytvr3" path="res://menus/tournament_setup.gd" id="1_yhlbr"]
+[ext_resource type="PackedScene" uid="uid://dp7f35xelw7qo" path="res://user_controls/profile_selector.tscn" id="2_04i78"]
 
-[node name="TournementSetup" type="Control" unique_id=126129394]
+[node name="TournamentSetup" type="Control" unique_id=126129394]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_7i231")
+script = ExtResource("1_yhlbr")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=386132758]
 layout_mode = 1
@@ -32,15 +32,15 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="ProfileSelector" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=878384072 instance=ExtResource("2_1jmxu")]
+[node name="ProfileSelector" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=878384072 instance=ExtResource("2_04i78")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="StartTournementButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=62860947]
+[node name="StartTournamentButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=62860947]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Start Tournement"
+text = "Start Tournament"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer" unique_id=487530795]
 layout_mode = 2

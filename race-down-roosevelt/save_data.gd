@@ -2,7 +2,7 @@ class_name SaveData extends Resource
 
 @export var profiles:Array[Profile] = []
 
-@export var in_progress_tournements:Array[TournementState] = []
+@export var in_progress_tournaments:Array[TournamentState] = []
 
 func save() -> void:
 	

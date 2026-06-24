@@ -9,9 +9,9 @@ enum MenuType {
 	VEHICLE_SELECTION,
 	MANAGE_PROFILES,
 	EDIT_PROFILE,
-	TOURNEMENT_START,
-	TOURNEMENT_SETUP,
-	TOURNEMENT_MENU,
+	TOURNAMENT_START,
+	TOURNAMENT_SETUP,
+	TOURNAMENT_MENU,
 }
 
 const CAMERA_OFFSET:Vector2 = Vector2(1920.0 * 0.5, 1080.0 * 0.5)
@@ -26,18 +26,18 @@ const CAMERA_OFFSET:Vector2 = Vector2(1920.0 * 0.5, 1080.0 * 0.5)
 @onready var _vehicle_selection_4p_scene:PackedScene = preload("res://menus/vehicle_selection_4p.tscn")
 @onready var _manage_profiles_scene:PackedScene = preload("res://menus/manage_profiles.tscn")
 @onready var _edit_profile_scene:PackedScene = preload("res://menus/edit_profile.tscn")
-@onready var _tournement_start_scene:PackedScene = preload("res://menus/tournement_start.tscn")
-@onready var _tournement_setup_scene:PackedScene = preload("res://menus/tournement_setup.tscn")
-@onready var _tournement_menu_scene:PackedScene = preload("res://menus/tournement_menu.tscn")
+@onready var _tournament_start_scene:PackedScene = preload("res://menus/tournament_start.tscn")
+@onready var _tournament_setup_scene:PackedScene = preload("res://menus/tournament_setup.tscn")
+@onready var _tournament_menu_scene:PackedScene = preload("res://menus/tournament_menu.tscn")
 
 var _main_menu:MainMenu = null
 var _player_count_selection:PlayerCountSelection = null
 var _vehicle_selection:VehicleSelection = null
 var _manage_profiles:ManageProfiles = null
 var _edit_profile:EditProfile = null
-var _tournement_start:TournementStart = null
-var _tournement_setup:TournementSetup = null
-var _tournement_menu:TournementMenu = null
+var _tournament_start:TournamentStart = null
+var _tournament_setup:TournamentSetup = null
+var _tournament_menu:TournamentMenu = null
 
 var game_state:GameState = null
 
@@ -81,12 +81,12 @@ func _go_to_new_menu(type:MenuType, back_navigate:bool = false) -> void:
 			new_menu = _setup_manage_profiles()
 		MenuType.EDIT_PROFILE:
 			new_menu = _setup_edit_profile()
-		MenuType.TOURNEMENT_START:
-			new_menu = _setup_tournement_start()
-		MenuType.TOURNEMENT_SETUP:
-			new_menu = _setup_tournement_setup()
-		MenuType.TOURNEMENT_MENU:
-			new_menu = _setup_tournement_menu()
+		MenuType.TOURNAMENT_START:
+			new_menu = _setup_tournament_start()
+		MenuType.TOURNAMENT_SETUP:
+			new_menu = _setup_tournament_setup()
+		MenuType.TOURNAMENT_MENU:
+			new_menu = _setup_tournament_menu()
 			
 	if (new_menu != null):
 		_current_menu = new_menu
@@ -115,7 +115,7 @@ func _setup_main_menu() -> Control:
 	_main_menu = _main_menu_scene.instantiate()
 	_main_menu.single_race_selected.connect(_on_main_menu_single_race_selected)
 	_main_menu.manage_profiles_selected.connect(_on_main_menu_manage_profiles_selected)
-	_main_menu.tournement_selected.connect(_on_tournement_selected)
+	_main_menu.tournament_selected.connect(_on_tournament_selected)
 	return _main_menu
 	
 func _on_main_menu_single_race_selected() -> void:
@@ -126,9 +126,9 @@ func _on_main_menu_manage_profiles_selected() -> void:
 	
 	_go_to_new_menu(MenuType.MANAGE_PROFILES)
 	
-func _on_tournement_selected() -> void:
+func _on_tournament_selected() -> void:
 	
-	_go_to_new_menu(MenuType.TOURNEMENT_START)
+	_go_to_new_menu(MenuType.TOURNAMENT_START)
 	
 #endregion
 
@@ -230,58 +230,58 @@ func _on_add_profile_back_requested() -> void:
 
 #endregion
 
-#region Tournement Start
+#region Tournament Start
 
-func _setup_tournement_start() -> Control:
+func _setup_tournament_start() -> Control:
 	
-	_tournement_start = _tournement_start_scene.instantiate()
-	_tournement_start.game_state = game_state
-	_tournement_start.back_requested.connect(_on_tournement_start_back_requested)
-	_tournement_start.new_tournement_requested.connect(_on_tournement_start_new_tournement_requested)
-	return _tournement_start
+	_tournament_start = _tournament_start_scene.instantiate()
+	_tournament_start.game_state = game_state
+	_tournament_start.back_requested.connect(_on_tournament_start_back_requested)
+	_tournament_start.new_tournament_requested.connect(_on_tournament_start_new_tournament_requested)
+	return _tournament_start
 
-func _on_tournement_start_back_requested() -> void:
+func _on_tournament_start_back_requested() -> void:
 	
 	_go_to_new_menu(MenuType.NONE, true)
 	
-func _on_tournement_start_new_tournement_requested() -> void:
+func _on_tournament_start_new_tournament_requested() -> void:
 	
-	_go_to_new_menu(MenuType.TOURNEMENT_SETUP)
+	_go_to_new_menu(MenuType.TOURNAMENT_SETUP)
 
 #endregion
 
-#region Tournement Setup
+#region Tournament Setup
 
-func _setup_tournement_setup() -> Control:
+func _setup_tournament_setup() -> Control:
 	
-	_tournement_setup = _tournement_setup_scene.instantiate()
-	_tournement_setup.game_state = game_state
-	_tournement_setup.back_requested.connect(_on_tournement_setup_back_requested)
-	_tournement_setup.start_tournement_requested.connect(_on_tournement_setup_start_tournement_requested)
-	return _tournement_setup
+	_tournament_setup = _tournament_setup_scene.instantiate()
+	_tournament_setup.game_state = game_state
+	_tournament_setup.back_requested.connect(_on_tournament_setup_back_requested)
+	_tournament_setup.start_tournament_requested.connect(_on_tournament_setup_start_tournament_requested)
+	return _tournament_setup
 
-func _on_tournement_setup_back_requested() -> void:
+func _on_tournament_setup_back_requested() -> void:
 	
 	_go_to_new_menu(MenuType.NONE, true)
 
-func _on_tournement_setup_start_tournement_requested() -> void:
+func _on_tournament_setup_start_tournament_requested() -> void:
 	
-	_go_to_new_menu(MenuType.TOURNEMENT_MENU)
-	# It doesn't make sense to go back to tournement setup. Remove it from the stack after the tournement menu is created.
+	_go_to_new_menu(MenuType.TOURNAMENT_MENU)
+	# It doesn't make sense to go back to tournament setup. Remove it from the stack after the tournament menu is created.
 	_menu_type_stack.remove_at(_menu_type_stack.size() - 2)
 
 #endregion
 
-#region Tournement Menu
+#region Tournament Menu
 
-func _setup_tournement_menu() -> Control:
+func _setup_tournament_menu() -> Control:
 	
-	_tournement_menu = _tournement_menu_scene.instantiate()
-	_tournement_menu.game_state = game_state
-	_tournement_menu.back_requested.connect(_on_tournement_menu_back_requested)
-	return _tournement_menu
+	_tournament_menu = _tournament_menu_scene.instantiate()
+	_tournament_menu.game_state = game_state
+	_tournament_menu.back_requested.connect(_on_tournament_menu_back_requested)
+	return _tournament_menu
 
-func _on_tournement_menu_back_requested() -> void:
+func _on_tournament_menu_back_requested() -> void:
 	
 	_go_to_new_menu(MenuType.NONE, true)
 

@@ -8,4 +8,4 @@ class_name GameState extends Resource
 
 @export var profile_to_edit:Profile = null
 
-@export var active_tournement:TournementState = null
+@export var active_tournament:TournamentState = null

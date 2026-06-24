@@ -1,13 +1,13 @@
-class_name TournementSetup extends Control
+class_name TournamentSetup extends Control
 
 signal back_requested
-signal start_tournement_requested
+signal start_tournament_requested
 
-@onready var _included_profile_button_scene:PackedScene = preload("res://menus/tournement_setup_included_profile_button.tscn")
+@onready var _included_profile_button_scene:PackedScene = preload("res://menus/tournament_setup_included_profile_button.tscn")
 
 @onready var _profile_selector:ProfileSelector = $MarginContainer/HBoxContainer/VBoxContainer/ProfileSelector
 @onready var _included_profiles_container:VBoxContainer = $MarginContainer/HBoxContainer/ScrollContainer/IncludedProfiles
-@onready var _start_tournement_button:Button = $MarginContainer/HBoxContainer/VBoxContainer/StartTournementButton
+@onready var _start_tournament_button:Button = $MarginContainer/HBoxContainer/VBoxContainer/StartTournamentButton
 
 var game_state:GameState = null
 
@@ -29,7 +29,7 @@ func _on_profile_selected(profile:Profile) -> void:
 		_remove_included_profile(profile, button))
 	_included_profiles_container.add_child(button)
 	
-	_update_start_tournement_button_disabled_state();
+	_update_start_tournament_button_disabled_state();
 
 func _remove_included_profile(profile:Profile, profile_button:Button) -> void:
 	
@@ -42,20 +42,20 @@ func _remove_included_profile(profile:Profile, profile_button:Button) -> void:
 	_available_profiles.append(profile)
 	_profile_selector.set_profiles(_available_profiles)
 	
-	_update_start_tournement_button_disabled_state();
+	_update_start_tournament_button_disabled_state();
 
-func _on_start_tournement_button_pressed() -> void:
+func _on_start_tournament_button_pressed() -> void:
 	
-	var tournement_state:TournementState = TournementState.new()
-	tournement_state.all_profiles = _included_profiles.duplicate()
-	game_state.save_data.in_progress_tournements.append(tournement_state)
+	var tournament_state:TournamentState = TournamentState.new()
+	tournament_state.all_profiles = _included_profiles.duplicate()
+	game_state.save_data.in_progress_tournaments.append(tournament_state)
 	game_state.save_data.save()
-	game_state.active_tournement = tournement_state
-	start_tournement_requested.emit()
+	game_state.active_tournament = tournament_state
+	start_tournament_requested.emit()
 
-func _update_start_tournement_button_disabled_state() -> void:
+func _update_start_tournament_button_disabled_state() -> void:
 	
-	_start_tournement_button.disabled = _included_profiles.size() == 0
+	_start_tournament_button.disabled = _included_profiles.size() == 0
 
 func _ready() -> void:
 	
@@ -68,8 +68,8 @@ func _ready() -> void:
 	_profile_selector.set_profiles(_available_profiles)
 	_profile_selector.profile_selected.connect(_on_profile_selected)
 	
-	_update_start_tournement_button_disabled_state();
-	_start_tournement_button.pressed.connect(_on_start_tournement_button_pressed)
+	_update_start_tournament_button_disabled_state();
+	_start_tournament_button.pressed.connect(_on_start_tournament_button_pressed)
 
 func _unhandled_input(event: InputEvent) -> void:
 	

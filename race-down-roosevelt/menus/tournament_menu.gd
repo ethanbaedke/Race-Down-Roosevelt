@@ -1,4 +1,4 @@
-class_name TournementMenu extends Control
+class_name TournamentMenu extends Control
 
 signal back_requested
 
@@ -10,8 +10,8 @@ func _ready() -> void:
 		RdrLogger.fatal(self, _ready.get_method() + " expects class to have a reference to GameState.")
 		return
 		
-	if (game_state.active_tournement == null):
-		RdrLogger.fatal(self, _ready.get_method() + " expects an active tournement to be set on GameState.")
+	if (game_state.active_tournament == null):
+		RdrLogger.fatal(self, _ready.get_method() + " expects an active tournament to be set on GameState.")
 		return
 
 func _unhandled_input(event: InputEvent) -> void:

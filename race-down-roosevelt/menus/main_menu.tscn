@@ -37,7 +37,7 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Manage Profiles"
 
-[node name="Tournement" type="Button" parent="MarginContainer/HBoxContainer" unique_id=29799646]
+[node name="Tournament" type="Button" parent="MarginContainer/HBoxContainer" unique_id=29799646]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Tournement"
+text = "Tournament"

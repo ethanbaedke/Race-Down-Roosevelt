@@ -14,6 +14,8 @@ func _ready() -> void:
 	var save_data:SaveData = null
 	if (ResourceLoader.exists(Globals.SAVE_DATA_PATH)):
 		save_data = ResourceLoader.load(Globals.SAVE_DATA_PATH)
+		if (save_data == null):
+			save_data = SaveData.new()
 	else:
 		save_data = SaveData.new()
 		

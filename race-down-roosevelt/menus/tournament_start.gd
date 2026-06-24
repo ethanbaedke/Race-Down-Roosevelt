@@ -1,10 +1,10 @@
-class_name TournementStart extends Control
+class_name TournamentStart extends Control
 
 signal back_requested
-signal new_tournement_requested
+signal new_tournament_requested
 
-@onready var _new_tournement_button:Button = $MarginContainer/HBoxContainer/NewTournementButton
-@onready var _continue_tournement_button:Button = $MarginContainer/HBoxContainer/ContinueTournementButton
+@onready var _new_tournament_button:Button = $MarginContainer/HBoxContainer/NewTournamentButton
+@onready var _continue_tournament_button:Button = $MarginContainer/HBoxContainer/ContinueTournamentButton
 
 var game_state:GameState = null
 
@@ -14,10 +14,10 @@ func _ready() -> void:
 		RdrLogger.fatal(self, _ready.get_method() + " expects class to have a reference to GameState.")
 		return
 		
-	_new_tournement_button.pressed.connect(func() -> void:
-		new_tournement_requested.emit())
+	_new_tournament_button.pressed.connect(func() -> void:
+		new_tournament_requested.emit())
 	
-	_continue_tournement_button.disabled = game_state.save_data.in_progress_tournements.size() == 0
+	_continue_tournament_button.disabled = game_state.save_data.in_progress_tournaments.size() == 0
 
 func _unhandled_input(event: InputEvent) -> void:
 	

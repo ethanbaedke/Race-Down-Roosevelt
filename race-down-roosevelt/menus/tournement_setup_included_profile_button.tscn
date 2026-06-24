@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cmyfr26mxghck"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jmxu"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[node name="Button" type="Button" unique_id=1953795787]
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1jmxu")
+text = "New Player"
+text_overrun_behavior = 3

@@ -8,7 +8,9 @@ enum MenuType {
 	PLAYER_COUNT_SELECTION,
 	VEHICLE_SELECTION,
 	MANAGE_PROFILES,
-	EDIT_PROFILE
+	EDIT_PROFILE,
+	TOURNEMENT_START,
+	TOURNEMENT_SETUP,
 }
 
 const CAMERA_OFFSET:Vector2 = Vector2(1920.0 * 0.5, 1080.0 * 0.5)
@@ -23,12 +25,16 @@ const CAMERA_OFFSET:Vector2 = Vector2(1920.0 * 0.5, 1080.0 * 0.5)
 @onready var _vehicle_selection_4p_scene:PackedScene = preload("res://menus/vehicle_selection_4p.tscn")
 @onready var _manage_profiles_scene:PackedScene = preload("res://menus/manage_profiles.tscn")
 @onready var _edit_profile_scene:PackedScene = preload("res://menus/edit_profile.tscn")
+@onready var _tournement_start_scene:PackedScene = preload("res://menus/tournement_start.tscn")
+@onready var _tournement_setup_scene:PackedScene = preload("res://menus/tournement_setup.tscn")
 
 var _main_menu:MainMenu = null
 var _player_count_selection:PlayerCountSelection = null
 var _vehicle_selection:VehicleSelection = null
 var _manage_profiles:ManageProfiles = null
 var _edit_profile:EditProfile = null
+var _tournement_start:TournementStart = null
+var _tournement_setup:TournementSetup = null
 
 var game_state:GameState = null
 
@@ -72,6 +78,10 @@ func _go_to_new_menu(type:MenuType, back_navigate:bool = false) -> void:
 			new_menu = _setup_manage_profiles()
 		MenuType.EDIT_PROFILE:
 			new_menu = _setup_edit_profile()
+		MenuType.TOURNEMENT_START:
+			new_menu = _setup_tournement_start()
+		MenuType.TOURNEMENT_SETUP:
+			new_menu = _setup_tournement_setup()
 			
 	if (new_menu != null):
 		_current_menu = new_menu
@@ -100,6 +110,7 @@ func _setup_main_menu() -> Control:
 	_main_menu = _main_menu_scene.instantiate()
 	_main_menu.single_race_selected.connect(_on_main_menu_single_race_selected)
 	_main_menu.manage_profiles_selected.connect(_on_main_menu_manage_profiles_selected)
+	_main_menu.tournement_selected.connect(_on_tournement_selected)
 	return _main_menu
 	
 func _on_main_menu_single_race_selected() -> void:
@@ -109,6 +120,10 @@ func _on_main_menu_single_race_selected() -> void:
 func _on_main_menu_manage_profiles_selected() -> void:
 	
 	_go_to_new_menu(MenuType.MANAGE_PROFILES)
+	
+func _on_tournement_selected() -> void:
+	
+	_go_to_new_menu(MenuType.TOURNEMENT_START)
 	
 #endregion
 
@@ -205,6 +220,41 @@ func _setup_edit_profile() -> Control:
 	return _edit_profile
 
 func _on_add_profile_back_requested() -> void:
+	
+	_go_to_new_menu(MenuType.NONE, true)
+
+#endregion
+
+#region Tournement Start
+
+func _setup_tournement_start() -> Control:
+	
+	_tournement_start = _tournement_start_scene.instantiate()
+	_tournement_start.game_state = game_state
+	_tournement_start.back_requested.connect(_on_tournement_start_back_requested)
+	_tournement_start.new_tournement_requested.connect(_on_tournement_start_new_tournement_requested)
+	return _tournement_start
+
+func _on_tournement_start_back_requested() -> void:
+	
+	_go_to_new_menu(MenuType.NONE, true)
+	
+func _on_tournement_start_new_tournement_requested() -> void:
+	
+	_go_to_new_menu(MenuType.TOURNEMENT_SETUP)
+
+#endregion
+
+#region Tournement Setup
+
+func _setup_tournement_setup() -> Control:
+	
+	_tournement_setup = _tournement_setup_scene.instantiate()
+	_tournement_setup.game_state = game_state
+	_tournement_setup.back_requested.connect(_on_tournement_setup_back_requested)
+	return _tournement_setup
+
+func _on_tournement_setup_back_requested() -> void:
 	
 	_go_to_new_menu(MenuType.NONE, true)
 

@@ -41,3 +41,7 @@ func _ready() -> void:
 		# Wait for the race to tell us its ready for cleanup.
 		await _race.ready_for_cleanup
 		_race.queue_free()
+		
+		# If we are in a tournement, go to the next match.
+		if (_game_state.active_tournament != null):
+			_game_state.active_tournament.go_to_next_match()

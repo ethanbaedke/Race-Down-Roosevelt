@@ -298,4 +298,10 @@ func _ready() -> void:
 		RdrLogger.fatal(self, _ready.get_method() + " expects the class to have a GameState reference.")
 		return
 	
-	_go_to_new_menu(MenuType.MAIN_MENU)
+	if (game_state.active_tournament == null):
+		_go_to_new_menu(MenuType.MAIN_MENU)
+	else:
+		# If we are currently in a tournement, we should begin on the tournement menu, with our menu stack set accordingly.
+		_menu_type_stack.append(MenuType.MAIN_MENU)
+		_menu_type_stack.append(MenuType.TOURNAMENT_START)
+		_go_to_new_menu(MenuType.TOURNAMENT_MENU)

@@ -100,12 +100,16 @@ func go_to_next_match() -> void:
 		_match_index = 0
 	else:
 		# TODO: Tournement over.
-		pass
+		return
 	
 	if (next_match != null):
 		next_match.is_up_next = false
 	next_match = all_rounds[_round_index][_match_index]
 	all_rounds[_round_index][_match_index].is_up_next = true
+	
+	# If the next match has no players, skip it.
+	if (next_match.player_profiles.size() == 0):
+		go_to_next_match()
 
 # Fills empty profile slots on all matches with ai profiles.
 func _fill_with_ai() -> void:

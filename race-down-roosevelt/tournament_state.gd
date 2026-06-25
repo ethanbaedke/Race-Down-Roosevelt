@@ -91,6 +91,11 @@ func build_tournament(player_profiles:Array[Profile]) -> void:
 
 func go_to_next_match() -> void:
 	
+	# Handle the previous match ending.
+	if (next_match != null):
+		next_match.is_up_next = false
+		next_match.push_profiles()
+	
 	var all_rounds:Array[Array] = get_all_rounds()
 	
 	if (_match_index < all_rounds[_round_index].size() - 1):
@@ -102,13 +107,13 @@ func go_to_next_match() -> void:
 		# TODO: Tournement over.
 		return
 	
-	if (next_match != null):
-		next_match.is_up_next = false
 	next_match = all_rounds[_round_index][_match_index]
 	all_rounds[_round_index][_match_index].is_up_next = true
 	
-	# If the next match has no players, skip it.
+	# If the next match has no players, set a random profile order (for winners/losers) and skip it.
 	if (next_match.player_profiles.size() == 0):
+		next_match.finish_order = next_match.ai_profiles.duplicate()
+		next_match.finish_order.shuffle()
 		go_to_next_match()
 
 # Fills empty profile slots on all matches with ai profiles.
@@ -116,3 +121,39 @@ func _fill_with_ai() -> void:
 	
 	for tournament_match:TournamentMatchData in winners_round_1:
 		tournament_match.fill_with_ai()
+
+# Tell all matches which matches they should send their winners/losers to.
+func _initialize_match_targets() -> void:
+	
+	for i:int in range(winners_round_1.size()):
+		winners_round_1[i].winner_match_target = winners_round_2[i * 0.5]
+		winners_round_1[i].loser_match_target = losers_round_1[i * 0.5]
+		
+	for i:int in range(winners_round_2.size()):
+		winners_round_2[i].winner_match_target = winners_round_3[i * 0.5]
+		winners_round_2[i].loser_match_target = losers_round_2[i]
+		
+	for i:int in range(winners_round_3.size()):
+		winners_round_3[i].winner_match_target = winners_round_4[i * 0.5]
+		winners_round_3[i].loser_match_target = losers_round_3[0]
+		
+	winners_round_4[0].winner_match_target = final_round[0]
+	winners_round_4[0].loser_match_target = losers_round_4[0]
+	
+	for i:int in range(losers_round_1.size()):
+		losers_round_1[i].winner_match_target = losers_round_2[i]
+		
+	for i:int in range(losers_round_2.size()):
+		losers_round_2[i].winner_match_target = losers_round_3[(i * 0.5) + 1]
+		
+	for i:int in range(losers_round_3.size()):
+		losers_round_3[i].winner_match_target = losers_round_4[(i + 1) * 0.5]
+		
+	for i:int in range(losers_round_4.size()):
+		losers_round_4[i].winner_match_target = losers_round_5[i * 0.5]
+		
+	losers_round_5[0].winner_match_target = final_round[0]
+
+func _init() -> void:
+	
+	_initialize_match_targets()

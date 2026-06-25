@@ -13,13 +13,13 @@ var game_state:GameState = null
 
 @onready var _leaderboard:Leaderboard = $Leaderboard
 
+var leaderboard_data:Array[RacerObject] = []
+
 var _race_setup:bool = false
 
 var _racer_vehicles:Array[RacerVehicle] = []
 
 var _finish_line_placed:bool = false
-
-var _leaderboard_data:Array[RacerObject] = []
 
 # Returns all racer vehicles in order of 1st place -> 4th place.
 func get_racer_order() -> Array[RacerVehicle]:
@@ -59,24 +59,24 @@ func _move_racers(delta:float) -> void:
 func _on_finish_line_crossed(racer:RacerVehicle) -> void:
 	
 	# If this racer somehow crossed twice, ignore them.
-	if (_leaderboard_data.has(racer.racer)):
+	if (leaderboard_data.has(racer.racer)):
 		return
 	
 	racer.input_enabled = false
 	
-	_leaderboard_data.append(racer.racer)
+	leaderboard_data.append(racer.racer)
 	
 	# All but one racer have finished, append the missing racer and end the race.
-	if (_leaderboard_data.size() == _racer_vehicles.size() - 1):
+	if (leaderboard_data.size() == _racer_vehicles.size() - 1):
 		var last_place:RacerObject = null
 		for vehicle:RacerVehicle in _racer_vehicles:
-			if (!_leaderboard_data.has(vehicle.racer)):
+			if (!leaderboard_data.has(vehicle.racer)):
 				last_place = vehicle.racer
 				break
 		if (last_place == null):
 			RdrLogger.warn(self, "Race ending since one racer remains but no racer can be found that isn't already on the leaderboard.")
 		else:
-			_leaderboard_data.append(last_place)
+			leaderboard_data.append(last_place)
 		_finish_race()
 		
 	# At least two racers are left.
@@ -84,30 +84,30 @@ func _on_finish_line_crossed(racer:RacerVehicle) -> void:
 		# If all remaining racers are AI, add them to the leaderboard based on position and end the race.
 		var all_ai:bool = true
 		for vehicle:RacerVehicle in _racer_vehicles:
-			if (!_leaderboard_data.has(vehicle.racer) && vehicle.racer.device_index != -2):
+			if (!leaderboard_data.has(vehicle.racer) && vehicle.racer.device_index != -2):
 				all_ai = false
 				break
 		if (all_ai):
 			var remaining:Array[RacerVehicle] = []
 			for vehicle:RacerVehicle in _racer_vehicles:
-				if (!_leaderboard_data.has(vehicle.racer)):
+				if (!leaderboard_data.has(vehicle.racer)):
 					# Keep remaining in order of distance to finish line while adding vehicles.
 					var i:int = 0
 					while (i < remaining.size() && remaining[i].position.z < vehicle.position.z):
 						i += 1
 					remaining.insert(i, vehicle)
 			for vehicle:RacerVehicle in remaining:
-				_leaderboard_data.append(vehicle.racer)
+				leaderboard_data.append(vehicle.racer)
 			_finish_race()
 	
 # Expects leaderboard to be filled out correctly.
 func _finish_race() -> void:
 	
 	RdrLogger.log(self, "Race finished.")
-	for i:int in range(_leaderboard_data.size()):
-		RdrLogger.log(self, "Position " + str(i + 1) + ": " + _leaderboard_data[i].profile.name + ".")
+	for i:int in range(leaderboard_data.size()):
+		RdrLogger.log(self, "Position " + str(i + 1) + ": " + leaderboard_data[i].profile.name + ".")
 	
-	_leaderboard.load_data(_leaderboard_data)
+	_leaderboard.load_data(leaderboard_data)
 	
 	await get_tree().create_timer(LEADERBOARD_DISPLAY_TIME).timeout
 	ready_for_cleanup.emit()
@@ -349,8 +349,8 @@ func setup_race() -> void:
 	
 	# If ai racers are enabled, fill them into any open racer slots.
 	if (game_state.include_ai_racers):
-		var profiles:Array[Profile] = Globals.get_random_unique_ai_profiles(4 - game_state.num_players)
-		for i:int in range(game_state.num_players, 4):
+		var profiles:Array[Profile] = Globals.get_random_unique_ai_profiles(4 - game_state.racer_objects.size())
+		for i:int in range(game_state.racer_objects.size(), 4):
 			var ai_racer:RacerObject = RacerObject.new()
 			ai_racer.profile = profiles[profiles.size() - 1]
 			profiles.remove_at(profiles.size() - 1)

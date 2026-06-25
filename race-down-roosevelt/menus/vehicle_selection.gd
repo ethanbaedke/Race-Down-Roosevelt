@@ -21,7 +21,14 @@ func _on_player_ready() -> void:
 	for panel:VehicleSelectionPanel in _panels:
 		if (panel.state == panel.PanelState.READY):
 			racers.append(panel.racer)
+	# All players are in the ready state
 	if (racers.size() == _panels.size()):
+		# If we are in a tournement, add racer vehicles for the ai racers.
+		if (_game_state.active_tournament != null):
+			for profile:Profile in _game_state.active_tournament.next_match.ai_profiles:
+				var ai_racer:RacerObject = RacerObject.new()
+				ai_racer.profile = profile
+				racers.append(ai_racer)
 		all_players_ready.emit(racers)
 
 # Exits selection if no panels are being used.

@@ -40,8 +40,15 @@ func _ready() -> void:
 		
 		# Wait for the race to tell us its ready for cleanup.
 		await _race.ready_for_cleanup
+		# Save the order the profiles finished in. May need this below.
+		var profile_finish_order:Array[Profile] = []
+		for racer:RacerObject in _race.leaderboard_data:
+			profile_finish_order.append(racer.profile)
 		_race.queue_free()
 		
-		# If we are in a tournement, go to the next match.
+		# If we are in a tournement, report results and go to the next match.
 		if (_game_state.active_tournament != null):
+			# At this point, next match still references the match we just finished.
+			_game_state.active_tournament.next_match.finish_order = profile_finish_order
+			# Now next match is updated.
 			_game_state.active_tournament.go_to_next_match()

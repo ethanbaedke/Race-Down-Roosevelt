@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://b0c4pm17p5daf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ymn7g"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
+[node name="TournamentMatch" type="CenterContainer" unique_id=1115203901]
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=478789805]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ymn7g")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=240002969]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=2053119550]
+layout_mode = 2
+text = "?"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer" unique_id=756557552]
+layout_mode = 2
+text = "?"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1100338665]
+layout_mode = 2
+text = "?"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer" unique_id=689723088]
+layout_mode = 2
+text = "?"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3

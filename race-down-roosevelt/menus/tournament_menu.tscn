@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cn3ouq68yee3b"]
 
 [ext_resource type="Script" uid="uid://5voe7gj657ea" path="res://menus/tournament_menu.gd" id="1_ymn7g"]
+[ext_resource type="PackedScene" uid="uid://b0c4pm17p5daf" path="res://menus/tournament_match.tscn" id="2_bhhha"]
 
 [node name="TournamentMenu" type="Control" unique_id=1366807223]
 layout_mode = 3
@@ -10,3 +11,193 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ymn7g")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=655909373]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Bracket" type="HBoxContainer" parent="MarginContainer" unique_id=1500759153]
+layout_mode = 2
+
+[node name="Winners1" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=2081498852]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TournamentMatch" parent="MarginContainer/Bracket/Winners1" unique_id=1115203901 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch2" parent="MarginContainer/Bracket/Winners1" unique_id=745170270 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch3" parent="MarginContainer/Bracket/Winners1" unique_id=1911753265 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch4" parent="MarginContainer/Bracket/Winners1" unique_id=787310752 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch5" parent="MarginContainer/Bracket/Winners1" unique_id=1988612480 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch6" parent="MarginContainer/Bracket/Winners1" unique_id=1519090885 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch7" parent="MarginContainer/Bracket/Winners1" unique_id=1340525426 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch8" parent="MarginContainer/Bracket/Winners1" unique_id=1554659603 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="Winners2" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=963682654]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TournamentMatch" parent="MarginContainer/Bracket/Winners2" unique_id=1695211370 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch2" parent="MarginContainer/Bracket/Winners2" unique_id=353534837 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch3" parent="MarginContainer/Bracket/Winners2" unique_id=80765389 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch4" parent="MarginContainer/Bracket/Winners2" unique_id=1738932567 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="Winners3" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=1134590715]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TournamentMatch" parent="MarginContainer/Bracket/Winners3" unique_id=773043502 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch2" parent="MarginContainer/Bracket/Winners3" unique_id=1070243961 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="Winners4" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=1437385746]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TournamentMatch" parent="MarginContainer/Bracket/Winners4" unique_id=546922335 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="Final" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=1279859907]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TournamentMatch" parent="MarginContainer/Bracket/Final" unique_id=1062796231 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="Losers5" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=102571276]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TournamentMatch" parent="MarginContainer/Bracket/Losers5" unique_id=1332302650 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="Losers4" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=420547930]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TournamentMatch" parent="MarginContainer/Bracket/Losers4" unique_id=815492573 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch2" parent="MarginContainer/Bracket/Losers4" unique_id=1722640698 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="Losers3" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=938223144]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TournamentMatch" parent="MarginContainer/Bracket/Losers3" unique_id=1070138667 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch2" parent="MarginContainer/Bracket/Losers3" unique_id=151767823 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch3" parent="MarginContainer/Bracket/Losers3" unique_id=1720319114 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="Losers2" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=1076534565]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TournamentMatch" parent="MarginContainer/Bracket/Losers2" unique_id=637229014 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch2" parent="MarginContainer/Bracket/Losers2" unique_id=123316782 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch3" parent="MarginContainer/Bracket/Losers2" unique_id=435363589 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch4" parent="MarginContainer/Bracket/Losers2" unique_id=1313379661 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="Losers1" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=599765907]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TournamentMatch" parent="MarginContainer/Bracket/Losers1" unique_id=1797691424 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch2" parent="MarginContainer/Bracket/Losers1" unique_id=696187074 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch3" parent="MarginContainer/Bracket/Losers1" unique_id=167172604 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="TournamentMatch4" parent="MarginContainer/Bracket/Losers1" unique_id=1102964919 instance=ExtResource("2_bhhha")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer" unique_id=1012019610]
+layout_mode = 2
+theme_override_constants/margin_left = 582
+theme_override_constants/margin_right = 772
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer" unique_id=1313847907]
+layout_mode = 2
+
+[node name="WinnerLabel" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=1198214120]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Winner: ?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=1253629904]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StartMatchButton" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/CenterContainer" unique_id=746430519]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Start Match"

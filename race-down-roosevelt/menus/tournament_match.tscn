@@ -1,14 +1,21 @@
 [gd_scene format=3 uid="uid://b0c4pm17p5daf"]
 
+[ext_resource type="Script" uid="uid://clipwumo1imar" path="res://menus/tournament_match.gd" id="1_opgqa"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ymn7g"]
 content_margin_left = 10.0
 content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 1)
 
-[node name="TournamentMatch" type="CenterContainer" unique_id=1115203901]
+[node name="TournamentMatch" type="CenterContainer" unique_id=1115203901 node_paths=PackedStringArray("_profile_name_labels", "_match_panel")]
+script = ExtResource("1_opgqa")
+_profile_name_labels = [NodePath("PanelContainer/VBoxContainer/Label"), NodePath("PanelContainer/VBoxContainer/Label2"), NodePath("PanelContainer/VBoxContainer/Label3"), NodePath("PanelContainer/VBoxContainer/Label4")]
+_match_panel = NodePath("PanelContainer")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=478789805]
+self_modulate = Color(0.5, 0.5, 0.5, 1)
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ymn7g")

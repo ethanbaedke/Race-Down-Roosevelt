@@ -47,7 +47,7 @@ func _remove_included_profile(profile:Profile, profile_button:Button) -> void:
 func _on_start_tournament_button_pressed() -> void:
 	
 	var tournament_state:TournamentState = TournamentState.new()
-	tournament_state.all_profiles = _included_profiles.duplicate()
+	tournament_state.build_tournament(_included_profiles)
 	game_state.save_data.in_progress_tournaments.append(tournament_state)
 	game_state.save_data.save()
 	game_state.active_tournament = tournament_state

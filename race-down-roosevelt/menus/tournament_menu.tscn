@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://5voe7gj657ea" path="res://menus/tournament_menu.gd" id="1_ymn7g"]
 [ext_resource type="PackedScene" uid="uid://b0c4pm17p5daf" path="res://menus/tournament_match.tscn" id="2_bhhha"]
 
-[node name="TournamentMenu" type="Control" unique_id=1366807223]
+[node name="TournamentMenu" type="Control" unique_id=1366807223 node_paths=PackedStringArray("winners_round_1", "winners_round_2", "winners_round_3", "winners_round_4", "losers_round_1", "losers_round_2", "losers_round_3", "losers_round_4", "losers_round_5", "final_round", "_start_match_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +11,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ymn7g")
+winners_round_1 = [NodePath("MarginContainer/Bracket/Winners1/TournamentMatch"), NodePath("MarginContainer/Bracket/Winners1/TournamentMatch2"), NodePath("MarginContainer/Bracket/Winners1/TournamentMatch3"), NodePath("MarginContainer/Bracket/Winners1/TournamentMatch4"), NodePath("MarginContainer/Bracket/Winners1/TournamentMatch5"), NodePath("MarginContainer/Bracket/Winners1/TournamentMatch6"), NodePath("MarginContainer/Bracket/Winners1/TournamentMatch7"), NodePath("MarginContainer/Bracket/Winners1/TournamentMatch8")]
+winners_round_2 = [NodePath("MarginContainer/Bracket/Winners2/TournamentMatch"), NodePath("MarginContainer/Bracket/Winners2/TournamentMatch2"), NodePath("MarginContainer/Bracket/Winners2/TournamentMatch3"), NodePath("MarginContainer/Bracket/Winners2/TournamentMatch4")]
+winners_round_3 = [NodePath("MarginContainer/Bracket/Winners3/TournamentMatch"), NodePath("MarginContainer/Bracket/Winners3/TournamentMatch2")]
+winners_round_4 = [NodePath("MarginContainer/Bracket/Winners4/TournamentMatch")]
+losers_round_1 = [NodePath("MarginContainer/Bracket/Losers1/TournamentMatch"), NodePath("MarginContainer/Bracket/Losers1/TournamentMatch2"), NodePath("MarginContainer/Bracket/Losers1/TournamentMatch3"), NodePath("MarginContainer/Bracket/Losers1/TournamentMatch4")]
+losers_round_2 = [NodePath("MarginContainer/Bracket/Losers2/TournamentMatch"), NodePath("MarginContainer/Bracket/Losers2/TournamentMatch2"), NodePath("MarginContainer/Bracket/Losers2/TournamentMatch3"), NodePath("MarginContainer/Bracket/Losers2/TournamentMatch4")]
+losers_round_3 = [NodePath("MarginContainer/Bracket/Losers3/TournamentMatch"), NodePath("MarginContainer/Bracket/Losers3/TournamentMatch2"), NodePath("MarginContainer/Bracket/Losers3/TournamentMatch3")]
+losers_round_4 = [NodePath("MarginContainer/Bracket/Losers4/TournamentMatch"), NodePath("MarginContainer/Bracket/Losers4/TournamentMatch2")]
+losers_round_5 = [NodePath("MarginContainer/Bracket/Losers5/TournamentMatch")]
+final_round = [NodePath("MarginContainer/Bracket/Final/TournamentMatch")]
+_start_match_button = NodePath("MarginContainer/MarginContainer/VBoxContainer/CenterContainer/StartMatchButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=655909373]
 layout_mode = 1

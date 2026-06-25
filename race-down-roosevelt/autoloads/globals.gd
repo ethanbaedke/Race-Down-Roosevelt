@@ -55,6 +55,7 @@ func get_random_unique_ai_profiles(num:int) -> Array[Profile]:
 		if (i < profiles.size()):
 			selected.append(profiles[i])
 		else:
+			var new_profile:Profile = Profile.new()
 			selected.append(Profile.new())
 	return selected
 

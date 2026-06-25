@@ -279,11 +279,16 @@ func _setup_tournament_menu() -> Control:
 	_tournament_menu = _tournament_menu_scene.instantiate()
 	_tournament_menu.game_state = game_state
 	_tournament_menu.back_requested.connect(_on_tournament_menu_back_requested)
+	_tournament_menu.start_match_requested.connect(_on_tournament_menu_start_match_requested)
 	return _tournament_menu
 
 func _on_tournament_menu_back_requested() -> void:
 	
 	_go_to_new_menu(MenuType.NONE, true)
+
+func _on_tournament_menu_start_match_requested() -> void:
+	
+	_go_to_new_menu(MenuType.VEHICLE_SELECTION)
 
 #endregion
 

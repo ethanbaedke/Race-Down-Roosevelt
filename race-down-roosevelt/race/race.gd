@@ -294,9 +294,6 @@ func _handle_cleanup() -> void:
 
 #region Race Setup
 
-const CAMERA_CONTROLLER_POSITION:Vector3 = Vector3(0.0, 2.0, -4.0)
-const CAMERA_CONTROLLER_ROTATION:Vector3 = Vector3(deg_to_rad(-10.0), deg_to_rad(180.0), 0.0)
-
 @onready var _racer_vehicle_spawn_points:Array[Node3D] = [
 	$"RacerVehicleSpawnPoints/1",
 	$"RacerVehicleSpawnPoints/2",
@@ -420,9 +417,7 @@ func _setup_player_viewports() -> void:
 	for i:int in range(player_vehicles.size()):
 		var controller:CameraController = CameraController.new()
 		controller.camera = cameras[i]
-		player_vehicles[i].add_child(controller)
-		controller.position = CAMERA_CONTROLLER_POSITION
-		controller.rotation = CAMERA_CONTROLLER_ROTATION
+		player_vehicles[i].set_camera_controller(controller)
 		
 	RdrLogger.log(self, "Player viewport setup complete.")
 
@@ -444,7 +439,8 @@ func _spawn_racer_vehicles() -> void:
 			racer.lane_number = (i + 1) * 2
 			_racer_vehicles.append(racer)
 			self.add_child(racer)
-			racer.global_position = _racer_vehicle_spawn_points[i].global_position
+			# Important for the camera initializing at the correct position.
+			racer.set_initial_position(_racer_vehicle_spawn_points[i].global_position)
 	
 	RdrLogger.log(self, "Racer vehicle spawning complete.")
 

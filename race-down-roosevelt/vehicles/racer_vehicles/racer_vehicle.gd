@@ -18,13 +18,24 @@ const MIN_WEIGHT:int = 1
 
 @onready var _collision_area:Area3D = $Area3D
 @onready var _collision_shape:CollisionShape3D = $Area3D/CollisionShape3D
+@onready var _model_controller:VehicleModelController = $VehicleModelController
 
 var speed:float = 0
 var input_enabled:bool = false
 
+func set_camera_controller(controller:CameraController) -> void:
+	
+	_model_controller.set_camera_controller(controller)
+
 func boost() -> void:
 	
 	speed += 5.0
+
+# Important for the camera initializing at the correct position.
+func set_initial_position(global_pos:Vector3) -> void:
+	
+	self.global_position = global_pos
+	_model_controller.global_position = global_pos
 
 func calculate_speed(delta:float) -> float:
 	

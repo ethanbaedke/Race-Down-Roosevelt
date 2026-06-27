@@ -31,7 +31,14 @@ const AI_RACER_NAMES:Array[String] = [
 
 const PROFILE_ICONS:Array[CompressedTexture2D] = [
 	preload("res://profiles/skull_and_crossbones_profile_icon.png"),
-	preload("res://profiles/gas_mask_profile_icon.png")
+	preload("res://profiles/gas_mask_profile_icon.png"),
+	preload("res://profiles/diamond_profile_icon.png"),
+	preload("res://profiles/sword_profile_icon.png"),
+	preload("res://profiles/wrench_profile_icon.png"),
+	preload("res://profiles/slime_profile_icon.png"),
+	preload("res://profiles/fireball_profile_icon.png"),
+	preload("res://profiles/flower_profile_icon.png"),
+	preload("res://profiles/pizza_profile_icon.png"),
 ]
 
 @onready var racer_vehicle_data:Array[RacerVehicleData] = [

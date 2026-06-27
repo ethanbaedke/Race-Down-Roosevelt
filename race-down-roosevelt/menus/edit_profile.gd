@@ -12,11 +12,7 @@ signal back_requested
 @onready var _default_options:MarginContainer = $MarginContainer/VBoxContainer/MarginContainer/DefaultOptions
 @onready var _icon_selection:CenterContainer = $MarginContainer/VBoxContainer/MarginContainer/IconSelection
 
-@onready var _icon_buttons:Array[Button] = [
-	$MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon1/Button,
-	$MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon2/Button,
-	$MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon3/Button,
-]
+@export var _icon_buttons:Array[Button] = []
 
 var game_state:GameState = null
 

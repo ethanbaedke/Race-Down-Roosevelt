@@ -16,11 +16,6 @@ const MIN_DURABILITY:int = 1
 const MAX_WEIGHT:int = 6
 const MIN_WEIGHT:int = 1
 
-@export_range(1, MAX_TOP_SPEED) var top_speed:int = 17
-@export_range(1, MAX_ACCELERATION) var acceleration:int = 7
-@export_range(1, MAX_DURABILITY) var durability:int = 3
-@export_range(1, MAX_WEIGHT) var weight:int = 3
-
 @onready var _collision_area:Area3D = $Area3D
 @onready var _collision_shape:CollisionShape3D = $Area3D/CollisionShape3D
 
@@ -33,6 +28,9 @@ func boost() -> void:
 
 func calculate_speed(delta:float) -> float:
 	
+	var top_speed:float = racer.vehicle_data.top_speed
+	var acceleration:float = racer.vehicle_data.acceleration
+	var weight:float = racer.vehicle_data.weight
 	if (speed < top_speed):
 		speed = min(speed + (acceleration * delta), top_speed)
 	elif (speed > top_speed):
@@ -142,7 +140,7 @@ func _handle_traffic_vehicle_hit(vehicle:TrafficVehicle) -> void:
 	vehicle.explode()
 	# Reduce speed based on durability (higher = more maintained).
 	# Add one to max durability here to ensure vehicles with max durability still slow down some.
-	speed = speed * ((durability as float) / (MAX_DURABILITY + 1))
+	speed = speed * ((racer.vehicle_data.durability as float) / (MAX_DURABILITY + 1))
 
 func _collision_area_entered(area: Area3D) -> void:
 	

@@ -117,8 +117,8 @@ func _handle_racer_bump(other:RacerVehicle) -> void:
 	
 	RdrLogger.log(self, self.racer.profile.name + " bumped " + other.racer.profile.name + ".")
 	
-	var m1:float = self.weight
-	var m2:float = other.weight
+	var m1:float = self.racer.vehicle_data.weight
+	var m2:float = other.racer.vehicle_data.weight
 	var s1:float = self.speed
 	var s2:float = other.speed
 

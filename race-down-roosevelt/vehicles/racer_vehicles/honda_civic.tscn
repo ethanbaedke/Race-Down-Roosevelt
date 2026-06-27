@@ -1,15 +1,14 @@
 [gd_scene format=3 uid="uid://wk7eji5glhus"]
 
 [ext_resource type="Script" uid="uid://b30kj0jrm85yt" path="res://vehicles/racer_vehicles/racer_vehicle.gd" id="1_uwc0b"]
-[ext_resource type="PackedScene" uid="uid://bm0vc0wvvnx4h" path="res://race/vehicle_model_controller.tscn" id="2_o80sb"]
+[ext_resource type="PackedScene" uid="uid://bm0vc0wvvnx4h" path="res://vehicles/vehicle_model_controller.tscn" id="2_o80sb"]
 [ext_resource type="PackedScene" uid="uid://uvhx5awql1e8" path="res://vehicles/honda_civic.glb" id="2_uwc0b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4rng7"]
 size = Vector3(0.89019775, 0.63409424, 2.3129516)
 
-[node name="HondaCivic" type="Node3D" unique_id=1093534000 node_paths=PackedStringArray("_model_node")]
+[node name="HondaCivic" type="Node3D" unique_id=1093534000]
 script = ExtResource("1_uwc0b")
-_model_node = NodePath("VehicleModelController/HondaCivicModel")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=407952649]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40587777, -0.025)

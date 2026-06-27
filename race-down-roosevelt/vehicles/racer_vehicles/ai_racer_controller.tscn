@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dcf6mvjwffjpe"]
+
+[ext_resource type="Script" uid="uid://gt1k2go6icpg" path="res://vehicles/racer_vehicles/ai_racer_controller.gd" id="1_rouw3"]
+
+[node name="AiRacerController" type="Node3D" unique_id=590700889]
+script = ExtResource("1_rouw3")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1752859757]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+target_position = Vector3(0, 0, 10)
+collide_with_areas = true
+collide_with_bodies = false

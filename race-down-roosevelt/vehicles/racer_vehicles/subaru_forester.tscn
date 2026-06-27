@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bkdshlcm7ss5w"]
 
 [ext_resource type="Script" uid="uid://b30kj0jrm85yt" path="res://vehicles/racer_vehicles/racer_vehicle.gd" id="1_ce1kl"]
-[ext_resource type="PackedScene" uid="uid://bm0vc0wvvnx4h" path="res://race/vehicle_model_controller.tscn" id="2_07dxa"]
+[ext_resource type="PackedScene" uid="uid://bm0vc0wvvnx4h" path="res://vehicles/vehicle_model_controller.tscn" id="2_07dxa"]
 [ext_resource type="PackedScene" uid="uid://40efplcfedui" path="res://vehicles/subaru_forester.glb" id="2_ce1kl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_meqtm"]

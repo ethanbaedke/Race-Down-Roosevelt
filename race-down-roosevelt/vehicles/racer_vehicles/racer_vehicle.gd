@@ -58,35 +58,47 @@ func try_switch_lanes(dir:int) -> bool:
 	
 	# Moving right.
 	if (dir > 0):
-		if (lane_number < race.NUM_LANES):
-			if (is_right_lane_open()):
-				lane_number += 1
-				position.x -= race.LANE_SPACING
-				return true
-			else:
-				RdrLogger.log(self, racer.profile.name + " attempted to move right, but the lane was blocked.")
+		if (is_right_lane_open()):
+			switch_lanes_right()
+			return true
+		else:
+			RdrLogger.log(self, racer.profile.name + " attempted to move right, but the lane was blocked.")
 	# Moving left.
 	else:
-		if (lane_number > 1):
-			if (is_left_lane_open()):
-				lane_number -= 1
-				position.x += race.LANE_SPACING
-				return true
-			else:
-				RdrLogger.log(self, racer.profile.name + " attempted to move left, but the lane was blocked.")
+		if (is_left_lane_open()):
+			switch_lanes_left()
+			return true
+		else:
+			RdrLogger.log(self, racer.profile.name + " attempted to move left, but the lane was blocked.")
 	return false
 
 # Returns true if this vehicle can move left (nothing in the way).
 func is_left_lane_open() -> bool:
 	
+	if (lane_number <= 1):
+		return false
+	
 	var hits:Array[Node3D] = _cast_vehicle_shape_to_position(_collision_area.global_position + Vector3(race.LANE_SPACING, 0.0, 0.0))
 	return hits.size() == 0
+
+func switch_lanes_left() -> void:
+	
+	lane_number -= 1
+	position.x += race.LANE_SPACING
 
 # Returns true if this vehicle can move right (nothing in the way).
 func is_right_lane_open() -> bool:
 	
+	if (lane_number >= race.NUM_LANES):
+		return false
+	
 	var hits:Array[Node3D] = _cast_vehicle_shape_to_position(_collision_area.global_position - Vector3(race.LANE_SPACING, 0.0, 0.0))
 	return hits.size() == 0
+
+func switch_lanes_right() -> void:
+	
+	lane_number += 1
+	position.x -= race.LANE_SPACING
 
 # The input position should be in world space.
 func _cast_vehicle_shape_to_position(world_pos:Vector3) -> Array[Node3D]:

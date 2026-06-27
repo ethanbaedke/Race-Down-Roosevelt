@@ -294,6 +294,8 @@ func _handle_cleanup() -> void:
 
 #region Race Setup
 
+@onready var _ai_racer_controller_scene:PackedScene = preload("res://vehicles/racer_vehicles/ai_racer_controller.tscn")
+
 @onready var _racer_vehicle_spawn_points:Array[Node3D] = [
 	$"RacerVehicleSpawnPoints/1",
 	$"RacerVehicleSpawnPoints/2",
@@ -437,6 +439,10 @@ func _spawn_racer_vehicles() -> void:
 			racer.race = self
 			racer.racer = game_state.racer_objects[i]
 			racer.lane_number = (i + 1) * 2
+			# If this racer is ai-controlled, add an ai-controller.
+			if (racer.racer.device_index == -2):
+				var ai_controller:AiRacerController = _ai_racer_controller_scene.instantiate()
+				racer.add_child(ai_controller)
 			_racer_vehicles.append(racer)
 			self.add_child(racer)
 			# Important for the camera initializing at the correct position.

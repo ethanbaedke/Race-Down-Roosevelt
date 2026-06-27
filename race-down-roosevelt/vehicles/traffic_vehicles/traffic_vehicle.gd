@@ -2,13 +2,18 @@ class_name TrafficVehicle extends Node3D
 
 @export var speed:int = 1
 
+@export var _vehicle_model:Node3D = null
+
 @onready var _collision_area:Area3D = $Area3D
 @onready var _collision_shape:CollisionShape3D = $Area3D/CollisionShape3D
+@onready var _explosion_particles:GPUParticles3D = $ExplosionParticles
 
 # The actual speed used. This allows it to be modified without changing the original speed variable.
 var _speed:float = speed
 
 func explode() -> void:
+	
+	_explosion_particles.emitting = true
 	
 	# We don't destroy this object since the race will recycle it.
 	disable_vehicle()
@@ -18,13 +23,13 @@ func disable_vehicle() -> void:
 	# Stop the vehicle when disabled so it can fall behind quicker and be cleaned up sooner.
 	_speed = 0
 	_collision_shape.disabled = true
-	self.visible = false
+	_vehicle_model.visible = false
 
 func enable_vehicle() -> void:
 	
 	_speed = speed
 	_collision_shape.disabled = false
-	self.visible = true
+	_vehicle_model.visible = true
 
 # Called when this racer bumps a racer in front of it.
 func _handle_traffic_vehicle_bump(other:TrafficVehicle) -> void:

@@ -2,19 +2,23 @@
 
 [ext_resource type="Script" uid="uid://bqi1740ikajnm" path="res://vehicles/traffic_vehicles/traffic_vehicle.gd" id="1_ia38m"]
 [ext_resource type="PackedScene" uid="uid://40efplcfedui" path="res://vehicles/subaru_forester.glb" id="2_oduem"]
+[ext_resource type="PackedScene" uid="uid://de81jjuripues" path="res://vehicles/traffic_vehicles/explosion_particles.tscn" id="3_ccmxo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ia38m"]
 size = Vector3(0.91748047, 0.6846924, 2.3123658)
 
-[node name="SubaruForester" type="Node3D" unique_id=1093534000]
+[node name="SubaruForester" type="Node3D" unique_id=1093534000 node_paths=PackedStringArray("_vehicle_model")]
 script = ExtResource("1_ia38m")
 speed = 8
+_vehicle_model = NodePath("SubaruForesterModel")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=743470967]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5016584, -0.025)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=962662507]
 shape = SubResource("BoxShape3D_ia38m")
+
+[node name="ExplosionParticles" parent="." unique_id=2029290469 instance=ExtResource("3_ccmxo")]
 
 [node name="SubaruForesterModel" parent="." unique_id=1946182605 instance=ExtResource("2_oduem")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.46786118, 0, 1.1404314)

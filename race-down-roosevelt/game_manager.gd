@@ -46,7 +46,7 @@ func _ready() -> void:
 			profile_finish_order.append(racer.profile)
 		_race.queue_free()
 		
-		# If we are in a tournement, report results and go to the next match.
+		# If we are in a tournament, report results and go to the next match.
 		if (_game_state.active_tournament != null):
 			# At this point, next match still references the match we just finished.
 			_game_state.active_tournament.next_match.finish_order = profile_finish_order

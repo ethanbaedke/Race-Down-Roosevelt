@@ -280,6 +280,7 @@ func _setup_tournament_menu() -> Control:
 	_tournament_menu.game_state = game_state
 	_tournament_menu.back_requested.connect(_on_tournament_menu_back_requested)
 	_tournament_menu.start_match_requested.connect(_on_tournament_menu_start_match_requested)
+	_tournament_menu.return_to_menu_requested.connect(_on_tournament_menu_return_to_menu_requested)
 	return _tournament_menu
 
 func _on_tournament_menu_back_requested() -> void:
@@ -289,6 +290,14 @@ func _on_tournament_menu_back_requested() -> void:
 func _on_tournament_menu_start_match_requested() -> void:
 	
 	_go_to_new_menu(MenuType.VEHICLE_SELECTION)
+
+func _on_tournament_menu_return_to_menu_requested() -> void:
+	
+	# Replace menu stack to hold main menu and tournament menu so we can navigate straight back to the main menu.
+	_menu_type_stack.clear()
+	_menu_type_stack.append(MenuType.MAIN_MENU)
+	_menu_type_stack.append(MenuType.TOURNAMENT_MENU)
+	_go_to_new_menu(MenuType.NONE, true)
 
 #endregion
 
@@ -301,7 +310,7 @@ func _ready() -> void:
 	if (game_state.active_tournament == null):
 		_go_to_new_menu(MenuType.MAIN_MENU)
 	else:
-		# If we are currently in a tournement, we should begin on the tournement menu, with our menu stack set accordingly.
+		# If we are currently in a tournament, we should begin on the tournament menu, with our menu stack set accordingly.
 		_menu_type_stack.append(MenuType.MAIN_MENU)
 		_menu_type_stack.append(MenuType.TOURNAMENT_START)
 		_go_to_new_menu(MenuType.TOURNAMENT_MENU)

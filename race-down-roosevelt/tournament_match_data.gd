@@ -2,7 +2,7 @@ class_name TournamentMatchData extends Resource
 
 # TODO: The profiles here will be loaded from the machine and there will be two copies. One here, and one on the save data resource.
 # TODO: These lists should reference profile ids (integers that represent which profile on save data is being used here).
-# TODO: Will need to handle a profile being removed and then a tournement being continued that uses the removed profile.
+# TODO: Will need to handle a profile being removed and then a tournament being continued that uses the removed profile.
 @export var player_profiles:Array[Profile] = []
 @export var ai_profiles:Array[Profile] = []
 @export var is_up_next:bool = false

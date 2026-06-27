@@ -52,6 +52,7 @@ class_name TournamentState extends Resource
 ]
 
 var next_match:TournamentMatchData = null
+var winner:Profile = null
 
 var _match_index:int = -1
 var _round_index:int = 0
@@ -104,7 +105,8 @@ func go_to_next_match() -> void:
 		_round_index += 1
 		_match_index = 0
 	else:
-		# TODO: Tournement over.
+		# Tournament over.
+		winner = final_round[0].finish_order[0]
 		return
 	
 	next_match = all_rounds[_round_index][_match_index]

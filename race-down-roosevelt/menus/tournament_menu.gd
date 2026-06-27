@@ -2,6 +2,7 @@ class_name TournamentMenu extends Control
 
 signal back_requested
 signal start_match_requested
+signal return_to_menu_requested
 
 @export var winners_round_1:Array[TournamentMatch] = []
 @export var winners_round_2:Array[TournamentMatch] = []
@@ -14,7 +15,9 @@ signal start_match_requested
 @export var losers_round_5:Array[TournamentMatch] = []
 @export var final_round:Array[TournamentMatch] = []
 
+@export var _winner_label:Label = null
 @export var _start_match_button:Button = null
+@export var _return_to_menu_button:Button = null
 
 var game_state:GameState = null
 
@@ -59,8 +62,15 @@ func _ready() -> void:
 		return
 	
 	_start_match_button.pressed.connect(_on_start_match_button_pressed)
+	_return_to_menu_button.pressed.connect(func() -> void:
+		return_to_menu_requested.emit())
 	
 	_set_match_data_references()
+	
+	if (game_state.active_tournament.winner != null):
+		_winner_label.text = "Winner: " + game_state.active_tournament.winner.name
+		_start_match_button.visible = false
+		_return_to_menu_button.visible = true
 
 func _unhandled_input(event: InputEvent) -> void:
 	

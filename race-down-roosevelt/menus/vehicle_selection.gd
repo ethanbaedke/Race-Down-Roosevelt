@@ -23,7 +23,7 @@ func _on_player_ready() -> void:
 			racers.append(panel.racer)
 	# All players are in the ready state
 	if (racers.size() == _panels.size()):
-		# If we are in a tournement, add racer vehicles for the ai racers.
+		# If we are in a tournament, add racer vehicles for the ai racers.
 		if (_game_state.active_tournament != null):
 			for profile:Profile in _game_state.active_tournament.next_match.ai_profiles:
 				var ai_racer:RacerObject = RacerObject.new()

@@ -46,8 +46,6 @@ const PROFILE_ICONS:Array[CompressedTexture2D] = [
 	preload("res://vehicles/racer_vehicles/subaru_forester_data.tres"),
 ]
 
-var _ai_profiles:Array[Profile] = []
-
 func get_random_racer_vehicle_data() -> RacerVehicleData:
 	
 	var index:int = randi_range(0, racer_vehicle_data.size() - 1)
@@ -55,32 +53,24 @@ func get_random_racer_vehicle_data() -> RacerVehicleData:
 
 func get_random_unique_ai_profiles(num:int) -> Array[Profile]:
 	
-	var profiles:Array[Profile] = _ai_profiles.duplicate()
-	profiles.shuffle()
-	var selected:Array[Profile] = []
-	for i:int in range(num):
-		if (i < profiles.size()):
-			selected.append(profiles[i])
-		else:
-			var new_profile:Profile = Profile.new()
-			selected.append(Profile.new())
-	return selected
-
-func _create_ai_profiles() -> void:
-	
-	if (PROFILE_ICONS.size() == 0):
-		RdrLogger.warn(self, "No profile icon references have been set.")
-		return
-	
+	var name_ind:int = 0
+	var shuffled_names:Array[String] = AI_RACER_NAMES.duplicate()
+	shuffled_names.shuffle()
 	var icon_ind:int = 0
-	for ai_name:String in AI_RACER_NAMES:
-		var profile:Profile = Profile.new()
-		profile.name = ai_name
-		profile.icon = PROFILE_ICONS[icon_ind]
-		icon_ind = (icon_ind + 1) % PROFILE_ICONS.size()
-		_ai_profiles.append(profile)
-
-func _ready() -> void:
+	var shuffled_icons:Array[CompressedTexture2D] = PROFILE_ICONS.duplicate()
+	shuffled_icons.shuffle()
 	
-	_create_ai_profiles()
+	var ai_profiles:Array[Profile] = []
+	for i:int in range(num):
+		var new_profile:Profile = Profile.new()
+		
+		new_profile.name = shuffled_names[name_ind]
+		name_ind = (name_ind + 1) % shuffled_names.size()
+		
+		new_profile.icon = shuffled_icons[icon_ind]
+		icon_ind = (icon_ind + 1) % shuffled_icons.size()
+		
+		ai_profiles.append(new_profile)
+
+	return ai_profiles
 	

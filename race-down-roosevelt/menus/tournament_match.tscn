@@ -9,9 +9,13 @@ content_margin_right = 10.0
 content_margin_bottom = 10.0
 bg_color = Color(1, 1, 1, 1)
 
-[node name="TournamentMatch" type="CenterContainer" unique_id=1115203901 node_paths=PackedStringArray("_profile_name_labels", "_match_panel")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_opgqa"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="TournamentMatch" type="CenterContainer" unique_id=1115203901 node_paths=PackedStringArray("_profile_containers", "_profile_name_labels", "_match_panel")]
 script = ExtResource("1_opgqa")
-_profile_name_labels = [NodePath("PanelContainer/VBoxContainer/Label"), NodePath("PanelContainer/VBoxContainer/Label2"), NodePath("PanelContainer/VBoxContainer/Label3"), NodePath("PanelContainer/VBoxContainer/Label4")]
+_profile_containers = [NodePath("PanelContainer/VBoxContainer/PanelContainer"), NodePath("PanelContainer/VBoxContainer/PanelContainer2"), NodePath("PanelContainer/VBoxContainer/PanelContainer3"), NodePath("PanelContainer/VBoxContainer/PanelContainer4")]
+_profile_name_labels = [NodePath("PanelContainer/VBoxContainer/PanelContainer/Label"), NodePath("PanelContainer/VBoxContainer/PanelContainer2/Label"), NodePath("PanelContainer/VBoxContainer/PanelContainer3/Label"), NodePath("PanelContainer/VBoxContainer/PanelContainer4/Label")]
 _match_panel = NodePath("PanelContainer")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=478789805]
@@ -26,7 +30,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=2053119550]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1091106360]
+self_modulate = Color(0.75, 0.75, 0.75, 1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_opgqa")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=2053119550]
 layout_mode = 2
 text = "?"
 horizontal_alignment = 1
@@ -34,7 +43,12 @@ vertical_alignment = 1
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer" unique_id=756557552]
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=808174895]
+self_modulate = Color(0.75, 0.75, 0.75, 1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_opgqa")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer2" unique_id=889962099]
 layout_mode = 2
 text = "?"
 horizontal_alignment = 1
@@ -42,7 +56,12 @@ vertical_alignment = 1
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1100338665]
+[node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1776329848]
+self_modulate = Color(0.75, 0.75, 0.75, 1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_opgqa")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer3" unique_id=1742978153]
 layout_mode = 2
 text = "?"
 horizontal_alignment = 1
@@ -50,7 +69,12 @@ vertical_alignment = 1
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer" unique_id=689723088]
+[node name="PanelContainer4" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1087055392]
+self_modulate = Color(0.75, 0.75, 0.75, 1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_opgqa")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer4" unique_id=1002414740]
 layout_mode = 2
 text = "?"
 horizontal_alignment = 1

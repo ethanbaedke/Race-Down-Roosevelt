@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bqi1740ikajnm" path="res://vehicles/traffic_vehicles/traffic_vehicle.gd" id="1_by02n"]
 [ext_resource type="PackedScene" uid="uid://uvhx5awql1e8" path="res://vehicles/honda_civic.glb" id="2_ugfde"]
-[ext_resource type="PackedScene" uid="uid://de81jjuripues" path="res://vehicles/traffic_vehicles/explosion_particles.tscn" id="3_mlu1s"]
+[ext_resource type="PackedScene" uid="uid://gy7sowipcjkk" path="res://vehicles/traffic_vehicles/explosion_effect.tscn" id="3_mlu1s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_by02n"]
 size = Vector3(0.89019775, 0.63409424, 2.3129516)
@@ -18,7 +18,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40587777, -0.025)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=223287468]
 shape = SubResource("BoxShape3D_by02n")
 
-[node name="ExplosionParticles" parent="." unique_id=2029290469 instance=ExtResource("3_mlu1s")]
-
 [node name="HondaCivicModel" parent="." unique_id=114766186 instance=ExtResource("2_ugfde")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.4615922, 0, 1.1404314)
+
+[node name="ExplosionEffect" parent="." unique_id=1325316322 instance=ExtResource("3_mlu1s")]

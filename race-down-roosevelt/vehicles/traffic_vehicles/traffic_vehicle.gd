@@ -6,14 +6,14 @@ class_name TrafficVehicle extends Node3D
 
 @onready var _collision_area:Area3D = $Area3D
 @onready var _collision_shape:CollisionShape3D = $Area3D/CollisionShape3D
-@onready var _explosion_particles:GPUParticles3D = $ExplosionParticles
+@onready var _explosion_effect:ParticleEffect = $ExplosionEffect
 
 # The actual speed used. This allows it to be modified without changing the original speed variable.
 var _speed:float = speed
 
 func explode() -> void:
 	
-	_explosion_particles.emitting = true
+	_explosion_effect.play()
 	
 	# We don't destroy this object since the race will recycle it.
 	disable_vehicle()

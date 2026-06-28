@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c4j85t8xu0nvo" path="res://race/race.gd" id="1_6dlvr"]
 [ext_resource type="Script" uid="uid://clyn63xl4tio5" path="res://helpers/random_node_pool_entry.gd" id="2_c8320"]
-[ext_resource type="PackedScene" uid="uid://cvkcos6bwew0n" path="res://vehicles/traffic_vehicles/honda_civic_traffic.tscn" id="3_01boi"]
+[ext_resource type="PackedScene" uid="uid://dvlgkkayjdnkm" path="res://vehicles/traffic_vehicles/honda_civic_traffic.tscn" id="3_01boi"]
 [ext_resource type="Script" uid="uid://bonfni7lag8hs" path="res://helpers/random_node_pool.gd" id="4_01boi"]
 [ext_resource type="PackedScene" uid="uid://buplbimw5vl7v" path="res://vehicles/traffic_vehicles/subaru_forester_traffic.tscn" id="4_hkrbr"]
 [ext_resource type="Texture2D" uid="uid://bphsvdqsicl7h" path="res://road/road_straight.png" id="4_iqn4a"]
@@ -50,6 +50,9 @@ size = Vector3(0.2, 0.2, 3)
 
 [sub_resource type="BoxMesh" id="BoxMesh_g0dry"]
 size = Vector3(0.2, 0.2, 3)
+
+[sub_resource type="Environment" id="Environment_c8320"]
+glow_enabled = true
 
 [node name="Race" type="Node3D" unique_id=1363738947]
 script = ExtResource("1_6dlvr")
@@ -500,3 +503,6 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 8.0
 theme_override_font_sizes/font_size = 64
 text = "Name"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=504762943]
+environment = SubResource("Environment_c8320")

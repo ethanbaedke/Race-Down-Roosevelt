@@ -63,6 +63,7 @@ func try_switch_lanes(dir:int) -> bool:
 			return true
 		else:
 			RdrLogger.log(self, racer.profile.name + " attempted to move right, but the lane was blocked.")
+			_model_controller.pulse_right()
 	# Moving left.
 	else:
 		if (is_left_lane_open()):
@@ -70,6 +71,7 @@ func try_switch_lanes(dir:int) -> bool:
 			return true
 		else:
 			RdrLogger.log(self, racer.profile.name + " attempted to move left, but the lane was blocked.")
+			_model_controller.pulse_left()
 	return false
 
 # Returns true if this vehicle can move left (nothing in the way).

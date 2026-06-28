@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://gy7sowipcjkk"]
 
-[ext_resource type="Script" uid="uid://didtlpoapvc62" path="res://particle_effect.gd" id="1_e2dgq"]
+[ext_resource type="Script" uid="uid://didtlpoapvc62" path="res://one_shot_particle_effect.gd" id="1_e2dgq"]
 
 [sub_resource type="Curve" id="Curve_f5x0w"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -94,9 +94,8 @@ scale_min = 0.5
 scale_curve = SubResource("CurveTexture_3n43j")
 color = Color(0.25, 0.25, 0.25, 1)
 
-[node name="ExplosionEffect" type="Node3D" unique_id=1325316322 node_paths=PackedStringArray("_gpu_particles")]
+[node name="ExplosionEffect" type="Node3D" unique_id=1325316322]
 script = ExtResource("1_e2dgq")
-_gpu_particles = [NodePath("FlyingParticles"), NodePath("Fire"), NodePath("Smoke")]
 
 [node name="FlyingParticles" type="GPUParticles3D" parent="." unique_id=2029290469]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

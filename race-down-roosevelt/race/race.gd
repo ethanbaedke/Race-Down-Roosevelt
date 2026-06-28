@@ -266,7 +266,8 @@ func _handle_cleanup() -> void:
 	
 	var order:Array[RacerVehicle] = get_racer_order()
 	var last_place_z:float = order[order.size() - 1].position.z
-	# Anything at or behind this can be cleaned up.
+	# Anything at or behind this is eligable to be cleaned up.
+	# Some objects may have their own conditions determining if they can be cleaned up.
 	var cleanup_z:float = last_place_z - ROAD_CLEANUP_DIST
 	
 	# Shrink road.
@@ -282,7 +283,8 @@ func _handle_cleanup() -> void:
 	
 	# Cleanup traffic vehicles.
 	traffic_vehicle_pool.run_cleanup(func (n:Node3D) -> bool:
-		return n.position.z < cleanup_z
+		var vehicle:TrafficVehicle = n as TrafficVehicle
+		return vehicle.available_for_cleanup && n.position.z < cleanup_z
 	)
 	
 	# Cleanup road objects.

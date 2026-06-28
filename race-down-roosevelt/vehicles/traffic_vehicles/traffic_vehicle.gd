@@ -4,16 +4,24 @@ class_name TrafficVehicle extends Node3D
 
 @export var _vehicle_model:Node3D = null
 
+@onready var _explosion_effect_scene:PackedScene = preload("res://vehicles/traffic_vehicles/explosion_effect.tscn")
+
 @onready var _collision_area:Area3D = $Area3D
 @onready var _collision_shape:CollisionShape3D = $Area3D/CollisionShape3D
-@onready var _explosion_effect:ParticleEffect = $ExplosionEffect
+
+# Only set to false when vehicle in a state we don't want to cleanup during, such as exploding.
+var available_for_cleanup:bool = true
 
 # The actual speed used. This allows it to be modified without changing the original speed variable.
 var _speed:float = speed
 
 func explode() -> void:
 	
-	_explosion_effect.play()
+	available_for_cleanup = false
+	var effect:OneShotParticleEffect = _explosion_effect_scene.instantiate()
+	effect.effect_finished.connect(func() -> void:
+		available_for_cleanup = true)
+	self.add_child(effect)
 	
 	# We don't destroy this object since the race will recycle it.
 	disable_vehicle()

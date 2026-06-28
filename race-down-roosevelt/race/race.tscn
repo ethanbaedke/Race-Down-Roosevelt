@@ -3,25 +3,25 @@
 [ext_resource type="Script" uid="uid://c4j85t8xu0nvo" path="res://race/race.gd" id="1_6dlvr"]
 [ext_resource type="Script" uid="uid://clyn63xl4tio5" path="res://helpers/random_node_pool_entry.gd" id="2_c8320"]
 [ext_resource type="PackedScene" uid="uid://dvlgkkayjdnkm" path="res://vehicles/traffic_vehicles/honda_civic_traffic.tscn" id="3_01boi"]
+[ext_resource type="PackedScene" uid="uid://5phxb6wuavas" path="res://vehicles/traffic_vehicles/subaru_forester_traffic.tscn" id="3_g1gks"]
 [ext_resource type="Script" uid="uid://bonfni7lag8hs" path="res://helpers/random_node_pool.gd" id="4_01boi"]
-[ext_resource type="PackedScene" uid="uid://buplbimw5vl7v" path="res://vehicles/traffic_vehicles/subaru_forester_traffic.tscn" id="4_hkrbr"]
 [ext_resource type="Texture2D" uid="uid://bphsvdqsicl7h" path="res://road/road_straight.png" id="4_iqn4a"]
 [ext_resource type="PackedScene" uid="uid://8t5pwnixghwp" path="res://road/boost_pad_row.tscn" id="5_g0dry"]
 [ext_resource type="Script" uid="uid://7psf6ks7j2k4" path="res://race/leaderboard.gd" id="8_c8320"]
 
-[sub_resource type="Resource" id="Resource_0lns8"]
+[sub_resource type="Resource" id="Resource_g0dry"]
+script = ExtResource("2_c8320")
+scene = ExtResource("3_g1gks")
+metadata/_custom_type_script = "uid://clyn63xl4tio5"
+
+[sub_resource type="Resource" id="Resource_c8320"]
 script = ExtResource("2_c8320")
 scene = ExtResource("3_01boi")
 metadata/_custom_type_script = "uid://clyn63xl4tio5"
 
-[sub_resource type="Resource" id="Resource_ru474"]
-script = ExtResource("2_c8320")
-scene = ExtResource("4_hkrbr")
-metadata/_custom_type_script = "uid://clyn63xl4tio5"
-
 [sub_resource type="Resource" id="Resource_cyu3u"]
 script = ExtResource("4_01boi")
-entries = Array[ExtResource("2_c8320")]([SubResource("Resource_0lns8"), SubResource("Resource_ru474")])
+entries = Array[ExtResource("2_c8320")]([SubResource("Resource_g0dry"), SubResource("Resource_c8320")])
 debug_name = "Traffic Vehicle"
 metadata/_custom_type_script = "uid://bonfni7lag8hs"
 

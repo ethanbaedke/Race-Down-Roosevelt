@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://uvhx5awql1e8" path="res://vehicles/honda_civic.glb" id="2_ugfde"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_by02n"]
-size = Vector3(0.89019775, 0.63409424, 2.3129516)
+size = Vector3(0.89, 0.634, 0.813)
 
 [node name="HondaCivic" type="Node3D" unique_id=1093534000 node_paths=PackedStringArray("_vehicle_model")]
 script = ExtResource("1_by02n")

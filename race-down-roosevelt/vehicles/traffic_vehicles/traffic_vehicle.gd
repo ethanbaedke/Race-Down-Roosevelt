@@ -50,9 +50,13 @@ func _handle_traffic_vehicle_bump(other:TrafficVehicle) -> void:
 func _handle_racer_vehicle_bump(other:RacerVehicle) -> void:
 
 	RdrLogger.log(self, "Traffic vehicle rear ended racer " + other.racer.profile.name + ". Set to tailgate.")
-
+	
+	# DEPRECATED: Since areas do not have continous detection, a fast racer may end up in front of a traffic vehicle despite coming from behind.
+	# DEPRECATED: With this implementation, a traffic vehicle would stick to a racer by matching its incredibly high speed.
 	# Simply set the behind vehicles speed equal to the bumped vehicles speed and let it tailgate.
-	self._speed = other.speed
+	#self._speed = other.speed
+
+	explode()
 
 func _collision_area_entered(area: Area3D) -> void:
 	

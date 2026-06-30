@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://40efplcfedui" path="res://vehicles/subaru_forester.glb" id="2_oduem"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ia38m"]
-size = Vector3(0.917, 0.685, 0.812)
+size = Vector3(0.917, 0.685, 2.312)
 
 [node name="SubaruForester" type="Node3D" unique_id=1093534000 node_paths=PackedStringArray("_vehicle_model")]
 script = ExtResource("1_ia38m")

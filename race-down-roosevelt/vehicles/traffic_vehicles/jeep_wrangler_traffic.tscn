@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://5525td7tv2km" path="res://vehicles/jeep_wrangler.glb" id="3_l4kve"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_meqtm"]
-size = Vector3(0.917, 0.754, 0.57)
+size = Vector3(0.917, 0.754, 2.07)
 
 [node name="JeepWranglerTraffic" type="Node3D" unique_id=1093534000 node_paths=PackedStringArray("_vehicle_model")]
 script = ExtResource("1_yk7gm")

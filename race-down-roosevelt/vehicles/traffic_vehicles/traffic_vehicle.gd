@@ -49,7 +49,7 @@ func _handle_traffic_vehicle_bump(other:TrafficVehicle) -> void:
 	
 func _handle_racer_vehicle_bump(other:RacerVehicle) -> void:
 
-	RdrLogger.log(self, "Traffic vehicle rear ended racer " + other.racer.name + ". Set to tailgate.")
+	RdrLogger.log(self, "Traffic vehicle rear ended racer " + other.racer.profile.name + ". Set to tailgate.")
 
 	# Simply set the behind vehicles speed equal to the bumped vehicles speed and let it tailgate.
 	self._speed = other.speed

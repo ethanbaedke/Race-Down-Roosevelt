@@ -44,6 +44,7 @@ const PROFILE_ICONS:Array[CompressedTexture2D] = [
 @onready var racer_vehicle_data:Array[RacerVehicleData] = [
 	preload("res://vehicles/racer_vehicles/honda_civic_data.tres"),
 	preload("res://vehicles/racer_vehicles/subaru_forester_data.tres"),
+	preload("res://vehicles/racer_vehicles/jeep_wrangler_data.tres")
 ]
 
 func get_random_racer_vehicle_data() -> RacerVehicleData:

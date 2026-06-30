@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://kavq5hucvvej"]
+
+[ext_resource type="Script" uid="uid://bqi1740ikajnm" path="res://vehicles/traffic_vehicles/traffic_vehicle.gd" id="1_yk7gm"]
+[ext_resource type="PackedScene" uid="uid://5525td7tv2km" path="res://vehicles/jeep_wrangler.glb" id="3_l4kve"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_meqtm"]
+size = Vector3(0.917, 0.754, 0.57)
+
+[node name="JeepWranglerTraffic" type="Node3D" unique_id=1093534000 node_paths=PackedStringArray("_vehicle_model")]
+script = ExtResource("1_yk7gm")
+speed = 8
+_vehicle_model = NodePath("JeepWranglerModel")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=60177497]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.57163775, -0.015970374)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=228510056]
+shape = SubResource("BoxShape3D_meqtm")
+
+[node name="JeepWranglerModel" parent="." unique_id=731493010 instance=ExtResource("3_l4kve")]
+transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-08, 0.5331831, 0, -1.056751)

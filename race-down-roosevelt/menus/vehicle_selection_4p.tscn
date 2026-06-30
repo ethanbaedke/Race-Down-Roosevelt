@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bj11itykefsaa" path="res://menus/vehicle_selection.gd" id="1_xxnxd"]
 [ext_resource type="PackedScene" uid="uid://uvhx5awql1e8" path="res://vehicles/honda_civic.glb" id="3_et73i"]
 [ext_resource type="PackedScene" uid="uid://40efplcfedui" path="res://vehicles/subaru_forester.glb" id="4_dhwrm"]
+[ext_resource type="PackedScene" uid="uid://5525td7tv2km" path="res://vehicles/jeep_wrangler.glb" id="5_dhwrm"]
 
 [node name="VehicleSelection4P" type="Control" unique_id=334173602 node_paths=PackedStringArray("_panels")]
 layout_mode = 3
@@ -63,3 +64,6 @@ transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-
 
 [node name="SubaruForesterModel" parent="." unique_id=2138444277 instance=ExtResource("4_dhwrm")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 19.532, 0, 1.14)
+
+[node name="JeepWranglerModel" parent="." unique_id=731493010 instance=ExtResource("5_dhwrm")]
+transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-08, 40.533, 0, -1.057)

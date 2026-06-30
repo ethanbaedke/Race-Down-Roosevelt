@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bonfni7lag8hs" path="res://helpers/random_node_pool.gd" id="4_01boi"]
 [ext_resource type="Texture2D" uid="uid://bphsvdqsicl7h" path="res://road/road_straight.png" id="4_iqn4a"]
 [ext_resource type="PackedScene" uid="uid://8t5pwnixghwp" path="res://road/boost_pad_row.tscn" id="5_g0dry"]
+[ext_resource type="PackedScene" uid="uid://kavq5hucvvej" path="res://vehicles/traffic_vehicles/jeep_wrangler_traffic.tscn" id="5_vhq2c"]
 [ext_resource type="Script" uid="uid://7psf6ks7j2k4" path="res://race/leaderboard.gd" id="8_c8320"]
 
 [sub_resource type="Resource" id="Resource_g0dry"]
@@ -19,9 +20,14 @@ script = ExtResource("2_c8320")
 scene = ExtResource("3_01boi")
 metadata/_custom_type_script = "uid://clyn63xl4tio5"
 
+[sub_resource type="Resource" id="Resource_01boi"]
+script = ExtResource("2_c8320")
+scene = ExtResource("5_vhq2c")
+metadata/_custom_type_script = "uid://clyn63xl4tio5"
+
 [sub_resource type="Resource" id="Resource_cyu3u"]
 script = ExtResource("4_01boi")
-entries = Array[ExtResource("2_c8320")]([SubResource("Resource_g0dry"), SubResource("Resource_c8320")])
+entries = Array[ExtResource("2_c8320")]([SubResource("Resource_g0dry"), SubResource("Resource_c8320"), SubResource("Resource_01boi")])
 debug_name = "Traffic Vehicle"
 metadata/_custom_type_script = "uid://bonfni7lag8hs"
 

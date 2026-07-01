@@ -37,6 +37,8 @@ func _ready() -> void:
 		_race.game_state = _game_state
 		self.add_child(_race)
 		_race.setup_race()
+		await _race.play_opening_animation()
+		_race.start_race()
 		
 		# Wait for the race to tell us its ready for cleanup.
 		await _race.ready_for_cleanup

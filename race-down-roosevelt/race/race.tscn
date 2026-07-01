@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://dvlgkkayjdnkm" path="res://vehicles/traffic_vehicles/honda_civic_traffic.tscn" id="3_01boi"]
 [ext_resource type="PackedScene" uid="uid://5phxb6wuavas" path="res://vehicles/traffic_vehicles/subaru_forester_traffic.tscn" id="3_g1gks"]
 [ext_resource type="Script" uid="uid://bonfni7lag8hs" path="res://helpers/random_node_pool.gd" id="4_01boi"]
-[ext_resource type="Texture2D" uid="uid://bphsvdqsicl7h" path="res://road/road_straight.png" id="4_iqn4a"]
 [ext_resource type="PackedScene" uid="uid://8t5pwnixghwp" path="res://road/boost_pad_row.tscn" id="5_g0dry"]
 [ext_resource type="PackedScene" uid="uid://kavq5hucvvej" path="res://vehicles/traffic_vehicles/jeep_wrangler_traffic.tscn" id="5_vhq2c"]
 [ext_resource type="Script" uid="uid://7psf6ks7j2k4" path="res://race/leaderboard.gd" id="8_c8320"]
@@ -42,13 +41,16 @@ entries = Array[ExtResource("2_c8320")]([SubResource("Resource_g7srd")])
 debug_name = "Road Object"
 metadata/_custom_type_script = "uid://bonfni7lag8hs"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g0dry"]
-albedo_texture = ExtResource("4_iqn4a")
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c8320"]
+load_path = "res://.godot/imported/road_straight.png-d12ae04bb66e2d3dcf9149b3edf0378b.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhq2c"]
+albedo_texture = SubResource("CompressedTexture2D_c8320")
 uv1_scale = Vector3(9, 1, 1)
 texture_filter = 0
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_g1gks"]
-material = SubResource("StandardMaterial3D_g0dry")
+[sub_resource type="PlaneMesh" id="PlaneMesh_01boi"]
+material = SubResource("StandardMaterial3D_vhq2c")
 size = Vector2(27, 3)
 
 [sub_resource type="BoxMesh" id="BoxMesh_iqn4a"]
@@ -59,6 +61,305 @@ size = Vector3(0.2, 0.2, 3)
 
 [sub_resource type="Environment" id="Environment_c8320"]
 glow_enabled = true
+
+[sub_resource type="Animation" id="Animation_vhq2c"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OpeningAnimationPlayer/OpeningAnimationCamera")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -9, 1, 4)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OpeningAnimationPlayer/CanvasLayer/Black:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OpeningAnimationPlayer/BackWall/SubViewport/HBoxContainer/RaceLabel:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OpeningAnimationPlayer/BackWall/SubViewport/HBoxContainer/DownLabel:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("OpeningAnimationPlayer/BackWall/SubViewport/HBoxContainer/RooseveltLabel:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OpeningAnimationPlayer/BackWall:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("OpeningAnimationPlayer/BackWall:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-3, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("OpeningAnimationPlayer/BackWall:position:z")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-3, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("OpeningAnimationPlayer/CanvasLayer/Countdown:text")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["3"]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("OpeningAnimationPlayer/CanvasLayer/Countdown:self_modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c8320"]
+resource_name = "back_wall_in"
+length = 1.25
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OpeningAnimationPlayer/BackWall:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(1),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OpeningAnimationPlayer/BackWall:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-3, -0.25, 0, 0.13333334, 5.219342, 2.25, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OpeningAnimationPlayer/BackWall:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(1),
+"points": PackedFloat32Array(-3, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_01boi"]
+resource_name = "countdown"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OpeningAnimationPlayer/CanvasLayer/Countdown:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75, 1, 1.75, 2, 2.75),
+"transitions": PackedFloat32Array(1, 0, 1, 0, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OpeningAnimationPlayer/CanvasLayer/Countdown:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": ["3", "2", "1"]
+}
+
+[sub_resource type="Animation" id="Animation_xiy3d"]
+resource_name = "fade_from_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OpeningAnimationPlayer/CanvasLayer/Black:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g7srd"]
+resource_name = "fade_to_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OpeningAnimationPlayer/CanvasLayer/Black:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hkrbr"]
+resource_name = "go"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OpeningAnimationPlayer/CanvasLayer/Countdown:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["GO!"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OpeningAnimationPlayer/CanvasLayer/Countdown:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cyu3u"]
+resource_name = "scroll_vehicles"
+length = 7.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OpeningAnimationPlayer/OpeningAnimationCamera")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -9, 1, 4, 6, 1, 9, 1, 4)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OpeningAnimationPlayer/BackWall/SubViewport/HBoxContainer/RaceLabel:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OpeningAnimationPlayer/BackWall/SubViewport/HBoxContainer/DownLabel:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OpeningAnimationPlayer/BackWall/SubViewport/HBoxContainer/RooseveltLabel:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(3, 4.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hkrbr"]
+_data = {
+&"RESET": SubResource("Animation_vhq2c"),
+&"back_wall_in": SubResource("Animation_c8320"),
+&"countdown": SubResource("Animation_01boi"),
+&"fade_from_black": SubResource("Animation_xiy3d"),
+&"fade_to_black": SubResource("Animation_g7srd"),
+&"go": SubResource("Animation_hkrbr"),
+&"scroll_vehicles": SubResource("Animation_cyu3u")
+}
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_c8320"]
+size = Vector2(26.8, 4)
 
 [node name="Race" type="Node3D" unique_id=1363738947]
 script = ExtResource("1_6dlvr")
@@ -305,7 +606,7 @@ render_target_update_mode = 0
 [node name="Road" type="Node3D" parent="." unique_id=1549239541]
 
 [node name="Asphalt" type="MeshInstance3D" parent="Road" unique_id=362303329]
-mesh = SubResource("PlaneMesh_g1gks")
+mesh = SubResource("PlaneMesh_01boi")
 
 [node name="LeftBarrier" type="MeshInstance3D" parent="Road" unique_id=2118898070]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 0, 0)
@@ -512,3 +813,72 @@ text = "Name"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=504762943]
 environment = SubResource("Environment_c8320")
+
+[node name="OpeningAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1386659809]
+libraries/ = SubResource("AnimationLibrary_hkrbr")
+
+[node name="OpeningAnimationCamera" type="Camera3D" parent="OpeningAnimationPlayer" unique_id=900515783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, 4)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="OpeningAnimationPlayer" unique_id=1838710824]
+
+[node name="Black" type="ColorRect" parent="OpeningAnimationPlayer/CanvasLayer" unique_id=1522165535]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Countdown" type="Label" parent="OpeningAnimationPlayer/CanvasLayer" unique_id=156906141]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 256
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackWall" type="MeshInstance3D" parent="OpeningAnimationPlayer" unique_id=1155583820]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -3, -3)
+mesh = SubResource("PlaneMesh_c8320")
+
+[node name="SubViewport" type="SubViewport" parent="OpeningAnimationPlayer/BackWall" unique_id=353432122]
+transparent_bg = true
+size = Vector2i(2144, 320)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OpeningAnimationPlayer/BackWall/SubViewport" unique_id=494334686]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="RaceLabel" type="Label" parent="OpeningAnimationPlayer/BackWall/SubViewport/HBoxContainer" unique_id=663209177]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "RACE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DownLabel" type="Label" parent="OpeningAnimationPlayer/BackWall/SubViewport/HBoxContainer" unique_id=1506147049]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "DOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RooseveltLabel" type="Label" parent="OpeningAnimationPlayer/BackWall/SubViewport/HBoxContainer" unique_id=1409986879]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "ROOSEVELT"
+horizontal_alignment = 1
+vertical_alignment = 1

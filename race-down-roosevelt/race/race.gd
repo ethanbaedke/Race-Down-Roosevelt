@@ -15,7 +15,7 @@ var game_state:GameState = null
 
 var leaderboard_data:Array[RacerObject] = []
 
-var _race_setup:bool = false
+var _race_in_progress:bool = false
 
 var _racer_vehicles:Array[RacerVehicle] = []
 
@@ -163,6 +163,9 @@ func _handle_traffic_vehicle_placement(z_pos:float) -> void:
 		return
 	if (_traffic_spawn_cooldowns.size() != NUM_LANES):
 		RdrLogger.fatal(self, _handle_traffic_vehicle_placement.get_method() + " expects traffic spawn cooldowns array to have size equal to number of lanes.")
+		return
+	if (!_race_in_progress):
+		return
 	
 	# Spawn traffic.
 	for i:int in range(NUM_LANES):
@@ -305,6 +308,10 @@ func _handle_cleanup() -> void:
 	$"RacerVehicleSpawnPoints/4",
 ]
 
+@onready var _opening_animation_player:AnimationPlayer = $OpeningAnimationPlayer
+@onready var _back_wall_for_animation:MeshInstance3D = $OpeningAnimationPlayer/BackWall
+@onready var _sub_viewport_for_back_wall:SubViewport = $OpeningAnimationPlayer/BackWall/SubViewport
+
 # 1-player viewport objects.
 @onready var _viewport_setup_1p:Control = $ViewportSetup1p
 @onready var _p1_cam_1p:Camera3D = $ViewportSetup1p/P1SubViewportContainer/SubViewport/P1Cam1p
@@ -346,7 +353,11 @@ func setup_race() -> void:
 	
 	_traffic_spawn_cooldowns.resize(NUM_LANES)
 	
-	# TODO: Reset asphalt/barrier mesh and material properties here.
+	# Create unique copies of the asphalt and barrier meshes here since we'll modify them.
+	# This keeps their changes from persisting between races.
+	_road_asphalt.mesh = _road_asphalt.mesh.duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
+	_road_left_barrier.mesh = _road_left_barrier.mesh.duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
+	_road_right_barrier.mesh = _road_right_barrier.mesh.duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
 	
 	# If ai racers are enabled, fill them into any open racer slots.
 	if (game_state.include_ai_racers):
@@ -369,14 +380,51 @@ func setup_race() -> void:
 	
 	# DEPRECATED _validate_race_parameters()
 	_spawn_racer_vehicles()
+	
+	# Do one round of road placement to put initial road down in front of the players.
+	_handle_road_placement()
+	# We also do one round of cleanup since it handles moving the road back.
+	_handle_cleanup()
+	
+	RdrLogger.log(self, "Race setup complete.")
+
+func play_opening_animation() -> void:
+	
+	var back_wall_material_override:Material = StandardMaterial3D.new()
+	back_wall_material_override.albedo_texture = _sub_viewport_for_back_wall.get_texture()
+	_back_wall_for_animation.material_override = back_wall_material_override
+	
+	_opening_animation_player.play("fade_from_black")
+	await _opening_animation_player.animation_finished
+	
+	_opening_animation_player.play("back_wall_in")
+	await _opening_animation_player.animation_finished
+	
+	_opening_animation_player.play("scroll_vehicles")
+	await _opening_animation_player.animation_finished
+	
+	_opening_animation_player.play("fade_to_black")
+	await _opening_animation_player.animation_finished
+	
+	_back_wall_for_animation.visible = false
 	_setup_player_viewports()
+	
+	_opening_animation_player.play("fade_from_black")
+	await _opening_animation_player.animation_finished
+	
+	_opening_animation_player.play("countdown")
+	await _opening_animation_player.animation_finished
+	
+	_opening_animation_player.play("go")
+
+func start_race() -> void:
 	
 	# Enable input for all racers
 	for vehicle:RacerVehicle in _racer_vehicles:
 		vehicle.input_enabled = true
 	
-	_race_setup = true
-	RdrLogger.log(self, "Race setup complete.")
+	_race_in_progress = true
+	RdrLogger.log(self, "Race started.")
 
 # This function expects there to be 1-4 racer vehicles, with at least one being player controlled.
 func _setup_player_viewports() -> void:
@@ -513,7 +561,7 @@ func _spawn_racer_vehicles() -> void:
 
 func _physics_process(delta: float) -> void:
 
-	if (!_race_setup):
+	if (!_race_in_progress):
 		return
 
 	_move_racers(delta)

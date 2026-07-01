@@ -6,7 +6,7 @@ signal ready_for_cleanup
 const NUM_LANES:int = 9
 const LANE_SPACING:float = 3.0
 # Number of road rows to be placed before the finish line.
-const RACE_LENGTH:int = 100
+const RACE_LENGTH:int = 1000
 const LEADERBOARD_DISPLAY_TIME:float = 5.0
 
 var game_state:GameState = null
@@ -133,7 +133,7 @@ const TRAFFIC_SPAWN_COOLDOWN:int = 10
 @onready var _road_left_barrier:MeshInstance3D = $Road/LeftBarrier
 @onready var _road_right_barrier:MeshInstance3D = $Road/RightBarrier
 
-var traffic_spawn_chance:float = 0.1
+var traffic_spawn_chance:float = 0.2
 var road_object_spawn_chance:float = 0.5
 
 var _finish_line_scene:PackedScene = preload("res://road/road_row_finish_line.tscn")

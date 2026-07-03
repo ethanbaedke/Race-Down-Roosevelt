@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b30kj0jrm85yt" path="res://vehicles/racer_vehicles/racer_vehicle.gd" id="1_uwc0b"]
 [ext_resource type="PackedScene" uid="uid://bm0vc0wvvnx4h" path="res://vehicles/vehicle_model_controller.tscn" id="2_o80sb"]
 [ext_resource type="PackedScene" uid="uid://uvhx5awql1e8" path="res://vehicles/honda_civic.glb" id="2_uwc0b"]
+[ext_resource type="PackedScene" uid="uid://dcf6mvjwffjpe" path="res://vehicles/racer_vehicles/ai_racer_controller.tscn" id="4_mjgcb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4rng7"]
 size = Vector3(0.89, 0.634, 2.313)
@@ -20,3 +21,5 @@ shape = SubResource("BoxShape3D_4rng7")
 
 [node name="HondaCivicModel" parent="VehicleModelController" unique_id=1671646187 instance=ExtResource("2_uwc0b")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.4615922, 0, 1.1404314)
+
+[node name="AiRacerController" parent="." unique_id=590700889 instance=ExtResource("4_mjgcb")]

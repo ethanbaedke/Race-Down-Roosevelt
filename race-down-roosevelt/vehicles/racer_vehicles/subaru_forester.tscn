@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b30kj0jrm85yt" path="res://vehicles/racer_vehicles/racer_vehicle.gd" id="1_ce1kl"]
 [ext_resource type="PackedScene" uid="uid://bm0vc0wvvnx4h" path="res://vehicles/vehicle_model_controller.tscn" id="2_07dxa"]
 [ext_resource type="PackedScene" uid="uid://40efplcfedui" path="res://vehicles/subaru_forester.glb" id="2_ce1kl"]
+[ext_resource type="PackedScene" uid="uid://dcf6mvjwffjpe" path="res://vehicles/racer_vehicles/ai_racer_controller.tscn" id="4_1kbiw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_meqtm"]
 size = Vector3(0.917, 0.685, 2.312)
@@ -20,3 +21,5 @@ shape = SubResource("BoxShape3D_meqtm")
 
 [node name="SubaruForesterModel" parent="VehicleModelController" unique_id=1946182605 instance=ExtResource("2_ce1kl")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.46786118, 0, 1.1404314)
+
+[node name="AiRacerController" parent="." unique_id=590700889 instance=ExtResource("4_1kbiw")]

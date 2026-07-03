@@ -16,9 +16,16 @@ const MIN_DURABILITY:int = 1
 const MAX_WEIGHT:int = 6
 const MIN_WEIGHT:int = 1
 
+@onready var ai_controller:AiRacerController = $AiRacerController
+
 @onready var _collision_area:Area3D = $Area3D
 @onready var _collision_shape:CollisionShape3D = $Area3D/CollisionShape3D
 @onready var _model_controller:VehicleModelController = $VehicleModelController
+
+var top_speed:float = 0.0
+var acceleration:float = 0.0
+var durability:float = 0.0
+var weight:float = 0.0
 
 var speed:float = 0
 var input_enabled:bool = false
@@ -42,9 +49,6 @@ func set_initial_position(global_pos:Vector3) -> void:
 
 func calculate_speed(delta:float) -> float:
 	
-	var top_speed:float = racer.vehicle_data.top_speed
-	var acceleration:float = racer.vehicle_data.acceleration
-	var weight:float = racer.vehicle_data.weight
 	if (speed < top_speed):
 		speed = min(speed + (acceleration * delta), top_speed)
 	elif (speed > top_speed):
@@ -151,8 +155,8 @@ func _handle_racer_bump(other:RacerVehicle) -> void:
 	
 	RdrLogger.log(self, self.racer.profile.name + " bumped " + other.racer.profile.name + ".")
 	
-	var m1:float = self.racer.vehicle_data.weight
-	var m2:float = other.racer.vehicle_data.weight
+	var m1:float = self.weight
+	var m2:float = other.weight
 	var s1:float = self.speed
 	var s2:float = other.speed
 
@@ -188,7 +192,7 @@ func _handle_traffic_vehicle_hit(vehicle:TrafficVehicle) -> void:
 	if (!_invincible):
 		# Reduce speed based on durability (higher = more maintained).
 		# Add one to max durability here to ensure vehicles with max durability still slow down some.
-		speed = speed * ((racer.vehicle_data.durability as float) / (MAX_DURABILITY + 1))
+		speed = speed * ((durability as float) / (MAX_DURABILITY + 1))
 
 func _collision_area_entered(area: Area3D) -> void:
 	
@@ -210,6 +214,8 @@ func _collision_area_entered(area: Area3D) -> void:
 #region Items
 
 const INVINCIBILITY_ITEM_TIME:float = 5.0
+const AI_ITEM_TIME:float = 5.0
+const AI_ITEM_MAX_SPEED_INCREASE:float = 10.0
 
 var _held_item:ItemData = null
 var _total_item_time:float = 0.0
@@ -237,6 +243,8 @@ func try_use_item() -> bool:
 			_activate_boost_item()
 		ItemData.ItemType.INVINCIBILITY:
 			_activate_invincibility_item()
+		ItemData.ItemType.AI:
+			_activate_ai_item()
 	
 	if (_hud != null):
 		_hud.update_item(_held_item)
@@ -258,6 +266,8 @@ func _handle_timed_item_finished() -> void:
 			pass
 		ItemData.ItemType.INVINCIBILITY:
 			_handle_invincibility_item_finished()
+		ItemData.ItemType.AI:
+			_handle_ai_item_finished()
 	
 	_held_item = null
 	if (_hud != null):
@@ -279,6 +289,23 @@ func _handle_invincibility_item_finished() -> void:
 	
 	_invincible = false
 
+func _activate_ai_item() -> void:
+	
+	_set_item_time(AI_ITEM_TIME)
+	top_speed += AI_ITEM_MAX_SPEED_INCREASE
+	boost()
+	ai_controller.intelligence = AiRacerController.Intelligence.HIGH
+	ai_controller.enabled = true
+
+func _handle_ai_item_finished() -> void:
+	
+	# Only disable the ai racer if we are a player. This keeps ai racers from having their ai turned off after using this item.
+	if (racer.device_index != -2):
+		ai_controller.enabled = false
+	
+	ai_controller.intelligence = AiRacerController.Intelligence.LOW
+	top_speed -= AI_ITEM_MAX_SPEED_INCREASE
+
 #endregion
 
 # Expects race to be set.
@@ -289,7 +316,12 @@ func _ready() -> void:
 	if (racer == null):
 		RdrLogger.warn(self, "Racer object not set. Creating default instance.")
 		racer = RacerObject.new()
-		
+	
+	top_speed = racer.vehicle_data.top_speed
+	acceleration = racer.vehicle_data.acceleration
+	durability = racer.vehicle_data.durability
+	weight = racer.vehicle_data.weight
+	
 	_collision_area.area_entered.connect(_collision_area_entered)
 
 func _process(delta: float) -> void:
@@ -310,6 +342,9 @@ var _joystick_active:bool = false
 var _powerup_button_active:bool = false
 
 func _unhandled_input(event: InputEvent) -> void:
+	
+	if (ai_controller.enabled):
+		return
 	
 	if (!input_enabled):
 		return

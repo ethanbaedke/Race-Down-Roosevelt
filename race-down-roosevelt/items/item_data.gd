@@ -4,6 +4,7 @@ enum ItemType {
 	BOOST,
 	INVINCIBILITY,
 	AI,
+	SPEED,
 }
 
 @export var item_icon:CompressedTexture2D = preload("res://profiles/diamond_profile_icon.png")

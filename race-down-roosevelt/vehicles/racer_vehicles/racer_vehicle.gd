@@ -216,6 +216,9 @@ func _collision_area_entered(area: Area3D) -> void:
 const INVINCIBILITY_ITEM_TIME:float = 5.0
 const AI_ITEM_TIME:float = 5.0
 const AI_ITEM_MAX_SPEED_INCREASE:float = 10.0
+const SPEED_ITEM_TIME:float = 5.0
+const SPEED_ITEM_TOP_SPEED_INCREASE:float = 30.0
+const SPEED_ITEM_ACCELERATION_INCREASE:float = 10.0
 
 var _held_item:ItemData = null
 var _total_item_time:float = 0.0
@@ -245,6 +248,8 @@ func try_use_item() -> bool:
 			_activate_invincibility_item()
 		ItemData.ItemType.AI:
 			_activate_ai_item()
+		ItemData.ItemType.SPEED:
+			_activate_speed_item()
 	
 	if (_hud != null):
 		_hud.update_item(_held_item)
@@ -268,6 +273,8 @@ func _handle_timed_item_finished() -> void:
 			_handle_invincibility_item_finished()
 		ItemData.ItemType.AI:
 			_handle_ai_item_finished()
+		ItemData.ItemType.SPEED:
+			_handle_speed_item_finished()
 	
 	_held_item = null
 	if (_hud != null):
@@ -305,6 +312,17 @@ func _handle_ai_item_finished() -> void:
 	
 	ai_controller.intelligence = AiRacerController.Intelligence.LOW
 	top_speed -= AI_ITEM_MAX_SPEED_INCREASE
+
+func _activate_speed_item() -> void:
+	
+	_set_item_time(SPEED_ITEM_TIME)
+	top_speed += SPEED_ITEM_TOP_SPEED_INCREASE
+	acceleration += SPEED_ITEM_ACCELERATION_INCREASE
+
+func _handle_speed_item_finished() -> void:
+	
+	top_speed -= SPEED_ITEM_TOP_SPEED_INCREASE
+	acceleration -= SPEED_ITEM_ACCELERATION_INCREASE
 
 #endregion
 

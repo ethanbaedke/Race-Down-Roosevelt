@@ -88,7 +88,14 @@ func is_left_lane_open() -> bool:
 		return false
 	
 	var hits:Array[Node3D] = _cast_vehicle_shape_to_position(_collision_area.global_position + Vector3(race.LANE_SPACING, 0.0, 0.0))
-	return hits.size() == 0
+	var num_obstructions:int = 0
+	for node:Node3D in hits:
+		var parent:Node = node.get_parent()
+		if (parent is TrafficVehicle):
+			if (_invincible):
+				continue
+		num_obstructions += 1
+	return num_obstructions == 0
 
 func switch_lanes_left() -> void:
 	
@@ -102,7 +109,14 @@ func is_right_lane_open() -> bool:
 		return false
 	
 	var hits:Array[Node3D] = _cast_vehicle_shape_to_position(_collision_area.global_position - Vector3(race.LANE_SPACING, 0.0, 0.0))
-	return hits.size() == 0
+	var num_obstructions:int = 0
+	for node:Node3D in hits:
+		var parent:Node = node.get_parent()
+		if (parent is TrafficVehicle):
+			if (_invincible):
+				continue
+		num_obstructions += 1
+	return num_obstructions == 0
 
 func switch_lanes_right() -> void:
 	
@@ -169,9 +183,12 @@ func _handle_traffic_vehicle_hit(vehicle:TrafficVehicle) -> void:
 	RdrLogger.log(self, racer.profile.name + " hit a traffic vehicle.")
 	
 	vehicle.explode()
-	# Reduce speed based on durability (higher = more maintained).
-	# Add one to max durability here to ensure vehicles with max durability still slow down some.
-	speed = speed * ((racer.vehicle_data.durability as float) / (MAX_DURABILITY + 1))
+	
+	# Only reduce our speed if we are not invincible.
+	if (!_invincible):
+		# Reduce speed based on durability (higher = more maintained).
+		# Add one to max durability here to ensure vehicles with max durability still slow down some.
+		speed = speed * ((racer.vehicle_data.durability as float) / (MAX_DURABILITY + 1))
 
 func _collision_area_entered(area: Area3D) -> void:
 	
@@ -192,7 +209,13 @@ func _collision_area_entered(area: Area3D) -> void:
 
 #region Items
 
+const INVINCIBILITY_ITEM_TIME:float = 5.0
+
 var _held_item:ItemData = null
+var _total_item_time:float = 0.0
+var _current_item_time:float = 0.0
+
+var _invincible:bool = false
 
 func try_give_item(data:ItemData) -> bool:
 	
@@ -211,14 +234,50 @@ func try_use_item() -> bool:
 	
 	match (_held_item.item_type):
 		ItemData.ItemType.BOOST:
-			boost()
-			boost()
-			boost()
+			_activate_boost_item()
+		ItemData.ItemType.INVINCIBILITY:
+			_activate_invincibility_item()
+	
+	if (_hud != null):
+		_hud.update_item(_held_item)
+	return true
+
+func _set_item_time(time:float) -> void:
+	
+	_total_item_time = time
+	_current_item_time = time
+
+func _handle_timed_item_finished() -> void:
+	
+	if (_held_item == null):
+		RdrLogger.error(self, "timed item finished but held item is null.")
+		return
+	
+	match (_held_item.item_type):
+		ItemData.ItemType.BOOST:
+			pass
+		ItemData.ItemType.INVINCIBILITY:
+			_handle_invincibility_item_finished()
 	
 	_held_item = null
 	if (_hud != null):
-		_hud.update_item(null)
-	return true
+		_hud.update_item(_held_item)
+
+func _activate_boost_item() -> void:
+	
+	boost()
+	boost()
+	boost()
+	_held_item = null
+
+func _activate_invincibility_item() -> void:
+	
+	_invincible = true
+	_set_item_time(INVINCIBILITY_ITEM_TIME)
+
+func _handle_invincibility_item_finished() -> void:
+	
+	_invincible = false
 
 #endregion
 
@@ -232,6 +291,16 @@ func _ready() -> void:
 		racer = RacerObject.new()
 		
 	_collision_area.area_entered.connect(_collision_area_entered)
+
+func _process(delta: float) -> void:
+	
+	if (_current_item_time > 0):
+		_current_item_time -= delta
+		if (_current_item_time <= 0):
+			_current_item_time = 0
+			_handle_timed_item_finished()
+	if (_hud != null):
+		_hud.update_item_time(_current_item_time, _total_item_time)
 
 # These are used to get single inputs instead of a continuous stream.
 var _left_key_active:bool = false

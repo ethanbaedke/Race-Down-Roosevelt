@@ -12,6 +12,8 @@ func _start_decision_loop() -> void:
 	
 	while (true):
 		
+		return
+		
 		await get_tree().create_timer(DECISION_COOLDOWN).timeout
 		
 		# Cannot make a decision if input is disabled.

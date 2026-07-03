@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://b8sbqnq6jtmp1"]
+
+[ext_resource type="Texture2D" uid="uid://oxpxrv0k3po8" path="res://items/invincibility_item_icon.png" id="1_sv1yy"]
+[ext_resource type="Script" uid="uid://c0jy6l4ekh1t2" path="res://items/item_data.gd" id="2_br3v8"]
+
+[resource]
+script = ExtResource("2_br3v8")
+item_icon = ExtResource("1_sv1yy")
+item_type = 1
+metadata/_custom_type_script = "uid://c0jy6l4ekh1t2"

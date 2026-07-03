@@ -32,13 +32,30 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="ItemTextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=2100005317]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=520892533]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+alignment_horizontal = 0
+alignment_vertical = 0
+
+[node name="ItemTextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/AspectRatioContainer" unique_id=2100005317]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 texture = ExtResource("1_tdi34")
 stretch_mode = 4
+
+[node name="ItemProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer/AspectRatioContainer" unique_id=471768205]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.25
+value = 100.0
+fill_mode = 3
+show_percentage = false
 
 [node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1272258086]
 layout_mode = 2

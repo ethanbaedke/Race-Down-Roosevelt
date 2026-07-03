@@ -23,9 +23,16 @@ const MIN_WEIGHT:int = 1
 var speed:float = 0
 var input_enabled:bool = false
 
+var _hud:RacePlayerHud = null
+
 func set_camera_controller(controller:CameraController) -> void:
 	
 	_model_controller.set_camera_controller(controller)
+
+func set_hud(hud:RacePlayerHud) -> void:
+	
+	_hud = hud
+	_hud.update_item(_held_item)
 
 # Important for the camera initializing at the correct position.
 func set_initial_position(global_pos:Vector3) -> void:
@@ -193,6 +200,8 @@ func try_give_item(data:ItemData) -> bool:
 		return false
 		
 	_held_item = data
+	if (_hud != null):
+		_hud.update_item(data)
 	return true
 	
 func try_use_item() -> bool:
@@ -207,6 +216,8 @@ func try_use_item() -> bool:
 			boost()
 	
 	_held_item = null
+	if (_hud != null):
+		_hud.update_item(null)
 	return true
 
 #endregion

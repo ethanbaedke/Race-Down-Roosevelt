@@ -315,24 +315,34 @@ func _handle_cleanup() -> void:
 # 1-player viewport objects.
 @onready var _viewport_setup_1p:Control = $ViewportSetup1p
 @onready var _p1_cam_1p:Camera3D = $ViewportSetup1p/P1SubViewportContainer/SubViewport/P1Cam1p
+@onready var _p1_hud_1p:RacePlayerHud = $ViewportSetup1p/P1SubViewportContainer/SubViewport/RacePlayerHud
 
 # 2-player viewport objects.
 @onready var _viewport_setup_2p:Control = $ViewportSetup2p
 @onready var _p1_cam_2p:Camera3D = $ViewportSetup2p/SplitContainer/P1SubViewportContainer/SubViewport/P1Cam2p
+@onready var _p1_hud_2p:RacePlayerHud = $ViewportSetup2p/SplitContainer/P1SubViewportContainer/SubViewport/RacePlayerHud
 @onready var _p2_cam_2p:Camera3D = $ViewportSetup2p/SplitContainer/P2SubViewportContainer/SubViewport/P2Cam2p
+@onready var _p2_hud_2p:RacePlayerHud = $ViewportSetup2p/SplitContainer/P2SubViewportContainer/SubViewport/RacePlayerHud
 
 # 3-player viewport objects.
 @onready var _viewport_setup_3p:Control = $ViewportSetup3p
 @onready var _p1_cam_3p:Camera3D = $ViewportSetup3p/SplitContainer/P1SubViewportContainer/SubViewport/P1Cam3p
+@onready var _p1_hud_3p:RacePlayerHud = $ViewportSetup3p/SplitContainer/P1SubViewportContainer/SubViewport/RacePlayerHud
 @onready var _p2_cam_3p:Camera3D = $ViewportSetup3p/SplitContainer/SplitContainer/P2SubViewportContainer/SubViewport/P2Cam3p
+@onready var _p2_hud_3p:RacePlayerHud = $ViewportSetup3p/SplitContainer/SplitContainer/P2SubViewportContainer/SubViewport/RacePlayerHud
 @onready var _p3_cam_3p:Camera3D = $ViewportSetup3p/SplitContainer/SplitContainer/P3SubViewportContainer/SubViewport/P3Cam3p
+@onready var _p3_hud_3p:RacePlayerHud = $ViewportSetup3p/SplitContainer/SplitContainer/P3SubViewportContainer/SubViewport/RacePlayerHud
 
 # 4-player viewport objects.
 @onready var _viewport_setup_4p:Control = $ViewportSetup4p
 @onready var _p1_cam_4p:Camera3D = $ViewportSetup4p/SplitContainer/SplitContainerTop/P1SubViewportContainer/SubViewport/P1Cam4p
+@onready var _p1_hud_4p:RacePlayerHud = $ViewportSetup4p/SplitContainer/SplitContainerTop/P1SubViewportContainer/SubViewport/RacePlayerHud
 @onready var _p2_cam_4p:Camera3D = $ViewportSetup4p/SplitContainer/SplitContainerTop/P2SubViewportContainer/SubViewport/P2Cam4p
+@onready var _p2_hud_4p:RacePlayerHud = $ViewportSetup4p/SplitContainer/SplitContainerTop/P2SubViewportContainer/SubViewport/RacePlayerHud
 @onready var _p3_cam_4p:Camera3D = $ViewportSetup4p/SplitContainer/SplitContainerBottom/P3SubViewportContainer/SubViewport/P3Cam4p
+@onready var _p3_hud_4p:RacePlayerHud = $ViewportSetup4p/SplitContainer/SplitContainerBottom/P3SubViewportContainer/SubViewport/RacePlayerHud
 @onready var _p4_cam_4p:Camera3D = $ViewportSetup4p/SplitContainer/SplitContainerBottom/P4SubViewportContainer/SubViewport/P4Cam4p
+@onready var _p4_hud_4p:RacePlayerHud = $ViewportSetup4p/SplitContainer/SplitContainerBottom/P4SubViewportContainer/SubViewport/RacePlayerHud
 
 func setup_race() -> void:
 	
@@ -443,25 +453,36 @@ func _setup_player_viewports() -> void:
 	
 	# Enable viewport setup that corresponds to the number of players and store sub-viewports that should be used.
 	var cameras:Array[Camera3D] = []
+	var huds:Array[RacePlayerHud] = []
 	match player_vehicles.size():
 		1:
 			_viewport_setup_1p.visible = true
 			cameras.append(_p1_cam_1p)
+			huds.append(_p1_hud_1p)
 		2:
 			_viewport_setup_2p.visible = true
 			cameras.append(_p1_cam_2p)
+			huds.append(_p1_hud_2p)
 			cameras.append(_p2_cam_2p)
+			huds.append(_p2_hud_2p)
 		3:
 			_viewport_setup_3p.visible = true
 			cameras.append(_p1_cam_3p)
+			huds.append(_p1_hud_3p)
 			cameras.append(_p2_cam_3p)
+			huds.append(_p2_hud_3p)
 			cameras.append(_p3_cam_3p)
+			huds.append(_p3_hud_3p)
 		4:
 			_viewport_setup_4p.visible = true
 			cameras.append(_p1_cam_4p)
+			huds.append(_p1_hud_4p)
 			cameras.append(_p2_cam_4p)
+			huds.append(_p2_hud_4p)
 			cameras.append(_p3_cam_4p)
+			huds.append(_p3_hud_4p)
 			cameras.append(_p4_cam_4p)
+			huds.append(_p4_hud_4p)
 		_:
 			RdrLogger.fatal(self, _setup_player_viewports.get_method() + " expects 1-4 racer vehicles to exist.")
 	
@@ -470,6 +491,7 @@ func _setup_player_viewports() -> void:
 		var controller:CameraController = CameraController.new()
 		controller.camera = cameras[i]
 		player_vehicles[i].set_camera_controller(controller)
+		player_vehicles[i].set_hud(huds[i])
 		
 	RdrLogger.log(self, "Player viewport setup complete.")
 

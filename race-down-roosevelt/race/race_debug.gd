@@ -14,3 +14,5 @@ func _ready() -> void:
 	]
 	_race.game_state = game_state
 	_race.setup_race()
+	await _race.play_opening_animation()
+	_race.start_race()

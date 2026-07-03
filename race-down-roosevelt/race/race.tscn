@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://kavq5hucvvej" path="res://vehicles/traffic_vehicles/jeep_wrangler_traffic.tscn" id="5_vhq2c"]
 [ext_resource type="Script" uid="uid://7psf6ks7j2k4" path="res://race/leaderboard.gd" id="8_c8320"]
 [ext_resource type="PackedScene" uid="uid://ukdsd8n4p20e" path="res://road/item_row.tscn" id="8_vhq2c"]
+[ext_resource type="PackedScene" uid="uid://bhgv8crq1o62j" path="res://race/race_player_hud.tscn" id="10_hkrbr"]
 
 [sub_resource type="Resource" id="Resource_g0dry"]
 script = ExtResource("2_c8320")
@@ -416,6 +417,8 @@ render_target_update_mode = 0
 
 [node name="P1Cam1p" type="Camera3D" parent="ViewportSetup1p/P1SubViewportContainer/SubViewport" unique_id=368035240]
 
+[node name="RacePlayerHud" parent="ViewportSetup1p/P1SubViewportContainer/SubViewport" unique_id=365328423 instance=ExtResource("10_hkrbr")]
+
 [node name="ViewportSetup2p" type="Control" parent="." unique_id=1816943001]
 visible = false
 layout_mode = 3
@@ -448,6 +451,8 @@ render_target_update_mode = 0
 
 [node name="P1Cam2p" type="Camera3D" parent="ViewportSetup2p/SplitContainer/P1SubViewportContainer/SubViewport" unique_id=1614703854]
 
+[node name="RacePlayerHud" parent="ViewportSetup2p/SplitContainer/P1SubViewportContainer/SubViewport" unique_id=1563171209 instance=ExtResource("10_hkrbr")]
+
 [node name="P2SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup2p/SplitContainer" unique_id=811511113]
 layout_mode = 2
 size_flags_vertical = 3
@@ -459,6 +464,8 @@ size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="P2Cam2p" type="Camera3D" parent="ViewportSetup2p/SplitContainer/P2SubViewportContainer/SubViewport" unique_id=950310841]
+
+[node name="RacePlayerHud" parent="ViewportSetup2p/SplitContainer/P2SubViewportContainer/SubViewport" unique_id=244374586 instance=ExtResource("10_hkrbr")]
 
 [node name="ViewportSetup3p" type="Control" parent="." unique_id=412423473]
 visible = false
@@ -492,6 +499,8 @@ render_target_update_mode = 0
 
 [node name="P1Cam3p" type="Camera3D" parent="ViewportSetup3p/SplitContainer/P1SubViewportContainer/SubViewport" unique_id=279638826]
 
+[node name="RacePlayerHud" parent="ViewportSetup3p/SplitContainer/P1SubViewportContainer/SubViewport" unique_id=2011513084 instance=ExtResource("10_hkrbr")]
+
 [node name="SplitContainer" type="SplitContainer" parent="ViewportSetup3p/SplitContainer" unique_id=962487105]
 layout_mode = 2
 size_flags_vertical = 3
@@ -511,6 +520,8 @@ render_target_update_mode = 0
 
 [node name="P2Cam3p" type="Camera3D" parent="ViewportSetup3p/SplitContainer/SplitContainer/P2SubViewportContainer/SubViewport" unique_id=1010377993]
 
+[node name="RacePlayerHud" parent="ViewportSetup3p/SplitContainer/SplitContainer/P2SubViewportContainer/SubViewport" unique_id=859023197 instance=ExtResource("10_hkrbr")]
+
 [node name="P3SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup3p/SplitContainer/SplitContainer" unique_id=1035557721]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -523,6 +534,8 @@ size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="P3Cam3p" type="Camera3D" parent="ViewportSetup3p/SplitContainer/SplitContainer/P3SubViewportContainer/SubViewport" unique_id=484191211]
+
+[node name="RacePlayerHud" parent="ViewportSetup3p/SplitContainer/SplitContainer/P3SubViewportContainer/SubViewport" unique_id=1748070139 instance=ExtResource("10_hkrbr")]
 
 [node name="ViewportSetup4p" type="Control" parent="." unique_id=86277851]
 visible = false
@@ -565,6 +578,8 @@ render_target_update_mode = 0
 
 [node name="P1Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerTop/P1SubViewportContainer/SubViewport" unique_id=1962248314]
 
+[node name="RacePlayerHud" parent="ViewportSetup4p/SplitContainer/SplitContainerTop/P1SubViewportContainer/SubViewport" unique_id=2047375211 instance=ExtResource("10_hkrbr")]
+
 [node name="P2SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup4p/SplitContainer/SplitContainerTop" unique_id=629965026]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -577,6 +592,8 @@ size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="P2Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerTop/P2SubViewportContainer/SubViewport" unique_id=14345126]
+
+[node name="RacePlayerHud" parent="ViewportSetup4p/SplitContainer/SplitContainerTop/P2SubViewportContainer/SubViewport" unique_id=1649782683 instance=ExtResource("10_hkrbr")]
 
 [node name="SplitContainerBottom" type="SplitContainer" parent="ViewportSetup4p/SplitContainer" unique_id=437469594]
 layout_mode = 2
@@ -597,6 +614,8 @@ render_target_update_mode = 0
 
 [node name="P3Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P3SubViewportContainer/SubViewport" unique_id=1996853780]
 
+[node name="RacePlayerHud" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P3SubViewportContainer/SubViewport" unique_id=1980372517 instance=ExtResource("10_hkrbr")]
+
 [node name="P4SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom" unique_id=117659262]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -609,6 +628,8 @@ size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="P4Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P4SubViewportContainer/SubViewport" unique_id=1975362]
+
+[node name="RacePlayerHud" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P4SubViewportContainer/SubViewport" unique_id=2142799666 instance=ExtResource("10_hkrbr")]
 
 [node name="Road" type="Node3D" parent="." unique_id=1549239541]
 

@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bhgv8crq1o62j"]
+
+[ext_resource type="Script" uid="uid://dxvrepu3i11kx" path="res://race/race_player_hud.gd" id="1_7t3ce"]
+[ext_resource type="Texture2D" uid="uid://bcug07nmp85uk" path="res://items/boost_item_icon.png" id="1_tdi34"]
+
+[node name="RacePlayerHud" type="Control" unique_id=365328423]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7t3ce")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2080816943]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=474705734]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=608783771]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="ItemTextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=2100005317]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+texture = ExtResource("1_tdi34")
+stretch_mode = 4
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1272258086]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer" unique_id=542521493]
+layout_mode = 2
+size_flags_vertical = 3

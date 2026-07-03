@@ -27,10 +27,6 @@ func set_camera_controller(controller:CameraController) -> void:
 	
 	_model_controller.set_camera_controller(controller)
 
-func boost() -> void:
-	
-	speed += 5.0
-
 # Important for the camera initializing at the correct position.
 func set_initial_position(global_pos:Vector3) -> void:
 	
@@ -49,6 +45,10 @@ func calculate_speed(delta:float) -> float:
 	RdrLogger.spam_log(self, racer.profile.name + " speed: " + str(speed))
 	
 	return speed
+
+func boost() -> void:
+	
+	speed += 5.0
 
 func try_switch_lanes(dir:int) -> bool:
 	
@@ -183,6 +183,34 @@ func _collision_area_entered(area: Area3D) -> void:
 	elif (parent is TrafficVehicle):
 		_handle_traffic_vehicle_hit(parent)
 
+#region Items
+
+var _held_item:ItemData = null
+
+func try_give_item(data:ItemData) -> bool:
+	
+	if (_held_item != null):
+		return false
+		
+	_held_item = data
+	return true
+	
+func try_use_item() -> bool:
+	
+	if (_held_item == null):
+		return false
+	
+	match (_held_item.item_type):
+		ItemData.ItemType.BOOST:
+			boost()
+			boost()
+			boost()
+	
+	_held_item = null
+	return true
+
+#endregion
+
 # Expects race to be set.
 func _ready() -> void:
 	
@@ -228,8 +256,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				_powerup_key_active = false
 			elif (!_powerup_key_active):
 				_powerup_key_active = true
-				boost()
-				
+				try_use_item()
 	
 	elif (event.device != racer.device_index):
 		return
@@ -252,4 +279,4 @@ func _unhandled_input(event: InputEvent) -> void:
 				_powerup_button_active = false
 			elif (!_powerup_button_active):
 				_powerup_button_active = true
-				boost()
+				try_use_item()

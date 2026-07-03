@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://ch5ogdf24rydn"]
+
+[ext_resource type="PackedScene" uid="uid://bhwfveh6nk2q0" path="res://items/item.tscn" id="1_kvyr0"]
+[ext_resource type="Script" uid="uid://c0jy6l4ekh1t2" path="res://items/item_data.gd" id="1_u4lg2"]
+
+[resource]
+script = ExtResource("1_u4lg2")
+item_scene = ExtResource("1_kvyr0")
+metadata/_custom_type_script = "uid://c0jy6l4ekh1t2"

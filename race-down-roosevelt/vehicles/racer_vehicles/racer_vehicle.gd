@@ -219,12 +219,16 @@ const AI_ITEM_MAX_SPEED_INCREASE:float = 10.0
 const SPEED_ITEM_TIME:float = 5.0
 const SPEED_ITEM_TOP_SPEED_INCREASE:float = 30.0
 const SPEED_ITEM_ACCELERATION_INCREASE:float = 10.0
+const JUMP_ITEM_TIME:float = 2.0
+const JUMP_ITEM_HEIGHT:float = 5.0
 
 var _held_item:ItemData = null
 var _total_item_time:float = 0.0
 var _current_item_time:float = 0.0
 
 var _invincible:bool = false
+var _jump_item_initial_y:float = 0.0
+var _in_air:bool = false
 
 func try_give_item(data:ItemData) -> bool:
 	
@@ -250,6 +254,8 @@ func try_use_item() -> bool:
 			_activate_ai_item()
 		ItemData.ItemType.SPEED:
 			_activate_speed_item()
+		ItemData.ItemType.JUMP:
+			_activate_jump_item()
 	
 	if (_hud != null):
 		_hud.update_item(_held_item)
@@ -275,10 +281,27 @@ func _handle_timed_item_finished() -> void:
 			_handle_ai_item_finished()
 		ItemData.ItemType.SPEED:
 			_handle_speed_item_finished()
+		ItemData.ItemType.JUMP:
+			_handle_jump_item_finished()
 	
 	_held_item = null
 	if (_hud != null):
 		_hud.update_item(_held_item)
+
+# Used for items that need mid-use processing. Not used for timed item countdowns.
+func _tick_item(delta:float) -> void:
+	
+	match (_held_item.item_type):
+		ItemData.ItemType.BOOST:
+			pass
+		ItemData.ItemType.INVINCIBILITY:
+			pass
+		ItemData.ItemType.AI:
+			pass
+		ItemData.ItemType.SPEED:
+			pass
+		ItemData.ItemType.JUMP:
+			_tick_jump_item(delta)
 
 func _activate_boost_item() -> void:
 	
@@ -324,6 +347,31 @@ func _handle_speed_item_finished() -> void:
 	top_speed -= SPEED_ITEM_TOP_SPEED_INCREASE
 	acceleration -= SPEED_ITEM_ACCELERATION_INCREASE
 
+func _activate_jump_item() -> void:
+	
+	_set_item_time(JUMP_ITEM_TIME)
+	_jump_item_initial_y = self.position.y
+	_in_air = true
+	_collision_shape.disabled = true
+	ai_controller.enabled = false
+	boost()
+	boost()
+	boost()
+
+func _tick_jump_item(delta:float) -> void:
+	
+	var time_p:float = _current_item_time / _total_item_time
+	var height_time:float = -pow((time_p * 2.0) - 1.0, 2.0) + 1.0
+	self.position.y = lerpf(_jump_item_initial_y, _jump_item_initial_y + JUMP_ITEM_HEIGHT, height_time)
+
+func _handle_jump_item_finished() -> void:
+	
+	self.position.y = _jump_item_initial_y
+	_in_air = false
+	_collision_shape.disabled = false
+	if (racer.device_index == -2):
+		ai_controller.enabled = true
+
 #endregion
 
 # Expects race to be set.
@@ -351,6 +399,9 @@ func _process(delta: float) -> void:
 			_handle_timed_item_finished()
 	if (_hud != null):
 		_hud.update_item_time(_current_item_time, _total_item_time)
+	
+	if (_held_item != null && _current_item_time != _total_item_time):
+		_tick_item(delta)
 
 # These are used to get single inputs instead of a continuous stream.
 var _left_key_active:bool = false
@@ -365,6 +416,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	
 	if (!input_enabled):
+		return
+	
+	if (_in_air):
 		return
 	
 	if (event is InputEventKey):

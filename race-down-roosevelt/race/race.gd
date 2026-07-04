@@ -12,6 +12,7 @@ const LEADERBOARD_DISPLAY_TIME:float = 5.0
 var game_state:GameState = null
 
 @onready var _leaderboard:Leaderboard = $Leaderboard
+@onready var _race_theme_player:AudioStreamPlayer3D = $RaceThemePlayer
 
 var leaderboard_data:Array[RacerObject] = []
 
@@ -435,6 +436,7 @@ func start_race() -> void:
 			vehicle.ai_controller.enabled = true
 	
 	_race_in_progress = true
+	_race_theme_player.play()
 	RdrLogger.log(self, "Race started.")
 
 # This function expects there to be 1-4 racer vehicles, with at least one being player controlled.

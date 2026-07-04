@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://7psf6ks7j2k4" path="res://race/leaderboard.gd" id="8_c8320"]
 [ext_resource type="PackedScene" uid="uid://ukdsd8n4p20e" path="res://road/item_row.tscn" id="8_vhq2c"]
 [ext_resource type="PackedScene" uid="uid://bhgv8crq1o62j" path="res://race/race_player_hud.tscn" id="10_hkrbr"]
+[ext_resource type="AudioStream" uid="uid://8d08w1au8lsc" path="res://music/race_theme.wav" id="11_hkrbr"]
 
 [sub_resource type="Resource" id="Resource_g0dry"]
 script = ExtResource("2_c8320")
@@ -910,3 +911,8 @@ theme_override_font_sizes/font_size = 128
 text = "ROOSEVELT"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RaceThemePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1364561858]
+stream = ExtResource("11_hkrbr")
+attenuation_model = 3
+panning_strength = 0.0

@@ -13,6 +13,7 @@ var game_state:GameState = null
 
 @onready var _leaderboard:Leaderboard = $Leaderboard
 @onready var _race_theme_player:AudioStreamPlayer3D = $RaceThemePlayer
+@onready var _race_intro_player:AudioStreamPlayer3D = $RaceIntroPlayer
 
 var leaderboard_data:Array[RacerObject] = []
 
@@ -402,6 +403,8 @@ func play_opening_animation() -> void:
 	var back_wall_material_override:Material = StandardMaterial3D.new()
 	back_wall_material_override.albedo_texture = _sub_viewport_for_back_wall.get_texture()
 	_back_wall_for_animation.material_override = back_wall_material_override
+	
+	_race_intro_player.play()
 	
 	_opening_animation_player.play("fade_from_black")
 	await _opening_animation_player.animation_finished

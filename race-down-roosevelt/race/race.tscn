@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ukdsd8n4p20e" path="res://road/item_row.tscn" id="8_vhq2c"]
 [ext_resource type="PackedScene" uid="uid://bhgv8crq1o62j" path="res://race/race_player_hud.tscn" id="10_hkrbr"]
 [ext_resource type="AudioStream" uid="uid://8d08w1au8lsc" path="res://music/race_theme.wav" id="11_hkrbr"]
+[ext_resource type="AudioStream" uid="uid://bkt6k1nkh8j76" path="res://music/race_intro.wav" id="12_0lns8"]
 
 [sub_resource type="Resource" id="Resource_g0dry"]
 script = ExtResource("2_c8320")
@@ -914,5 +915,10 @@ vertical_alignment = 1
 
 [node name="RaceThemePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1364561858]
 stream = ExtResource("11_hkrbr")
+attenuation_model = 3
+panning_strength = 0.0
+
+[node name="RaceIntroPlayer" type="AudioStreamPlayer3D" parent="." unique_id=2028479648]
+stream = ExtResource("12_0lns8")
 attenuation_model = 3
 panning_strength = 0.0

@@ -352,7 +352,6 @@ func _activate_jump_item() -> void:
 	_set_item_time(JUMP_ITEM_TIME)
 	_jump_item_initial_y = self.position.y
 	_in_air = true
-	_collision_shape.disabled = true
 	ai_controller.enabled = false
 	boost()
 	boost()
@@ -368,7 +367,6 @@ func _handle_jump_item_finished() -> void:
 	
 	self.position.y = _jump_item_initial_y
 	_in_air = false
-	_collision_shape.disabled = false
 	if (racer.device_index == -2):
 		ai_controller.enabled = true
 

@@ -13,7 +13,7 @@ material = SubResource("StandardMaterial3D_3mep1")
 size = Vector2(27, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3mep1"]
-size = Vector3(27.25, 1, 1)
+size = Vector3(27.25, 100, 1)
 
 [node name="RoadRowFinishLine" type="Node3D" unique_id=741640470]
 script = ExtResource("1_vtf4o")
@@ -23,7 +23,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = SubResource("PlaneMesh_vtf4o")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1025912092]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=969080983]
 shape = SubResource("BoxShape3D_3mep1")

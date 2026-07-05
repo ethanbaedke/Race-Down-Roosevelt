@@ -2,10 +2,10 @@ class_name ItemRow extends Node3D
 
 @onready var _item_scene:PackedScene = preload("res://items/item.tscn")
 @onready var _item_data_resources:Array[ItemData] = [
-	#preload("res://items/boost_item_data.tres"),
-	#preload("res://items/invincibility_item_data.tres"),
-	#preload("res://items/ai_item_data.tres"),
-	#preload("res://items/speed_item_data.tres"),
+	preload("res://items/boost_item_data.tres"),
+	preload("res://items/invincibility_item_data.tres"),
+	preload("res://items/ai_item_data.tres"),
+	preload("res://items/speed_item_data.tres"),
 	preload("res://items/jump_item_data.tres"),
 ]
 

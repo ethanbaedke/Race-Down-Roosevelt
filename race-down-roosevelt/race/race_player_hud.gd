@@ -1,7 +1,8 @@
 class_name RacePlayerHud extends Control
 
-@onready var _item_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/AspectRatioContainer/ItemTextureRect
-@onready var _item_progress_bar:ProgressBar = $MarginContainer/VBoxContainer/HBoxContainer/AspectRatioContainer/ItemProgressBar
+@onready var _item_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl/ItemTextureRect
+@onready var _item_progress_bar:ProgressBar = $MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl/ItemProgressBar
+@onready var _jump_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl2/JumpForeground
 
 func update_item(data:ItemData) -> void:
 	
@@ -19,3 +20,7 @@ func update_item_time(current_time:float, total_time:float) -> void:
 	
 	_item_progress_bar.visible = true
 	_item_progress_bar.value = (current_time / total_time) * 100.0
+
+func update_jump_progress(percent:float) -> void:
+	
+	_jump_texture_rect.set_shader_parameter("percent", percent)

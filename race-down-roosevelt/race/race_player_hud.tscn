@@ -2,6 +2,14 @@
 
 [ext_resource type="Script" uid="uid://dxvrepu3i11kx" path="res://race/race_player_hud.gd" id="1_7t3ce"]
 [ext_resource type="Texture2D" uid="uid://bcug07nmp85uk" path="res://items/boost_item_icon.png" id="1_tdi34"]
+[ext_resource type="Script" uid="uid://bbq73pgt3nopk" path="res://size_fitter_control.gd" id="2_20vi5"]
+[ext_resource type="Texture2D" uid="uid://dj3fhnu8spnvs" path="res://items/jump_item_icon.png" id="3_0s412"]
+[ext_resource type="Shader" uid="uid://c5g0wgdvx2bkb" path="res://race/race_jump_ui.gdshader" id="4_gv7jw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_20vi5"]
+shader = ExtResource("4_gv7jw")
+shader_parameter/tex = ExtResource("3_0s412")
+shader_parameter/percent = 0.0
 
 [node name="RacePlayerHud" type="Control" unique_id=365328423]
 layout_mode = 3
@@ -27,39 +35,78 @@ theme_override_constants/margin_bottom = 20
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=474705734]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=608783771]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=468573854]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.25
+size_flags_stretch_ratio = 0.2
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=520892533]
+[node name="SizeFitterControl" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=831817812]
+custom_minimum_size = Vector2(172, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
-alignment_horizontal = 0
-alignment_vertical = 0
+script = ExtResource("2_20vi5")
+metadata/_custom_type_script = "uid://bbq73pgt3nopk"
 
-[node name="ItemTextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/AspectRatioContainer" unique_id=2100005317]
+[node name="ItemTextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl" unique_id=2100005317]
 texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_tdi34")
-stretch_mode = 4
+expand_mode = 1
+stretch_mode = 5
 
-[node name="ItemProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer/AspectRatioContainer" unique_id=471768205]
-visible = false
-layout_mode = 2
+[node name="ItemProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl" unique_id=471768205]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-size_flags_stretch_ratio = 0.25
 value = 100.0
 fill_mode = 3
 show_percentage = false
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1272258086]
+[node name="SizeFitterControl2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1530404179]
+custom_minimum_size = Vector2(172, 0)
 layout_mode = 2
+script = ExtResource("2_20vi5")
+metadata/_custom_type_script = "uid://bbq73pgt3nopk"
+
+[node name="JumpBackground" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl2" unique_id=1023061735]
+self_modulate = Color(1, 1, 1, 0.24705882)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+texture = ExtResource("3_0s412")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="JumpForeground" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl2" unique_id=1025428949]
+texture_filter = 1
+material = SubResource("ShaderMaterial_20vi5")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+texture = ExtResource("3_0s412")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Control" type="Control" parent="MarginContainer/VBoxContainer" unique_id=542521493]
 layout_mode = 2

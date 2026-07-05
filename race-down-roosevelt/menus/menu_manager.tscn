@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bpqhwjkap7iak"]
 
 [ext_resource type="Script" uid="uid://ct418ki6s0o41" path="res://menus/menu_manager.gd" id="1_xrek7"]
+[ext_resource type="AudioStream" uid="uid://ckc6jvdqwpylt" path="res://music/menu_theme.wav" id="2_g7wb1"]
 
 [node name="MenuManager" type="Control" unique_id=891136904]
 layout_mode = 3
@@ -15,3 +16,10 @@ script = ExtResource("1_xrek7")
 position = Vector2(960, 540)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Camera2D" unique_id=1209399680]
+position = Vector2(-960, -540)
+stream = ExtResource("2_g7wb1")
+autoplay = true
+attenuation = 0.0
+panning_strength = 0.0

@@ -246,6 +246,10 @@ func try_use_item() -> bool:
 	if (_held_item == null):
 		return false
 	
+	# Don't let user refresh their timed item.
+	if (_current_item_time != 0):
+		return false
+	
 	match (_held_item.item_type):
 		ItemData.ItemType.BOOST:
 			_activate_boost_item()

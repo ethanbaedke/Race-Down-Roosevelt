@@ -412,6 +412,21 @@ var _powerup_button_active:bool = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	
+	# Always listen for key releases so we have the correct states, regardless of our current input allowance.
+	if (event is InputEventKey):
+		if (event.keycode == KEY_A || event.keycode == KEY_LEFT):
+			if (!event.pressed):
+				_left_key_active = false
+				return
+		elif (event.keycode == KEY_D || event.keycode == KEY_RIGHT):
+			if (!event.pressed):
+				_right_key_active = false
+				return
+		elif (event.keycode == KEY_C || event.keycode == KEY_X):
+			if (!event.pressed):
+				_powerup_key_active = false
+				return
+	
 	if (ai_controller.enabled):
 		return
 	
@@ -426,22 +441,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		# Keyboard movement.
 		if (event.keycode == KEY_A || event.keycode == KEY_LEFT):
-			if (!event.pressed):
-				_left_key_active = false
-			elif (!_left_key_active):
+			if (!_left_key_active):
 				_left_key_active = true
 				try_switch_lanes(-1)
 		elif (event.keycode == KEY_D || event.keycode == KEY_RIGHT):
-			if (!event.pressed):
-				_right_key_active = false
-			elif (!_right_key_active):
+			if (!_right_key_active):
 				_right_key_active = true
 				try_switch_lanes(1)
 		# Keyboard powerup.
 		elif (event.keycode == KEY_C || event.keycode == KEY_X):
-			if (!event.pressed):
-				_powerup_key_active = false
-			elif (!_powerup_key_active):
+			if (!_powerup_key_active):
 				_powerup_key_active = true
 				try_use_item()
 	

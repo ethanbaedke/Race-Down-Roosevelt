@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bcug07nmp85uk" path="res://items/boost_item_icon.png" id="1_tdi34"]
 [ext_resource type="Script" uid="uid://bbq73pgt3nopk" path="res://size_fitter_control.gd" id="2_20vi5"]
 [ext_resource type="Texture2D" uid="uid://dj3fhnu8spnvs" path="res://items/jump_item_icon.png" id="3_0s412"]
+[ext_resource type="Texture2D" uid="uid://b3s5i1o0gu1t3" path="res://items/red_x.png" id="4_g7q07"]
 [ext_resource type="Shader" uid="uid://c5g0wgdvx2bkb" path="res://race/race_jump_ui.gdshader" id="4_gv7jw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_20vi5"]
@@ -72,6 +73,17 @@ value = 100.0
 fill_mode = 3
 show_percentage = false
 
+[node name="ItemDisabledTexture" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl" unique_id=310143360]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_g7q07")
+
 [node name="SizeFitterControl2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1530404179]
 custom_minimum_size = Vector2(172, 0)
 layout_mode = 2
@@ -107,6 +119,17 @@ size_flags_stretch_ratio = 0.25
 texture = ExtResource("3_0s412")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="JumpDisabledTexture" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl2" unique_id=309862596]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_g7q07")
 
 [node name="Control" type="Control" parent="MarginContainer/VBoxContainer" unique_id=542521493]
 layout_mode = 2

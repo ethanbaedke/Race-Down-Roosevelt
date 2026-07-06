@@ -3,6 +3,8 @@ class_name RacePlayerHud extends Control
 @onready var _item_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl/ItemTextureRect
 @onready var _item_progress_bar:ProgressBar = $MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl/ItemProgressBar
 @onready var _jump_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl2/JumpForeground
+@onready var _item_disabled_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl/ItemDisabledTexture
+@onready var _jump_disabled_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl2/JumpDisabledTexture
 
 func update_item(data:ItemData) -> void:
 	
@@ -25,3 +27,11 @@ func update_gas(current_amount:float, max_amount:float) -> void:
 	
 	var percent:float = current_amount / max_amount
 	_jump_texture_rect.material.set_shader_parameter("percent", percent)
+
+func update_item_usable_state(usable:bool) -> void:
+	
+	_item_disabled_texture_rect.visible = !usable
+
+func update_gas_usable_state(usable:bool) -> void:
+	
+	_jump_disabled_texture_rect.visible = !usable

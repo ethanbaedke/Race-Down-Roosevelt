@@ -407,8 +407,6 @@ func _process(delta: float) -> void:
 		if (_current_item_time <= 0):
 			_current_item_time = 0
 			_handle_timed_item_finished()
-	if (_hud != null):
-		_hud.update_item_time(_current_item_time, _total_item_time)
 	
 	if (_current_jump_time > 0):
 		_current_jump_time -= delta
@@ -416,6 +414,11 @@ func _process(delta: float) -> void:
 		if (_current_jump_time <= 0):
 			_current_jump_time = 0
 			_handle_jump_finished()
+	
+	if (_hud != null):
+		_hud.update_item_time(_current_item_time, _total_item_time)
+		_hud.update_item_usable_state(!_in_air)
+		_hud.update_gas_usable_state(_current_item_time == 0)
 
 # These are used to get single inputs instead of a continuous stream.
 var _left_key_active:bool = false

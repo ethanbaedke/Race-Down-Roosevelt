@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b3mpgd28w21q2"]
+
+[ext_resource type="Script" uid="uid://cl7nfdqj5blsq" path="res://road/gas_row.gd" id="1_tqd5q"]
+
+[node name="GasRow" type="Node3D" unique_id=1690735168]
+script = ExtResource("1_tqd5q")

@@ -21,6 +21,7 @@ func update_item_time(current_time:float, total_time:float) -> void:
 	_item_progress_bar.visible = true
 	_item_progress_bar.value = (current_time / total_time) * 100.0
 
-func update_jump_progress(percent:float) -> void:
+func update_gas(current_amount:float, max_amount:float) -> void:
 	
-	_jump_texture_rect.set_shader_parameter("percent", percent)
+	var percent:float = current_amount / max_amount
+	_jump_texture_rect.material.set_shader_parameter("percent", percent)

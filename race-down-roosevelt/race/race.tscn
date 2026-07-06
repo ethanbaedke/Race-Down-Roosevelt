@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://kavq5hucvvej" path="res://vehicles/traffic_vehicles/jeep_wrangler_traffic.tscn" id="5_vhq2c"]
 [ext_resource type="Script" uid="uid://7psf6ks7j2k4" path="res://race/leaderboard.gd" id="8_c8320"]
 [ext_resource type="PackedScene" uid="uid://ukdsd8n4p20e" path="res://road/item_row.tscn" id="8_vhq2c"]
+[ext_resource type="PackedScene" uid="uid://b3mpgd28w21q2" path="res://road/gas_row.tscn" id="9_cyu3u"]
 [ext_resource type="PackedScene" uid="uid://bhgv8crq1o62j" path="res://race/race_player_hud.tscn" id="10_hkrbr"]
 [ext_resource type="AudioStream" uid="uid://8d08w1au8lsc" path="res://music/race_theme.wav" id="11_hkrbr"]
 [ext_resource type="AudioStream" uid="uid://bkt6k1nkh8j76" path="res://music/race_intro.wav" id="12_0lns8"]
@@ -45,9 +46,15 @@ script = ExtResource("2_c8320")
 scene = ExtResource("8_vhq2c")
 metadata/_custom_type_script = "uid://clyn63xl4tio5"
 
+[sub_resource type="Resource" id="Resource_ru474"]
+script = ExtResource("2_c8320")
+scene = ExtResource("9_cyu3u")
+weight = 10
+metadata/_custom_type_script = "uid://clyn63xl4tio5"
+
 [sub_resource type="Resource" id="Resource_xiy3d"]
 script = ExtResource("4_01boi")
-entries = Array[ExtResource("2_c8320")]([SubResource("Resource_g7srd"), SubResource("Resource_hkrbr")])
+entries = Array[ExtResource("2_c8320")]([SubResource("Resource_g7srd"), SubResource("Resource_hkrbr"), SubResource("Resource_ru474")])
 debug_name = "Road Object"
 metadata/_custom_type_script = "uid://bonfni7lag8hs"
 

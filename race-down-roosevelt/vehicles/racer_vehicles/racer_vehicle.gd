@@ -220,15 +220,20 @@ const AI_ITEM_ACCELERATION_INCREASE:float = 5.0
 const SPEED_ITEM_TIME:float = 5.0
 const SPEED_ITEM_TOP_SPEED_INCREASE:float = 30.0
 const SPEED_ITEM_ACCELERATION_INCREASE:float = 10.0
-const JUMP_ITEM_TIME:float = 2.0
-const JUMP_ITEM_HEIGHT:float = 5.0
+
+const MAX_GAS:int = 8
+const JUMP_TIME:float = 2.0
+const JUMP_HEIGHT:float = 5.0
 
 var _held_item:ItemData = null
 var _total_item_time:float = 0.0
 var _current_item_time:float = 0.0
 
 var _invincible:bool = false
-var _jump_item_initial_y:float = 0.0
+
+var _current_gas:int = 0
+var _jump_initial_y:float = 0.0
+var _current_jump_time:float = 0.0
 var _in_air:bool = false
 
 func try_give_item(data:ItemData) -> bool:
@@ -259,8 +264,6 @@ func try_use_item() -> bool:
 			_activate_ai_item()
 		ItemData.ItemType.SPEED:
 			_activate_speed_item()
-		ItemData.ItemType.JUMP:
-			_activate_jump_item()
 	
 	if (_hud != null):
 		_hud.update_item(_held_item)
@@ -286,27 +289,10 @@ func _handle_timed_item_finished() -> void:
 			_handle_ai_item_finished()
 		ItemData.ItemType.SPEED:
 			_handle_speed_item_finished()
-		ItemData.ItemType.JUMP:
-			_handle_jump_item_finished()
 	
 	_held_item = null
 	if (_hud != null):
 		_hud.update_item(_held_item)
-
-# Used for items that need mid-use processing. Not used for timed item countdowns.
-func _tick_item(delta:float) -> void:
-	
-	match (_held_item.item_type):
-		ItemData.ItemType.BOOST:
-			pass
-		ItemData.ItemType.INVINCIBILITY:
-			pass
-		ItemData.ItemType.AI:
-			pass
-		ItemData.ItemType.SPEED:
-			pass
-		ItemData.ItemType.JUMP:
-			_tick_jump_item(delta)
 
 func _activate_boost_item() -> void:
 	
@@ -353,25 +339,45 @@ func _handle_speed_item_finished() -> void:
 	top_speed -= SPEED_ITEM_TOP_SPEED_INCREASE
 	acceleration -= SPEED_ITEM_ACCELERATION_INCREASE
 
-func _activate_jump_item() -> void:
+func try_give_gas() -> bool:
 	
-	_set_item_time(JUMP_ITEM_TIME)
-	_jump_item_initial_y = self.position.y
+	if (_current_gas == MAX_GAS):
+		return false
+	
+	_current_gas += 1
+	if (_hud != null):
+		_hud.update_gas(_current_gas, MAX_GAS)
+	return true
+
+func try_use_gas() -> bool:
+	
+	if (_current_gas < MAX_GAS):
+		return false
+	
+	if (_current_item_time > 0):
+		return false
+	
+	_jump_initial_y = self.position.y
+	_current_jump_time = JUMP_TIME
 	_in_air = true
 	ai_controller.enabled = false
 	boost()
 	boost()
 	boost()
+	_current_gas = 0
+	if (_hud):
+		_hud.update_gas(_current_gas, MAX_GAS)
+	return true
 
-func _tick_jump_item(delta:float) -> void:
+func _tick_jump() -> void:
 	
-	var time_p:float = _current_item_time / _total_item_time
+	var time_p:float = _current_jump_time / JUMP_TIME
 	var height_time:float = -pow((time_p * 2.0) - 1.0, 2.0) + 1.0
-	self.position.y = lerpf(_jump_item_initial_y, _jump_item_initial_y + JUMP_ITEM_HEIGHT, height_time)
+	self.position.y = lerpf(_jump_initial_y, _jump_initial_y + JUMP_HEIGHT, height_time)
 
-func _handle_jump_item_finished() -> void:
+func _handle_jump_finished() -> void:
 	
-	self.position.y = _jump_item_initial_y
+	self.position.y = _jump_initial_y
 	_in_air = false
 	if (racer.device_index == -2):
 		ai_controller.enabled = true
@@ -404,19 +410,25 @@ func _process(delta: float) -> void:
 	if (_hud != null):
 		_hud.update_item_time(_current_item_time, _total_item_time)
 	
-	if (_held_item != null && _current_item_time != _total_item_time):
-		_tick_item(delta)
+	if (_current_jump_time > 0):
+		_current_jump_time -= delta
+		_tick_jump()
+		if (_current_jump_time <= 0):
+			_current_jump_time = 0
+			_handle_jump_finished()
 
 # These are used to get single inputs instead of a continuous stream.
 var _left_key_active:bool = false
 var _right_key_active:bool = false
 var _powerup_key_active:bool = false
+var _jump_key_active:bool = false
 var _joystick_active:bool = false
 var _powerup_button_active:bool = false
+var _jump_button_active:bool = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	
-	# Always listen for key releases so we have the correct states, regardless of our current input allowance.
+	# Always listen for key/button releases so we have the correct states, regardless of our current input allowance.
 	if (event is InputEventKey):
 		if (event.keycode == KEY_A || event.keycode == KEY_LEFT):
 			if (!event.pressed):
@@ -426,10 +438,21 @@ func _unhandled_input(event: InputEvent) -> void:
 			if (!event.pressed):
 				_right_key_active = false
 				return
-		elif (event.keycode == KEY_C || event.keycode == KEY_X):
+		elif (event.keycode == KEY_C):
 			if (!event.pressed):
 				_powerup_key_active = false
 				return
+		elif (event.keycode == KEY_X):
+			if (!event.pressed):
+				_jump_key_active = false
+				return
+	elif (event is InputEventJoypadButton):
+		if (event.button_index == JOY_BUTTON_A || event.button_index == JOY_BUTTON_B):
+			if (!event.pressed):
+				_powerup_button_active = false
+		elif (event.button_index == JOY_BUTTON_X || event.button_index == JOY_BUTTON_Y):
+			if (!event.pressed):
+				_jump_button_active = false
 	
 	if (ai_controller.enabled):
 		return
@@ -453,10 +476,15 @@ func _unhandled_input(event: InputEvent) -> void:
 				_right_key_active = true
 				try_switch_lanes(1)
 		# Keyboard powerup.
-		elif (event.keycode == KEY_C || event.keycode == KEY_X):
+		elif (event.keycode == KEY_C):
 			if (!_powerup_key_active):
 				_powerup_key_active = true
 				try_use_item()
+		# Keyboard jump.
+		elif (event.keycode == KEY_X):
+			if (!_jump_key_active):
+				_jump_key_active = true
+				try_use_gas()
 	
 	elif (event.device != racer.device_index):
 		return
@@ -472,11 +500,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif (val < 0.5):
 			_joystick_active = false
 	
-	# Gamepad powerup.
 	elif (event is InputEventJoypadButton):
-		if (event.button_index == JOY_BUTTON_A || event.button_index == JOY_BUTTON_B || event.button_index == JOY_AXIS_LEFT_X || event.button_index == JOY_BUTTON_Y):
-			if (!event.pressed):
-				_powerup_button_active = false
-			elif (!_powerup_button_active):
+		# Gamepad powerup.
+		if (event.button_index == JOY_BUTTON_A || event.button_index == JOY_BUTTON_B):
+			if (!_powerup_button_active):
 				_powerup_button_active = true
 				try_use_item()
+		# Gamepad jump.
+		elif (event.button_index == JOY_BUTTON_X || event.button_index == JOY_BUTTON_Y):
+			if (!_jump_button_active):
+				_jump_button_active = true
+				try_use_gas()

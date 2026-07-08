@@ -450,10 +450,10 @@ func _unhandled_input(event: InputEvent) -> void:
 				_jump_key_active = false
 				return
 	elif (event is InputEventJoypadButton):
-		if (event.button_index == JOY_BUTTON_A || event.button_index == JOY_BUTTON_B):
+		if (event.button_index == JOY_BUTTON_X || event.button_index == JOY_BUTTON_Y):
 			if (!event.pressed):
 				_powerup_button_active = false
-		elif (event.button_index == JOY_BUTTON_X || event.button_index == JOY_BUTTON_Y):
+		elif (event.button_index == JOY_BUTTON_A || event.button_index == JOY_BUTTON_B):
 			if (!event.pressed):
 				_jump_button_active = false
 	
@@ -505,12 +505,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	elif (event is InputEventJoypadButton):
 		# Gamepad powerup.
-		if (event.button_index == JOY_BUTTON_A || event.button_index == JOY_BUTTON_B):
+		if (event.button_index == JOY_BUTTON_X || event.button_index == JOY_BUTTON_Y):
 			if (!_powerup_button_active):
 				_powerup_button_active = true
 				try_use_item()
 		# Gamepad jump.
-		elif (event.button_index == JOY_BUTTON_X || event.button_index == JOY_BUTTON_Y):
+		elif (event.button_index == JOY_BUTTON_A || event.button_index == JOY_BUTTON_A):
 			if (!_jump_button_active):
 				_jump_button_active = true
 				try_use_gas()

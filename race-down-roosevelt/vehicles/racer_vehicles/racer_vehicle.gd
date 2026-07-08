@@ -22,6 +22,8 @@ const MIN_WEIGHT:int = 1
 @onready var _collision_shape:CollisionShape3D = $Area3D/CollisionShape3D
 @onready var _model_controller:VehicleModelController = $VehicleModelController
 
+@onready var _boost_player:AudioStreamPlayer3D = $BoostPlayer
+
 var top_speed:float = 0.0
 var acceleration:float = 0.0
 var durability:float = 0.0
@@ -59,6 +61,7 @@ func calculate_speed(delta:float) -> float:
 
 func boost() -> void:
 	
+	AudioSystem3D.play_source(_boost_player)
 	speed += 5.0
 
 func try_switch_lanes(dir:int) -> bool:

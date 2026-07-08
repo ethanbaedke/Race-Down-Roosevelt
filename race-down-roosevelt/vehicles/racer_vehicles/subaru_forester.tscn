@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bm0vc0wvvnx4h" path="res://vehicles/vehicle_model_controller.tscn" id="2_07dxa"]
 [ext_resource type="PackedScene" uid="uid://40efplcfedui" path="res://vehicles/subaru_forester.glb" id="2_ce1kl"]
 [ext_resource type="PackedScene" uid="uid://dcf6mvjwffjpe" path="res://vehicles/racer_vehicles/ai_racer_controller.tscn" id="4_1kbiw"]
+[ext_resource type="AudioStream" uid="uid://c712lrhvgb3oo" path="res://sound_effects/boost.wav" id="5_br1bg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_meqtm"]
 size = Vector3(0.917, 0.685, 2.312)
@@ -23,3 +24,6 @@ shape = SubResource("BoxShape3D_meqtm")
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.46786118, 0, 1.1404314)
 
 [node name="AiRacerController" parent="." unique_id=590700889 instance=ExtResource("4_1kbiw")]
+
+[node name="BoostPlayer" type="AudioStreamPlayer3D" parent="." unique_id=739409323]
+stream = ExtResource("5_br1bg")

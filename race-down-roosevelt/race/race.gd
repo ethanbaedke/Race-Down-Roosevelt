@@ -109,6 +109,9 @@ func _finish_race() -> void:
 	for i:int in range(leaderboard_data.size()):
 		RdrLogger.log(self, "Position " + str(i + 1) + ": " + leaderboard_data[i].profile.name + ".")
 	
+	if (_race_theme_player.get_playback_position() < 188.30):
+		_race_theme_player.seek(188.30)
+	
 	_leaderboard.load_data(leaderboard_data)
 	
 	await get_tree().create_timer(LEADERBOARD_DISPLAY_TIME).timeout
@@ -345,8 +348,6 @@ func _handle_cleanup() -> void:
 @onready var _p4_hud_4p:RacePlayerHud = $ViewportSetup4p/SplitContainer/SplitContainerBottom/P4SubViewportContainer/SubViewport/RacePlayerHud
 
 func setup_race() -> void:
-	
-	RdrLogger.log(self, "Setting up race.")
 	
 	if (game_state == null):
 		RdrLogger.fatal(self, setup_race.get_method() + " expects to have a reference to GameState.")

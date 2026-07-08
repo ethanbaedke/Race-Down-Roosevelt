@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://bhgv8crq1o62j" path="res://race/race_player_hud.tscn" id="10_hkrbr"]
 [ext_resource type="AudioStream" uid="uid://8d08w1au8lsc" path="res://music/race_theme.wav" id="11_hkrbr"]
 [ext_resource type="AudioStream" uid="uid://bkt6k1nkh8j76" path="res://music/race_intro.wav" id="12_0lns8"]
+[ext_resource type="AudioStream" uid="uid://cnojsshdw3m23" path="res://sound_effects/countdown_low.wav" id="12_xiy3d"]
+[ext_resource type="AudioStream" uid="uid://bvtm4cbq20pwu" path="res://sound_effects/countdown_high.wav" id="13_ru474"]
 
 [sub_resource type="Resource" id="Resource_g0dry"]
 script = ExtResource("2_c8320")
@@ -258,6 +260,29 @@ tracks/1/keys = {
 "update": 1,
 "values": ["3", "2", "1"]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CountdownPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 1.0,
+"start_offset": 0.0,
+"stream": ExtResource("12_xiy3d")
+}, {
+"end_offset": 1.0,
+"start_offset": 0.0,
+"stream": ExtResource("12_xiy3d")
+}, {
+"end_offset": 1.0,
+"start_offset": 0.0,
+"stream": ExtResource("12_xiy3d")
+}],
+"times": PackedFloat32Array(0, 1, 2)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_xiy3d"]
 resource_name = "fade_from_black"
@@ -316,6 +341,21 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CountdownPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("13_ru474")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_cyu3u"]
 resource_name = "scroll_vehicles"
@@ -927,5 +967,9 @@ panning_strength = 0.0
 
 [node name="RaceIntroPlayer" type="AudioStreamPlayer3D" parent="." unique_id=2028479648]
 stream = ExtResource("12_0lns8")
+attenuation_model = 3
+panning_strength = 0.0
+
+[node name="CountdownPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1401887787]
 attenuation_model = 3
 panning_strength = 0.0

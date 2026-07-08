@@ -1,15 +1,10 @@
 [gd_scene format=3 uid="uid://b86bft4mprxkh"]
 
 [ext_resource type="Script" uid="uid://ctqsqhsei52f0" path="res://items/gas.gd" id="1_io5a7"]
+[ext_resource type="PackedScene" uid="uid://dbrodo5l8nox7" path="res://items/gas_can.glb" id="2_8im0o"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2ga2q"]
 size = Vector3(3, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_io5a7"]
-albedo_color = Color(1, 0.5, 0, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_pxpuq"]
-material = SubResource("StandardMaterial3D_io5a7")
 
 [node name="Gas" type="Node3D" unique_id=1774876169]
 script = ExtResource("1_io5a7")
@@ -21,6 +16,5 @@ collision_layer = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1321092402]
 shape = SubResource("BoxShape3D_2ga2q")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=72515786]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
-mesh = SubResource("SphereMesh_pxpuq")
+[node name="GasCanModel" parent="." unique_id=1682290730 instance=ExtResource("2_8im0o")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.74565345, 0)

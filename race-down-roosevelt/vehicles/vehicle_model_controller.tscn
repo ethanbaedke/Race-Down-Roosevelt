@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://bm0vc0wvvnx4h"]
 
 [ext_resource type="Script" uid="uid://bec8qyc2fv3n8" path="res://vehicles/vehicle_model_controller.gd" id="1_sw8d4"]
-[ext_resource type="AudioStream" uid="uid://c3bsd3kjpfh0j" path="res://sound_effects/tire_screech.wav" id="2_oat3c"]
+[ext_resource type="AudioStream" uid="uid://c3bsd3kjpfh0j" path="res://sound_effects/near_hit.wav" id="2_oat3c"]
 
 [node name="VehicleModelController" type="Node3D" unique_id=826719096]
 top_level = true
 script = ExtResource("1_sw8d4")
 
-[node name="TireScreechPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1691837781]
+[node name="NearHitPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1691837781]
 stream = ExtResource("2_oat3c")
 unit_size = 3.0

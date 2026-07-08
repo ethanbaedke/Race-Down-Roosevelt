@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c3bsd3kjpfh0j"
-path="res://.godot/imported/tire_screech.wav-0d23b4aa42ab75c683fbaefdf2b8a590.sample"
+path="res://.godot/imported/near_hit.wav-05e0f8a7f972bb9f101437ae3a630599.sample"
 
 [deps]
 
-source_file="res://sound_effects/tire_screech.wav"
-dest_files=["res://.godot/imported/tire_screech.wav-0d23b4aa42ab75c683fbaefdf2b8a590.sample"]
+source_file="res://sound_effects/near_hit.wav"
+dest_files=["res://.godot/imported/near_hit.wav-05e0f8a7f972bb9f101437ae3a630599.sample"]
 
 [params]
 

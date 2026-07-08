@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bqi1740ikajnm" path="res://vehicles/traffic_vehicles/traffic_vehicle.gd" id="1_ia38m"]
 [ext_resource type="PackedScene" uid="uid://40efplcfedui" path="res://vehicles/subaru_forester.glb" id="2_oduem"]
+[ext_resource type="AudioStream" uid="uid://b8b8kfajvkt86" path="res://sound_effects/crash.wav" id="3_ccmxo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ia38m"]
 size = Vector3(0.917, 0.685, 2.312)
@@ -19,3 +20,7 @@ shape = SubResource("BoxShape3D_ia38m")
 
 [node name="SubaruForesterModel" parent="." unique_id=1946182605 instance=ExtResource("2_oduem")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.46786118, 0, 1.1404314)
+
+[node name="ExplodePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1502362502]
+stream = ExtResource("3_ccmxo")
+unit_size = 18.0

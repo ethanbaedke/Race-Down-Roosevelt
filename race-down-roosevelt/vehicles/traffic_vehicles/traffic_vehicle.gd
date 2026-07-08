@@ -8,6 +8,7 @@ class_name TrafficVehicle extends Node3D
 
 @onready var _collision_area:Area3D = $Area3D
 @onready var _collision_shape:CollisionShape3D = $Area3D/CollisionShape3D
+@onready var _explode_player:AudioStreamPlayer3D = $ExplodePlayer
 
 # Only set to false when vehicle in a state we don't want to cleanup during, such as exploding.
 var available_for_cleanup:bool = true
@@ -17,6 +18,7 @@ var _speed:float = speed
 
 func explode() -> void:
 	
+	_explode_player.play()
 	available_for_cleanup = false
 	var effect:OneShotParticleEffect = _explosion_effect_scene.instantiate()
 	effect.effect_finished.connect(func() -> void:

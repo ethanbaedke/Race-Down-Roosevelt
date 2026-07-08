@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bqi1740ikajnm" path="res://vehicles/traffic_vehicles/traffic_vehicle.gd" id="1_yk7gm"]
 [ext_resource type="PackedScene" uid="uid://5525td7tv2km" path="res://vehicles/jeep_wrangler.glb" id="3_l4kve"]
+[ext_resource type="AudioStream" uid="uid://b8b8kfajvkt86" path="res://sound_effects/crash.wav" id="3_o1ej1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_meqtm"]
 size = Vector3(0.917, 0.754, 2.07)
@@ -19,3 +20,7 @@ shape = SubResource("BoxShape3D_meqtm")
 
 [node name="JeepWranglerModel" parent="." unique_id=731493010 instance=ExtResource("3_l4kve")]
 transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-08, 0.5331831, 0, -1.056751)
+
+[node name="ExplodePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1741418440]
+stream = ExtResource("3_o1ej1")
+unit_size = 18.0

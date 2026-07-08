@@ -519,6 +519,11 @@ func _spawn_racer_vehicles() -> void:
 			racer.racer = game_state.racer_objects[i]
 			racer.lane_number = (i + 1) * 2
 			_racer_vehicles.append(racer)
+			# If this is a player, give them an audio listener.
+			if (game_state.racer_objects[i].device_index != -2):
+				var listener:AudioListener3D = AudioListener3D.new()
+				listener.rotation.y = 180.0
+				racer.add_child(listener)
 			self.add_child(racer)
 			# Important for the camera initializing at the correct position.
 			racer.set_initial_position(_racer_vehicle_spawn_points[i].global_position)

@@ -18,7 +18,7 @@ var _speed:float = speed
 
 func explode() -> void:
 	
-	_explode_player.play()
+	AudioSystem3D.play_source(_explode_player)
 	available_for_cleanup = false
 	var effect:OneShotParticleEffect = _explosion_effect_scene.instantiate()
 	effect.effect_finished.connect(func() -> void:

@@ -6,6 +6,8 @@ const CAMERA_CONTROLLER_ROTATION:Vector3 = Vector3(deg_to_rad(-10.0), deg_to_rad
 const ROTATIONAL_VELOCITY:float = 4.0
 const PULSE_TIME:float = 0.5
 
+@onready var _tire_screech_player:AudioStreamPlayer3D = $TireScreechPlayer
+
 # This is the node that should be rotated, holds all the models. Created at runtime.
 var _rotation_parent:Node3D = null
 
@@ -33,6 +35,8 @@ func pulse_left() -> void:
 	_start_pulse(1)
 
 func _start_pulse(direction:int) -> void:
+	
+	AudioSystem3D.play_source(_tire_screech_player)
 	
 	_target_x_on_pulse_start = _target_x
 	_is_in_pulse = true

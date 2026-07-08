@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 RdrLogger="*uid://dcohqktyew722"
 Globals="*uid://bfgwv77cqwhuk"
+AudioSystem3D="*uid://cq7n7mo0btpj8"
 
 [debug]
 

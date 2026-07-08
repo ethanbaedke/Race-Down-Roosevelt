@@ -441,11 +441,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			if (!event.pressed):
 				_right_key_active = false
 				return
-		elif (event.keycode == KEY_C):
+		elif (event.keycode == KEY_X):
 			if (!event.pressed):
 				_powerup_key_active = false
 				return
-		elif (event.keycode == KEY_X):
+		elif (event.keycode == KEY_C):
 			if (!event.pressed):
 				_jump_key_active = false
 				return
@@ -479,12 +479,12 @@ func _unhandled_input(event: InputEvent) -> void:
 				_right_key_active = true
 				try_switch_lanes(1)
 		# Keyboard powerup.
-		elif (event.keycode == KEY_C):
+		elif (event.keycode == KEY_X):
 			if (!_powerup_key_active):
 				_powerup_key_active = true
 				try_use_item()
 		# Keyboard jump.
-		elif (event.keycode == KEY_X):
+		elif (event.keycode == KEY_C):
 			if (!_jump_key_active):
 				_jump_key_active = true
 				try_use_gas()

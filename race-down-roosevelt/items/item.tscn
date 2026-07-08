@@ -1,11 +1,10 @@
 [gd_scene format=3 uid="uid://bhwfveh6nk2q0"]
 
 [ext_resource type="Script" uid="uid://dtc0ewduux6if" path="res://items/item.gd" id="1_pxpuq"]
+[ext_resource type="PackedScene" uid="uid://bysr61x17pl6m" path="res://items/unknown_item.glb" id="2_buahv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2ga2q"]
 size = Vector3(3, 1, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_pxpuq"]
 
 [node name="Item" type="Node3D" unique_id=1774876169]
 script = ExtResource("1_pxpuq")
@@ -17,6 +16,5 @@ collision_layer = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1321092402]
 shape = SubResource("BoxShape3D_2ga2q")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=72515786]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
-mesh = SubResource("SphereMesh_pxpuq")
+[node name="UnknownItemModel" parent="." unique_id=797093779 instance=ExtResource("2_buahv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.73483473, 0)

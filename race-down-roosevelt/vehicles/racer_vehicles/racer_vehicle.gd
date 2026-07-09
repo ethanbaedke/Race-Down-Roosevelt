@@ -34,6 +34,13 @@ var input_enabled:bool = false
 
 var _hud:RacePlayerHud = null
 
+# Reparents a world pickup above this object so it moves with it during its pickup animation.
+func give_world_pickup(pickup:Node3D) -> void:
+	
+	pickup.reparent.call_deferred(_model_controller)
+	# Must set global position here since it will not be a child of the model controller until the end of the frame.
+	pickup.global_position = _model_controller.global_position + (Vector3.UP * 0.5)
+
 func set_camera_controller(controller:CameraController) -> void:
 	
 	_model_controller.set_camera_controller(controller)

@@ -6,6 +6,127 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_2ga2q"]
 size = Vector3(3, 1, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_buahv"]
+resource_local_to_scene = true
+transparency = 4
+albedo_color = Color(0.85490197, 0.64705884, 0.1254902, 1)
+emission_enabled = true
+emission = Color(0.85490197, 0.64705884, 0.1254902, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="Animation" id="Animation_8im0o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UnknownItemModel:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.74565345]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UnknownItemModel:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.1415927]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UnknownItemModel/Cube:surface_material_override/0:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.85490197, 0.64705884, 0.1254902, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ax7uy"]
+resource_name = "base"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UnknownItemModel:position:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.496, 0.996, 0.496]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UnknownItemModel:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [3.1415927, 0.0, -3.142]
+}
+
+[sub_resource type="Animation" id="Animation_buahv"]
+resource_name = "pickup"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UnknownItemModel:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.746, -0.25, 0, 0.1, 0.5183082, 1.246, -0.049999997, -0.0006300211, 0.050000012, 0.0014743805),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UnknownItemModel:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(3.142, 0, 18.336695, 0, -5.8833156, -3.142, -0.03333333, 0.051573277, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UnknownItemModel/Cube:surface_material_override/0:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.85490197, 0.64705884, 0.1254902, 1), Color(0.85490197, 0.64705884, 0.1254902, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_buahv"]
+_data = {
+&"RESET": SubResource("Animation_8im0o"),
+&"base": SubResource("Animation_ax7uy"),
+&"pickup": SubResource("Animation_buahv")
+}
+
 [node name="Item" type="Node3D" unique_id=1774876169]
 script = ExtResource("1_pxpuq")
 
@@ -17,4 +138,12 @@ collision_layer = 2
 shape = SubResource("BoxShape3D_2ga2q")
 
 [node name="UnknownItemModel" parent="." unique_id=797093779 instance=ExtResource("2_buahv")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.73483473, 0)
+transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, 0.74565345, 0)
+
+[node name="Cube" parent="UnknownItemModel" index="0" unique_id=90577812]
+surface_material_override/0 = SubResource("StandardMaterial3D_buahv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=862065104]
+libraries/ = SubResource("AnimationLibrary_buahv")
+
+[editable path="UnknownItemModel"]

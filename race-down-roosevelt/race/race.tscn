@@ -78,7 +78,124 @@ size = Vector3(0.2, 0.2, 3)
 [sub_resource type="BoxMesh" id="BoxMesh_g0dry"]
 size = Vector3(0.2, 0.2, 3)
 
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_xiy3d"]
+parameter_name = "DayNightBlend"
+hint = 1
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_xiy3d"]
+default_input_values = [0, 0.0, 1, 10.0]
+operator = 2
+
+[sub_resource type="VisualShaderNodeSmoothStep" id="VisualShaderNodeSmoothStep_xiy3d"]
+default_input_values = [0, 0.25, 1, 0.5, 2, 0.5]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_ru474"]
+default_input_values = [0, 0.0, 1, 0.5]
+operator = 5
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_xiy3d"]
+source = 5
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ru474"]
+input_name = "sky_coords"
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_xt8ap"]
+parameter_name = "Texture2DParameter"
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_ru474"]
+parameter_name = "Texture2DParameter2"
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_xt8ap"]
+source = 5
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_yiuc0"]
+input_name = "sky_coords"
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_klqtr"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0, 0, 0)]
+op_type = 3
+
+[sub_resource type="VisualShader" id="VisualShader_yiuc0"]
+mode = 3
+flags/use_half_res_pass = false
+flags/use_quarter_res_pass = false
+flags/disable_fog = false
+flags/use_debanding = false
+nodes/sky/0/position = Vector2(1320, 160)
+nodes/sky/2/node = SubResource("VisualShaderNodeTexture_xiy3d")
+nodes/sky/2/position = Vector2(0, 160)
+nodes/sky/3/node = SubResource("VisualShaderNodeInput_ru474")
+nodes/sky/3/position = Vector2(-360, 160)
+nodes/sky/4/node = SubResource("VisualShaderNodeTexture2DParameter_xt8ap")
+nodes/sky/4/position = Vector2(-360, 260)
+nodes/sky/5/node = SubResource("VisualShaderNodeTexture2DParameter_ru474")
+nodes/sky/5/position = Vector2(-360, 700)
+nodes/sky/6/node = SubResource("VisualShaderNodeTexture_xt8ap")
+nodes/sky/6/position = Vector2(0, 600)
+nodes/sky/7/node = SubResource("VisualShaderNodeInput_yiuc0")
+nodes/sky/7/position = Vector2(-360, 600)
+nodes/sky/9/node = SubResource("VisualShaderNodeMix_klqtr")
+nodes/sky/9/position = Vector2(1100, 160)
+nodes/sky/10/node = SubResource("VisualShaderNodeFloatParameter_xiy3d")
+nodes/sky/10/position = Vector2(180, 280)
+nodes/sky/11/node = SubResource("VisualShaderNodeFloatOp_xiy3d")
+nodes/sky/11/position = Vector2(440, 700)
+nodes/sky/13/node = SubResource("VisualShaderNodeSmoothStep_xiy3d")
+nodes/sky/13/position = Vector2(500, 300)
+nodes/sky/14/node = SubResource("VisualShaderNodeFloatOp_ru474")
+nodes/sky/14/position = Vector2(740, 300)
+nodes/sky/connections = PackedInt32Array(3, 0, 2, 0, 4, 0, 2, 2, 5, 0, 6, 2, 7, 0, 6, 0, 2, 0, 9, 0, 9, 0, 0, 0, 6, 0, 11, 0, 11, 0, 9, 1, 10, 0, 13, 2, 13, 0, 14, 0, 14, 0, 9, 2)
+
+[sub_resource type="Gradient" id="Gradient_xiy3d"]
+offsets = PackedFloat32Array(0.50666666, 1)
+colors = PackedColorArray(0.644, 0.84180003, 0.92, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ru474"]
+noise_type = 3
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xt8ap"]
+noise = SubResource("FastNoiseLite_ru474")
+color_ramp = SubResource("Gradient_xiy3d")
+seamless = true
+seamless_blend_skirt = 0.25
+
+[sub_resource type="Gradient" id="Gradient_g63gw"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.64, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mudrt"]
+noise_type = 3
+frequency = 0.1
+fractal_gain = 1.3
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yqwes"]
+width = 3840
+height = 2160
+noise = SubResource("FastNoiseLite_mudrt")
+color_ramp = SubResource("Gradient_g63gw")
+seamless = true
+seamless_blend_skirt = 0.25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_klqtr"]
+shader = SubResource("VisualShader_yiuc0")
+shader_parameter/Texture2DParameter = SubResource("NoiseTexture2D_xt8ap")
+shader_parameter/Texture2DParameter2 = SubResource("NoiseTexture2D_yqwes")
+shader_parameter/DayNightBlend = 0.0
+
+[sub_resource type="Sky" id="Sky_g63gw"]
+sky_material = SubResource("ShaderMaterial_klqtr")
+
 [sub_resource type="Environment" id="Environment_c8320"]
+background_mode = 2
+sky = SubResource("Sky_g63gw")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.1
+reflected_light_source = 1
 glow_enabled = true
 
 [sub_resource type="Animation" id="Animation_vhq2c"]
@@ -422,10 +539,6 @@ size = Vector2(26.8, 4)
 script = ExtResource("1_6dlvr")
 traffic_vehicle_pool = SubResource("Resource_cyu3u")
 road_object_pool = SubResource("Resource_xiy3d")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=327752361]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
-shadow_enabled = true
 
 [node name="RacerVehicleSpawnPoints" type="Node3D" parent="." unique_id=2143620694]
 
@@ -887,6 +1000,10 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 8.0
 theme_override_font_sizes/font_size = 64
 text = "Name"
+
+[node name="Sunlight" type="DirectionalLight3D" parent="." unique_id=327752361]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=504762943]
 environment = SubResource("Environment_c8320")

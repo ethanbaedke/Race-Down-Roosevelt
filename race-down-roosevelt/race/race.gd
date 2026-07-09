@@ -8,20 +8,22 @@ const LANE_SPACING:float = 3.0
 # Number of road rows to be placed before the finish line.
 const RACE_LENGTH:int = 1000
 const LEADERBOARD_DISPLAY_TIME:float = 5.0
+const DAY_CYCLE_TIME:float = 60.0
 
 var game_state:GameState = null
 
 @onready var _leaderboard:Leaderboard = $Leaderboard
 @onready var _race_theme_player:AudioStreamPlayer3D = $RaceThemePlayer
 @onready var _race_intro_player:AudioStreamPlayer3D = $RaceIntroPlayer
+@onready var _environment:WorldEnvironment = $WorldEnvironment
+@onready var _sunlight:DirectionalLight3D = $Sunlight
 
 var leaderboard_data:Array[RacerObject] = []
-
 var _race_in_progress:bool = false
-
 var _racer_vehicles:Array[RacerVehicle] = []
-
 var _finish_line_placed:bool = false
+# 0=noon, 1=sunset, 2=midnight, 3=sunrise.
+var _time_of_day:float = 0.0
 
 # Returns all racer vehicles in order of 1st place -> 4th place.
 func get_racer_order() -> Array[RacerVehicle]:
@@ -30,6 +32,13 @@ func get_racer_order() -> Array[RacerVehicle]:
 	_ordered_vehicles.sort_custom(func(v1:RacerVehicle, v2:RacerVehicle) -> bool:
 		return v1.position.z > v2.position.z)
 	return _ordered_vehicles
+
+func _update_time_of_day() -> void:
+	
+	var day_night_blend:float = -abs((_time_of_day - 2.0) * 0.5) + 1.0
+	_environment.environment.sky.sky_material.set_shader_parameter("DayNightBlend", day_night_blend)
+	_sunlight.rotation.x = lerp(deg_to_rad(-90.0), deg_to_rad(270.0), _time_of_day * 0.25)
+	_sunlight.light_energy = abs(smoothstep(0.45, 0.55, day_night_blend) - 1.0)
 
 # Expects at least one racer vehicle to exist.
 func _move_racers(delta:float) -> void:
@@ -52,6 +61,7 @@ func _move_racers(delta:float) -> void:
 		to_move_back = z_last + (diff * 0.5)
 	for vehicle:RacerVehicle in _racer_vehicles:
 		vehicle.position.z -= to_move_back
+	
 	_move_world_back(to_move_back)
 		
 	# Debugging
@@ -397,6 +407,9 @@ func setup_race() -> void:
 	# We also do one round of cleanup since it handles moving the road back.
 	_handle_cleanup()
 	
+	# Set intial time of day.
+	_update_time_of_day()
+	
 	RdrLogger.log(self, "Race setup complete.")
 
 func play_opening_animation() -> void:
@@ -597,3 +610,9 @@ func _physics_process(delta: float) -> void:
 	# Cleanup first so pool can be filled before placement happens.
 	_handle_cleanup()
 	_handle_road_placement()
+	
+	# Increment the time of day.
+	_time_of_day = _time_of_day + ((delta * 4.0) / DAY_CYCLE_TIME)
+	if (_time_of_day > 4.0):
+		_time_of_day -= 4.0
+	_update_time_of_day()

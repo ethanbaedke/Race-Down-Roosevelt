@@ -1,7 +1,30 @@
 class_name StreetLightRow extends Node3D
 
 @onready var _left_light:Node3D = $StreetLightLeft
+@onready var _left_light_light:SpotLight3D = $StreetLightLeft/SpotLight3D
 @onready var _right_light:Node3D = $StreetLightRight
+@onready var _right_light_light:SpotLight3D = $StreetLightRight/SpotLight3D
+
+func set_lit(value:bool) -> void:
+	
+	if (value):
+		if (_left_light.visible && _right_light.visible):
+			_left_light_light.light_energy = 1.0
+			await get_tree().create_timer(0.05).timeout
+			_right_light_light.light_energy = 1.0
+		elif (_left_light.visible):
+			_left_light_light.light_energy = 1.0
+		elif (_right_light.visible):
+			_right_light_light.light_energy = 1.0
+	else:
+		if (_left_light.visible && _right_light.visible):
+			_left_light_light.light_energy = 0.0
+			await get_tree().create_timer(0.05).timeout
+			_right_light_light.light_energy = 0.0
+		elif (_left_light.visible):
+			_left_light_light.light_energy = 0.0
+		elif (_right_light.visible):
+			_right_light_light.light_energy = 0.0
 
 func _ready() -> void:
 	

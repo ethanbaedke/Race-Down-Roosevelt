@@ -9,5 +9,19 @@ script = ExtResource("1_hudhy")
 [node name="StreetLightLeft" parent="." unique_id=1598161230 instance=ExtResource("2_3r3sc")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 15.5, 0, 0)
 
+[node name="SpotLight3D" type="SpotLight3D" parent="StreetLightLeft" unique_id=1023906933]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.57503605, 3, 5.0271296e-08)
+spot_range = 30.5859
+spot_attenuation = 0.0
+spot_angle = 84.37499
+spot_angle_attenuation = 0.5
+
 [node name="StreetLightRight" parent="." unique_id=1262166450 instance=ExtResource("2_3r3sc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="StreetLightRight" unique_id=1704080941]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.57503605, 3, 5.0271296e-08)
+spot_range = 30.5859
+spot_attenuation = 0.0
+spot_angle = 84.37499
+spot_angle_attenuation = 0.5

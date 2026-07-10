@@ -152,6 +152,21 @@ var _road_object_spawned_last_row:bool = false
 var _next_road_row_z:float = ROAD_ROW_SPACING
 var _road_rows_placed:int = 0
 
+var _street_lights_on:bool = false
+
+func set_street_lights_lit(value:bool) -> void:
+	
+	_street_lights_on = value
+	
+	var light_rows:Array[StreetLightRow] = []
+	for child:Node3D in _road_parent.get_children():
+		if (child is StreetLightRow):
+			light_rows.append(child)
+	
+	for row:StreetLightRow in light_rows:
+		await row.set_lit(value)
+		await get_tree().create_timer(0.05).timeout
+
 func _move_world_back(amount:float) -> void:
 	
 	for node:Node3D in _road_parent.get_children():
@@ -206,6 +221,9 @@ func _handle_road_object_placement(z_pos:float) -> void:
 	_road_parent.add_child(obj)
 	obj.position.z = z_pos
 	_road_object_spawned_last_row = true
+	
+	if (obj is StreetLightRow):
+		obj.set_lit(_street_lights_on)
 
 # Preferably, amount is a multiple of the road row spacing to avoid partial rows.
 # Extends in the +z direction (adds road to the front).
@@ -298,7 +316,7 @@ func _handle_cleanup() -> void:
 	road_object_pool.run_cleanup(func (n:Node3D) -> bool:
 		return n.position.z < cleanup_z
 	)
-	
+
 #endregion
 
 #region Race Setup
@@ -424,6 +442,7 @@ func play_opening_animation() -> void:
 	_opening_animation_player.play("fade_from_black")
 	await _opening_animation_player.animation_finished
 	
+	_day_night_player.play("RESET")
 	_day_night_player.play("initial_sunrise")
 	
 	_opening_animation_player.play("countdown")

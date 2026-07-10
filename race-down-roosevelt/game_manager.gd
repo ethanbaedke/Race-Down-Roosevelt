@@ -42,6 +42,10 @@ func _ready() -> void:
 		
 		# Wait for the race to tell us its ready for cleanup.
 		await _race.ready_for_cleanup
+		
+		# Must clear listeners from previous race to avoid null references in future races.
+		AudioSystem3D.clear_listeners()
+		
 		# Save the order the profiles finished in. May need this below.
 		var profile_finish_order:Array[Profile] = []
 		for racer:RacerObject in _race.leaderboard_data:

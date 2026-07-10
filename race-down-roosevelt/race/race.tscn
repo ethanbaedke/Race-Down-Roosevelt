@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ukdsd8n4p20e" path="res://road/item_row.tscn" id="8_vhq2c"]
 [ext_resource type="PackedScene" uid="uid://b3mpgd28w21q2" path="res://road/gas_row.tscn" id="9_cyu3u"]
 [ext_resource type="PackedScene" uid="uid://bhgv8crq1o62j" path="res://race/race_player_hud.tscn" id="10_hkrbr"]
+[ext_resource type="PackedScene" uid="uid://bcaf0sqrldq02" path="res://road/street_light_row.tscn" id="10_ru474"]
 [ext_resource type="AudioStream" uid="uid://8d08w1au8lsc" path="res://music/race_theme.wav" id="11_hkrbr"]
 [ext_resource type="AudioStream" uid="uid://bkt6k1nkh8j76" path="res://music/race_intro.wav" id="12_0lns8"]
 [ext_resource type="AudioStream" uid="uid://cnojsshdw3m23" path="res://sound_effects/countdown_low.wav" id="12_xiy3d"]
@@ -54,9 +55,15 @@ scene = ExtResource("9_cyu3u")
 weight = 10
 metadata/_custom_type_script = "uid://clyn63xl4tio5"
 
+[sub_resource type="Resource" id="Resource_xt8ap"]
+script = ExtResource("2_c8320")
+scene = ExtResource("10_ru474")
+weight = 20
+metadata/_custom_type_script = "uid://clyn63xl4tio5"
+
 [sub_resource type="Resource" id="Resource_xiy3d"]
 script = ExtResource("4_01boi")
-entries = Array[ExtResource("2_c8320")]([SubResource("Resource_g7srd"), SubResource("Resource_hkrbr"), SubResource("Resource_ru474")])
+entries = Array[ExtResource("2_c8320")]([SubResource("Resource_g7srd"), SubResource("Resource_hkrbr"), SubResource("Resource_ru474"), SubResource("Resource_xt8ap")])
 debug_name = "Road Object"
 metadata/_custom_type_script = "uid://bonfni7lag8hs"
 
@@ -72,11 +79,19 @@ texture_filter = 0
 material = SubResource("StandardMaterial3D_vhq2c")
 size = Vector2(27, 3)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ru474"]
+albedo_color = Color(0.48235294, 0.56078434, 0.6, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_iqn4a"]
-size = Vector3(0.2, 0.2, 3)
+material = SubResource("StandardMaterial3D_ru474")
+size = Vector3(3, 0.2, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xiy3d"]
+albedo_color = Color(0.48235294, 0.56078434, 0.6, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_g0dry"]
-size = Vector3(0.2, 0.2, 3)
+material = SubResource("StandardMaterial3D_xiy3d")
+size = Vector3(3, 0.2, 3)
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_xiy3d"]
 parameter_name = "DayNightBlend"
@@ -1081,11 +1096,11 @@ render_target_update_mode = 0
 mesh = SubResource("PlaneMesh_01boi")
 
 [node name="LeftBarrier" type="MeshInstance3D" parent="Road" unique_id=2118898070]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.9, 0.09, 0)
 mesh = SubResource("BoxMesh_iqn4a")
 
 [node name="RightBarrier" type="MeshInstance3D" parent="Road" unique_id=989704898]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9, 0.09, 0)
 mesh = SubResource("BoxMesh_g0dry")
 
 [node name="Traffic" type="Node3D" parent="." unique_id=282542112]

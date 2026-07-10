@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bcaf0sqrldq02"]
+
+[ext_resource type="Script" uid="uid://ca25t5qke4ux2" path="res://road/street_light_row.gd" id="1_hudhy"]
+[ext_resource type="PackedScene" uid="uid://dc3drwjtr7jc1" path="res://road/street_light.tscn" id="2_3r3sc"]
+
+[node name="StreetLightRow" type="Node3D" unique_id=190617459]
+script = ExtResource("1_hudhy")
+
+[node name="StreetLightLeft" parent="." unique_id=1598161230 instance=ExtResource("2_3r3sc")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 15.5, 0, 0)
+
+[node name="StreetLightRight" parent="." unique_id=1262166450 instance=ExtResource("2_3r3sc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5, 0, 0)

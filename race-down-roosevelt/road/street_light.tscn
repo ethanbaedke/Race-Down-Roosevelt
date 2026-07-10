@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dc3drwjtr7jc1"]
+
+[ext_resource type="PackedScene" uid="uid://d1o2j7m38dw70" path="res://road/street_light.glb" id="1_qblvs"]
+
+[node name="StreetLight" type="Node3D" unique_id=1598161230]
+
+[node name="StreetLightModel" parent="." unique_id=1957885890 instance=ExtResource("1_qblvs")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

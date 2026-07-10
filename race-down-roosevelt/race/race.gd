@@ -138,7 +138,7 @@ const TRAFFIC_SPAWN_COOLDOWN:int = 10
 @onready var _road_right_barrier:MeshInstance3D = $Road/RightBarrier
 
 var traffic_spawn_chance:float = 0.2
-var road_object_spawn_chance:float = 0.5
+var road_object_spawn_chance:float = 1.0
 
 var _finish_line_scene:PackedScene = preload("res://road/road_row_finish_line.tscn")
 

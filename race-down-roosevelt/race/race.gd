@@ -39,6 +39,10 @@ func _update_time_of_day() -> void:
 	_environment.environment.sky.sky_material.set_shader_parameter("DayNightBlend", day_night_blend)
 	_sunlight.rotation.x = lerp(deg_to_rad(-90.0), deg_to_rad(270.0), _time_of_day * 0.25)
 	_sunlight.light_energy = abs(smoothstep(0.45, 0.55, day_night_blend) - 1.0)
+	var sun_angle:float = lerp(0.0, PI * 2.0, _time_of_day * 0.25)
+	var sun_dir:Vector3 = Vector3(0.0, cos(sun_angle), sin(sun_angle))
+	_environment.environment.sky.sky_material.set_shader_parameter("SunDirection", sun_dir)
+	_environment.environment.sky.sky_material.set_shader_parameter("MoonDirection", -sun_dir)
 
 # Expects at least one racer vehicle to exist.
 func _move_racers(delta:float) -> void:

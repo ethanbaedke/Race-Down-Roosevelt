@@ -21,7 +21,6 @@ const MIN_WEIGHT:int = 1
 @onready var _collision_area:Area3D = $Area3D
 @onready var _collision_shape:CollisionShape3D = $Area3D/CollisionShape3D
 @onready var _model_controller:VehicleModelController = $VehicleModelController
-
 @onready var _boost_player:AudioStreamPlayer3D = $BoostPlayer
 
 var top_speed:float = 0.0
@@ -31,6 +30,8 @@ var weight:float = 0.0
 
 var speed:float = 0
 var input_enabled:bool = false
+# Set on ready since we have to search the tree for it.
+var nameplate:Nameplate = null
 
 var _hud:RacePlayerHud = null
 
@@ -203,6 +204,8 @@ func _handle_traffic_vehicle_hit(vehicle:TrafficVehicle) -> void:
 		# Reduce speed based on durability (higher = more maintained).
 		# Add one to max durability here to ensure vehicles with max durability still slow down some.
 		speed = speed * ((durability as float) / (MAX_DURABILITY + 1))
+		# Spin the racers nameplate.
+		nameplate.spin()
 
 func _collision_area_entered(area: Area3D) -> void:
 	
@@ -409,6 +412,9 @@ func _ready() -> void:
 	weight = racer.vehicle_data.weight
 	
 	_collision_area.area_entered.connect(_collision_area_entered)
+	
+	nameplate = _model_controller.find_child("Nameplate", true, false)
+	nameplate.set_display_name(racer.profile.name)
 
 func _process(delta: float) -> void:
 	

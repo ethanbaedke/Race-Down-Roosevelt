@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://d10eiktcruj47"]
+
+[ext_resource type="Script" uid="uid://dl418kmc1paoe" path="res://vehicles/racer_vehicles/nameplate.gd" id="1_iklcb"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_s1gwh"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Animation" id="Animation_lp4v7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder/NameSprite:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_8fhae"]
+resource_name = "base"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder/NameSprite:position:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.125, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s1gwh"]
+_data = {
+&"RESET": SubResource("Animation_lp4v7"),
+&"base": SubResource("Animation_8fhae")
+}
+
+[sub_resource type="Animation" id="Animation_ek3l5"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder/NameSprite:rotation:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_iklcb"]
+resource_name = "base"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHolder/NameSprite:rotation:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0, -0.10435593, 11.790405, 0.10384788, -11.733005, -12.56, -0.033333335, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ek3l5"]
+_data = {
+&"RESET": SubResource("Animation_ek3l5"),
+&"base": SubResource("Animation_iklcb")
+}
+
+[node name="Nameplate" type="Node3D" unique_id=932594312]
+script = ExtResource("1_iklcb")
+
+[node name="SpriteHolder" type="Node3D" parent="." unique_id=1259531788]
+
+[node name="NameSprite" type="Sprite3D" parent="SpriteHolder" unique_id=1301109944]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = SubResource("ViewportTexture_s1gwh")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1979409087]
+transparent_bg = true
+size = Vector2i(512, 128)
+
+[node name="NameLabel" type="Label" parent="SubViewport" unique_id=1197208960]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "New Racer"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="BounceAnimator" type="AnimationPlayer" parent="." unique_id=1214862231]
+libraries/ = SubResource("AnimationLibrary_s1gwh")
+autoplay = &"base"
+
+[node name="SpinAnimator" type="AnimationPlayer" parent="." unique_id=1315122333]
+libraries/ = SubResource("AnimationLibrary_ek3l5")

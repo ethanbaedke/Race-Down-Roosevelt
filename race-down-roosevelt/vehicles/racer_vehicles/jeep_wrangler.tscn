@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://5525td7tv2km" path="res://vehicles/jeep_wrangler.glb" id="3_r225x"]
 [ext_resource type="PackedScene" uid="uid://dcf6mvjwffjpe" path="res://vehicles/racer_vehicles/ai_racer_controller.tscn" id="4_8h12p"]
 [ext_resource type="AudioStream" uid="uid://c712lrhvgb3oo" path="res://sound_effects/boost.wav" id="5_qagkh"]
+[ext_resource type="PackedScene" uid="uid://d10eiktcruj47" path="res://vehicles/racer_vehicles/nameplate.tscn" id="6_r2w1j"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_meqtm"]
 size = Vector3(0.917, 0.754, 2.07)
@@ -22,6 +23,9 @@ shape = SubResource("BoxShape3D_meqtm")
 
 [node name="JeepWranglerModel" parent="VehicleModelController" unique_id=731493010 instance=ExtResource("3_r225x")]
 transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-08, 0.5331831, 0, -1.056751)
+
+[node name="Nameplate" parent="VehicleModelController" unique_id=932594312 instance=ExtResource("6_r2w1j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.181, 0)
 
 [node name="AiRacerController" parent="." unique_id=590700889 instance=ExtResource("4_8h12p")]
 

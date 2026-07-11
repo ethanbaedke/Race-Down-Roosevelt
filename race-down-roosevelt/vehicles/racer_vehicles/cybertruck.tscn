@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cag4gxseexopt" path="res://vehicles/cybertruck.glb" id="3_8fhae"]
 [ext_resource type="PackedScene" uid="uid://dcf6mvjwffjpe" path="res://vehicles/racer_vehicles/ai_racer_controller.tscn" id="4_ngcmy"]
 [ext_resource type="AudioStream" uid="uid://c712lrhvgb3oo" path="res://sound_effects/boost.wav" id="5_e3bkp"]
+[ext_resource type="PackedScene" uid="uid://d10eiktcruj47" path="res://vehicles/racer_vehicles/nameplate.tscn" id="6_lp4v7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4rng7"]
 size = Vector3(0.89, 0.634, 2.7939482)
@@ -22,6 +23,9 @@ shape = SubResource("BoxShape3D_4rng7")
 
 [node name="CybertruckModel" parent="VehicleModelController" unique_id=834419295 instance=ExtResource("3_8fhae")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.544021, 0, 1.3809184)
+
+[node name="Nameplate" parent="VehicleModelController" unique_id=932594312 instance=ExtResource("6_lp4v7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.147, 0)
 
 [node name="AiRacerController" parent="." unique_id=590700889 instance=ExtResource("4_ngcmy")]
 

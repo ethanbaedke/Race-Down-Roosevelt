@@ -49,6 +49,11 @@ ui_cancel={
 ]
 }
 
+[layer_names]
+
+2d_render/layer_2="Layer 2"
+2d_render/layer_3="Layer 3"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

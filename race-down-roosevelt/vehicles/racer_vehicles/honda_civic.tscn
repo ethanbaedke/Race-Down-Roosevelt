@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b30kj0jrm85yt" path="res://vehicles/racer_vehicles/racer_vehicle.gd" id="1_uwc0b"]
 [ext_resource type="PackedScene" uid="uid://bm0vc0wvvnx4h" path="res://vehicles/vehicle_model_controller.tscn" id="2_o80sb"]
 [ext_resource type="PackedScene" uid="uid://uvhx5awql1e8" path="res://vehicles/honda_civic.glb" id="2_uwc0b"]
+[ext_resource type="PackedScene" uid="uid://d10eiktcruj47" path="res://vehicles/racer_vehicles/nameplate.tscn" id="4_ggvtw"]
 [ext_resource type="PackedScene" uid="uid://dcf6mvjwffjpe" path="res://vehicles/racer_vehicles/ai_racer_controller.tscn" id="4_mjgcb"]
 [ext_resource type="AudioStream" uid="uid://c712lrhvgb3oo" path="res://sound_effects/boost.wav" id="5_ws3ns"]
 
@@ -27,6 +28,9 @@ transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-
 
 [node name="Car" parent="VehicleModelController/HondaCivicModel" index="0" unique_id=1032396022]
 surface_material_override/0 = SubResource("StandardMaterial3D_ws3ns")
+
+[node name="Nameplate" parent="VehicleModelController" unique_id=932594312 instance=ExtResource("4_ggvtw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.971, 0)
 
 [node name="AiRacerController" parent="." unique_id=590700889 instance=ExtResource("4_mjgcb")]
 

@@ -440,8 +440,10 @@ func play_opening_animation() -> void:
 	_setup_player_viewports()
 	
 	# Flip the nameplates on racers, since they will have been facing the opposite direction for the opening animation.
-	for vehicle:RacerVehicle in _racer_vehicles:
-		vehicle.nameplate.flip()
+	# Also set layers on the nameplates so they are invisible on a players own viewport.
+	for i:int in range(_racer_vehicles.size()):
+		_racer_vehicles[i].nameplate.flip()
+		_racer_vehicles[i].nameplate.set_player_number(i + 1)
 	
 	_opening_animation_player.play("fade_from_black")
 	await _opening_animation_player.animation_finished

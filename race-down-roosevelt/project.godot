@@ -52,7 +52,11 @@ ui_cancel={
 [layer_names]
 
 2d_render/layer_2="Layer 2"
+3d_render/layer_2="Player 1"
 2d_render/layer_3="Layer 3"
+3d_render/layer_3="Player 2"
+3d_render/layer_4="Player 3"
+3d_render/layer_5="Player 4"
 
 [physics]
 

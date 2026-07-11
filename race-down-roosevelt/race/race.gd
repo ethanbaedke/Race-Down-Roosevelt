@@ -212,6 +212,10 @@ func _handle_road_object_placement(z_pos:float) -> void:
 		_road_object_spawned_last_row = false
 		return
 	
+	# During setup, don't spawn objects in the first 5 rows.
+	if (!_race_in_progress && z_pos <= 30.0):
+		return
+	
 	if (randf_range(0.0, 1.0) > road_object_spawn_chance):
 		return
 	

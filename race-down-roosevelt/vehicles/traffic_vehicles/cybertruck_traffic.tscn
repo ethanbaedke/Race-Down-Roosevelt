@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://citqde56c7r8t"]
+
+[ext_resource type="Script" uid="uid://bqi1740ikajnm" path="res://vehicles/traffic_vehicles/traffic_vehicle.gd" id="1_3fq0q"]
+[ext_resource type="PackedScene" uid="uid://cag4gxseexopt" path="res://vehicles/cybertruck.glb" id="3_3fq0q"]
+[ext_resource type="AudioStream" uid="uid://b8b8kfajvkt86" path="res://sound_effects/crash.wav" id="3_gnpme"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3fq0q"]
+size = Vector3(0.89, 0.634, 2.7939482)
+
+[node name="CybertruckTraffic" type="Node3D" unique_id=1093534000 node_paths=PackedStringArray("_vehicle_model")]
+script = ExtResource("1_3fq0q")
+speed = 8
+_vehicle_model = NodePath("CybertruckModel")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1328120887]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40587777, -0.025)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1414403268]
+shape = SubResource("BoxShape3D_3fq0q")
+
+[node name="CybertruckModel" parent="." unique_id=834419295 instance=ExtResource("3_3fq0q")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.544021, 0, 1.3809184)
+
+[node name="ExplodePlayer" type="AudioStreamPlayer3D" parent="." unique_id=867219294]
+stream = ExtResource("3_gnpme")
+unit_size = 18.0

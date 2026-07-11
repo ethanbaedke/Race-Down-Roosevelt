@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RacerVehicleData" format=3 uid="uid://cbuhnvvl21iod"]
+
+[ext_resource type="PackedScene" uid="uid://c4fc1sjv3ylko" path="res://vehicles/racer_vehicles/cybertruck.tscn" id="1_0ddah"]
+[ext_resource type="Script" uid="uid://cng61qyitlqib" path="res://vehicles/racer_vehicle_data.gd" id="2_7bb7v"]
+
+[resource]
+script = ExtResource("2_7bb7v")
+scene = ExtResource("1_0ddah")
+metadata/_custom_type_script = "uid://cng61qyitlqib"

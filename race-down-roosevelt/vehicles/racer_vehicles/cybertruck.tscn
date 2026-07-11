@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c4fc1sjv3ylko"]
+
+[ext_resource type="Script" uid="uid://b30kj0jrm85yt" path="res://vehicles/racer_vehicles/racer_vehicle.gd" id="1_8fhae"]
+[ext_resource type="PackedScene" uid="uid://bm0vc0wvvnx4h" path="res://vehicles/vehicle_model_controller.tscn" id="2_lp4v7"]
+[ext_resource type="PackedScene" uid="uid://cag4gxseexopt" path="res://vehicles/cybertruck.glb" id="3_8fhae"]
+[ext_resource type="PackedScene" uid="uid://dcf6mvjwffjpe" path="res://vehicles/racer_vehicles/ai_racer_controller.tscn" id="4_ngcmy"]
+[ext_resource type="AudioStream" uid="uid://c712lrhvgb3oo" path="res://sound_effects/boost.wav" id="5_e3bkp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4rng7"]
+size = Vector3(0.89, 0.634, 2.7939482)
+
+[node name="Cybertruck" type="Node3D" unique_id=1093534000]
+script = ExtResource("1_8fhae")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=407952649]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40587777, -0.025)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1446051688]
+shape = SubResource("BoxShape3D_4rng7")
+
+[node name="VehicleModelController" parent="." unique_id=826719096 instance=ExtResource("2_lp4v7")]
+
+[node name="CybertruckModel" parent="VehicleModelController" unique_id=834419295 instance=ExtResource("3_8fhae")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.544021, 0, 1.3809184)
+
+[node name="AiRacerController" parent="." unique_id=590700889 instance=ExtResource("4_ngcmy")]
+
+[node name="BoostPlayer" type="AudioStreamPlayer3D" parent="." unique_id=627810049]
+stream = ExtResource("5_e3bkp")
+volume_db = -80.0

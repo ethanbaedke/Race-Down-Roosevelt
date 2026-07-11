@@ -1,10 +1,11 @@
 class_name RacePlayerHud extends Control
 
-@onready var _item_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl/ItemTextureRect
-@onready var _item_progress_bar:ProgressBar = $MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl/ItemProgressBar
-@onready var _jump_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl2/JumpForeground
-@onready var _item_disabled_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl/ItemDisabledTexture
-@onready var _jump_disabled_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl2/JumpDisabledTexture
+@onready var _item_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/SizeFitterControl/ItemTextureRect
+@onready var _item_progress_bar:ProgressBar = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/SizeFitterControl/ItemProgressBar
+@onready var _jump_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/SizeFitterControl2/JumpForeground
+@onready var _item_disabled_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/SizeFitterControl/ItemDisabledTexture
+@onready var _jump_disabled_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/SizeFitterControl2/JumpDisabledTexture
+@onready var _name_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/NameLabel
 
 func update_item(data:ItemData) -> void:
 	
@@ -35,3 +36,7 @@ func update_item_usable_state(usable:bool) -> void:
 func update_gas_usable_state(usable:bool) -> void:
 	
 	_jump_disabled_texture_rect.visible = !usable
+
+func update_name(new_name:String) -> void:
+	
+	_name_label.text = new_name

@@ -12,6 +12,12 @@ shader = ExtResource("4_gv7jw")
 shader_parameter/tex = ExtResource("3_0s412")
 shader_parameter/percent = 0.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7q07"]
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
 [node name="RacePlayerHud" type="Control" unique_id=365328423]
 layout_mode = 3
 anchors_preset = 15
@@ -36,18 +42,23 @@ theme_override_constants/margin_bottom = 20
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=474705734]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=468573854]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=405792991]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="SizeFitterControl" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=831817812]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=468573854]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SizeFitterControl" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=831817812]
+custom_minimum_size = Vector2(172, 0)
 layout_mode = 2
 script = ExtResource("2_20vi5")
 metadata/_custom_type_script = "uid://bbq73pgt3nopk"
 
-[node name="ItemTextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl" unique_id=2100005317]
+[node name="ItemTextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/SizeFitterControl" unique_id=2100005317]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -59,7 +70,7 @@ texture = ExtResource("1_tdi34")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ItemProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl" unique_id=471768205]
+[node name="ItemProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/SizeFitterControl" unique_id=471768205]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -72,7 +83,7 @@ value = 100.0
 fill_mode = 3
 show_percentage = false
 
-[node name="ItemDisabledTexture" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl" unique_id=310143360]
+[node name="ItemDisabledTexture" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/SizeFitterControl" unique_id=310143360]
 visible = false
 texture_filter = 1
 layout_mode = 1
@@ -83,12 +94,13 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_g7q07")
 
-[node name="SizeFitterControl2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1530404179]
+[node name="SizeFitterControl2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1530404179]
+custom_minimum_size = Vector2(172, 0)
 layout_mode = 2
 script = ExtResource("2_20vi5")
 metadata/_custom_type_script = "uid://bbq73pgt3nopk"
 
-[node name="JumpBackground" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl2" unique_id=1023061735]
+[node name="JumpBackground" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/SizeFitterControl2" unique_id=1023061735]
 self_modulate = Color(1, 1, 1, 0.24705882)
 texture_filter = 1
 layout_mode = 1
@@ -103,7 +115,7 @@ texture = ExtResource("3_0s412")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="JumpForeground" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl2" unique_id=1025428949]
+[node name="JumpForeground" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/SizeFitterControl2" unique_id=1025428949]
 texture_filter = 1
 material = SubResource("ShaderMaterial_20vi5")
 layout_mode = 1
@@ -118,7 +130,7 @@ texture = ExtResource("3_0s412")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="JumpDisabledTexture" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/SizeFitterControl2" unique_id=309862596]
+[node name="JumpDisabledTexture" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/SizeFitterControl2" unique_id=309862596]
 visible = false
 texture_filter = 1
 layout_mode = 1
@@ -128,6 +140,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_g7q07")
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=164229966]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_g7q07")
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer" unique_id=702633636]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "New Racer"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=380353631]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Control" type="Control" parent="MarginContainer/VBoxContainer" unique_id=542521493]
 layout_mode = 2

@@ -51,6 +51,7 @@ func set_hud(hud:RacePlayerHud) -> void:
 	_hud = hud
 	_hud.update_item(_held_item)
 	_hud.update_name(racer.profile.name)
+	_hud.update_device_type(Globals.device_type_from_index(racer.device_index))
 
 # Important for the camera initializing at the correct position.
 func set_initial_position(global_pos:Vector3) -> void:

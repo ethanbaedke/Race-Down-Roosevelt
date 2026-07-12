@@ -1,5 +1,13 @@
 extends Node
 
+enum DeviceType {
+	UNKNOWN,
+	KEYBOARD,
+	XBOX,
+	PLAYSTATION,
+	SWITCH
+}
+
 const SAVE_DATA_PATH:String = "user://save_data.res"
 
 const AI_RACER_NAMES:Array[String] = [
@@ -47,6 +55,27 @@ const PROFILE_ICONS:Array[CompressedTexture2D] = [
 	preload("res://vehicles/racer_vehicles/jeep_wrangler_data.tres"),
 	preload("res://vehicles/racer_vehicles/cybertruck_data.tres")
 ]
+
+func device_type_from_index(device_index:int) -> DeviceType:
+	
+	match (device_index):
+		-2:
+			return DeviceType.UNKNOWN
+		-1:
+			return DeviceType.KEYBOARD
+		_:
+			for device:int in Input.get_connected_joypads():
+				if (device == device_index):
+					var device_name:String = Input.get_joy_name(device).to_lower()
+					if (device_name.contains("xinput")):
+						return DeviceType.XBOX
+					elif (device_name.contains("dualsense")):
+						return DeviceType.PLAYSTATION
+					elif (device_name.contains("nintendo")):
+						return DeviceType.SWITCH
+					else:
+						return DeviceType.UNKNOWN
+			return DeviceType.UNKNOWN
 
 func get_random_racer_vehicle_data() -> RacerVehicleData:
 	

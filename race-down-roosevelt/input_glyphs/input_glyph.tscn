@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://djt7v72ojdmfm"]
+
+[ext_resource type="Texture2D" uid="uid://cg86rubg8tred" path="res://input_glyphs/xbox_a.png" id="1_ikrsm"]
+[ext_resource type="Script" uid="uid://s51f3mee541j" path="res://input_glyphs/input_glyph.gd" id="1_m7ike"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2oj61"]
+resource_local_to_scene = true
+atlas = ExtResource("1_ikrsm")
+region = Rect2(0, 0, 16, 16)
+
+[node name="InputGlyph" type="TextureRect" unique_id=1586109879]
+texture_filter = 1
+texture = SubResource("AtlasTexture_2oj61")
+stretch_mode = 5
+script = ExtResource("1_m7ike")

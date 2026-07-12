@@ -1,11 +1,13 @@
 class_name RacePlayerHud extends Control
 
-@onready var _item_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/SizeFitterControl/ItemTextureRect
-@onready var _item_progress_bar:ProgressBar = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/SizeFitterControl/ItemProgressBar
-@onready var _jump_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/SizeFitterControl2/JumpForeground
-@onready var _item_disabled_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/SizeFitterControl/ItemDisabledTexture
-@onready var _jump_disabled_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/SizeFitterControl2/JumpDisabledTexture
+@onready var _item_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer/SizeFitterControl/ItemTextureRect
+@onready var _item_progress_bar:ProgressBar = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer/SizeFitterControl/ItemProgressBar
+@onready var _jump_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2/SizeFitterControl2/JumpForeground
+@onready var _item_disabled_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer/SizeFitterControl/ItemDisabledTexture
+@onready var _jump_disabled_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2/SizeFitterControl2/JumpDisabledTexture
 @onready var _name_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/NameLabel
+@onready var _item_input_glyph:InputGlyph = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer/InputGlyph
+@onready var _jump_input_glyph:InputGlyph = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2/InputGlyph
 
 func update_item(data:ItemData) -> void:
 	
@@ -40,3 +42,8 @@ func update_gas_usable_state(usable:bool) -> void:
 func update_name(new_name:String) -> void:
 	
 	_name_label.text = new_name
+
+func update_device_type(device_type:Globals.DeviceType) -> void:
+	
+	_item_input_glyph.set_glyph(device_type, InputGlyph.ActionType.ITEM)
+	_jump_input_glyph.set_glyph(device_type, InputGlyph.ActionType.JUMP)

@@ -3,14 +3,27 @@
 [ext_resource type="Script" uid="uid://b30kj0jrm85yt" path="res://vehicles/racer_vehicles/racer_vehicle.gd" id="1_uwc0b"]
 [ext_resource type="PackedScene" uid="uid://bm0vc0wvvnx4h" path="res://vehicles/vehicle_model_controller.tscn" id="2_o80sb"]
 [ext_resource type="PackedScene" uid="uid://uvhx5awql1e8" path="res://vehicles/honda_civic.glb" id="2_uwc0b"]
+[ext_resource type="Material" uid="uid://c2abq63w460su" path="res://vehicles/racer_vehicles/glass_material.tres" id="4_eyx0d"]
 [ext_resource type="PackedScene" uid="uid://d10eiktcruj47" path="res://vehicles/racer_vehicles/nameplate.tscn" id="4_ggvtw"]
 [ext_resource type="PackedScene" uid="uid://dcf6mvjwffjpe" path="res://vehicles/racer_vehicles/ai_racer_controller.tscn" id="4_mjgcb"]
+[ext_resource type="Material" uid="uid://bqmd5s7ioykar" path="res://vehicles/racer_vehicles/headlight_material.tres" id="5_vnuan"]
 [ext_resource type="AudioStream" uid="uid://c712lrhvgb3oo" path="res://sound_effects/boost.wav" id="5_ws3ns"]
+[ext_resource type="Material" uid="uid://cqhl8e7t4qblg" path="res://vehicles/racer_vehicles/taillight_material.tres" id="6_3rkw2"]
+[ext_resource type="Material" uid="uid://d112u1couco11" path="res://vehicles/racer_vehicles/wheel_rubber_material.tres" id="7_3rkw2"]
+[ext_resource type="Material" uid="uid://8ala27u8ily3" path="res://vehicles/racer_vehicles/wheel_rim_material.tres" id="8_6348r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4rng7"]
 size = Vector3(0.89, 0.634, 2.313)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ws3ns"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ggvtw"]
+albedo_color = Color(0.9, 0.9, 0.9, 1)
+metallic = 0.6
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pbf1d"]
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+metallic = 0.5
+roughness = 0.6
 
 [node name="HondaCivic" type="Node3D" unique_id=1093534000]
 script = ExtResource("1_uwc0b")
@@ -27,7 +40,15 @@ shape = SubResource("BoxShape3D_4rng7")
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.4615922, 0, 1.1404314)
 
 [node name="Car" parent="VehicleModelController/HondaCivicModel" index="0" unique_id=1032396022]
-surface_material_override/0 = SubResource("StandardMaterial3D_ws3ns")
+surface_material_override/0 = SubResource("StandardMaterial3D_ggvtw")
+surface_material_override/1 = ExtResource("4_eyx0d")
+surface_material_override/2 = ExtResource("5_vnuan")
+surface_material_override/3 = SubResource("StandardMaterial3D_pbf1d")
+surface_material_override/4 = ExtResource("6_3rkw2")
+
+[node name="Wheel" parent="VehicleModelController/HondaCivicModel" index="1" unique_id=869785292]
+surface_material_override/0 = ExtResource("7_3rkw2")
+surface_material_override/1 = ExtResource("8_6348r")
 
 [node name="Nameplate" parent="VehicleModelController" unique_id=932594312 instance=ExtResource("4_ggvtw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.971, 0)

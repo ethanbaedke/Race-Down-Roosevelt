@@ -11,8 +11,9 @@ resource_local_to_scene = true
 transparency = 4
 albedo_color = Color(0.85490197, 0.64705884, 0.1254902, 1)
 emission_enabled = true
-emission = Color(0.85490197, 0.64705884, 0.1254902, 1)
+emission = Color(1, 1, 0, 1)
 emission_energy_multiplier = 2.0
+rim_enabled = true
 
 [sub_resource type="Animation" id="Animation_8im0o"]
 length = 0.001

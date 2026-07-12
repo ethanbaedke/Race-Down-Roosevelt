@@ -4,11 +4,26 @@
 [ext_resource type="PackedScene" uid="uid://bm0vc0wvvnx4h" path="res://vehicles/vehicle_model_controller.tscn" id="2_8h12p"]
 [ext_resource type="PackedScene" uid="uid://5525td7tv2km" path="res://vehicles/jeep_wrangler.glb" id="3_r225x"]
 [ext_resource type="PackedScene" uid="uid://dcf6mvjwffjpe" path="res://vehicles/racer_vehicles/ai_racer_controller.tscn" id="4_8h12p"]
+[ext_resource type="Material" uid="uid://bqmd5s7ioykar" path="res://vehicles/racer_vehicles/headlight_material.tres" id="4_cr8d3"]
+[ext_resource type="Material" uid="uid://c2abq63w460su" path="res://vehicles/racer_vehicles/glass_material.tres" id="5_0cq6j"]
 [ext_resource type="AudioStream" uid="uid://c712lrhvgb3oo" path="res://sound_effects/boost.wav" id="5_qagkh"]
 [ext_resource type="PackedScene" uid="uid://d10eiktcruj47" path="res://vehicles/racer_vehicles/nameplate.tscn" id="6_r2w1j"]
+[ext_resource type="Material" uid="uid://cqhl8e7t4qblg" path="res://vehicles/racer_vehicles/taillight_material.tres" id="6_unmob"]
+[ext_resource type="Material" uid="uid://d112u1couco11" path="res://vehicles/racer_vehicles/wheel_rubber_material.tres" id="7_akw67"]
+[ext_resource type="Material" uid="uid://8ala27u8ily3" path="res://vehicles/racer_vehicles/wheel_rim_material.tres" id="8_rf8rf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_meqtm"]
 size = Vector3(0.917, 0.754, 2.07)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r2w1j"]
+albedo_color = Color(1, 0.8333334, 0, 1)
+metallic = 0.6
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pbf1d"]
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+metallic = 0.5
+roughness = 0.6
 
 [node name="JeepWrangler" type="Node3D" unique_id=1093534000]
 script = ExtResource("1_r225x")
@@ -24,6 +39,33 @@ shape = SubResource("BoxShape3D_meqtm")
 [node name="JeepWranglerModel" parent="VehicleModelController" unique_id=731493010 instance=ExtResource("3_r225x")]
 transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-08, 0.5331831, 0, -1.056751)
 
+[node name="Car" parent="VehicleModelController/JeepWranglerModel" index="0" unique_id=972316620]
+surface_material_override/0 = SubResource("StandardMaterial3D_r2w1j")
+surface_material_override/1 = ExtResource("4_cr8d3")
+surface_material_override/2 = SubResource("StandardMaterial3D_pbf1d")
+surface_material_override/3 = ExtResource("5_0cq6j")
+surface_material_override/4 = ExtResource("6_unmob")
+
+[node name="Wheel" parent="VehicleModelController/JeepWranglerModel" index="1" unique_id=1900539099]
+surface_material_override/0 = ExtResource("7_akw67")
+surface_material_override/1 = ExtResource("8_rf8rf")
+
+[node name="Wheel_001" parent="VehicleModelController/JeepWranglerModel" index="2" unique_id=1327568564]
+surface_material_override/0 = ExtResource("7_akw67")
+surface_material_override/1 = ExtResource("8_rf8rf")
+
+[node name="Wheel_002" parent="VehicleModelController/JeepWranglerModel" index="3" unique_id=813251960]
+surface_material_override/0 = ExtResource("7_akw67")
+surface_material_override/1 = ExtResource("8_rf8rf")
+
+[node name="Wheel_003" parent="VehicleModelController/JeepWranglerModel" index="4" unique_id=162368818]
+surface_material_override/0 = ExtResource("7_akw67")
+surface_material_override/1 = ExtResource("8_rf8rf")
+
+[node name="Wheel_004" parent="VehicleModelController/JeepWranglerModel" index="5" unique_id=56359366]
+surface_material_override/0 = ExtResource("7_akw67")
+surface_material_override/1 = ExtResource("8_rf8rf")
+
 [node name="Nameplate" parent="VehicleModelController" unique_id=932594312 instance=ExtResource("6_r2w1j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.181, 0)
 
@@ -32,3 +74,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.181, 0)
 [node name="BoostPlayer" type="AudioStreamPlayer3D" parent="." unique_id=255617415]
 stream = ExtResource("5_qagkh")
 volume_db = -80.0
+
+[editable path="VehicleModelController/JeepWranglerModel"]

@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://bkt6k1nkh8j76" path="res://music/race_intro.wav" id="12_0lns8"]
 [ext_resource type="AudioStream" uid="uid://cnojsshdw3m23" path="res://sound_effects/countdown_low.wav" id="12_xiy3d"]
 [ext_resource type="AudioStream" uid="uid://bvtm4cbq20pwu" path="res://sound_effects/countdown_high.wav" id="13_ru474"]
+[ext_resource type="PackedScene" uid="uid://cu32ofcaom0gu" path="res://race/race_environment.tscn" id="14_yiuc0"]
 
 [sub_resource type="Resource" id="Resource_g0dry"]
 script = ExtResource("2_c8320")
@@ -301,20 +302,22 @@ shader = SubResource("VisualShader_yiuc0")
 shader_parameter/Texture2DParameter = SubResource("NoiseTexture2D_xt8ap")
 shader_parameter/Texture2DParameter2 = SubResource("NoiseTexture2D_yqwes")
 shader_parameter/DayNightBlend = 1.0
-shader_parameter/SunDirection = Vector3(0, -0.22354479, 1)
+shader_parameter/SunDirection = Vector3(0, -0.23902161, 1)
 shader_parameter/MoonDirection = Vector3(0, -0.25, 1)
 
 [sub_resource type="Sky" id="Sky_g63gw"]
 sky_material = SubResource("ShaderMaterial_klqtr")
 
-[sub_resource type="Environment" id="Environment_xiy3d"]
+[sub_resource type="Environment" id="Environment_yiuc0"]
 resource_local_to_scene = true
 background_mode = 2
 sky = SubResource("Sky_g63gw")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.1
-reflected_light_source = 1
+reflected_light_source = 2
+ssao_enabled = true
+ssil_enabled = true
 glow_enabled = true
 
 [sub_resource type="Animation" id="Animation_vhq2c"]
@@ -430,6 +433,54 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("OpeningAnimationPlayer/OpeningAnimLights/SpotLight3D:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("OpeningAnimationPlayer/OpeningAnimLights/SpotLight3D2:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("OpeningAnimationPlayer/OpeningAnimLights/SpotLight3D3:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("OpeningAnimationPlayer/OpeningAnimLights/SpotLight3D4:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_c8320"]
@@ -595,7 +646,7 @@ tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_cyu3u"]
 resource_name = "scroll_vehicles"
-length = 7.0
+length = 6.0
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -638,6 +689,54 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("OpeningAnimationPlayer/OpeningAnimLights/SpotLight3D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OpeningAnimationPlayer/OpeningAnimLights/SpotLight3D2:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("OpeningAnimationPlayer/OpeningAnimLights/SpotLight3D3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("OpeningAnimationPlayer/OpeningAnimLights/SpotLight3D4:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(4.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hkrbr"]
@@ -722,6 +821,18 @@ tracks/5/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sunlight:light_color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.85, 0.7, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_ru474"]
 resource_name = "day_cycle"
@@ -768,7 +879,7 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 0, -0.777778, 0.083333336, 0, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(0.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 0, -0.777778, 0.083333336, 0, 0, 0, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 30, 45, 47, 60, 62, 76.632, 77.556, 88, 90)
 }
 tracks/4/type = "bezier"
@@ -809,6 +920,18 @@ tracks/6/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.07478714, 0.01653439, 0.058547974, -0.014329808, -0.05, 0, 0, 0, 0, 0, -0.07011795, -0.016534394, 0.06321716, 0.014329805, 0.05, 0, 0, 0, 0, 0, -0.07478714, 0.01653439, 0.058547974, -0.014329808, -0.05, 0, 0, 0, 0, 0, -0.07011795, -0.016534394, 0.06321716, 0.014329805, 0.05, 0, 0, 0, 0, 0, -0.07478714, 0.01653439, 0.058547974, -0.014329808, -0.05, 0, 0, 0, 0, 0, -0.07011795, -0.016534394, 0.06321716, 0.014329805, 0.05, 0, 0, 0, 0, 0, -0.07478714, 0.01653439, 0.058547974, -0.014329808, -0.05, 0, 0, 0, 0, 0, -0.07011795, -0.016534394, 0.06321716, 0.014329805, 0.05, 0, 0, 0, 0, 0, -0.07478714, 0.01653439, 0.058547974, -0.014329808, -0.05, 0, 0, 0, 0, 0, -0.07011795, -0.016534394, 0.06321716, 0.014329805, 0.05, 0, 0, 0, 0, 0, -0.07478714, 0.01653439, 0.058547974, -0.014329808, -0.05, 0, 0, 0, 0, 0, -0.07011795, -0.016534394, 0.06321716, 0.014329805, 0.05, 0, 0, 0, 0, 0, -0.07478714, 0.01653439, 0.058547974, -0.014329808, -0.05, 0, 0, 0, 0, 0, -0.07011795, -0.016534394, 0.06321716, 0.014329805, 0.05, 0, 0, 0, 0, 0, -0.07478714, 0.01653439, 0.058547974, -0.014329808, -0.05, 0, 0, 0, 0, 0, -0.07011795, -0.016534394, 0.06321716, 0.014329805, 0.05, 0, 0, 0, 0, 0, -0.07478714, 0.01653439, 0.058547974, -0.014329808, -0.05, 0, 0, 0, 0, 0, -0.07011795, -0.016534394, 0.06321716, 0.014329805, 0.05, 0, 0, 0, 0, 0, -0.07478714, 0.01653439, 0.058547974, -0.014329808, -0.05, 0, 0, 0, 0, 0, -0.07011795, -0.016534394, 0.06321716, 0.014329805, 0.05, 0, 0, 0, 0, 0, -0.07478714, 0.01653439, 0.058547974, -0.014329808, -0.05, 0, 0, 0, 0, 0, -0.07011795, -0.016534394, 0.06321716, 0.014329805, 0.05, 0, 0, 0, 0, 0, -0.07478714, 0.01653439, 0.058547974, -0.014329808, -0.05, 0, 0, 0, 0, 0, -0.07011795, -0.016534394, 0.06321716, 0.014329805, 0.05, 0, 0, 0, 0, 0, -0.07478714, 0.01653439, 0.058547974, -0.014329808, -0.05, 0, 0, 0, 0, 0, -0.07011795, -0.016534394, 0.06321716, 0.014329805, 0.05, 0, 0, 0, 0, 0, -0.07478714, 0.01653439, 0.058547974, -0.014329808, -0.05, 0, 0, 0, 0, 0, -0.07011795, -0.016534394, 0.06321716, 0.014329805, 0.05, 0, 0, 0, 0, 0, -0.07478714, 0.01653439, 0.058547974, -0.014329808, -0.05, 0, 0, 0, 0, 0, -0.07011795, -0.016534394, 0.06321716, 0.014329805, 0.05, 0, 0, 0, 0, 0, -0.07478714, 0.01653439, 0.058547974, -0.014329808, -0.05, 0, 0, 0, 0, 0, -0.52817535, 0.15762796, 0.058547974, -0.014329808),
 "times": PackedFloat32Array(0, 62.541, 62.772, 63.003, 63.234, 63.465, 63.696, 63.927, 64.158, 64.38899, 64.619995, 64.851, 65.082, 65.312996, 65.54399, 65.774994, 66.006, 66.237, 66.467995, 66.69899, 66.92999, 67.160995, 67.392, 67.62299, 67.85399, 68.08499, 68.315994, 68.547, 68.778, 69.00899, 69.23999, 69.47099, 69.702, 69.93301, 70.16401, 70.39501, 70.626015, 70.857, 71.088005, 71.31901, 71.55, 71.78099, 72.012, 72.243004, 72.47401, 72.704994, 72.936, 73.167, 73.397995, 73.62898, 73.86, 74.091, 74.32201, 74.55299, 74.784, 75.015, 75.245995, 75.47698, 75.70799, 75.938995, 76.17, 76.400986, 76.63199, 77.556)
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sunlight:light_color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 30, 45, 60, 77.556, 88),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0.85, 0.7, 1), Color(1, 0.85, 0.7, 1), Color(0.93, 0.465, 0, 1), Color(0.5, 0.5, 1, 1), Color(0.5, 0.5, 1, 1), Color(1, 0.85, 0.7, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_yiuc0"]
@@ -855,7 +978,7 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "handle_modes": PackedInt32Array(2, 2),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 
@@ -1342,10 +1465,12 @@ size_flags_stretch_ratio = 8.0
 theme_override_font_sizes/font_size = 64
 text = "Name"
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1208283316]
-environment = SubResource("Environment_xiy3d")
+[node name="WorldEnvironment" parent="." unique_id=849873186 instance=ExtResource("14_yiuc0")]
+environment = SubResource("Environment_yiuc0")
 
 [node name="Sunlight" type="DirectionalLight3D" parent="." unique_id=327752361]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+light_color = Color(1, 0.85, 0.7, 1)
 light_energy = 0.0
 shadow_enabled = true
 
@@ -1417,6 +1542,28 @@ theme_override_font_sizes/font_size = 128
 text = "ROOSEVELT"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="OpeningAnimLights" type="Node3D" parent="OpeningAnimationPlayer" unique_id=200408457]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="OpeningAnimationPlayer/OpeningAnimLights" unique_id=127263161]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, -9, 2, 2)
+visible = false
+shadow_enabled = true
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="OpeningAnimationPlayer/OpeningAnimLights" unique_id=395109381]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, -3, 2, 2)
+visible = false
+shadow_enabled = true
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="OpeningAnimationPlayer/OpeningAnimLights" unique_id=1545923487]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 3, 2, 2)
+visible = false
+shadow_enabled = true
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="OpeningAnimationPlayer/OpeningAnimLights" unique_id=1301045000]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 9, 2, 2)
+visible = false
+shadow_enabled = true
 
 [node name="RaceThemePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1364561858]
 stream = ExtResource("11_hkrbr")

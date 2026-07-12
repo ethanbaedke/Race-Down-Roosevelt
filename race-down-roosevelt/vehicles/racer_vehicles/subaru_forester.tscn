@@ -5,10 +5,25 @@
 [ext_resource type="PackedScene" uid="uid://40efplcfedui" path="res://vehicles/subaru_forester.glb" id="2_ce1kl"]
 [ext_resource type="PackedScene" uid="uid://dcf6mvjwffjpe" path="res://vehicles/racer_vehicles/ai_racer_controller.tscn" id="4_1kbiw"]
 [ext_resource type="PackedScene" uid="uid://d10eiktcruj47" path="res://vehicles/racer_vehicles/nameplate.tscn" id="4_7jwak"]
+[ext_resource type="Material" uid="uid://c2abq63w460su" path="res://vehicles/racer_vehicles/glass_material.tres" id="4_l132g"]
 [ext_resource type="AudioStream" uid="uid://c712lrhvgb3oo" path="res://sound_effects/boost.wav" id="5_br1bg"]
+[ext_resource type="Material" uid="uid://bqmd5s7ioykar" path="res://vehicles/racer_vehicles/headlight_material.tres" id="5_bymmc"]
+[ext_resource type="Material" uid="uid://cqhl8e7t4qblg" path="res://vehicles/racer_vehicles/taillight_material.tres" id="6_sjgu0"]
+[ext_resource type="Material" uid="uid://d112u1couco11" path="res://vehicles/racer_vehicles/wheel_rubber_material.tres" id="7_sjgu0"]
+[ext_resource type="Material" uid="uid://8ala27u8ily3" path="res://vehicles/racer_vehicles/wheel_rim_material.tres" id="8_l71ua"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_meqtm"]
 size = Vector3(0.917, 0.685, 2.312)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7jwak"]
+albedo_color = Color(0, 0.83333325, 1, 1)
+metallic = 0.6
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pbf1d"]
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+metallic = 0.5
+roughness = 0.6
 
 [node name="SubaruForester" type="Node3D" unique_id=1093534000]
 script = ExtResource("1_ce1kl")
@@ -24,6 +39,29 @@ shape = SubResource("BoxShape3D_meqtm")
 [node name="SubaruForesterModel" parent="VehicleModelController" unique_id=1946182605 instance=ExtResource("2_ce1kl")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.46786118, 0, 1.1404314)
 
+[node name="Car" parent="VehicleModelController/SubaruForesterModel" index="0" unique_id=855582764]
+surface_material_override/0 = SubResource("StandardMaterial3D_7jwak")
+surface_material_override/1 = SubResource("StandardMaterial3D_pbf1d")
+surface_material_override/2 = ExtResource("4_l132g")
+surface_material_override/3 = ExtResource("5_bymmc")
+surface_material_override/4 = ExtResource("6_sjgu0")
+
+[node name="Wheel" parent="VehicleModelController/SubaruForesterModel" index="1" unique_id=1499226399]
+surface_material_override/0 = ExtResource("7_sjgu0")
+surface_material_override/1 = ExtResource("8_l71ua")
+
+[node name="Wheel_001" parent="VehicleModelController/SubaruForesterModel" index="2" unique_id=1948993672]
+surface_material_override/0 = ExtResource("7_sjgu0")
+surface_material_override/1 = ExtResource("8_l71ua")
+
+[node name="Wheel_002" parent="VehicleModelController/SubaruForesterModel" index="3" unique_id=1530365537]
+surface_material_override/0 = ExtResource("7_sjgu0")
+surface_material_override/1 = ExtResource("8_l71ua")
+
+[node name="Wheel_003" parent="VehicleModelController/SubaruForesterModel" index="4" unique_id=432397097]
+surface_material_override/0 = ExtResource("7_sjgu0")
+surface_material_override/1 = ExtResource("8_l71ua")
+
 [node name="Nameplate" parent="VehicleModelController" unique_id=932594312 instance=ExtResource("4_7jwak")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09, 0)
 
@@ -32,3 +70,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09, 0)
 [node name="BoostPlayer" type="AudioStreamPlayer3D" parent="." unique_id=739409323]
 stream = ExtResource("5_br1bg")
 volume_db = -80.0
+
+[editable path="VehicleModelController/SubaruForesterModel"]

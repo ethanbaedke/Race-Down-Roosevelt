@@ -3,12 +3,34 @@
 [ext_resource type="Script" uid="uid://b30kj0jrm85yt" path="res://vehicles/racer_vehicles/racer_vehicle.gd" id="1_8fhae"]
 [ext_resource type="PackedScene" uid="uid://bm0vc0wvvnx4h" path="res://vehicles/vehicle_model_controller.tscn" id="2_lp4v7"]
 [ext_resource type="PackedScene" uid="uid://cag4gxseexopt" path="res://vehicles/cybertruck.glb" id="3_8fhae"]
+[ext_resource type="Material" uid="uid://c2abq63w460su" path="res://vehicles/racer_vehicles/glass_material.tres" id="4_e3bkp"]
 [ext_resource type="PackedScene" uid="uid://dcf6mvjwffjpe" path="res://vehicles/racer_vehicles/ai_racer_controller.tscn" id="4_ngcmy"]
+[ext_resource type="Material" uid="uid://8ala27u8ily3" path="res://vehicles/racer_vehicles/wheel_rim_material.tres" id="4_ukj7q"]
+[ext_resource type="Material" uid="uid://bqmd5s7ioykar" path="res://vehicles/racer_vehicles/headlight_material.tres" id="5_0t1o4"]
 [ext_resource type="AudioStream" uid="uid://c712lrhvgb3oo" path="res://sound_effects/boost.wav" id="5_e3bkp"]
+[ext_resource type="Material" uid="uid://d112u1couco11" path="res://vehicles/racer_vehicles/wheel_rubber_material.tres" id="5_ngcmy"]
 [ext_resource type="PackedScene" uid="uid://d10eiktcruj47" path="res://vehicles/racer_vehicles/nameplate.tscn" id="6_lp4v7"]
+[ext_resource type="Material" uid="uid://cqhl8e7t4qblg" path="res://vehicles/racer_vehicles/taillight_material.tres" id="6_uq21u"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4rng7"]
 size = Vector3(0.89, 0.634, 2.7939482)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hdf6i"]
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+metallic = 0.6
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uq21u"]
+albedo_color = Color(0.5, 0.5, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+emission_energy_multiplier = 16.0
+rim_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pbf1d"]
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+metallic = 0.5
+roughness = 0.6
 
 [node name="Cybertruck" type="Node3D" unique_id=1093534000]
 script = ExtResource("1_8fhae")
@@ -21,8 +43,32 @@ shape = SubResource("BoxShape3D_4rng7")
 
 [node name="VehicleModelController" parent="." unique_id=826719096 instance=ExtResource("2_lp4v7")]
 
-[node name="CybertruckModel" parent="VehicleModelController" unique_id=834419295 instance=ExtResource("3_8fhae")]
+[node name="CybertruckModel" parent="VehicleModelController" unique_id=102932695 instance=ExtResource("3_8fhae")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.544021, 0, 1.3809184)
+
+[node name="Car" parent="VehicleModelController/CybertruckModel" index="0" unique_id=551574782]
+surface_material_override/0 = SubResource("StandardMaterial3D_hdf6i")
+surface_material_override/1 = ExtResource("4_e3bkp")
+surface_material_override/2 = ExtResource("5_0t1o4")
+surface_material_override/3 = SubResource("StandardMaterial3D_uq21u")
+surface_material_override/4 = ExtResource("6_uq21u")
+surface_material_override/5 = SubResource("StandardMaterial3D_pbf1d")
+
+[node name="Wheel" parent="VehicleModelController/CybertruckModel" index="1" unique_id=1850213362]
+surface_material_override/0 = ExtResource("5_ngcmy")
+surface_material_override/1 = ExtResource("4_ukj7q")
+
+[node name="Wheel_001" parent="VehicleModelController/CybertruckModel" index="2" unique_id=1174885064]
+surface_material_override/0 = ExtResource("5_ngcmy")
+surface_material_override/1 = ExtResource("4_ukj7q")
+
+[node name="Wheel_002" parent="VehicleModelController/CybertruckModel" index="3" unique_id=649242232]
+surface_material_override/0 = ExtResource("5_ngcmy")
+surface_material_override/1 = ExtResource("4_ukj7q")
+
+[node name="Wheel_003" parent="VehicleModelController/CybertruckModel" index="4" unique_id=767372845]
+surface_material_override/0 = ExtResource("5_ngcmy")
+surface_material_override/1 = ExtResource("4_ukj7q")
 
 [node name="Nameplate" parent="VehicleModelController" unique_id=932594312 instance=ExtResource("6_lp4v7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.147, 0)
@@ -32,3 +78,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.147, 0)
 [node name="BoostPlayer" type="AudioStreamPlayer3D" parent="." unique_id=627810049]
 stream = ExtResource("5_e3bkp")
 volume_db = -80.0
+
+[editable path="VehicleModelController/CybertruckModel"]

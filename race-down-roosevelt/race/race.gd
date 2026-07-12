@@ -15,6 +15,7 @@ var game_state:GameState = null
 @onready var _race_theme_player:AudioStreamPlayer3D = $RaceThemePlayer
 @onready var _race_intro_player:AudioStreamPlayer3D = $RaceIntroPlayer
 @onready var _day_night_player:AnimationPlayer = $DayNightAnimationPlayer
+@onready var _opening_anim_lights:Node3D = $OpeningAnimationPlayer/OpeningAnimLights
 
 var leaderboard_data:Array[RacerObject] = []
 var _race_in_progress:bool = false
@@ -448,6 +449,9 @@ func play_opening_animation() -> void:
 	for i:int in range(_racer_vehicles.size()):
 		_racer_vehicles[i].nameplate.flip()
 		_racer_vehicles[i].nameplate.set_player_number(i + 1)
+	
+	# Shut off the lights that were being used in the opening animation.
+	_opening_anim_lights.visible = false
 	
 	_opening_animation_player.play("fade_from_black")
 	await _opening_animation_player.animation_finished

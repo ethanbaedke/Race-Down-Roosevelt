@@ -3,9 +3,24 @@
 [ext_resource type="Script" uid="uid://bqi1740ikajnm" path="res://vehicles/traffic_vehicles/traffic_vehicle.gd" id="1_by02n"]
 [ext_resource type="PackedScene" uid="uid://uvhx5awql1e8" path="res://vehicles/honda_civic.glb" id="2_ugfde"]
 [ext_resource type="AudioStream" uid="uid://b8b8kfajvkt86" path="res://sound_effects/crash.wav" id="3_mlu1s"]
+[ext_resource type="Material" uid="uid://c2abq63w460su" path="res://vehicles/racer_vehicles/glass_material.tres" id="4_ygyd3"]
+[ext_resource type="Material" uid="uid://bqmd5s7ioykar" path="res://vehicles/racer_vehicles/headlight_material.tres" id="5_fcmn3"]
+[ext_resource type="Material" uid="uid://cqhl8e7t4qblg" path="res://vehicles/racer_vehicles/taillight_material.tres" id="6_vt3xd"]
+[ext_resource type="Material" uid="uid://d112u1couco11" path="res://vehicles/racer_vehicles/wheel_rubber_material.tres" id="7_4wysm"]
+[ext_resource type="Material" uid="uid://8ala27u8ily3" path="res://vehicles/racer_vehicles/wheel_rim_material.tres" id="8_708g1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_by02n"]
 size = Vector3(0.89, 0.634, 2.313)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o2dyf"]
+albedo_color = Color(0.9, 0.9, 0.9, 1)
+metallic = 0.6
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyotk"]
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+metallic = 0.5
+roughness = 0.6
 
 [node name="HondaCivic" type="Node3D" unique_id=1093534000 node_paths=PackedStringArray("_vehicle_model")]
 script = ExtResource("1_by02n")
@@ -18,9 +33,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40587777, -0.025)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=223287468]
 shape = SubResource("BoxShape3D_by02n")
 
-[node name="HondaCivicModel" parent="." unique_id=114766186 instance=ExtResource("2_ugfde")]
+[node name="HondaCivicModel" parent="." unique_id=1671646187 instance=ExtResource("2_ugfde")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.4615922, 0, 1.1404314)
+
+[node name="Car" parent="HondaCivicModel" index="0" unique_id=1032396022]
+surface_material_override/0 = SubResource("StandardMaterial3D_o2dyf")
+surface_material_override/1 = ExtResource("4_ygyd3")
+surface_material_override/2 = ExtResource("5_fcmn3")
+surface_material_override/3 = SubResource("StandardMaterial3D_wyotk")
+surface_material_override/4 = ExtResource("6_vt3xd")
+
+[node name="Wheel" parent="HondaCivicModel" index="1" unique_id=869785292]
+surface_material_override/0 = ExtResource("7_4wysm")
+surface_material_override/1 = ExtResource("8_708g1")
 
 [node name="ExplodePlayer" type="AudioStreamPlayer3D" parent="." unique_id=867219294]
 stream = ExtResource("3_mlu1s")
 unit_size = 18.0
+
+[editable path="HondaCivicModel"]

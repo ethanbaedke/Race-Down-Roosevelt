@@ -11,6 +11,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 15.5
 
 [node name="SpotLight3D" type="SpotLight3D" parent="StreetLightLeft" unique_id=1023906933]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.57503605, 3, 5.0271296e-08)
+shadow_enabled = true
 spot_range = 30.5859
 spot_attenuation = 0.0
 spot_angle = 84.37499
@@ -21,6 +22,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5, 0, 0)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="StreetLightRight" unique_id=1704080941]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.57503605, 3, 5.0271296e-08)
+shadow_enabled = true
 spot_range = 30.5859
 spot_attenuation = 0.0
 spot_angle = 84.37499

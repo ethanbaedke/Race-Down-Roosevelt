@@ -7,11 +7,22 @@
 [ext_resource type="Texture2D" uid="uid://b3s5i1o0gu1t3" path="res://items/red_x.png" id="4_g7q07"]
 [ext_resource type="Shader" uid="uid://c5g0wgdvx2bkb" path="res://race/race_jump_ui.gdshader" id="4_gv7jw"]
 [ext_resource type="PackedScene" uid="uid://djt7v72ojdmfm" path="res://input_glyphs/input_glyph.tscn" id="5_1mie1"]
+[ext_resource type="Texture2D" uid="uid://cg86rubg8tred" path="res://input_glyphs/xbox_a.png" id="6_blrmq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qugfo"]
+resource_local_to_scene = true
+atlas = ExtResource("6_blrmq")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_20vi5"]
 shader = ExtResource("4_gv7jw")
 shader_parameter/tex = ExtResource("3_0s412")
 shader_parameter/percent = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cll5l"]
+resource_local_to_scene = true
+atlas = ExtResource("6_blrmq")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7q07"]
 corner_radius_top_left = 64
@@ -100,10 +111,21 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_g7q07")
 
-[node name="InputGlyph" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=1586109879 instance=ExtResource("5_1mie1")]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=434917715]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
+
+[node name="InputGlyph" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer/Control" unique_id=1586109879 instance=ExtResource("5_1mie1")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+texture = SubResource("AtlasTexture_qugfo")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=316670670]
 layout_mode = 2
@@ -157,10 +179,21 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_g7q07")
 
-[node name="InputGlyph" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1512742857 instance=ExtResource("5_1mie1")]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2" unique_id=656708823]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
+
+[node name="InputGlyph" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2/Control" unique_id=1512742857 instance=ExtResource("5_1mie1")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+texture = SubResource("AtlasTexture_cll5l")
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=164229966]
 layout_mode = 2

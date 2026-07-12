@@ -236,7 +236,7 @@ const SPEED_ITEM_TIME:float = 5.0
 const SPEED_ITEM_TOP_SPEED_INCREASE:float = 30.0
 const SPEED_ITEM_ACCELERATION_INCREASE:float = 10.0
 
-const MAX_GAS:int = 8
+const MAX_GAS:int = 4
 const JUMP_TIME:float = 2.0
 const JUMP_HEIGHT:float = 5.0
 

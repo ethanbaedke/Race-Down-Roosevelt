@@ -3,6 +3,7 @@ class_name Gas extends Node3D
 @onready var _collision_area:Area3D = $Area3D
 @onready var _collision_shape:CollisionShape3D = $Area3D/CollisionShape3D
 @onready var _animation_player:AnimationPlayer = $AnimationPlayer
+@onready var _pickup_player:AudioStreamPlayer3D = $PickupPlayer
 
 func _on_collision_area_entered(area:Area3D) -> void:
 
@@ -13,6 +14,7 @@ func _on_collision_area_entered(area:Area3D) -> void:
 			_collision_shape.disabled = true
 			parent.give_world_pickup(self)
 			_animation_player.play("pickup")
+			AudioSystem3D.play_source(_pickup_player)
 			await _animation_player.animation_finished
 			self.queue_free()
 

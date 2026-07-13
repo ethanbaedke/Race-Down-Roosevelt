@@ -21,7 +21,6 @@ const MIN_WEIGHT:int = 1
 @onready var _collision_area:Area3D = $Area3D
 @onready var _collision_shape:CollisionShape3D = $Area3D/CollisionShape3D
 @onready var _model_controller:VehicleModelController = $VehicleModelController
-@onready var _boost_player:AudioStreamPlayer3D = $BoostPlayer
 
 var top_speed:float = 0.0
 var acceleration:float = 0.0
@@ -69,10 +68,9 @@ func calculate_speed(delta:float) -> float:
 	
 	return speed
 
-func boost() -> void:
+func boost(force:float) -> void:
 	
-	AudioSystem3D.play_source(_boost_player)
-	speed += 5.0
+	speed += force
 
 func try_switch_lanes(dir:int) -> bool:
 	
@@ -240,6 +238,12 @@ const MAX_GAS:int = 4
 const JUMP_TIME:float = 2.0
 const JUMP_HEIGHT:float = 5.0
 
+@onready var _ai_item_activate_player:AudioStreamPlayer3D = $AIActivatePlayer
+@onready var _invincibility_item_activate_player:AudioStreamPlayer3D = $InvincibilityActivatePlayer
+@onready var _speed_item_activate_player:AudioStreamPlayer3D = $SpeedActivatePlayer
+@onready var _boost_item_activate_player:AudioStreamPlayer3D = $BoostActivatePlayer
+@onready var _jump_activate_player:AudioStreamPlayer3D = $JumpActivatePlayer
+
 var _held_item:ItemData = null
 var _total_item_time:float = 0.0
 var _current_item_time:float = 0.0
@@ -311,15 +315,15 @@ func _handle_timed_item_finished() -> void:
 
 func _activate_boost_item() -> void:
 	
-	boost()
-	boost()
-	boost()
+	boost(15.0)
 	_held_item = null
+	AudioSystem3D.play_source(_boost_item_activate_player)
 
 func _activate_invincibility_item() -> void:
 	
 	_invincible = true
 	_set_item_time(INVINCIBILITY_ITEM_TIME)
+	AudioSystem3D.play_source(_invincibility_item_activate_player)
 
 func _handle_invincibility_item_finished() -> void:
 	
@@ -332,6 +336,7 @@ func _activate_ai_item() -> void:
 	acceleration += AI_ITEM_ACCELERATION_INCREASE
 	ai_controller.intelligence = AiRacerController.Intelligence.HIGH
 	ai_controller.enabled = true
+	AudioSystem3D.play_source(_ai_item_activate_player)
 
 func _handle_ai_item_finished() -> void:
 	
@@ -348,6 +353,7 @@ func _activate_speed_item() -> void:
 	_set_item_time(SPEED_ITEM_TIME)
 	top_speed += SPEED_ITEM_TOP_SPEED_INCREASE
 	acceleration += SPEED_ITEM_ACCELERATION_INCREASE
+	AudioSystem3D.play_source(_speed_item_activate_player)
 
 func _handle_speed_item_finished() -> void:
 	
@@ -376,12 +382,11 @@ func try_use_gas() -> bool:
 	_current_jump_time = JUMP_TIME
 	_in_air = true
 	ai_controller.enabled = false
-	boost()
-	boost()
-	boost()
+	boost(15.0)
 	_current_gas = 0
 	if (_hud):
 		_hud.update_gas(_current_gas, MAX_GAS)
+	AudioSystem3D.play_source(_jump_activate_player)
 	return true
 
 func _tick_jump() -> void:

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bmfm17iutk33c"]
+[gd_scene format=3 uid="uid://d2k8qj71gaseu"]
 
 [ext_resource type="Script" uid="uid://b30kj0jrm85yt" path="res://vehicles/racer_vehicles/racer_vehicle.gd" id="1_uwc0b"]
 [ext_resource type="PackedScene" uid="uid://bm0vc0wvvnx4h" path="res://vehicles/vehicle_model_controller.tscn" id="2_o80sb"]
@@ -7,10 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://d10eiktcruj47" path="res://vehicles/racer_vehicles/nameplate.tscn" id="4_ggvtw"]
 [ext_resource type="PackedScene" uid="uid://dcf6mvjwffjpe" path="res://vehicles/racer_vehicles/ai_racer_controller.tscn" id="4_mjgcb"]
 [ext_resource type="Material" uid="uid://bqmd5s7ioykar" path="res://vehicles/racer_vehicles/headlight_material.tres" id="5_vnuan"]
-[ext_resource type="AudioStream" uid="uid://c712lrhvgb3oo" path="res://sound_effects/boost.wav" id="5_ws3ns"]
+[ext_resource type="AudioStream" uid="uid://cnoc44ln06uer" path="res://sound_effects/boost.wav" id="5_ws3ns"]
 [ext_resource type="Material" uid="uid://cqhl8e7t4qblg" path="res://vehicles/racer_vehicles/taillight_material.tres" id="6_3rkw2"]
 [ext_resource type="Material" uid="uid://d112u1couco11" path="res://vehicles/racer_vehicles/wheel_rubber_material.tres" id="7_3rkw2"]
 [ext_resource type="Material" uid="uid://8ala27u8ily3" path="res://vehicles/racer_vehicles/wheel_rim_material.tres" id="8_6348r"]
+[ext_resource type="AudioStream" uid="uid://ddlj6v8eofqxe" path="res://sound_effects/ai_item_activate.wav" id="11_ndli4"]
+[ext_resource type="AudioStream" uid="uid://cjwktwn57enty" path="res://sound_effects/invincibility_item_activate.wav" id="12_84qfn"]
+[ext_resource type="AudioStream" uid="uid://dd061nab8s5ws" path="res://sound_effects/speed_item_activate.wav" id="13_2ivt8"]
+[ext_resource type="AudioStream" uid="uid://cko6hgms8qx1r" path="res://sound_effects/jump_activate.wav" id="15_2ivt8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4rng7"]
 size = Vector3(0.89, 0.634, 2.313)
@@ -55,8 +59,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.971, 0)
 
 [node name="AiRacerController" parent="." unique_id=590700889 instance=ExtResource("4_mjgcb")]
 
-[node name="BoostPlayer" type="AudioStreamPlayer3D" parent="." unique_id=627810049]
+[node name="AIActivatePlayer" type="AudioStreamPlayer3D" parent="." unique_id=208949467]
+stream = ExtResource("11_ndli4")
+max_db = -8.0
+
+[node name="InvincibilityActivatePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1900284328]
+stream = ExtResource("12_84qfn")
+max_db = -8.0
+
+[node name="SpeedActivatePlayer" type="AudioStreamPlayer3D" parent="." unique_id=20065555]
+stream = ExtResource("13_2ivt8")
+max_db = -4.0
+
+[node name="BoostActivatePlayer" type="AudioStreamPlayer3D" parent="." unique_id=823071430]
 stream = ExtResource("5_ws3ns")
-volume_db = -80.0
+max_db = 0.0
+
+[node name="JumpActivatePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1411496089]
+stream = ExtResource("15_2ivt8")
+max_db = -12.0
 
 [editable path="VehicleModelController/HondaCivicModel"]

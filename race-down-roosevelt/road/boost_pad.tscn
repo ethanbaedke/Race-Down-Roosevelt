@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dm4qerk42yu7v" path="res://road/boost_pad.gd" id="1_fcabv"]
 [ext_resource type="Texture2D" uid="uid://c05vxg83j4srj" path="res://road/boost_pad.png" id="2_7ko8f"]
+[ext_resource type="AudioStream" uid="uid://cnoc44ln06uer" path="res://sound_effects/boost.wav" id="3_j4v03"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fcabv"]
 albedo_texture = ExtResource("2_7ko8f")
@@ -27,3 +28,7 @@ collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=492959981]
 shape = SubResource("BoxShape3D_7ko8f")
+
+[node name="BoostPlayer" type="AudioStreamPlayer3D" parent="." unique_id=593170367]
+stream = ExtResource("3_j4v03")
+max_db = -3.0

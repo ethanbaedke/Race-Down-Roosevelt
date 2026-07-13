@@ -10,3 +10,4 @@ script = ExtResource("1_sw8d4")
 [node name="NearHitPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1691837781]
 stream = ExtResource("2_oat3c")
 unit_size = 3.0
+max_db = -1.0

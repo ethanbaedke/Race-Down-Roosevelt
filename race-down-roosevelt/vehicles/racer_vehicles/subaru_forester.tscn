@@ -6,11 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://dcf6mvjwffjpe" path="res://vehicles/racer_vehicles/ai_racer_controller.tscn" id="4_1kbiw"]
 [ext_resource type="PackedScene" uid="uid://d10eiktcruj47" path="res://vehicles/racer_vehicles/nameplate.tscn" id="4_7jwak"]
 [ext_resource type="Material" uid="uid://c2abq63w460su" path="res://vehicles/racer_vehicles/glass_material.tres" id="4_l132g"]
-[ext_resource type="AudioStream" uid="uid://c712lrhvgb3oo" path="res://sound_effects/boost.wav" id="5_br1bg"]
+[ext_resource type="AudioStream" uid="uid://cnoc44ln06uer" path="res://sound_effects/boost.wav" id="5_br1bg"]
 [ext_resource type="Material" uid="uid://bqmd5s7ioykar" path="res://vehicles/racer_vehicles/headlight_material.tres" id="5_bymmc"]
 [ext_resource type="Material" uid="uid://cqhl8e7t4qblg" path="res://vehicles/racer_vehicles/taillight_material.tres" id="6_sjgu0"]
 [ext_resource type="Material" uid="uid://d112u1couco11" path="res://vehicles/racer_vehicles/wheel_rubber_material.tres" id="7_sjgu0"]
 [ext_resource type="Material" uid="uid://8ala27u8ily3" path="res://vehicles/racer_vehicles/wheel_rim_material.tres" id="8_l71ua"]
+[ext_resource type="AudioStream" uid="uid://ddlj6v8eofqxe" path="res://sound_effects/ai_item_activate.wav" id="11_tpmn5"]
+[ext_resource type="AudioStream" uid="uid://cjwktwn57enty" path="res://sound_effects/invincibility_item_activate.wav" id="12_2mvif"]
+[ext_resource type="AudioStream" uid="uid://dd061nab8s5ws" path="res://sound_effects/speed_item_activate.wav" id="13_8s7mv"]
+[ext_resource type="AudioStream" uid="uid://cko6hgms8qx1r" path="res://sound_effects/jump_activate.wav" id="15_8s7mv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_meqtm"]
 size = Vector3(0.917, 0.685, 2.312)
@@ -67,8 +71,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09, 0)
 
 [node name="AiRacerController" parent="." unique_id=590700889 instance=ExtResource("4_1kbiw")]
 
-[node name="BoostPlayer" type="AudioStreamPlayer3D" parent="." unique_id=739409323]
+[node name="AIActivatePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1430776771]
+stream = ExtResource("11_tpmn5")
+max_db = -8.0
+
+[node name="InvincibilityActivatePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1907239544]
+stream = ExtResource("12_2mvif")
+max_db = -8.0
+
+[node name="SpeedActivatePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1566049961]
+stream = ExtResource("13_8s7mv")
+max_db = -4.0
+
+[node name="BoostActivatePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1408356302]
 stream = ExtResource("5_br1bg")
-volume_db = -80.0
+max_db = 0.0
+
+[node name="JumpActivatePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1620803075]
+stream = ExtResource("15_8s7mv")
+max_db = -12.0
 
 [editable path="VehicleModelController/SubaruForesterModel"]

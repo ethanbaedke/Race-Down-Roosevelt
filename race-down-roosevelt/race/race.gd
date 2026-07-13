@@ -334,8 +334,7 @@ func _handle_cleanup() -> void:
 ]
 
 @onready var _opening_animation_player:AnimationPlayer = $OpeningAnimationPlayer
-@onready var _back_wall_for_animation:MeshInstance3D = $OpeningAnimationPlayer/BackWall
-@onready var _sub_viewport_for_back_wall:SubViewport = $OpeningAnimationPlayer/BackWall/SubViewport
+@onready var _sky_text_animation_player:AnimationPlayer = $SkyTextAnimationPlayer
 
 # 1-player viewport objects.
 @onready var _viewport_setup_1p:Control = $ViewportSetup1p
@@ -423,25 +422,19 @@ func setup_race() -> void:
 
 func play_opening_animation() -> void:
 	
-	var back_wall_material_override:Material = StandardMaterial3D.new()
-	back_wall_material_override.albedo_texture = _sub_viewport_for_back_wall.get_texture()
-	_back_wall_for_animation.material_override = back_wall_material_override
-	
 	_race_intro_player.play()
 	
 	_opening_animation_player.play("fade_from_black")
 	await _opening_animation_player.animation_finished
 	
-	_opening_animation_player.play("back_wall_in")
-	await _opening_animation_player.animation_finished
-	
+	_sky_text_animation_player.play("base")
 	_opening_animation_player.play("scroll_vehicles")
 	await _opening_animation_player.animation_finished
 	
 	_opening_animation_player.play("fade_to_black")
 	await _opening_animation_player.animation_finished
+	_sky_text_animation_player.play("RESET")
 	
-	_back_wall_for_animation.visible = false
 	_setup_player_viewports()
 	
 	# Flip the nameplates on racers, since they will have been facing the opposite direction for the opening animation.

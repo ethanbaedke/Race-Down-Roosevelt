@@ -69,6 +69,6 @@ surface_material_override/1 = ExtResource("8_mjvf7")
 
 [node name="ExplodePlayer" type="AudioStreamPlayer3D" parent="." unique_id=867219294]
 stream = ExtResource("3_gnpme")
-max_db = 0.0
+max_db = -1.0
 
 [editable path="CybertruckModel"]

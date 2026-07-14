@@ -7,13 +7,13 @@ var racer:RacerObject = null
 # 1-indexed, initialized as 0 since its an invalid lane number.
 var lane_number:int = 0
 
-const MAX_TOP_SPEED:int = 20
-const MIN_TOP_SPEED:int = 15
-const MAX_ACCELERATION:int = 10
-const MIN_ACCELERATION:int = 5
-const MAX_DURABILITY:int = 6
+const MAX_TOP_SPEED:int = 30
+const MIN_TOP_SPEED:int = 26
+const MAX_ACCELERATION:int = 15
+const MIN_ACCELERATION:int = 11
+const MAX_DURABILITY:int = 5
 const MIN_DURABILITY:int = 1
-const MAX_WEIGHT:int = 6
+const MAX_WEIGHT:int = 5
 const MIN_WEIGHT:int = 1
 
 @onready var ai_controller:AiRacerController = $AiRacerController
@@ -62,8 +62,8 @@ func calculate_speed(delta:float) -> float:
 	
 	if (speed < top_speed):
 		speed = min(speed + (acceleration * delta), top_speed)
-	elif (speed > top_speed):
-		speed = max(speed - (((MAX_WEIGHT + 1) - weight) * delta), top_speed)
+	elif (!_in_air && speed > top_speed):
+		speed = max(speed - (((((MAX_WEIGHT + 1) - weight) * 0.25) + 0.75) * (speed - top_speed) * delta), top_speed)
 	RdrLogger.spam_log(self, racer.profile.name + " speed: " + str(speed))
 	
 	return speed
@@ -203,7 +203,7 @@ func _handle_traffic_vehicle_hit(vehicle:TrafficVehicle) -> void:
 	if (!_invincible):
 		# Reduce speed based on durability (higher = more maintained).
 		# Add one to max durability here to ensure vehicles with max durability still slow down some.
-		speed = speed * ((durability as float) / (MAX_DURABILITY + 1))
+		speed = speed * ((durability as float) / (MAX_DURABILITY * 1.5))
 		# Spin the racers nameplate.
 		nameplate.spin()
 
@@ -229,10 +229,10 @@ func _collision_area_entered(area: Area3D) -> void:
 const INVINCIBILITY_ITEM_TIME:float = 5.0
 const AI_ITEM_TIME:float = 5.0
 const AI_ITEM_MAX_SPEED_INCREASE:float = 15.0
-const AI_ITEM_ACCELERATION_INCREASE:float = 5.0
+const AI_ITEM_ACCELERATION_INCREASE:float = 20.0
 const SPEED_ITEM_TIME:float = 5.0
-const SPEED_ITEM_TOP_SPEED_INCREASE:float = 30.0
-const SPEED_ITEM_ACCELERATION_INCREASE:float = 10.0
+const SPEED_ITEM_TOP_SPEED_INCREASE:float = 25.0
+const SPEED_ITEM_ACCELERATION_INCREASE:float = 20.0
 
 const MAX_GAS:int = 4
 const JUMP_TIME:float = 2.0
@@ -315,7 +315,7 @@ func _handle_timed_item_finished() -> void:
 
 func _activate_boost_item() -> void:
 	
-	boost(15.0)
+	boost(45.0)
 	_held_item = null
 	AudioSystem3D.play_source(_boost_item_activate_player)
 

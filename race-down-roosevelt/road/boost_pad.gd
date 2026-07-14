@@ -11,5 +11,5 @@ func _on_collision_area_entered(area:Area3D) -> void:
 
 	var parent:Node3D = area.get_parent()
 	if (parent is RacerVehicle):
-		parent.boost(5.0)
+		parent.boost(15.0)
 		AudioSystem3D.play_source(_boost_player)

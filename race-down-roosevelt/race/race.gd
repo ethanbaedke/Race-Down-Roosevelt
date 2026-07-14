@@ -6,7 +6,7 @@ signal ready_for_cleanup
 const NUM_LANES:int = 9
 const LANE_SPACING:float = 3.0
 # Number of road rows to be placed before the finish line.
-const RACE_LENGTH:int = 1000
+const RACE_LENGTH:int = 1500
 const LEADERBOARD_DISPLAY_TIME:float = 5.0
 
 var game_state:GameState = null
@@ -120,9 +120,9 @@ func _finish_race() -> void:
 #region Road/Traffic Management
 
 # Distance in front of the 1st place racer road should be placed up to.
-const ROAD_PLACE_DIST:int = 100
+const ROAD_PLACE_DIST:int = 200
 # Distance behind the last place racer road needs to be to be cleaned up.
-const ROAD_CLEANUP_DIST:int = 10
+const ROAD_CLEANUP_DIST:int = 20
 # Z-distance between road rows.
 const ROAD_ROW_SPACING:float = 3.0
 
@@ -422,6 +422,7 @@ func setup_race() -> void:
 
 func play_opening_animation() -> void:
 	
+	_day_night_player.play("RESET")
 	_race_intro_player.play()
 	
 	_opening_animation_player.play("fade_from_black")

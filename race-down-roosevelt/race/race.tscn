@@ -48,7 +48,7 @@ metadata/_custom_type_script = "uid://bonfni7lag8hs"
 [sub_resource type="Resource" id="Resource_g7srd"]
 script = ExtResource("2_c8320")
 scene = ExtResource("5_g0dry")
-weight = 10
+weight = 15
 metadata/_custom_type_script = "uid://clyn63xl4tio5"
 
 [sub_resource type="Resource" id="Resource_hkrbr"]
@@ -303,7 +303,7 @@ shader_parameter/Texture2DParameter = SubResource("NoiseTexture2D_xt8ap")
 shader_parameter/Texture2DParameter2 = SubResource("NoiseTexture2D_yqwes")
 shader_parameter/DayNightBlend = 1.0
 shader_parameter/SunDirection = Vector3(0, -0.23902161, 1)
-shader_parameter/MoonDirection = Vector3(0, -0.25, 1)
+shader_parameter/MoonDirection = Vector3(-0.25, -0.25, 1)
 
 [sub_resource type="Sky" id="Sky_g63gw"]
 sky_material = SubResource("ShaderMaterial_klqtr")
@@ -427,7 +427,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.75, 1, 1.75, 2, 2.75),
 "transitions": PackedFloat32Array(1, 0, 1, 0, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 0, 0, 1), Color(1, 0, 0, 0), Color(1, 0.5, 0, 1), Color(1, 0.5, 0, 0), Color(1, 1, 0, 1), Color(1, 1, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -520,7 +520,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(0, 1, 0, 1), Color(0, 1, 0, 1), Color(0, 1, 0, 0)]
 }
 tracks/2/type = "audio"
 tracks/2/imported = false
@@ -865,7 +865,7 @@ tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(-0.25, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/6/type = "value"
@@ -1598,6 +1598,7 @@ panning_strength = 0.0
 
 [node name="CountdownPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1401887787]
 attenuation_model = 3
+max_db = -2.0
 panning_strength = 0.0
 
 [node name="DayNightAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1503253438]

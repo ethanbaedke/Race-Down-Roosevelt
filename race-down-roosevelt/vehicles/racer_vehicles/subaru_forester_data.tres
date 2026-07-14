@@ -6,4 +6,6 @@
 [resource]
 script = ExtResource("2_k5hx7")
 scene = ExtResource("1_kos67")
+top_speed = 29
+durability = 2
 metadata/_custom_type_script = "uid://cng61qyitlqib"

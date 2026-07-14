@@ -74,6 +74,9 @@ entries = Array[ExtResource("2_c8320")]([SubResource("Resource_g7srd"), SubResou
 debug_name = "Road Object"
 metadata/_custom_type_script = "uid://bonfni7lag8hs"
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yiuc0"]
+bg_color = Color(0.5, 0.5, 0.5, 1)
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c8320"]
 load_path = "res://.godot/imported/road_straight.png-d12ae04bb66e2d3dcf9149b3edf0378b.s3tc.ctex"
 
@@ -1099,8 +1102,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 8
+theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_yiuc0")
 dragging_enabled = false
-dragger_visibility = 2
 vertical = true
 
 [node name="P1SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup2p/SplitContainer" unique_id=1161227815]
@@ -1110,7 +1114,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="ViewportSetup2p/SplitContainer/P1SubViewportContainer" unique_id=1124966520]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(1920, 536)
 render_target_update_mode = 0
 
 [node name="P1Cam2p" type="Camera3D" parent="ViewportSetup2p/SplitContainer/P1SubViewportContainer/SubViewport" unique_id=1614703854]
@@ -1125,7 +1129,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="ViewportSetup2p/SplitContainer/P2SubViewportContainer" unique_id=2138917841]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(1920, 536)
 render_target_update_mode = 0
 
 [node name="P2Cam2p" type="Camera3D" parent="ViewportSetup2p/SplitContainer/P2SubViewportContainer/SubViewport" unique_id=950310841]
@@ -1149,8 +1153,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 8
+theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_yiuc0")
 dragging_enabled = false
-dragger_visibility = 2
 vertical = true
 
 [node name="P1SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup3p/SplitContainer" unique_id=2008084985]
@@ -1160,7 +1165,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="ViewportSetup3p/SplitContainer/P1SubViewportContainer" unique_id=1933646717]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(1920, 536)
 render_target_update_mode = 0
 
 [node name="P1Cam3p" type="Camera3D" parent="ViewportSetup3p/SplitContainer/P1SubViewportContainer/SubViewport" unique_id=279638826]
@@ -1171,8 +1176,9 @@ cull_mask = 1048547
 [node name="SplitContainer" type="SplitContainer" parent="ViewportSetup3p/SplitContainer" unique_id=962487105]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 8
+theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_yiuc0")
 dragging_enabled = false
-dragger_visibility = 2
 
 [node name="P2SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup3p/SplitContainer/SplitContainer" unique_id=1243543346]
 layout_mode = 2
@@ -1182,7 +1188,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="ViewportSetup3p/SplitContainer/SplitContainer/P2SubViewportContainer" unique_id=110053399]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(956, 536)
 render_target_update_mode = 0
 
 [node name="P2Cam3p" type="Camera3D" parent="ViewportSetup3p/SplitContainer/SplitContainer/P2SubViewportContainer/SubViewport" unique_id=1010377993]
@@ -1198,7 +1204,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="ViewportSetup3p/SplitContainer/SplitContainer/P3SubViewportContainer" unique_id=1461339796]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(956, 536)
 render_target_update_mode = 0
 
 [node name="P3Cam3p" type="Camera3D" parent="ViewportSetup3p/SplitContainer/SplitContainer/P3SubViewportContainer/SubViewport" unique_id=484191211]
@@ -1222,17 +1228,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 8
+theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_yiuc0")
 split_offsets = PackedInt32Array(40)
 dragging_enabled = false
-dragger_visibility = 2
 vertical = true
 split_offset = 40
 
 [node name="SplitContainerTop" type="SplitContainer" parent="ViewportSetup4p/SplitContainer" unique_id=996727786]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 8
+theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_yiuc0")
 dragging_enabled = false
-dragger_visibility = 2
 
 [node name="P1SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup4p/SplitContainer/SplitContainerTop" unique_id=1734390034]
 layout_mode = 2
@@ -1242,7 +1250,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="ViewportSetup4p/SplitContainer/SplitContainerTop/P1SubViewportContainer" unique_id=1551899885]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(956, 576)
 render_target_update_mode = 0
 
 [node name="P1Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerTop/P1SubViewportContainer/SubViewport" unique_id=1962248314]
@@ -1258,7 +1266,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="ViewportSetup4p/SplitContainer/SplitContainerTop/P2SubViewportContainer" unique_id=326561824]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(956, 576)
 render_target_update_mode = 0
 
 [node name="P2Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerTop/P2SubViewportContainer/SubViewport" unique_id=14345126]
@@ -1269,8 +1277,9 @@ cull_mask = 1048549
 [node name="SplitContainerBottom" type="SplitContainer" parent="ViewportSetup4p/SplitContainer" unique_id=437469594]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 8
+theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_yiuc0")
 dragging_enabled = false
-dragger_visibility = 2
 
 [node name="P3SubViewportContainer" type="SubViewportContainer" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom" unique_id=1983900006]
 layout_mode = 2
@@ -1280,7 +1289,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P3SubViewportContainer" unique_id=2120210250]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(956, 496)
 render_target_update_mode = 0
 
 [node name="P3Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P3SubViewportContainer/SubViewport" unique_id=1996853780]
@@ -1296,7 +1305,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P4SubViewportContainer" unique_id=971782923]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(956, 496)
 render_target_update_mode = 0
 
 [node name="P4Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P4SubViewportContainer/SubViewport" unique_id=1975362]

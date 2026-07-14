@@ -27,7 +27,7 @@ corner_radius_bottom_left = 8
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cll5l"]
 bg_color = Color(0.6, 0.6, 0.6, 0.49803922)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_po0he"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_blrmq"]
 resource_local_to_scene = true
 atlas = ExtResource("6_blrmq")
 region = Rect2(0, 0, 16, 16)
@@ -46,11 +46,12 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_20vi5"]
+resource_local_to_scene = true
 shader = ExtResource("4_gv7jw")
 shader_parameter/tex = ExtResource("3_0s412")
 shader_parameter/percent = 0.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bddx3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qugfo"]
 resource_local_to_scene = true
 atlas = ExtResource("6_blrmq")
 region = Rect2(0, 0, 16, 16)
@@ -246,7 +247,7 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=405792991]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.25
+size_flags_stretch_ratio = 0.3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=468573854]
 layout_mode = 2
@@ -258,7 +259,7 @@ layout_mode = 2
 theme_override_constants/separation = 8
 
 [node name="SizeFitterControl" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer" unique_id=831817812]
-custom_minimum_size = Vector2(132, 0)
+custom_minimum_size = Vector2(154, 0)
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("2_20vi5")
@@ -310,14 +311,14 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
-texture = SubResource("AtlasTexture_po0he")
+texture = SubResource("AtlasTexture_blrmq")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=316670670]
 layout_mode = 2
 theme_override_constants/separation = 8
 
 [node name="SizeFitterControl2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1530404179]
-custom_minimum_size = Vector2(132, 0)
+custom_minimum_size = Vector2(154, 0)
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("2_20vi5")
@@ -372,7 +373,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
-texture = SubResource("AtlasTexture_bddx3")
+texture = SubResource("AtlasTexture_qugfo")
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=164229966]
 layout_mode = 2

@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://40efplcfedui" path="res://vehicles/subaru_forester.glb" id="4_dhwrm"]
 [ext_resource type="PackedScene" uid="uid://5525td7tv2km" path="res://vehicles/jeep_wrangler.glb" id="5_dhwrm"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yiuc0"]
+bg_color = Color(0.5, 0.5, 0.5, 1)
+
 [node name="VehicleSelection4P" type="Control" unique_id=334173602 node_paths=PackedStringArray("_panels")]
 layout_mode = 3
 anchors_preset = 15
@@ -23,15 +26,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 8
+theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_yiuc0")
 dragging_enabled = false
-dragger_visibility = 2
 
 [node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer" unique_id=1845636498]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 8
+theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_yiuc0")
 dragging_enabled = false
-dragger_visibility = 2
 
 [node name="VehicleSelectionPanel1" parent="HSplitContainer/HSplitContainer" unique_id=1970937734 instance=ExtResource("1_htcmw")]
 layout_mode = 2
@@ -45,8 +50,9 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 8
+theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_yiuc0")
 dragging_enabled = false
-dragger_visibility = 2
 
 [node name="VehicleSelectionPanel3" parent="HSplitContainer/HSplitContainer2" unique_id=1819280359 instance=ExtResource("1_htcmw")]
 layout_mode = 2

@@ -228,7 +228,7 @@ func _collision_area_entered(area: Area3D) -> void:
 
 const INVINCIBILITY_ITEM_TIME:float = 5.0
 const AI_ITEM_TIME:float = 5.0
-const AI_ITEM_MAX_SPEED_INCREASE:float = 15.0
+const AI_ITEM_MAX_SPEED_INCREASE:float = 25.0
 const AI_ITEM_ACCELERATION_INCREASE:float = 20.0
 const SPEED_ITEM_TIME:float = 5.0
 const SPEED_ITEM_TOP_SPEED_INCREASE:float = 25.0

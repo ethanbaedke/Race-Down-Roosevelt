@@ -5,8 +5,20 @@
 [node name="AiRacerController" type="Node3D" unique_id=590700889]
 script = ExtResource("1_rouw3")
 
-[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1752859757]
+[node name="CenterCast" type="RayCast3D" parent="." unique_id=1752859757]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+target_position = Vector3(0, 0, 10)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="LeftCast" type="RayCast3D" parent="." unique_id=848409079]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.25, 0)
+target_position = Vector3(0, 0, 10)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RightCast" type="RayCast3D" parent="." unique_id=288792185]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.25, 0)
 target_position = Vector3(0, 0, 10)
 collide_with_areas = true
 collide_with_bodies = false

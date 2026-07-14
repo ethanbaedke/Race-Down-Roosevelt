@@ -99,4 +99,6 @@ max_db = 0.0
 stream = ExtResource("15_31ho3")
 max_db = -12.0
 
+[node name="AiRacerController2" parent="." unique_id=1238810335 instance=ExtResource("4_ngcmy")]
+
 [editable path="VehicleModelController/CybertruckModel"]

@@ -3,6 +3,65 @@
 [ext_resource type="Script" uid="uid://4oj3m5ob0bs6" path="res://menus/vehicle_selection_panel.gd" id="1_w2dh7"]
 [ext_resource type="PackedScene" uid="uid://dp7f35xelw7qo" path="res://user_controls/profile_selector.tscn" id="2_1u52o"]
 
+[sub_resource type="Gradient" id="Gradient_1u52o"]
+offsets = PackedFloat32Array(0, 0.6212121, 1)
+colors = PackedColorArray(0.75, 0, 0, 1, 0.63, 0.63, 0, 1, 0, 0.75, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hio61"]
+gradient = SubResource("Gradient_1u52o")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mkwu5"]
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1u52o"]
+resource_local_to_scene = true
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xj6na"]
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6vrp"]
+resource_local_to_scene = true
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bcrqv"]
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hio61"]
+resource_local_to_scene = true
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1puel"]
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4u2gu"]
+resource_local_to_scene = true
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
 [sub_resource type="Environment" id="Environment_1u52o"]
 background_mode = 1
 ambient_light_source = 2
@@ -17,6 +76,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_w2dh7")
+_stat_bar_color_gradient = SubResource("GradientTexture1D_hio61")
 
 [node name="WaitingForDevice" type="Control" parent="." unique_id=826579971]
 layout_mode = 1
@@ -51,6 +111,164 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VehicleSelection" unique_id=338294087]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VehicleSelection/MarginContainer" unique_id=835506319]
+layout_mode = 2
+
+[node name="Top" type="HBoxContainer" parent="VehicleSelection/MarginContainer/VBoxContainer" unique_id=724216182]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Left" type="Control" parent="VehicleSelection/MarginContainer/VBoxContainer/Top" unique_id=2143383841]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpeedBar" type="ProgressBar" parent="VehicleSelection/MarginContainer/VBoxContainer/Top/Left" unique_id=908884421]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_mkwu5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1u52o")
+max_value = 5.0
+value = 3.0
+rounded = true
+show_percentage = false
+
+[node name="Label" type="Label" parent="VehicleSelection/MarginContainer/VBoxContainer/Top/Left" unique_id=1282306373]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SPEED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="VehicleSelection/MarginContainer/VBoxContainer/Top" unique_id=258723841]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="Right" type="Control" parent="VehicleSelection/MarginContainer/VBoxContainer/Top" unique_id=1145239138]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AccelerationBar" type="ProgressBar" parent="VehicleSelection/MarginContainer/VBoxContainer/Top/Right" unique_id=1773550373]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_xj6na")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r6vrp")
+max_value = 5.0
+value = 3.0
+rounded = true
+show_percentage = false
+
+[node name="Label" type="Label" parent="VehicleSelection/MarginContainer/VBoxContainer/Top/Right" unique_id=904997715]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ACCELERATION"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="VehicleSelection/MarginContainer/VBoxContainer" unique_id=1698087214]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 16.0
+
+[node name="Bottom" type="HBoxContainer" parent="VehicleSelection/MarginContainer/VBoxContainer" unique_id=127719550]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Left" type="Control" parent="VehicleSelection/MarginContainer/VBoxContainer/Bottom" unique_id=1219987913]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DurabilityBar" type="ProgressBar" parent="VehicleSelection/MarginContainer/VBoxContainer/Bottom/Left" unique_id=1393212009]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_bcrqv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hio61")
+max_value = 5.0
+value = 3.0
+rounded = true
+show_percentage = false
+
+[node name="Label" type="Label" parent="VehicleSelection/MarginContainer/VBoxContainer/Bottom/Left" unique_id=1930012745]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "DURABILITY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="VehicleSelection/MarginContainer/VBoxContainer/Bottom" unique_id=2001041357]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="Right" type="Control" parent="VehicleSelection/MarginContainer/VBoxContainer/Bottom" unique_id=502540478]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WeightBar" type="ProgressBar" parent="VehicleSelection/MarginContainer/VBoxContainer/Bottom/Right" unique_id=447593989]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_1puel")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4u2gu")
+max_value = 5.0
+value = 3.0
+rounded = true
+show_percentage = false
+
+[node name="Label" type="Label" parent="VehicleSelection/MarginContainer/VBoxContainer/Bottom/Right" unique_id=546442336]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "WEIGHT"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Ready" type="Control" parent="." unique_id=1468391303]
 visible = false

@@ -16,8 +16,14 @@ enum PanelState {
 
 signal player_ready
 
+@export var _stat_bar_color_gradient:GradientTexture1D
+
 @onready var _vehicle_model_viewport:SubViewportContainer = $VehicleModelViewport
 @onready var _vehicle_model_camera:Camera3D = $VehicleModelViewport/SubViewport/VehicleModelCamera
+@onready var _speed_bar:ProgressBar = $VehicleSelection/MarginContainer/VBoxContainer/Top/Left/SpeedBar
+@onready var _acceleration_bar:ProgressBar = $VehicleSelection/MarginContainer/VBoxContainer/Top/Right/AccelerationBar
+@onready var _durability_bar:ProgressBar = $VehicleSelection/MarginContainer/VBoxContainer/Bottom/Left/DurabilityBar
+@onready var _weight_bar:ProgressBar = $VehicleSelection/MarginContainer/VBoxContainer/Bottom/Right/WeightBar
 
 @onready var _waiting_for_device_ui:Control = $WaitingForDevice
 @onready var _profile_selector:ProfileSelector = $ProfileSelector
@@ -118,7 +124,30 @@ func move_vehicle_selection_right() -> void:
 	update_vehicle()
 
 func update_vehicle() -> void:
+	
+	# Show the new vehicle model.
 	_vehicle_model_camera.position.x = 2.0 + (20.0 * _vehicle_ind)
+	
+	# Display stats.
+	var data:RacerVehicleData = VEHICLE_DATA[_vehicle_ind]
+	_speed_bar.max_value = (RacerVehicle.MAX_TOP_SPEED + 1) - RacerVehicle.MIN_TOP_SPEED
+	_speed_bar.value = (data.top_speed + 1) - RacerVehicle.MIN_TOP_SPEED
+	_acceleration_bar.max_value = (RacerVehicle.MAX_ACCELERATION + 1) - RacerVehicle.MIN_ACCELERATION
+	_acceleration_bar.value = (data.acceleration + 1) - RacerVehicle.MIN_ACCELERATION
+	_durability_bar.max_value = (RacerVehicle.MAX_DURABILITY + 1) - RacerVehicle.MIN_DURABILITY
+	_durability_bar.value = (data.durability + 1) - RacerVehicle.MIN_DURABILITY
+	_weight_bar.max_value = (RacerVehicle.MAX_WEIGHT + 1) - RacerVehicle.MIN_WEIGHT
+	_weight_bar.value = (data.weight + 1) - RacerVehicle.MIN_WEIGHT
+	
+	# Set bar colors based on values.
+	var speed_stylebox:StyleBoxFlat = _speed_bar.get_theme_stylebox("fill") as StyleBoxFlat
+	speed_stylebox.bg_color = _stat_bar_color_gradient.gradient.sample(_speed_bar.value / _speed_bar.max_value)
+	var acceleration_stylebox:StyleBoxFlat = _acceleration_bar.get_theme_stylebox("fill") as StyleBoxFlat
+	acceleration_stylebox.bg_color = _stat_bar_color_gradient.gradient.sample(_acceleration_bar.value / _acceleration_bar.max_value)
+	var _durability_stylebox:StyleBoxFlat = _durability_bar.get_theme_stylebox("fill") as StyleBoxFlat
+	_durability_stylebox.bg_color = _stat_bar_color_gradient.gradient.sample(_durability_bar.value / _durability_bar.max_value)
+	var weight_stylebox:StyleBoxFlat = _weight_bar.get_theme_stylebox("fill") as StyleBoxFlat
+	weight_stylebox.bg_color = _stat_bar_color_gradient.gradient.sample(_weight_bar.value / _weight_bar.max_value)
 
 func _ready() -> void:
 	

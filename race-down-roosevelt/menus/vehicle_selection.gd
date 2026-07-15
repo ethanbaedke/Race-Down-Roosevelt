@@ -8,11 +8,45 @@ signal all_players_ready(racer_objects:Array[RacerObject])
 
 var _game_state:GameState = null
 
+var _available_profiles:Array[Profile] = []
+var _selected_profiles:Array[Profile] = []
+
 func set_game_state(game_state:GameState) -> void:
 	
 	_game_state = game_state
 	for panel:VehicleSelectionPanel in _panels:
 		panel.game_state = game_state
+
+func _update_available_profiles_on_selection_panels() -> void:
+	
+	for panel:VehicleSelectionPanel in _panels:
+		panel.set_available_profiles(_available_profiles)
+
+func _on_profile_selected(profile:Profile) -> void:
+	
+	var profile_ind:int = _available_profiles.find(profile)
+	
+	if (profile_ind == -1):
+		RdrLogger.error(self, "Profile selected by panel that doesn't exist in the vehicle selections available profiles.")
+		return
+	
+	_available_profiles.remove_at(profile_ind)
+	_selected_profiles.append(profile)
+	
+	_update_available_profiles_on_selection_panels()
+
+func _on_profile_freed(profile:Profile) -> void:
+	
+	var profile_ind:int = _selected_profiles.find(profile)
+	
+	if (profile_ind == -1):
+		RdrLogger.error(self, "Profile freed by panel doesn't exist in the vehicle selections selected profiles.")
+		return
+	
+	_selected_profiles.remove_at(profile_ind)
+	_available_profiles.append(profile)
+	
+	_update_available_profiles_on_selection_panels()
 
 func _on_player_ready() -> void:
 	
@@ -47,8 +81,21 @@ func _try_exit_selection() -> bool:
 
 func _ready() -> void:
 	
+	if (_game_state == null):
+		RdrLogger.fatal(self, _ready.get_method() + " expects class to have a reference to GameState.")
+		return
+	
 	for panel:VehicleSelectionPanel in _panels:
 		panel.player_ready.connect(_on_player_ready)
+		panel.profile_selected.connect(_on_profile_selected)
+		panel.profile_freed.connect(_on_profile_freed)
+	
+	if (_game_state.active_tournament == null):
+		_available_profiles = _game_state.save_data.profiles
+	else:
+		_available_profiles = _game_state.active_tournament.get_next_match().get_all_profiles()
+	
+	_update_available_profiles_on_selection_panels()
 
 func _unhandled_input(event: InputEvent) -> void:
 	

@@ -15,9 +15,12 @@ enum PanelState {
 }
 
 signal player_ready
+signal profile_selected(profile:Profile)
+signal profile_freed(profile:Profile)
 
 @export var _stat_bar_color_gradient:GradientTexture1D
 
+@onready var _profile_name:Label = $ProfileName
 @onready var _vehicle_model_viewport:SubViewportContainer = $VehicleModelViewport
 @onready var _vehicle_model_camera:Camera3D = $VehicleModelViewport/SubViewport/VehicleModelCamera
 @onready var _speed_bar:ProgressBar = $VehicleSelection/MarginContainer/VBoxContainer/Top/Left/SpeedBar
@@ -69,10 +72,6 @@ func transition_state(newstate:PanelState) -> void:
 			
 		PanelState.PROFILE_SELECTION:
 			_profile_selector.visible = true
-			if (game_state.active_tournament == null):
-				_profile_selector.set_profiles(game_state.save_data.profiles)
-			else:
-				_profile_selector.set_profiles(game_state.active_tournament.get_next_match().player_profiles)
 			_profile_selector.device_ind = racer.device_index
 		
 		PanelState.VEHICLE_SELECTION:
@@ -95,13 +94,23 @@ func set_device(index:int) -> void:
 	elif (previous == -2):
 		transition_state(PanelState.PROFILE_SELECTION)
 
+func set_available_profiles(profiles:Array[Profile]) -> void:
+	
+	_profile_selector.set_profiles(profiles)
+
 func set_profile(profile:Profile) -> void:
+	
+	if (racer.profile != null):
+		profile_freed.emit(racer.profile)
 	
 	racer.profile = profile
 	
 	if (profile == null):
+		_profile_name.text = ""
 		transition_state(PanelState.PROFILE_SELECTION)
 	else:
+		profile_selected.emit(profile)
+		_profile_name.text = profile.name
 		transition_state(PanelState.VEHICLE_SELECTION)
 
 func set_chosen_vehicle(data:RacerVehicleData) -> void:
@@ -157,6 +166,8 @@ func _ready() -> void:
 		
 	_profile_selector.profile_selected.connect(func(profile:Profile) -> void:
 		set_profile(profile))
+	
+	_profile_name.text = ""
 
 var _left_joystick_active:bool = false
 var _right_joystick_active:bool = false

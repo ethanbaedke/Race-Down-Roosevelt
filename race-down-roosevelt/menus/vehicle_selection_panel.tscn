@@ -78,6 +78,23 @@ grow_vertical = 2
 script = ExtResource("1_w2dh7")
 _stat_bar_color_gradient = SubResource("GradientTexture1D_hio61")
 
+[node name="ProfileName" type="Label" parent="." unique_id=1507314464]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -626.5
+offset_top = 25.0
+offset_right = 626.5
+offset_bottom = 70.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_override_font_sizes/font_size = 32
+text = "New Racer"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
 [node name="WaitingForDevice" type="Control" parent="." unique_id=826579971]
 layout_mode = 1
 anchors_preset = 15
@@ -161,7 +178,7 @@ text = "SPEED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="VehicleSelection/MarginContainer/VBoxContainer/Top" unique_id=258723841]
+[node name="Control" type="Control" parent="VehicleSelection/MarginContainer/VBoxContainer/Top" unique_id=398352532]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0

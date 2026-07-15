@@ -57,35 +57,35 @@ func _ready() -> void:
 			_bottom_button.pressed.connect(_on_start_match_button_pressed)
 			_first_round.show_round(game_state.active_tournament)
 		1:
-			_top_label.text = "WINNERS DIVISION 1"
-			_bottom_button.text = "START MATCH"
-			_bottom_button.pressed.connect(_on_start_match_button_pressed)
-			_winners_1.show_round(game_state.active_tournament)
-		2:
-			_top_label.text = "WINNERS DIVISION 2"
-			_bottom_button.text = "START MATCH"
-			_bottom_button.pressed.connect(_on_start_match_button_pressed)
-			_winners_2.show_round(game_state.active_tournament)
-		3:
-			_top_label.text = "WINNERS DIVISION 3"
-			_bottom_button.text = "START MATCH"
-			_bottom_button.pressed.connect(_on_start_match_button_pressed)
-			_winners_3.show_round(game_state.active_tournament)
-		4:
 			_top_label.text = "LOSERS DIVISION 1"
 			_bottom_button.text = "START MATCH"
 			_bottom_button.pressed.connect(_on_start_match_button_pressed)
 			_losers_1.show_round(game_state.active_tournament)
-		5:
+		2:
+			_top_label.text = "WINNERS DIVISION 1"
+			_bottom_button.text = "START MATCH"
+			_bottom_button.pressed.connect(_on_start_match_button_pressed)
+			_winners_1.show_round(game_state.active_tournament)
+		3:
 			_top_label.text = "LOSERS DIVISION 2"
 			_bottom_button.text = "START MATCH"
 			_bottom_button.pressed.connect(_on_start_match_button_pressed)
 			_losers_2.show_round(game_state.active_tournament)
-		6:
+		4:
+			_top_label.text = "WINNERS DIVISION 2"
+			_bottom_button.text = "START MATCH"
+			_bottom_button.pressed.connect(_on_start_match_button_pressed)
+			_winners_2.show_round(game_state.active_tournament)
+		5:
 			_top_label.text = "LOSERS DIVISION 3"
 			_bottom_button.text = "START MATCH"
 			_bottom_button.pressed.connect(_on_start_match_button_pressed)
 			_losers_3.show_round(game_state.active_tournament)
+		6:
+			_top_label.text = "WINNERS DIVISION 3"
+			_bottom_button.text = "START MATCH"
+			_bottom_button.pressed.connect(_on_start_match_button_pressed)
+			_winners_3.show_round(game_state.active_tournament)
 		7:
 			_top_label.text = "LOSERS DIVISION 4"
 			_bottom_button.text = "START MATCH"

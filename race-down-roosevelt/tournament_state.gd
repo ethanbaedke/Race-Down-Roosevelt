@@ -70,17 +70,17 @@ func get_match(target_round_index:int, target_match_index:int) -> TournamentMatc
 		0:
 			return winners_round_1[target_match_index]
 		1:
-			return winners_round_2[target_match_index]
-		2:
-			return winners_round_3[target_match_index]
-		3:
-			return winners_round_4[target_match_index]
-		4:
 			return losers_round_1[target_match_index]
-		5:
+		2:
+			return winners_round_2[target_match_index]
+		3:
 			return losers_round_2[target_match_index]
-		6:
+		4:
+			return winners_round_3[target_match_index]
+		5:
 			return losers_round_3[target_match_index]
+		6:
+			return winners_round_4[target_match_index]
 		7:
 			return losers_round_4[target_match_index]
 		8:
@@ -94,12 +94,12 @@ func get_all_rounds() -> Array[Array]:
 	
 	return [
 		winners_round_1,
-		winners_round_2,
-		winners_round_3,
-		winners_round_4,
 		losers_round_1,
+		winners_round_2,
 		losers_round_2,
+		winners_round_3,
 		losers_round_3,
+		winners_round_4,
 		losers_round_4,
 		losers_round_5,
 		final_round
@@ -166,8 +166,8 @@ func _initialize_match_targets() -> void:
 	
 	# WINNERS ROUND 1
 	for i:int in range(8):
-		winners_round_1[i].winner_match_target_round = 1
-		winners_round_1[i].loser_match_target_round = 4
+		winners_round_1[i].winner_match_target_round = 2
+		winners_round_1[i].loser_match_target_round = 1
 		
 	winners_round_1[0].winner_match_target_match = 0
 	winners_round_1[0].loser_match_target_match = 0
@@ -195,8 +195,8 @@ func _initialize_match_targets() -> void:
 	
 	# WINNERS ROUND 2
 	for i:int in range(4):
-		winners_round_2[i].winner_match_target_round = 2
-		winners_round_2[i].loser_match_target_round = 5
+		winners_round_2[i].winner_match_target_round = 4
+		winners_round_2[i].loser_match_target_round = 3
 	
 	winners_round_2[0].winner_match_target_match = 0
 	winners_round_2[0].loser_match_target_match = 0
@@ -212,8 +212,8 @@ func _initialize_match_targets() -> void:
 	
 	# WINNERS ROUND 3
 	for i:int in range(2):
-		winners_round_3[i].winner_match_target_round = 3
-		winners_round_3[i].loser_match_target_round = 6
+		winners_round_3[i].winner_match_target_round = 6
+		winners_round_3[i].loser_match_target_round = 5
 	
 	winners_round_3[0].winner_match_target_match = 0
 	winners_round_3[0].loser_match_target_match = 0
@@ -230,7 +230,7 @@ func _initialize_match_targets() -> void:
 	
 	# LOSERS ROUND 1
 	for i:int in range(4):
-		losers_round_1[i].winner_match_target_round = 5
+		losers_round_1[i].winner_match_target_round = 3
 	
 	losers_round_1[0].winner_match_target_match = 1
 	losers_round_1[1].winner_match_target_match = 1
@@ -239,7 +239,7 @@ func _initialize_match_targets() -> void:
 	
 	# LOSERS ROUND 2
 	for i:int in range(4):
-		losers_round_2[i].winner_match_target_round = 6
+		losers_round_2[i].winner_match_target_round = 5
 	
 	losers_round_2[0].winner_match_target_match = 0
 	losers_round_2[1].winner_match_target_match = 1

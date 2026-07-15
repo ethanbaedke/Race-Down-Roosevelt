@@ -6,9 +6,6 @@ class_name SaveData extends Resource
 
 func save() -> void:
 	
-	# TESTING: Don't save tournaments.
-	in_progress_tournaments.clear()
-	
 	if (ResourceSaver.save(self, Globals.SAVE_DATA_PATH) == OK):
 		RdrLogger.log(self, "Data saved.")
 	else:

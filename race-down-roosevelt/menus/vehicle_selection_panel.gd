@@ -72,7 +72,7 @@ func transition_state(newstate:PanelState) -> void:
 			if (game_state.active_tournament == null):
 				_profile_selector.set_profiles(game_state.save_data.profiles)
 			else:
-				_profile_selector.set_profiles(game_state.active_tournament.next_match.player_profiles)
+				_profile_selector.set_profiles(game_state.active_tournament.get_next_match().player_profiles)
 			_profile_selector.device_ind = racer.device_index
 		
 		PanelState.VEHICLE_SELECTION:

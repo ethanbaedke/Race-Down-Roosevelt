@@ -55,6 +55,8 @@ func _ready() -> void:
 		# If we are in a tournament, report results and go to the next match.
 		if (_game_state.active_tournament != null):
 			# At this point, next match still references the match we just finished.
-			_game_state.active_tournament.next_match.finish_order = profile_finish_order
+			_game_state.active_tournament.get_next_match().finish_order = profile_finish_order
 			# Now next match is updated.
 			_game_state.active_tournament.go_to_next_match()
+			# Now that the next match is set up, save the tournaments state.
+			_game_state.save_data.save()

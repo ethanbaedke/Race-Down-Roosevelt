@@ -12,6 +12,7 @@ enum MenuType {
 	TOURNAMENT_START,
 	TOURNAMENT_SETUP,
 	TOURNAMENT_MENU,
+	TOURNAMENT_CONTINUE,
 }
 
 const CAMERA_OFFSET:Vector2 = Vector2(1920.0 * 0.5, 1080.0 * 0.5)
@@ -29,6 +30,7 @@ const CAMERA_OFFSET:Vector2 = Vector2(1920.0 * 0.5, 1080.0 * 0.5)
 @onready var _tournament_start_scene:PackedScene = preload("res://menus/tournament_start.tscn")
 @onready var _tournament_setup_scene:PackedScene = preload("res://menus/tournament_setup.tscn")
 @onready var _tournament_menu_scene:PackedScene = preload("res://menus/tournament_menu.tscn")
+@onready var _tournament_continue_scene:PackedScene = preload("res://menus/tournament_continue.tscn")
 
 var _main_menu:MainMenu = null
 var _player_count_selection:PlayerCountSelection = null
@@ -38,6 +40,7 @@ var _edit_profile:EditProfile = null
 var _tournament_start:TournamentStart = null
 var _tournament_setup:TournamentSetup = null
 var _tournament_menu:TournamentMenu = null
+var _tournament_continue:TournamentContinue = null
 
 var game_state:GameState = null
 
@@ -87,6 +90,8 @@ func _go_to_new_menu(type:MenuType, back_navigate:bool = false) -> void:
 			new_menu = _setup_tournament_setup()
 		MenuType.TOURNAMENT_MENU:
 			new_menu = _setup_tournament_menu()
+		MenuType.TOURNAMENT_CONTINUE:
+			new_menu = _setup_tournament_continue()
 			
 	if (new_menu != null):
 		_current_menu = new_menu
@@ -238,6 +243,7 @@ func _setup_tournament_start() -> Control:
 	_tournament_start.game_state = game_state
 	_tournament_start.back_requested.connect(_on_tournament_start_back_requested)
 	_tournament_start.new_tournament_requested.connect(_on_tournament_start_new_tournament_requested)
+	_tournament_start.continue_tournament_requested.connect(_on_tournament_start_continue_tournament_requested)
 	return _tournament_start
 
 func _on_tournament_start_back_requested() -> void:
@@ -247,6 +253,10 @@ func _on_tournament_start_back_requested() -> void:
 func _on_tournament_start_new_tournament_requested() -> void:
 	
 	_go_to_new_menu(MenuType.TOURNAMENT_SETUP)
+
+func _on_tournament_start_continue_tournament_requested() -> void:
+	
+	_go_to_new_menu(MenuType.TOURNAMENT_CONTINUE)
 
 #endregion
 
@@ -298,6 +308,26 @@ func _on_tournament_menu_return_to_menu_requested() -> void:
 	_menu_type_stack.append(MenuType.MAIN_MENU)
 	_menu_type_stack.append(MenuType.TOURNAMENT_MENU)
 	_go_to_new_menu(MenuType.NONE, true)
+
+#endregion
+
+#region Tournament Continue
+
+func _setup_tournament_continue() -> Control:
+	
+	_tournament_continue = _tournament_continue_scene.instantiate()
+	_tournament_continue.game_state = game_state
+	_tournament_continue.back_requested.connect(_on_tournament_continue_back_requested)
+	_tournament_continue.continue_tournament_requested.connect(_on_tournament_continue_continue_tournament_requested)
+	return _tournament_continue
+
+func _on_tournament_continue_back_requested() -> void:
+	
+	_go_to_new_menu(MenuType.NONE, true)
+
+func _on_tournament_continue_continue_tournament_requested() -> void:
+	
+	_go_to_new_menu(MenuType.TOURNAMENT_MENU)
 
 #endregion
 

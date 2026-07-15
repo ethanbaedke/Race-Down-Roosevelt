@@ -48,7 +48,7 @@ func _set_match_data_references() -> void:
 
 func _on_start_match_button_pressed() -> void:
 	
-	game_state.num_players = game_state.active_tournament.next_match.player_profiles.size()
+	game_state.num_players = game_state.active_tournament.get_next_match().player_profiles.size()
 	start_match_requested.emit()
 
 func _ready() -> void:

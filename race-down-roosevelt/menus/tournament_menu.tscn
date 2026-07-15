@@ -1,9 +1,46 @@
 [gd_scene format=3 uid="uid://cn3ouq68yee3b"]
 
 [ext_resource type="Script" uid="uid://5voe7gj657ea" path="res://menus/tournament_menu.gd" id="1_ymn7g"]
+[ext_resource type="Script" uid="uid://4a6l2rceiatu" path="res://menus/tournament_menu_round.gd" id="2_4m8c7"]
 [ext_resource type="PackedScene" uid="uid://b0c4pm17p5daf" path="res://menus/tournament_match.tscn" id="2_bhhha"]
 
-[node name="TournamentMenu" type="Control" unique_id=1366807223 node_paths=PackedStringArray("winners_round_1", "winners_round_2", "winners_round_3", "winners_round_4", "losers_round_1", "losers_round_2", "losers_round_3", "losers_round_4", "losers_round_5", "final_round", "_winner_label", "_start_match_button", "_return_to_menu_button")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4m8c7"]
+bg_color = Color(0.75, 0.75, 0.75, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8tfdw"]
+content_margin_left = 24.0
+content_margin_top = 8.0
+content_margin_right = 24.0
+content_margin_bottom = 8.0
+bg_color = Color(0.2509804, 0.2509804, 0.2509804, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.75, 0.75, 0.75, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_otku0"]
+content_margin_left = 64.0
+content_margin_top = 8.0
+content_margin_right = 64.0
+content_margin_bottom = 8.0
+bg_color = Color(0.2509804, 0.2509804, 0.2509804, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.75, 0.75, 0.75, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+corner_detail = 16
+
+[node name="TournamentMenu" type="Control" unique_id=1366807223]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,19 +48,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ymn7g")
-winners_round_1 = [NodePath("MarginContainer/Bracket/Winners1/TournamentMatch"), NodePath("MarginContainer/Bracket/Winners1/TournamentMatch2"), NodePath("MarginContainer/Bracket/Winners1/TournamentMatch3"), NodePath("MarginContainer/Bracket/Winners1/TournamentMatch4"), NodePath("MarginContainer/Bracket/Winners1/TournamentMatch5"), NodePath("MarginContainer/Bracket/Winners1/TournamentMatch6"), NodePath("MarginContainer/Bracket/Winners1/TournamentMatch7"), NodePath("MarginContainer/Bracket/Winners1/TournamentMatch8")]
-winners_round_2 = [NodePath("MarginContainer/Bracket/Winners2/TournamentMatch"), NodePath("MarginContainer/Bracket/Winners2/TournamentMatch2"), NodePath("MarginContainer/Bracket/Winners2/TournamentMatch3"), NodePath("MarginContainer/Bracket/Winners2/TournamentMatch4")]
-winners_round_3 = [NodePath("MarginContainer/Bracket/Winners3/TournamentMatch"), NodePath("MarginContainer/Bracket/Winners3/TournamentMatch2")]
-winners_round_4 = [NodePath("MarginContainer/Bracket/Winners4/TournamentMatch")]
-losers_round_1 = [NodePath("MarginContainer/Bracket/Losers1/TournamentMatch"), NodePath("MarginContainer/Bracket/Losers1/TournamentMatch2"), NodePath("MarginContainer/Bracket/Losers1/TournamentMatch3"), NodePath("MarginContainer/Bracket/Losers1/TournamentMatch4")]
-losers_round_2 = [NodePath("MarginContainer/Bracket/Losers2/TournamentMatch"), NodePath("MarginContainer/Bracket/Losers2/TournamentMatch2"), NodePath("MarginContainer/Bracket/Losers2/TournamentMatch3"), NodePath("MarginContainer/Bracket/Losers2/TournamentMatch4")]
-losers_round_3 = [NodePath("MarginContainer/Bracket/Losers3/TournamentMatch"), NodePath("MarginContainer/Bracket/Losers3/TournamentMatch2"), NodePath("MarginContainer/Bracket/Losers3/TournamentMatch3")]
-losers_round_4 = [NodePath("MarginContainer/Bracket/Losers4/TournamentMatch"), NodePath("MarginContainer/Bracket/Losers4/TournamentMatch2")]
-losers_round_5 = [NodePath("MarginContainer/Bracket/Losers5/TournamentMatch")]
-final_round = [NodePath("MarginContainer/Bracket/Final/TournamentMatch")]
-_winner_label = NodePath("MarginContainer/MarginContainer/VBoxContainer/WinnerLabel")
-_start_match_button = NodePath("MarginContainer/MarginContainer/VBoxContainer/CenterContainer/StartMatchButton")
-_return_to_menu_button = NodePath("MarginContainer/MarginContainer/VBoxContainer/CenterContainer/ReturnToMenuButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=655909373]
 layout_mode = 1
@@ -37,188 +61,3357 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Bracket" type="HBoxContainer" parent="MarginContainer" unique_id=1500759153]
-layout_mode = 2
-
-[node name="Winners1" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=2081498852]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="TournamentMatch" parent="MarginContainer/Bracket/Winners1" unique_id=1115203901 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch2" parent="MarginContainer/Bracket/Winners1" unique_id=745170270 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch3" parent="MarginContainer/Bracket/Winners1" unique_id=1911753265 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch4" parent="MarginContainer/Bracket/Winners1" unique_id=787310752 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch5" parent="MarginContainer/Bracket/Winners1" unique_id=1988612480 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch6" parent="MarginContainer/Bracket/Winners1" unique_id=1519090885 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch7" parent="MarginContainer/Bracket/Winners1" unique_id=1340525426 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch8" parent="MarginContainer/Bracket/Winners1" unique_id=1554659603 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="Winners2" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=963682654]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="TournamentMatch" parent="MarginContainer/Bracket/Winners2" unique_id=1695211370 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch2" parent="MarginContainer/Bracket/Winners2" unique_id=353534837 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch3" parent="MarginContainer/Bracket/Winners2" unique_id=80765389 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch4" parent="MarginContainer/Bracket/Winners2" unique_id=1738932567 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="Winners3" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=1134590715]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="TournamentMatch" parent="MarginContainer/Bracket/Winners3" unique_id=773043502 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch2" parent="MarginContainer/Bracket/Winners3" unique_id=1070243961 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="Winners4" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=1437385746]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="TournamentMatch" parent="MarginContainer/Bracket/Winners4" unique_id=546922335 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="Final" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=1279859907]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="TournamentMatch" parent="MarginContainer/Bracket/Final" unique_id=1062796231 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-_num_winners_to_highlight = 1
-
-[node name="Losers5" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=102571276]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="TournamentMatch" parent="MarginContainer/Bracket/Losers5" unique_id=1332302650 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="Losers4" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=420547930]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="TournamentMatch" parent="MarginContainer/Bracket/Losers4" unique_id=815492573 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch2" parent="MarginContainer/Bracket/Losers4" unique_id=1722640698 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="Losers3" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=938223144]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="TournamentMatch" parent="MarginContainer/Bracket/Losers3" unique_id=1070138667 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch2" parent="MarginContainer/Bracket/Losers3" unique_id=151767823 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch3" parent="MarginContainer/Bracket/Losers3" unique_id=1720319114 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="Losers2" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=1076534565]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="TournamentMatch" parent="MarginContainer/Bracket/Losers2" unique_id=637229014 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch2" parent="MarginContainer/Bracket/Losers2" unique_id=123316782 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch3" parent="MarginContainer/Bracket/Losers2" unique_id=435363589 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch4" parent="MarginContainer/Bracket/Losers2" unique_id=1313379661 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="Losers1" type="VBoxContainer" parent="MarginContainer/Bracket" unique_id=599765907]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="TournamentMatch" parent="MarginContainer/Bracket/Losers1" unique_id=1797691424 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch2" parent="MarginContainer/Bracket/Losers1" unique_id=696187074 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch3" parent="MarginContainer/Bracket/Losers1" unique_id=167172604 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="TournamentMatch4" parent="MarginContainer/Bracket/Losers1" unique_id=1102964919 instance=ExtResource("2_bhhha")]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer" unique_id=1012019610]
-layout_mode = 2
-theme_override_constants/margin_left = 582
-theme_override_constants/margin_right = 772
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer" unique_id=1313847907]
-layout_mode = 2
-
-[node name="WinnerLabel" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=1198214120]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Winner: ?"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/MarginContainer/VBoxContainer" unique_id=1253629904]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="StartMatchButton" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/CenterContainer" unique_id=746430519]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Start Match"
-
-[node name="ReturnToMenuButton" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/CenterContainer" unique_id=709928485]
+[node name="FirstRound" type="Control" parent="MarginContainer" unique_id=473676854 node_paths=PackedStringArray("winners_round_1", "winners_round_2", "losers_round_1")]
 visible = false
 layout_mode = 2
+script = ExtResource("2_4m8c7")
+winners_round_1 = [NodePath("Match1"), NodePath("Match2"), NodePath("Match3"), NodePath("Match4"), NodePath("Match5"), NodePath("Match6"), NodePath("Match7"), NodePath("Match8")]
+winners_round_2 = [NodePath("Winners1"), NodePath("Winners2"), NodePath("Winners3"), NodePath("Winners4")]
+losers_round_1 = [NodePath("Losers1"), NodePath("Losers2"), NodePath("Losers3"), NodePath("Losers4")]
+
+[node name="Match1" parent="MarginContainer/FirstRound" unique_id=1115203901 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -328.0
+offset_right = -225.0
+offset_bottom = -152.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/FirstRound/Match1" unique_id=641957031]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/FirstRound/Match1/Control" unique_id=949300318]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -132.5
+offset_right = 150.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "FIRST ROUND"
+horizontal_alignment = 1
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/FirstRound/Match1/Control" unique_id=191336279]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/FirstRound/Match1/Control" unique_id=782363750]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -146.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/FirstRound/Match1/Control" unique_id=1732217417]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -182.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match2" parent="MarginContainer/FirstRound" unique_id=1674858477 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 225.0
+offset_top = -328.0
+offset_right = 525.0
+offset_bottom = -152.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/FirstRound/Match2" unique_id=209267052]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/FirstRound/Match2/Control" unique_id=400591345]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -132.5
+offset_right = 150.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "FIRST ROUND"
+horizontal_alignment = 1
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/FirstRound/Match2/Control" unique_id=879345050]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/FirstRound/Match2/Control" unique_id=1367622300]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 192.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/FirstRound/Match2/Control" unique_id=906961917]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 182.0
+offset_top = -5.0
+offset_right = 192.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match3" parent="MarginContainer/FirstRound" unique_id=978118817 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -168.0
+offset_right = -225.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/FirstRound/Match3" unique_id=995429916]
+layout_mode = 2
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/FirstRound/Match3/Control" unique_id=997050220]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/FirstRound/Match3/Control" unique_id=1494319370]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -146.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/FirstRound/Match3/Control" unique_id=1753583895]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -85.0
+offset_right = -182.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match4" parent="MarginContainer/FirstRound" unique_id=443551311 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 225.0
+offset_top = -168.0
+offset_right = 525.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/FirstRound/Match4" unique_id=1652928392]
+layout_mode = 2
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/FirstRound/Match4/Control" unique_id=30119776]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/FirstRound/Match4/Control" unique_id=1099267583]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 192.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/FirstRound/Match4/Control" unique_id=13058024]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 182.0
+offset_top = -85.0
+offset_right = 192.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match5" parent="MarginContainer/FirstRound" unique_id=1607400002 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -8.0
+offset_right = -225.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/FirstRound/Match5" unique_id=1392919578]
+layout_mode = 2
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/FirstRound/Match5/Control" unique_id=1214668533]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/FirstRound/Match5/Control" unique_id=468325321]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -146.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/FirstRound/Match5/Control" unique_id=1318826416]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -182.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match6" parent="MarginContainer/FirstRound" unique_id=1589643269 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 225.0
+offset_top = -8.0
+offset_right = 525.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/FirstRound/Match6" unique_id=1145568508]
+layout_mode = 2
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/FirstRound/Match6/Control" unique_id=1211144511]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/FirstRound/Match6/Control" unique_id=486847937]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 192.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/FirstRound/Match6/Control" unique_id=2039361254]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 182.0
+offset_top = -5.0
+offset_right = 192.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match7" parent="MarginContainer/FirstRound" unique_id=1234745743 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = 152.0
+offset_right = -225.0
+offset_bottom = 328.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/FirstRound/Match7" unique_id=1280578098]
+layout_mode = 2
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/FirstRound/Match7/Control" unique_id=659578194]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/FirstRound/Match7/Control" unique_id=523814309]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -146.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/FirstRound/Match7/Control" unique_id=721508231]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -85.0
+offset_right = -182.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match8" parent="MarginContainer/FirstRound" unique_id=1638486423 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 225.0
+offset_top = 152.0
+offset_right = 525.0
+offset_bottom = 328.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/FirstRound/Match8" unique_id=1264563659]
+layout_mode = 2
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/FirstRound/Match8/Control" unique_id=892617551]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/FirstRound/Match8/Control" unique_id=836592662]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 192.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/FirstRound/Match8/Control" unique_id=608067233]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 182.0
+offset_top = -85.0
+offset_right = 192.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Winners1" parent="MarginContainer/FirstRound" unique_id=1248392740 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -328.0
+offset_right = 150.0
+offset_bottom = -152.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/FirstRound/Winners1" unique_id=1321969704]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/FirstRound/Winners1/Control" unique_id=1476776706]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -132.5
+offset_right = 150.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "WINNERS DIVISION 1"
+horizontal_alignment = 1
+
+[node name="Winners2" parent="MarginContainer/FirstRound" unique_id=369107959 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -168.0
+offset_right = 150.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Winners3" parent="MarginContainer/FirstRound" unique_id=565036553 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -8.0
+offset_right = 150.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Winners4" parent="MarginContainer/FirstRound" unique_id=599405764 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 152.0
+offset_right = 150.0
+offset_bottom = 328.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Losers1" parent="MarginContainer/FirstRound" unique_id=1919462310 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -900.0
+offset_top = -248.0
+offset_right = -600.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/FirstRound/Losers1" unique_id=1940429344]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/FirstRound/Losers1/Control" unique_id=113554337]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -132.5
+offset_right = 150.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISION 1"
+horizontal_alignment = 1
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/FirstRound/Losers1/Control" unique_id=1081295904]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 193.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Losers2" parent="MarginContainer/FirstRound" unique_id=758323427 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 600.0
+offset_top = -248.0
+offset_right = 900.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/FirstRound/Losers2" unique_id=863800894]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/FirstRound/Losers2/Control" unique_id=1008373853]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -132.5
+offset_right = 150.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISION 1"
+horizontal_alignment = 1
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/FirstRound/Losers2/Control" unique_id=1754614370]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Losers3" parent="MarginContainer/FirstRound" unique_id=1078006866 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -900.0
+offset_top = 72.0
+offset_right = -600.0
+offset_bottom = 248.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/FirstRound/Losers3" unique_id=1076080225]
+layout_mode = 2
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/FirstRound/Losers3/Control" unique_id=430479907]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 193.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Losers4" parent="MarginContainer/FirstRound" unique_id=1531097054 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 600.0
+offset_top = 72.0
+offset_right = 900.0
+offset_bottom = 248.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/FirstRound/Losers4" unique_id=524128733]
+layout_mode = 2
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/FirstRound/Losers4/Control" unique_id=712710906]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Winners1" type="Control" parent="MarginContainer" unique_id=124804374 node_paths=PackedStringArray("winners_round_2", "winners_round_3", "losers_round_2")]
+visible = false
+layout_mode = 2
+script = ExtResource("2_4m8c7")
+winners_round_2 = [NodePath("Match1"), NodePath("Match2"), NodePath("Match3"), NodePath("Match4")]
+winners_round_3 = [NodePath("Winners1"), NodePath("Winners2")]
+losers_round_2 = [NodePath("Losers1"), NodePath("Losers2"), NodePath("Losers3"), NodePath("Losers4")]
+
+[node name="Match1" parent="MarginContainer/Winners1" unique_id=877921199 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -168.0
+offset_right = -225.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Winners1/Match1" unique_id=394227861]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Winners1/Match1/Control" unique_id=411527530]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "WINNERS DIVISION 1"
+horizontal_alignment = 1
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Winners1/Match1/Control" unique_id=1991820090]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/Winners1/Match1/Control" unique_id=1498799553]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -5.0
+offset_right = -146.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match2" parent="MarginContainer/Winners1" unique_id=288058476 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 225.0
+offset_top = -168.0
+offset_right = 525.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Winners1/Match2" unique_id=1004296442]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Winners1/Match2/Control" unique_id=1938193123]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "WINNERS DIVISION 1"
+horizontal_alignment = 1
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Winners1/Match2/Control" unique_id=729279789]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/Winners1/Match2/Control" unique_id=1411157220]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 192.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/Winners1/Match2/Control" unique_id=1361774568]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 182.0
+offset_top = -5.0
+offset_right = 192.0
+offset_bottom = 165.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match3" parent="MarginContainer/Winners1" unique_id=2064637985 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -8.0
+offset_right = -225.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Winners1/Match3" unique_id=1510956240]
+layout_mode = 2
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Winners1/Match3/Control" unique_id=1175826090]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/Winners1/Match3/Control" unique_id=886836394]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -146.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/Winners1/Match3/Control" unique_id=502830812]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -165.0
+offset_right = -182.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match4" parent="MarginContainer/Winners1" unique_id=60850317 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 225.0
+offset_top = -8.0
+offset_right = 525.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Winners1/Match4" unique_id=353981741]
+layout_mode = 2
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Winners1/Match4/Control" unique_id=508200272]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/Winners1/Match4/Control" unique_id=2045025542]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Winners1" parent="MarginContainer/Winners1" unique_id=686350039 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -168.0
+offset_right = 150.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Winners1/Winners1" unique_id=1971866511]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Winners1/Winners1/Control" unique_id=1778632902]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "WINNERS DIVISION 2"
+horizontal_alignment = 1
+
+[node name="Winners2" parent="MarginContainer/Winners1" unique_id=1195655860 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -8.0
+offset_right = 150.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Losers1" parent="MarginContainer/Winners1" unique_id=747423549 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -900.0
+offset_top = -168.0
+offset_right = -600.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Winners1/Losers1" unique_id=602046056]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Winners1/Losers1/Control" unique_id=720493826]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -132.5
+offset_right = 150.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISION 2"
+horizontal_alignment = 1
+
+[node name="Losers2" parent="MarginContainer/Winners1" unique_id=1683112106 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 600.0
+offset_top = -168.0
+offset_right = 900.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Winners1/Losers2" unique_id=532655918]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Winners1/Losers2/Control" unique_id=384199127]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -132.5
+offset_right = 150.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISION 2"
+horizontal_alignment = 1
+
+[node name="Losers3" parent="MarginContainer/Winners1" unique_id=1376096894 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -900.0
+offset_top = -8.0
+offset_right = -600.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Losers4" parent="MarginContainer/Winners1" unique_id=1330226843 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 600.0
+offset_top = -8.0
+offset_right = 900.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Winners2" type="Control" parent="MarginContainer" unique_id=572137375 node_paths=PackedStringArray("winners_round_3", "winners_round_4", "losers_round_3")]
+visible = false
+layout_mode = 2
+script = ExtResource("2_4m8c7")
+winners_round_3 = [NodePath("Match1"), NodePath("Match2")]
+winners_round_4 = [NodePath("Winners1")]
+losers_round_3 = [NodePath("Losers1"), NodePath("Losers2"), NodePath("Losers3")]
+
+[node name="Match1" parent="MarginContainer/Winners2" unique_id=1547967841 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -168.0
+offset_right = 150.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Winners2/Match1" unique_id=730281104]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Winners2/Match1/Control" unique_id=822007028]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "WINNERS DIVISION 2"
+horizontal_alignment = 1
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Winners2/Match1/Control" unique_id=1795385172]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 193.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToWinner2" type="Panel" parent="MarginContainer/Winners2/Match1/Control" unique_id=666121938]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 183.0
+offset_top = -5.0
+offset_right = 193.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/Winners2/Match1/Control" unique_id=2042296767]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/Winners2/Match1/Control" unique_id=784989713]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -85.0
+offset_right = -183.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match2" parent="MarginContainer/Winners2" unique_id=1518091527 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -8.0
+offset_right = 150.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Winners2/Match2" unique_id=1915058320]
+layout_mode = 2
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Winners2/Match2/Control" unique_id=762066811]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 193.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToWinner2" type="Panel" parent="MarginContainer/Winners2/Match2/Control" unique_id=430299195]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 183.0
+offset_top = -85.0
+offset_right = 193.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/Winners2/Match2/Control" unique_id=645776277]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/Winners2/Match2/Control" unique_id=2031843194]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -5.0
+offset_right = -183.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Winners1" parent="MarginContainer/Winners2" unique_id=2004873423 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 225.0
+offset_top = -88.0
+offset_right = 525.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Winners2/Winners1" unique_id=17882467]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Winners2/Winners1/Control" unique_id=917024851]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "WINNERS DIVISION 3"
+horizontal_alignment = 1
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/Winners2/Winners1/Control" unique_id=5030145]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Losers1" parent="MarginContainer/Winners2" unique_id=931023232 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -248.0
+offset_right = -225.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Winners2/Losers1" unique_id=677776367]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Winners2/Losers1/Control" unique_id=1454309277]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISON 3"
+horizontal_alignment = 1
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/Winners2/Losers1/Control" unique_id=1515684801]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 192.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Losers2" parent="MarginContainer/Winners2" unique_id=1333077945 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -88.0
+offset_right = -225.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Losers3" parent="MarginContainer/Winners2" unique_id=82918713 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = 72.0
+offset_right = -225.0
+offset_bottom = 248.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Winners2/Losers3" unique_id=857796920]
+layout_mode = 2
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/Winners2/Losers3/Control" unique_id=873688582]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 192.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Winners3" type="Control" parent="MarginContainer" unique_id=2095663323 node_paths=PackedStringArray("winners_round_4", "losers_round_4", "final_round")]
+visible = false
+layout_mode = 2
+script = ExtResource("2_4m8c7")
+winners_round_4 = [NodePath("Match1")]
+losers_round_4 = [NodePath("Losers1"), NodePath("Losers2")]
+final_round = [NodePath("Winners1")]
+
+[node name="Match1" parent="MarginContainer/Winners3" unique_id=1542788477 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -88.0
+offset_right = 150.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Winners3/Match1" unique_id=341666411]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Winners3/Match1/Control" unique_id=2012424113]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "WINNERS DIVISION 3"
+horizontal_alignment = 1
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Winners3/Match1/Control" unique_id=2083838785]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/Winners3/Match1/Control" unique_id=1855118824]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/Winners3/Match1/Control" unique_id=298369212]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -5.0
+offset_right = -183.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Winners1" parent="MarginContainer/Winners3" unique_id=1246752471 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 225.0
+offset_top = -88.0
+offset_right = 525.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Winners3/Winners1" unique_id=980194806]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Winners3/Winners1/Control" unique_id=352249281]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "FINAL RACE"
+horizontal_alignment = 1
+
+[node name="Losers1" parent="MarginContainer/Winners3" unique_id=47521188 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -168.0
+offset_right = -225.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Winners3/Losers1" unique_id=2117445919]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Winners3/Losers1/Control" unique_id=823297356]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISON 4"
+horizontal_alignment = 1
+
+[node name="Losers2" parent="MarginContainer/Winners3" unique_id=2061132667 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -8.0
+offset_right = -225.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Winners3/Losers2" unique_id=1407669852]
+layout_mode = 2
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/Winners3/Losers2/Control" unique_id=2023853588]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 192.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Losers1" type="Control" parent="MarginContainer" unique_id=1119870738 node_paths=PackedStringArray("losers_round_1", "losers_round_2")]
+visible = false
+layout_mode = 2
+script = ExtResource("2_4m8c7")
+losers_round_1 = [NodePath("Match1"), NodePath("Match2"), NodePath("Match3"), NodePath("Match4")]
+losers_round_2 = [NodePath("Winners1"), NodePath("Winners2"), NodePath("Winners3"), NodePath("Winners4")]
+
+[node name="Match1" parent="MarginContainer/Losers1" unique_id=1295526232 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -168.0
+offset_right = -225.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers1/Match1" unique_id=544454204]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Losers1/Match1/Control" unique_id=366608332]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISION 1"
+horizontal_alignment = 1
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Losers1/Match1/Control" unique_id=1981065223]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/Losers1/Match1/Control" unique_id=1853031126]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -146.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/Losers1/Match1/Control" unique_id=64407117]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -182.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match2" parent="MarginContainer/Losers1" unique_id=476416539 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 225.0
+offset_top = -168.0
+offset_right = 525.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers1/Match2" unique_id=515091292]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Losers1/Match2/Control" unique_id=971685683]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISION 1"
+horizontal_alignment = 1
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Losers1/Match2/Control" unique_id=1727262809]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/Losers1/Match2/Control" unique_id=1944198645]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 192.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/Losers1/Match2/Control" unique_id=360156780]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 182.0
+offset_top = -5.0
+offset_right = 192.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match3" parent="MarginContainer/Losers1" unique_id=1869226039 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -8.0
+offset_right = -225.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers1/Match3" unique_id=119162162]
+layout_mode = 2
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Losers1/Match3/Control" unique_id=1399176619]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/Losers1/Match3/Control" unique_id=834624830]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -146.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/Losers1/Match3/Control" unique_id=761743825]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -84.0
+offset_right = -182.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match4" parent="MarginContainer/Losers1" unique_id=2123678759 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 225.0
+offset_top = -8.0
+offset_right = 525.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers1/Match4" unique_id=905479698]
+layout_mode = 2
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Losers1/Match4/Control" unique_id=459334964]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/Losers1/Match4/Control" unique_id=2101458888]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 192.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/Losers1/Match4/Control" unique_id=1467281964]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 182.0
+offset_top = -85.0
+offset_right = 192.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Winners1" parent="MarginContainer/Losers1" unique_id=128983228 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -328.0
+offset_right = 150.0
+offset_bottom = -152.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers1/Winners1" unique_id=2115712713]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Losers1/Winners1/Control" unique_id=82658566]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISION 2"
+horizontal_alignment = 1
+
+[node name="Winners2" parent="MarginContainer/Losers1" unique_id=1525736392 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -168.0
+offset_right = 150.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Winners3" parent="MarginContainer/Losers1" unique_id=516260270 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -8.0
+offset_right = 150.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Winners4" parent="MarginContainer/Losers1" unique_id=384747525 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 152.0
+offset_right = 150.0
+offset_bottom = 328.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Eliminated1" type="PanelContainer" parent="MarginContainer/Losers1" unique_id=696773302]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -869.0
+offset_top = -30.5
+offset_right = -631.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8tfdw")
+
+[node name="Label" type="Label" parent="MarginContainer/Losers1/Eliminated1" unique_id=312807740]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "ELIMINATED"
+
+[node name="Control" type="Control" parent="MarginContainer/Losers1/Eliminated1" unique_id=906401526]
+layout_mode = 2
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/Losers1/Eliminated1/Control" unique_id=2073304005]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 111.0
+offset_top = -5.0
+offset_right = 193.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Eliminated2" type="PanelContainer" parent="MarginContainer/Losers1" unique_id=2092604817]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 631.0
+offset_top = -30.5
+offset_right = 869.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8tfdw")
+
+[node name="Label" type="Label" parent="MarginContainer/Losers1/Eliminated2" unique_id=523448110]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "ELIMINATED"
+
+[node name="Control" type="Control" parent="MarginContainer/Losers1/Eliminated2" unique_id=551339111]
+layout_mode = 2
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/Losers1/Eliminated2/Control" unique_id=645950289]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -5.0
+offset_right = -111.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Losers2" type="Control" parent="MarginContainer" unique_id=1580440540 node_paths=PackedStringArray("losers_round_2", "losers_round_3")]
+visible = false
+layout_mode = 2
+script = ExtResource("2_4m8c7")
+losers_round_2 = [NodePath("Match1"), NodePath("Match2"), NodePath("Match3"), NodePath("Match4")]
+losers_round_3 = [NodePath("Winners1"), NodePath("Winners2"), NodePath("Winners3")]
+
+[node name="Match1" parent="MarginContainer/Losers2" unique_id=1006213317 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -248.0
+offset_right = -225.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers2/Match1" unique_id=1777466718]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Losers2/Match1/Control" unique_id=577565259]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISION 2"
+horizontal_alignment = 1
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Losers2/Match1/Control" unique_id=1698461162]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/Losers2/Match1/Control" unique_id=24968617]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -146.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/Losers2/Match1/Control" unique_id=1296482713]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -182.0
+offset_bottom = 166.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match2" parent="MarginContainer/Losers2" unique_id=2045400850 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -88.0
+offset_right = -225.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers2/Match2" unique_id=1685286030]
+layout_mode = 2
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Losers2/Match2/Control" unique_id=1798232205]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match3" parent="MarginContainer/Losers2" unique_id=1295586986 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 225.0
+offset_top = -88.0
+offset_right = 525.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers2/Match3" unique_id=891769996]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Losers2/Match3/Control" unique_id=1561428075]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISION 2"
+horizontal_alignment = 1
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Losers2/Match3/Control" unique_id=73787297]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match4" parent="MarginContainer/Losers2" unique_id=2104875473 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 225.0
+offset_top = 72.0
+offset_right = 525.0
+offset_bottom = 248.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers2/Match4" unique_id=1341528570]
+layout_mode = 2
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Losers2/Match4/Control" unique_id=1444957961]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/Losers2/Match4/Control" unique_id=549565400]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 192.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/Losers2/Match4/Control" unique_id=991686029]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 182.0
+offset_top = -164.0
+offset_right = 192.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Winners1" parent="MarginContainer/Losers2" unique_id=1820960530 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -248.0
+offset_right = 150.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers2/Winners1" unique_id=1517184396]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Losers2/Winners1/Control" unique_id=245361613]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISION 3"
+horizontal_alignment = 1
+
+[node name="Winners2" parent="MarginContainer/Losers2" unique_id=853866019 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -88.0
+offset_right = 150.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Winners3" parent="MarginContainer/Losers2" unique_id=259638099 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 72.0
+offset_right = 150.0
+offset_bottom = 248.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Eliminated1" type="PanelContainer" parent="MarginContainer/Losers2" unique_id=1187878702]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -869.0
+offset_top = -30.5
+offset_right = -631.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8tfdw")
+
+[node name="Label" type="Label" parent="MarginContainer/Losers2/Eliminated1" unique_id=2097381659]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "ELIMINATED"
+
+[node name="Control" type="Control" parent="MarginContainer/Losers2/Eliminated1" unique_id=215557428]
+layout_mode = 2
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/Losers2/Eliminated1/Control" unique_id=32147375]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 111.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Eliminated2" type="PanelContainer" parent="MarginContainer/Losers2" unique_id=1058318671]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 631.0
+offset_top = -30.5
+offset_right = 869.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8tfdw")
+
+[node name="Label" type="Label" parent="MarginContainer/Losers2/Eliminated2" unique_id=2055019999]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "ELIMINATED"
+
+[node name="Control" type="Control" parent="MarginContainer/Losers2/Eliminated2" unique_id=576229775]
+layout_mode = 2
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/Losers2/Eliminated2/Control" unique_id=1351974158]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -5.0
+offset_right = -111.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Losers3" type="Control" parent="MarginContainer" unique_id=796610534 node_paths=PackedStringArray("losers_round_3", "losers_round_4")]
+visible = false
+layout_mode = 2
+script = ExtResource("2_4m8c7")
+losers_round_3 = [NodePath("Match1"), NodePath("Match2"), NodePath("Match3")]
+losers_round_4 = [NodePath("Winners1"), NodePath("Winners2")]
+
+[node name="Match1" parent="MarginContainer/Losers3" unique_id=821317183 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -168.0
+offset_right = -225.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers3/Match1" unique_id=61395637]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Losers3/Match1/Control" unique_id=1824612121]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISION 3"
+horizontal_alignment = 1
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Losers3/Match1/Control" unique_id=1904513803]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/Losers3/Match1/Control" unique_id=487213996]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -146.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/Losers3/Match1/Control" unique_id=323749090]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -182.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match2" parent="MarginContainer/Losers3" unique_id=1305742139 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 225.0
+offset_top = -88.0
+offset_right = 525.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers3/Match2" unique_id=113435498]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Losers3/Match2/Control" unique_id=336257769]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISION 3"
+horizontal_alignment = 1
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Losers3/Match2/Control" unique_id=1220566340]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToWinner2" type="Panel" parent="MarginContainer/Losers3/Match2/Control" unique_id=1333712601]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -85.0
+offset_right = -182.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Match3" parent="MarginContainer/Losers3" unique_id=679872012 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -8.0
+offset_right = -225.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers3/Match3" unique_id=27132298]
+layout_mode = 2
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Losers3/Match3/Control" unique_id=611954072]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/Losers3/Match3/Control" unique_id=694532233]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -5.0
+offset_right = -146.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser2" type="Panel" parent="MarginContainer/Losers3/Match3/Control" unique_id=240589244]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -84.0
+offset_right = -182.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Winners1" parent="MarginContainer/Losers3" unique_id=226495909 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -168.0
+offset_right = 150.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers3/Winners1" unique_id=1057820652]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Losers3/Winners1/Control" unique_id=1622857839]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISION 4"
+horizontal_alignment = 1
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/Losers3/Winners1/Control" unique_id=1151300078]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 193.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Winners2" parent="MarginContainer/Losers3" unique_id=1375376201 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -8.0
+offset_right = 150.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Eliminated1" type="PanelContainer" parent="MarginContainer/Losers3" unique_id=539355769]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -869.0
+offset_top = -30.5
+offset_right = -631.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8tfdw")
+
+[node name="Label" type="Label" parent="MarginContainer/Losers3/Eliminated1" unique_id=763182105]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "ELIMINATED"
+
+[node name="Control" type="Control" parent="MarginContainer/Losers3/Eliminated1" unique_id=287129792]
+layout_mode = 2
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/Losers3/Eliminated1/Control" unique_id=1283132333]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 111.0
+offset_top = -5.0
+offset_right = 193.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Eliminated2" type="PanelContainer" parent="MarginContainer/Losers3" unique_id=1527583660]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 591.0
+offset_top = -30.0
+offset_right = 829.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8tfdw")
+
+[node name="Label" type="Label" parent="MarginContainer/Losers3/Eliminated2" unique_id=1352688318]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "ELIMINATED"
+
+[node name="Control" type="Control" parent="MarginContainer/Losers3/Eliminated2" unique_id=390765251]
+layout_mode = 2
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/Losers3/Eliminated2/Control" unique_id=1765602859]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -5.0
+offset_right = -111.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Losers4" type="Control" parent="MarginContainer" unique_id=1142903788 node_paths=PackedStringArray("losers_round_4", "losers_round_5")]
+visible = false
+layout_mode = 2
+script = ExtResource("2_4m8c7")
+losers_round_4 = [NodePath("Match1"), NodePath("Match2")]
+losers_round_5 = [NodePath("Winners1")]
+
+[node name="Match1" parent="MarginContainer/Losers4" unique_id=744987372 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -88.0
+offset_right = -225.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers4/Match1" unique_id=2003595875]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Losers4/Match1/Control" unique_id=942238911]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISON 4"
+horizontal_alignment = 1
+
+[node name="Match2" parent="MarginContainer/Losers4" unique_id=1715616102 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 225.0
+offset_top = -88.0
+offset_right = 525.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers4/Match2" unique_id=1985494819]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Losers4/Match2/Control" unique_id=116848008]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISON 4"
+horizontal_alignment = 1
+
+[node name="Winners1" parent="MarginContainer/Losers4" unique_id=1757494232 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -88.0
+offset_right = 150.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers4/Winners1" unique_id=679475361]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Losers4/Winners1/Control" unique_id=413792690]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISON 5"
+horizontal_alignment = 1
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Losers4/Winners1/Control" unique_id=831259624]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="ToLoser" type="Panel" parent="MarginContainer/Losers4/Winners1/Control" unique_id=403314825]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -5.0
+offset_right = -142.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Eliminated1" type="PanelContainer" parent="MarginContainer/Losers4" unique_id=120072836]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -829.0
+offset_top = -30.0
+offset_right = -591.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8tfdw")
+
+[node name="Label" type="Label" parent="MarginContainer/Losers4/Eliminated1" unique_id=1838802833]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "ELIMINATED"
+
+[node name="Control" type="Control" parent="MarginContainer/Losers4/Eliminated1" unique_id=1061779042]
+layout_mode = 2
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/Losers4/Eliminated1/Control" unique_id=661033214]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 111.0
+offset_top = -5.0
+offset_right = 193.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Eliminated2" type="PanelContainer" parent="MarginContainer/Losers4" unique_id=1574918311]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 591.0
+offset_top = -30.0
+offset_right = 829.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8tfdw")
+
+[node name="Label" type="Label" parent="MarginContainer/Losers4/Eliminated2" unique_id=1720059658]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "ELIMINATED"
+
+[node name="Control" type="Control" parent="MarginContainer/Losers4/Eliminated2" unique_id=2030951668]
+layout_mode = 2
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/Losers4/Eliminated2/Control" unique_id=579099312]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -5.0
+offset_right = -111.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Losers5" type="Control" parent="MarginContainer" unique_id=927708337 node_paths=PackedStringArray("losers_round_5", "final_round")]
+visible = false
+layout_mode = 2
+script = ExtResource("2_4m8c7")
+losers_round_5 = [NodePath("Match1")]
+final_round = [NodePath("Winners1")]
+
+[node name="Match1" parent="MarginContainer/Losers5" unique_id=1502912237 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -88.0
+offset_right = 150.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers5/Match1" unique_id=742677577]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Losers5/Match1/Control" unique_id=461463834]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "LOSERS DIVISON 5"
+horizontal_alignment = 1
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/Losers5/Match1/Control" unique_id=1650399878]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 233.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Winners1" parent="MarginContainer/Losers5" unique_id=1674407902 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 225.0
+offset_top = -88.0
+offset_right = 525.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Losers5/Winners1" unique_id=1906395672]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/Losers5/Winners1/Control" unique_id=1879432294]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "FINAL RACE"
+horizontal_alignment = 1
+
+[node name="Eliminated1" type="PanelContainer" parent="MarginContainer/Losers5" unique_id=24957683]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.0
+offset_top = -30.0
+offset_right = -216.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8tfdw")
+
+[node name="Label" type="Label" parent="MarginContainer/Losers5/Eliminated1" unique_id=1522027917]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "ELIMINATED"
+
+[node name="Control" type="Control" parent="MarginContainer/Losers5/Eliminated1" unique_id=2021999159]
+layout_mode = 2
+
+[node name="FromMatch" type="Panel" parent="MarginContainer/Losers5/Eliminated1/Control" unique_id=4047711]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 111.0
+offset_top = -5.0
+offset_right = 193.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="FinalRace" type="Control" parent="MarginContainer" unique_id=618915537 node_paths=PackedStringArray("final_round")]
+visible = false
+layout_mode = 2
+script = ExtResource("2_4m8c7")
+final_round = [NodePath("Match1")]
+
+[node name="Match1" parent="MarginContainer/FinalRace" unique_id=2041945703 instance=ExtResource("2_bhhha")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -208.0
+offset_right = 150.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/FinalRace/Match1" unique_id=1479924651]
+layout_mode = 2
+
+[node name="RoundHeader" type="Label" parent="MarginContainer/FinalRace/Match1/Control" unique_id=492470239]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -132.5
+offset_right = 175.0
+offset_bottom = -87.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "FINAL RACE"
+horizontal_alignment = 1
+
+[node name="ToWinner" type="Panel" parent="MarginContainer/FinalRace/Match1/Control" unique_id=2023450919]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = 66.0
+offset_right = 5.0
+offset_bottom = 153.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4m8c7")
+
+[node name="Winner" type="PanelContainer" parent="MarginContainer/FinalRace" unique_id=2021545059]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -281.0
+offset_top = 24.5
+offset_right = 281.0
+offset_bottom = 215.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_otku0")
+
+[node name="Label" type="Label" parent="MarginContainer/FinalRace/Winner" unique_id=341782944]
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "WINNER"
+
+[node name="Winner" type="Control" parent="MarginContainer" unique_id=249127557]
+visible = false
+layout_mode = 2
+
+[node name="WinnerLabel" type="Label" parent="MarginContainer/Winner" unique_id=1567596263]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -502.5
+offset_top = -85.5
+offset_right = 502.5
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 125
+text = "New Racer Wins!"
+
+[node name="Control" type="Control" parent="MarginContainer" unique_id=753835822]
+layout_mode = 2
+
+[node name="TopLabel" type="Label" parent="MarginContainer/Control" unique_id=1588008077]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -127.0
+offset_top = 20.0
+offset_right = 127.0
+offset_bottom = 108.0
+grow_horizontal = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Return to Menu"
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 64
+text = "New Tournament"
+horizontal_alignment = 1
+
+[node name="BottomButton" type="Button" parent="MarginContainer/Control" unique_id=95379600]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -266.5
+offset_top = -116.0
+offset_right = 266.5
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 64
+text = "Start Next Match"

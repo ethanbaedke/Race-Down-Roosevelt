@@ -164,45 +164,104 @@ func _fill_with_ai() -> void:
 # Tell all matches which matches they should send their winners/losers to.
 func _initialize_match_targets() -> void:
 	
-	for i:int in range(winners_round_1.size()):
+	# WINNERS ROUND 1
+	for i:int in range(8):
 		winners_round_1[i].winner_match_target_round = 1
-		winners_round_1[i].winner_match_target_match = (i * 0.5) as int
 		winners_round_1[i].loser_match_target_round = 4
-		winners_round_1[i].loser_match_target_match = (i * 0.5) as int
 		
-	for i:int in range(winners_round_2.size()):
+	winners_round_1[0].winner_match_target_match = 0
+	winners_round_1[0].loser_match_target_match = 0
+	
+	winners_round_1[1].winner_match_target_match = 0
+	winners_round_1[1].loser_match_target_match = 1
+	
+	winners_round_1[2].winner_match_target_match = 1
+	winners_round_1[2].loser_match_target_match = 0
+	
+	winners_round_1[3].winner_match_target_match = 1
+	winners_round_1[3].loser_match_target_match = 1
+	
+	winners_round_1[4].winner_match_target_match = 2
+	winners_round_1[4].loser_match_target_match = 2
+	
+	winners_round_1[5].winner_match_target_match = 2
+	winners_round_1[5].loser_match_target_match = 3
+	
+	winners_round_1[6].winner_match_target_match = 3
+	winners_round_1[6].loser_match_target_match = 2
+	
+	winners_round_1[7].winner_match_target_match = 3
+	winners_round_1[7].loser_match_target_match = 3
+	
+	# WINNERS ROUND 2
+	for i:int in range(4):
 		winners_round_2[i].winner_match_target_round = 2
-		winners_round_2[i].winner_match_target_match = (i * 0.5) as int
 		winners_round_2[i].loser_match_target_round = 5
-		winners_round_2[i].loser_match_target_match = i
-		
-	for i:int in range(winners_round_3.size()):
+	
+	winners_round_2[0].winner_match_target_match = 0
+	winners_round_2[0].loser_match_target_match = 0
+	
+	winners_round_2[1].winner_match_target_match = 0
+	winners_round_2[1].loser_match_target_match = 3
+	
+	winners_round_2[2].winner_match_target_match = 1
+	winners_round_2[2].loser_match_target_match = 0
+	
+	winners_round_2[3].winner_match_target_match = 1
+	winners_round_2[3].loser_match_target_match = 3
+	
+	# WINNERS ROUND 3
+	for i:int in range(2):
 		winners_round_3[i].winner_match_target_round = 3
-		winners_round_3[i].winner_match_target_match = (i * 0.5) as int
 		winners_round_3[i].loser_match_target_round = 6
-		winners_round_3[i].loser_match_target_match = 0
 	
+	winners_round_3[0].winner_match_target_match = 0
+	winners_round_3[0].loser_match_target_match = 0
+	
+	winners_round_3[1].winner_match_target_match = 0
+	winners_round_3[1].loser_match_target_match = 2
+	
+	# WINNERS ROUND 4
 	winners_round_4[0].winner_match_target_round = 9
-	winners_round_4[0].winner_match_target_match = 0
 	winners_round_4[0].loser_match_target_round = 7
-	winners_round_4[0].loser_match_target_match = 0
 	
-	for i:int in range(losers_round_1.size()):
+	winners_round_4[0].winner_match_target_match = 0
+	winners_round_4[0].loser_match_target_match = 1
+	
+	# LOSERS ROUND 1
+	for i:int in range(4):
 		losers_round_1[i].winner_match_target_round = 5
-		losers_round_1[i].winner_match_target_match = i
-		
-	for i:int in range(losers_round_2.size()):
-		losers_round_2[i].winner_match_target_round = 6
-		losers_round_2[i].winner_match_target_match = ((i * 0.5) + 1) as int
-		
-	for i:int in range(losers_round_3.size()):
-		losers_round_3[i].winner_match_target_round = 7
-		losers_round_3[i].winner_match_target_match = ((i + 1) * 0.5) as int
-		
-	for i:int in range(losers_round_4.size()):
-		losers_round_4[i].winner_match_target_round = 8
-		losers_round_4[i].winner_match_target_match = (i * 0.5) as int
 	
+	losers_round_1[0].winner_match_target_match = 1
+	losers_round_1[1].winner_match_target_match = 1
+	losers_round_1[2].winner_match_target_match = 2
+	losers_round_1[3].winner_match_target_match = 2
+	
+	# LOSERS ROUND 2
+	for i:int in range(4):
+		losers_round_2[i].winner_match_target_round = 6
+	
+	losers_round_2[0].winner_match_target_match = 0
+	losers_round_2[1].winner_match_target_match = 1
+	losers_round_2[2].winner_match_target_match = 1
+	losers_round_2[3].winner_match_target_match = 2
+	
+	# LOSERS ROUND 3
+	for i:int in range(3):
+		losers_round_3[i].winner_match_target_round = 7
+	
+	losers_round_3[0].winner_match_target_match = 0
+	losers_round_3[1].winner_match_target_match = 0
+	losers_round_3[2].winner_match_target_match = 1
+	
+	# LOSERS ROUND 4
+	for i:int in range(2):
+		losers_round_4[i].winner_match_target_round = 8
+	
+	losers_round_4[0].winner_match_target_match = 0
+	losers_round_4[1].winner_match_target_match = 0
+	
+	# LOSERS ROUND 5
 	losers_round_5[0].winner_match_target_round = 9
 	losers_round_5[0].winner_match_target_match = 0
 

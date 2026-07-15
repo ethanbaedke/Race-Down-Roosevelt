@@ -4,52 +4,31 @@ signal back_requested
 signal start_match_requested
 signal return_to_menu_requested
 
-@export var winners_round_1:Array[TournamentMatch] = []
-@export var winners_round_2:Array[TournamentMatch] = []
-@export var winners_round_3:Array[TournamentMatch] = []
-@export var winners_round_4:Array[TournamentMatch] = []
-@export var losers_round_1:Array[TournamentMatch] = []
-@export var losers_round_2:Array[TournamentMatch] = []
-@export var losers_round_3:Array[TournamentMatch] = []
-@export var losers_round_4:Array[TournamentMatch] = []
-@export var losers_round_5:Array[TournamentMatch] = []
-@export var final_round:Array[TournamentMatch] = []
-
-@export var _winner_label:Label = null
-@export var _start_match_button:Button = null
-@export var _return_to_menu_button:Button = null
+@onready var _top_label:Label = $MarginContainer/Control/TopLabel
+@onready var _bottom_button:Button = $MarginContainer/Control/BottomButton
+@onready var _first_round:TournamentMenuRound = $MarginContainer/FirstRound
+@onready var _winners_1:TournamentMenuRound = $MarginContainer/Winners1
+@onready var _winners_2:TournamentMenuRound = $MarginContainer/Winners2
+@onready var _winners_3:TournamentMenuRound = $MarginContainer/Winners3
+@onready var _losers_1:TournamentMenuRound = $MarginContainer/Losers1
+@onready var _losers_2:TournamentMenuRound = $MarginContainer/Losers2
+@onready var _losers_3:TournamentMenuRound = $MarginContainer/Losers3
+@onready var _losers_4:TournamentMenuRound = $MarginContainer/Losers4
+@onready var _losers_5:TournamentMenuRound = $MarginContainer/Losers5
+@onready var _final_race:TournamentMenuRound = $MarginContainer/FinalRace
+@onready var _winner:Control = $MarginContainer/Winner
+@onready var _winner_label:Label = $MarginContainer/Winner/WinnerLabel
 
 var game_state:GameState = null
-
-func _get_all_rounds() -> Array[Array]:
-	
-	return [
-		winners_round_1,
-		winners_round_2,
-		winners_round_3,
-		winners_round_4,
-		losers_round_1,
-		losers_round_2,
-		losers_round_3,
-		losers_round_4,
-		losers_round_5,
-		final_round,
-	]
-
-# Should only be called once, to give the match data to the match ui.
-func _set_match_data_references() -> void:
-	
-	var all_rounds:Array[Array] = _get_all_rounds()
-	var all_round_data:Array[Array] = game_state.active_tournament.get_all_rounds()
-	
-	for i:int in range(all_round_data.size()):
-		for f:int in range(all_round_data[i].size()):
-			all_rounds[i][f].set_match_data(all_round_data[i][f])
 
 func _on_start_match_button_pressed() -> void:
 	
 	game_state.num_players = game_state.active_tournament.get_next_match().player_profiles.size()
 	start_match_requested.emit()
+
+func _on_return_to_menu_button_pressed() -> void:
+	
+	return_to_menu_requested.emit()
 
 func _ready() -> void:
 	
@@ -61,16 +40,69 @@ func _ready() -> void:
 		RdrLogger.fatal(self, _ready.get_method() + " expects an active tournament to be set on GameState.")
 		return
 	
-	_start_match_button.pressed.connect(_on_start_match_button_pressed)
-	_return_to_menu_button.pressed.connect(func() -> void:
-		return_to_menu_requested.emit())
-	
-	_set_match_data_references()
-	
 	if (game_state.active_tournament.winner != null):
-		_winner_label.text = "Winner: " + game_state.active_tournament.winner.name
-		_start_match_button.visible = false
-		_return_to_menu_button.visible = true
+		_top_label.text = "WINNER"
+		_bottom_button.text = "Return to Main Menu"
+		_bottom_button.pressed.connect(_on_return_to_menu_button_pressed)
+		_winner_label.text = game_state.active_tournament.winner.name + " WINS!"
+		_winner.visible = true
+		return
+	
+	match (game_state.active_tournament.round_index):
+		-1:
+			pass
+		0:
+			_top_label.text = "FIRST ROUND"
+			_bottom_button.text = "START MATCH"
+			_bottom_button.pressed.connect(_on_start_match_button_pressed)
+			_first_round.show_round(game_state.active_tournament)
+		1:
+			_top_label.text = "WINNERS DIVISION 1"
+			_bottom_button.text = "START MATCH"
+			_bottom_button.pressed.connect(_on_start_match_button_pressed)
+			_winners_1.show_round(game_state.active_tournament)
+		2:
+			_top_label.text = "WINNERS DIVISION 2"
+			_bottom_button.text = "START MATCH"
+			_bottom_button.pressed.connect(_on_start_match_button_pressed)
+			_winners_2.show_round(game_state.active_tournament)
+		3:
+			_top_label.text = "WINNERS DIVISION 3"
+			_bottom_button.text = "START MATCH"
+			_bottom_button.pressed.connect(_on_start_match_button_pressed)
+			_winners_3.show_round(game_state.active_tournament)
+		4:
+			_top_label.text = "LOSERS DIVISION 1"
+			_bottom_button.text = "START MATCH"
+			_bottom_button.pressed.connect(_on_start_match_button_pressed)
+			_losers_1.show_round(game_state.active_tournament)
+		5:
+			_top_label.text = "LOSERS DIVISION 2"
+			_bottom_button.text = "START MATCH"
+			_bottom_button.pressed.connect(_on_start_match_button_pressed)
+			_losers_2.show_round(game_state.active_tournament)
+		6:
+			_top_label.text = "LOSERS DIVISION 3"
+			_bottom_button.text = "START MATCH"
+			_bottom_button.pressed.connect(_on_start_match_button_pressed)
+			_losers_3.show_round(game_state.active_tournament)
+		7:
+			_top_label.text = "LOSERS DIVISION 4"
+			_bottom_button.text = "START MATCH"
+			_bottom_button.pressed.connect(_on_start_match_button_pressed)
+			_losers_4.show_round(game_state.active_tournament)
+		8:
+			_top_label.text = "LOSERS DIVISION 5"
+			_bottom_button.text = "START MATCH"
+			_bottom_button.pressed.connect(_on_start_match_button_pressed)
+			_losers_5.show_round(game_state.active_tournament)
+		9:
+			_top_label.text = "FINAL RACE"
+			_bottom_button.text = "START MATCH"
+			_bottom_button.pressed.connect(_on_start_match_button_pressed)
+			_final_race.show_round(game_state.active_tournament)
+		_:
+			pass
 
 func _unhandled_input(event: InputEvent) -> void:
 	

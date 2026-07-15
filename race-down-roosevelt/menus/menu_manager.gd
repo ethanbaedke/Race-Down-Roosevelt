@@ -295,6 +295,7 @@ func _setup_tournament_menu() -> Control:
 
 func _on_tournament_menu_back_requested() -> void:
 	
+	game_state.active_tournament = null
 	_go_to_new_menu(MenuType.NONE, true)
 
 func _on_tournament_menu_start_match_requested() -> void:

@@ -450,7 +450,6 @@ func play_opening_animation() -> void:
 	_opening_animation_player.play("fade_from_black")
 	await _opening_animation_player.animation_finished
 	
-	_day_night_player.play("RESET")
 	_day_night_player.play("initial_sunrise")
 	
 	_opening_animation_player.play("countdown")

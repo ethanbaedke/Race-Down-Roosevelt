@@ -10,6 +10,14 @@ class_name RacePlayerHud extends Control
 @onready var _jump_input_glyph:InputGlyph = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2/Control/InputGlyph
 @onready var _item_animator:AnimationPlayer = $ItemAnimator
 @onready var _jump_animator:AnimationPlayer = $JumpAnimator
+@onready var _item_name:Label = $ItemName
+@onready var _item_name_animator:AnimationPlayer = $ItemNameAnimator
+
+func display_item_name(data:ItemData) -> void:
+
+	if (data != null):
+		_item_name.text = data.item_name.to_upper()
+		_item_name_animator.play("base")
 
 func update_item(data:ItemData) -> void:
 	
@@ -90,5 +98,6 @@ func set_jump_glyph_enabled(value:bool) -> void:
 
 func _ready() -> void:
 	
+	_item_name_animator.play("RESET")
 	set_item_glyph_enabled(false)
 	_jump_input_glyph.visible = false

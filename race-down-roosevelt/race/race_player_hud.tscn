@@ -9,6 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://djt7v72ojdmfm" path="res://input_glyphs/input_glyph.tscn" id="5_1mie1"]
 [ext_resource type="Texture2D" uid="uid://cg86rubg8tred" path="res://input_glyphs/xbox_a.png" id="6_blrmq"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_blrmq"]
+font_size = 80
+font_color = Color(1, 0.6666667, 0, 1)
+outline_size = 10
+outline_color = Color(1, 0.33333337, 0, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blrmq"]
 resource_local_to_scene = true
 bg_color = Color(0.4, 0.4, 0.4, 1)
@@ -220,6 +226,85 @@ _data = {
 &"jump_ready": SubResource("Animation_po0he")
 }
 
+[sub_resource type="Animation" id="Animation_lox3y"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ItemName:offset_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ItemName:offset_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ItemName:self_modulate:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_bddx3"]
+resource_name = "base"
+length = 0.8
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ItemName:offset_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(50, -0.25, 0, 0, -100, -50, -0.083333336, 0, 0.083333336, 0, -150, 0, 100, 0, 0),
+"times": PackedFloat32Array(0, 0.5, 0.8)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ItemName:offset_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(50, -0.25, 0, 0, -100, -50, -0.083333336, 0, 0.083333336, 0, -150, 0, 100, 0, 0),
+"times": PackedFloat32Array(0, 0.5, 0.8)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ItemName:self_modulate:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.3, 1, 1, -0.083, 0, 0.083, 0, 0, -0.2, 1, 0, 0),
+"times": PackedFloat32Array(0, 0.5, 0.8)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lox3y"]
+_data = {
+&"RESET": SubResource("Animation_lox3y"),
+&"base": SubResource("Animation_bddx3")
+}
+
 [node name="RacePlayerHud" type="Control" unique_id=365328423]
 layout_mode = 3
 anchors_preset = 15
@@ -228,6 +313,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7t3ce")
+
+[node name="ItemName" type="Label" parent="." unique_id=1862927704]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 80
+text = "ITEM NAME"
+label_settings = SubResource("LabelSettings_blrmq")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2080816943]
 layout_mode = 1
@@ -403,3 +505,6 @@ libraries/ = SubResource("AnimationLibrary_cll5l")
 
 [node name="JumpAnimator" type="AnimationPlayer" parent="." unique_id=121119308]
 libraries/ = SubResource("AnimationLibrary_bddx3")
+
+[node name="ItemNameAnimator" type="AnimationPlayer" parent="." unique_id=1425107259]
+libraries/ = SubResource("AnimationLibrary_lox3y")

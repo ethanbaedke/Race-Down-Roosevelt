@@ -274,6 +274,9 @@ func try_use_item() -> bool:
 	if (_current_item_time != 0):
 		return false
 	
+	if (_hud != null):
+		_hud.display_item_name(_held_item)
+	
 	match (_held_item.item_type):
 		ItemData.ItemType.BOOST:
 			_activate_boost_item()

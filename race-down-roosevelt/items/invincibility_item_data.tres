@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("2_br3v8")
+item_name = "Invincibility"
 item_icon = ExtResource("1_sv1yy")
 item_type = 1
 metadata/_custom_type_script = "uid://c0jy6l4ekh1t2"

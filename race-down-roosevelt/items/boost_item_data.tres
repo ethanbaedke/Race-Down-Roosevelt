@@ -5,5 +5,6 @@
 
 [resource]
 script = ExtResource("1_u4lg2")
+item_name = "Turbo Boost"
 item_icon = ExtResource("1_kvyr0")
 metadata/_custom_type_script = "uid://c0jy6l4ekh1t2"

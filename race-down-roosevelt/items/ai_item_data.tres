@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("2_nj81k")
+item_name = "Ai Controller"
 item_icon = ExtResource("1_0y8co")
 item_type = 2
 metadata/_custom_type_script = "uid://c0jy6l4ekh1t2"

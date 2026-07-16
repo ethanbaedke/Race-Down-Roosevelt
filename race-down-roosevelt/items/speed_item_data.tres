@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("2_tvylv")
+item_name = "Overclock"
 item_icon = ExtResource("1_aib3m")
 item_type = 3
 metadata/_custom_type_script = "uid://c0jy6l4ekh1t2"

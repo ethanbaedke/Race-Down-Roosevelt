@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://uvhx5awql1e8" path="res://vehicles/honda_civic.glb" id="3_et73i"]
 [ext_resource type="PackedScene" uid="uid://40efplcfedui" path="res://vehicles/subaru_forester.glb" id="4_dhwrm"]
 [ext_resource type="PackedScene" uid="uid://5525td7tv2km" path="res://vehicles/jeep_wrangler.glb" id="5_dhwrm"]
+[ext_resource type="PackedScene" uid="uid://cag4gxseexopt" path="res://vehicles/cybertruck.glb" id="6_wuy1t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yiuc0"]
 bg_color = Color(0.5, 0.5, 0.5, 1)
@@ -73,3 +74,6 @@ transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-
 
 [node name="JeepWranglerModel" parent="." unique_id=731493010 instance=ExtResource("5_dhwrm")]
 transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-08, 40.533, 0, -1.057)
+
+[node name="CybertruckModel" parent="." unique_id=102932695 instance=ExtResource("6_wuy1t")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 59.456, 0, 1.381)

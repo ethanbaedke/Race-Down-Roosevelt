@@ -63,8 +63,13 @@ func calculate_speed(delta:float) -> float:
 	
 	if (speed < top_speed):
 		speed = min(speed + (acceleration * delta), top_speed)
-	elif (!_in_air && speed > top_speed):
-		speed = max(speed - (((((MAX_WEIGHT + 1) - weight) * 0.25) + 0.75) * (speed - top_speed) * delta), top_speed)
+	elif (speed > top_speed):
+		var new_speed:float = max(speed - (((((MAX_WEIGHT + 1) - weight) * 0.25) + 0.75) * (speed - top_speed) * delta), top_speed)
+		if (_in_air):
+			# Slow down 1/4 the regular amount in the air.
+			speed = lerp(new_speed, speed, 0.75)
+		else:
+			speed = new_speed
 	RdrLogger.spam_log(self, racer.profile.name + " speed: " + str(speed))
 	
 	return speed
@@ -228,11 +233,12 @@ func _collision_area_entered(area: Area3D) -> void:
 #region Items
 
 const INVINCIBILITY_ITEM_TIME:float = 5.0
-const AI_ITEM_TIME:float = 5.0
-const AI_ITEM_MAX_SPEED_INCREASE:float = 25.0
-const AI_ITEM_ACCELERATION_INCREASE:float = 20.0
-const SPEED_ITEM_TIME:float = 5.0
-const SPEED_ITEM_TOP_SPEED_INCREASE:float = 25.0
+const INVINCIBILITY_MAX_SPEED_INCREASE:float = 10.0
+const AI_ITEM_TIME:float = 10.0
+const AI_ITEM_MAX_SPEED_INCREASE:float = 20.0
+const AI_ITEM_ACCELERATION_INCREASE:float = 80.0
+const SPEED_ITEM_TIME:float = 7.5
+const SPEED_ITEM_TOP_SPEED_INCREASE:float = 40.0
 const SPEED_ITEM_ACCELERATION_INCREASE:float = 20.0
 
 const MAX_GAS:int = 4
@@ -328,12 +334,14 @@ func _activate_boost_item() -> void:
 func _activate_invincibility_item() -> void:
 	
 	_invincible = true
+	top_speed += INVINCIBILITY_MAX_SPEED_INCREASE
 	_set_item_time(INVINCIBILITY_ITEM_TIME)
 	AudioSystem3D.play_source(_invincibility_item_activate_player)
 
 func _handle_invincibility_item_finished() -> void:
 	
 	_invincible = false
+	top_speed -= INVINCIBILITY_MAX_SPEED_INCREASE
 
 func _activate_ai_item() -> void:
 	

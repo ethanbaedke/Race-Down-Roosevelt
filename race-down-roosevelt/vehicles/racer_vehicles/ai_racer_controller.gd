@@ -31,7 +31,7 @@ func _get_raycast_distance() -> float:
 		Intelligence.LOW:
 			return 20.0
 		Intelligence.HIGH:
-			return 10.0
+			return 5.0
 		_:
 			return 20.0
 

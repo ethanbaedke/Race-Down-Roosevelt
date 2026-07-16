@@ -20,8 +20,8 @@ const ANIMATION_SPEED:float = 4
 @onready var _xb_item:Texture2D = preload("res://input_glyphs/xbox_x.png")
 @onready var _xb_horizontal:Texture2D = preload("res://input_glyphs/xbox_left_stick.png")
 
-@onready var _ns_jump:Texture2D = preload("res://input_glyphs/switch_a.png")
-@onready var _ns_item:Texture2D = preload("res://input_glyphs/switch_x.png")
+@onready var _ns_jump:Texture2D = preload("res://input_glyphs/switch_b.png")
+@onready var _ns_item:Texture2D = preload("res://input_glyphs/switch_y.png")
 @onready var _ns_horizontal:Texture2D = preload("res://input_glyphs/switch_left_stick.png")
 
 var _atlas_texture:AtlasTexture = self.texture

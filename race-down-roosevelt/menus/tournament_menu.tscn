@@ -3378,6 +3378,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 125
 text = "New Racer Wins!"
+horizontal_alignment = 1
 
 [node name="Control" type="Control" parent="MarginContainer" unique_id=753835822]
 layout_mode = 2

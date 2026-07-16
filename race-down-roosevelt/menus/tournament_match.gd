@@ -32,4 +32,4 @@ func _refresh_match() -> void:
 				_profile_containers[i].self_modulate = Color.DARK_RED
 
 	if (_match_data.is_up_next):
-		_match_panel.self_modulate = Color.GOLDENROD
+		(_match_panel.get_theme_stylebox("panel", "") as StyleBoxFlat).bg_color = Color.GOLDENROD

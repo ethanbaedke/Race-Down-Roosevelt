@@ -90,10 +90,12 @@ func _ready() -> void:
 		panel.profile_selected.connect(_on_profile_selected)
 		panel.profile_freed.connect(_on_profile_freed)
 	
+	# Grab profiles for selection. Since we will move them around, we need to copy the source arrays.
+	# We keep the copy shallow so the same profiles are referenced.
 	if (_game_state.active_tournament == null):
-		_available_profiles = _game_state.save_data.profiles
+		_available_profiles = _game_state.save_data.profiles.duplicate()
 	else:
-		_available_profiles = _game_state.active_tournament.get_next_match().get_all_profiles()
+		_available_profiles = _game_state.active_tournament.get_next_match().player_profiles.duplicate()
 	
 	_update_available_profiles_on_selection_panels()
 

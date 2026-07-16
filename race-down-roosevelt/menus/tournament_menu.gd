@@ -46,7 +46,7 @@ func _ready() -> void:
 		_top_label.text = "WINNER"
 		_bottom_button.text = "Return to Main Menu"
 		_bottom_button.pressed.connect(_on_return_to_menu_button_pressed)
-		_winner_label.text = game_state.active_tournament.winner.name + " WINS!"
+		_winner_label.text = game_state.active_tournament.winner.name.to_upper() + " WINS!"
 		_winner.visible = true
 		return
 	

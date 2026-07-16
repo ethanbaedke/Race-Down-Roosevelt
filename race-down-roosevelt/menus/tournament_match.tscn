@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://clipwumo1imar" path="res://menus/tournament_match.gd" id="1_opgqa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ymn7g"]
+resource_local_to_scene = true
 content_margin_left = 16.0
 content_margin_top = 8.0
 content_margin_right = 16.0

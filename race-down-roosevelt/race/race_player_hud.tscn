@@ -13,7 +13,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_blrmq"]
 font_size = 80
 font_color = Color(1, 0.6666667, 0, 1)
-outline_size = 10
+outline_size = 8
 outline_color = Color(1, 0.33333337, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blrmq"]
@@ -265,7 +265,6 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_bddx3"]
 resource_name = "base"
-length = 0.8
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -274,8 +273,8 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(50, -0.25, 0, 0, -100, -50, -0.083333336, 0, 0.083333336, 0, -150, 0, 100, 0, 0),
-"times": PackedFloat32Array(0, 0.5, 0.8)
+"points": PackedFloat32Array(0, -0.25, 0, 0, -100, -100, -0.083333336, 0, 0.083333336, 0, -200, 0, 100, 0, 0),
+"times": PackedFloat32Array(0, 0.6, 1)
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
@@ -285,8 +284,8 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(50, -0.25, 0, 0, -100, -50, -0.083333336, 0, 0.083333336, 0, -150, 0, 100, 0, 0),
-"times": PackedFloat32Array(0, 0.5, 0.8)
+"points": PackedFloat32Array(0, -0.25, 0, 0, -100, -100, -0.083333336, 0, 0.083333336, 0, -200, 0, 100, 0, 0),
+"times": PackedFloat32Array(0, 0.6, 1)
 }
 tracks/2/type = "bezier"
 tracks/2/imported = false
@@ -297,7 +296,7 @@ tracks/2/loop_wrap = true
 tracks/2/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.3, 1, 1, -0.083, 0, 0.083, 0, 0, -0.2, 1, 0, 0),
-"times": PackedFloat32Array(0, 0.5, 0.8)
+"times": PackedFloat32Array(0, 0.6, 1)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lox3y"]
@@ -318,13 +317,15 @@ script = ExtResource("1_7t3ce")
 [node name="ItemName" type="Label" parent="." unique_id=1862927704]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
+offset_left = -221.5
+offset_right = 221.5
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 80
 text = "ITEM NAME"

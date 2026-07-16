@@ -103,6 +103,18 @@ albedo_color = Color(0.48235294, 0.56078434, 0.6, 1)
 material = SubResource("StandardMaterial3D_xiy3d")
 size = Vector3(3, 0.2, 3)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_klqtr"]
+bg_color = Color(0.25, 0.25, 0.25, 1)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(0.75, 0.75, 0.75, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_xiy3d"]
 parameter_name = "DayNightBlend"
 hint = 1
@@ -1427,6 +1439,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="PanelContainer" type="PanelContainer" parent="Leaderboard/MarginContainer/VBoxContainer/1stPlace" unique_id=1395960389]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_klqtr")
 
 [node name="MarginContainer" type="MarginContainer" parent="Leaderboard/MarginContainer/VBoxContainer/1stPlace/PanelContainer" unique_id=1397889136]
 layout_mode = 2
@@ -1469,6 +1482,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="PanelContainer" type="PanelContainer" parent="Leaderboard/MarginContainer/VBoxContainer/2ndPlace" unique_id=1038302027]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_klqtr")
 
 [node name="MarginContainer" type="MarginContainer" parent="Leaderboard/MarginContainer/VBoxContainer/2ndPlace/PanelContainer" unique_id=833875799]
 layout_mode = 2
@@ -1511,6 +1525,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="PanelContainer" type="PanelContainer" parent="Leaderboard/MarginContainer/VBoxContainer/3rdPlace" unique_id=454635654]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_klqtr")
 
 [node name="MarginContainer" type="MarginContainer" parent="Leaderboard/MarginContainer/VBoxContainer/3rdPlace/PanelContainer" unique_id=548643255]
 layout_mode = 2
@@ -1553,6 +1568,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="PanelContainer" type="PanelContainer" parent="Leaderboard/MarginContainer/VBoxContainer/4thPlace" unique_id=409805308]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_klqtr")
 
 [node name="MarginContainer" type="MarginContainer" parent="Leaderboard/MarginContainer/VBoxContainer/4thPlace/PanelContainer" unique_id=759832052]
 layout_mode = 2

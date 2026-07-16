@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://ciuqv0jcsgfrk"]
+
+[ext_resource type="Script" uid="uid://xvmd2scb0ph0" path="res://race/race_progress_tracker.gd" id="1_uj66s"]
+[ext_resource type="Texture2D" uid="uid://bkju8odrm63cv" path="res://profiles/empty_profile_icon.png" id="2_ioti4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xip0v"]
+bg_color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="RaceProgressTracker" type="PanelContainer" unique_id=107964342]
+custom_minimum_size = Vector2(100, 10)
+theme_override_styles/panel = SubResource("StyleBoxFlat_xip0v")
+script = ExtResource("1_uj66s")
+
+[node name="Control" type="Control" parent="." unique_id=2073983338]
+layout_mode = 2
+
+[node name="OtherProgressTexture3" type="TextureRect" parent="Control" unique_id=610307261]
+texture_filter = 1
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_vertical = 2
+texture = ExtResource("2_ioti4")
+
+[node name="OtherProgressTexture2" type="TextureRect" parent="Control" unique_id=465669645]
+texture_filter = 1
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_vertical = 2
+texture = ExtResource("2_ioti4")
+
+[node name="OtherProgressTexture" type="TextureRect" parent="Control" unique_id=796017357]
+texture_filter = 1
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_vertical = 2
+texture = ExtResource("2_ioti4")
+
+[node name="MyProgressTexture" type="TextureRect" parent="Control" unique_id=673808131]
+texture_filter = 1
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_vertical = 2
+texture = ExtResource("2_ioti4")

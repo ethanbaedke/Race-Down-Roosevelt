@@ -18,26 +18,51 @@ var game_state:GameState = null
 @onready var _opening_anim_lights:Node3D = $OpeningAnimationPlayer/OpeningAnimLights
 
 var leaderboard_data:Array[RacerObject] = []
-var _race_in_progress:bool = false
-var _racer_vehicles:Array[RacerVehicle] = []
-var _finish_line_placed:bool = false
+var race_in_progress:bool = false
+var racer_vehicles:Array[RacerVehicle] = []
 
 # Returns all racer vehicles in order of 1st place -> 4th place.
 func get_racer_order() -> Array[RacerVehicle]:
 	
-	var _ordered_vehicles:Array[RacerVehicle] = _racer_vehicles.duplicate()
+	var _ordered_vehicles:Array[RacerVehicle] = racer_vehicles.duplicate()
 	_ordered_vehicles.sort_custom(func(v1:RacerVehicle, v2:RacerVehicle) -> bool:
 		return v1.position.z > v2.position.z)
 	return _ordered_vehicles
 
+# Returns the percent of the race the input vehicle has finished.
+func get_vehicle_progress(vehicle:RacerVehicle) -> float:
+	
+	# Position of the last placed row.
+	var most_recent_row:float = 0.0
+	if (_finish_line != null):
+		most_recent_row = _finish_line.global_position.z
+	else:
+		most_recent_row = _next_road_row_z - ROAD_ROW_SPACING
+	
+	# Distance from the vehicle to that row.
+	var vehicle_to_most_recent_row:float = most_recent_row - vehicle.global_position.z
+	
+	# Distance from that row to the end of the race.
+	var most_recent_row_to_end:float = 0.0
+	if (_finish_line == null):
+		most_recent_row_to_end = (RACE_LENGTH - _road_rows_placed) * ROAD_ROW_SPACING
+	
+	# Distance from the vehicle to the end of the race.
+	var vehicle_to_end:float = vehicle_to_most_recent_row + most_recent_row_to_end
+	
+	# Total distance of the race.
+	var total_dist:float = RACE_LENGTH * ROAD_ROW_SPACING
+	
+	return min(1.0 - (vehicle_to_end / total_dist), 1.0)
+
 # Expects at least one racer vehicle to exist.
 func _move_racers(delta:float) -> void:
 	
-	if (_racer_vehicles.size() == 0):
+	if (racer_vehicles.size() == 0):
 		RdrLogger.fatal(self, _move_racers.get_method() + " expects at least one racer vehicle to exist.")
 	
 	# Have each racer vehicle calculate its speed and move them accordingly.
-	for vehicle:RacerVehicle in _racer_vehicles:
+	for vehicle:RacerVehicle in racer_vehicles:
 		var speed:float = vehicle.calculate_speed(delta)
 		vehicle.position.z += speed * delta
 	
@@ -49,7 +74,7 @@ func _move_racers(delta:float) -> void:
 		var z_last:float = order[order.size() - 1].position.z
 		var diff:float = z_first - z_last
 		to_move_back = z_last + (diff * 0.5)
-	for vehicle:RacerVehicle in _racer_vehicles:
+	for vehicle:RacerVehicle in racer_vehicles:
 		vehicle.position.z -= to_move_back
 	
 	_move_world_back(to_move_back)
@@ -69,9 +94,9 @@ func _on_finish_line_crossed(racer:RacerVehicle) -> void:
 	leaderboard_data.append(racer.racer)
 	
 	# All but one racer have finished, append the missing racer and end the race.
-	if (leaderboard_data.size() == _racer_vehicles.size() - 1):
+	if (leaderboard_data.size() == racer_vehicles.size() - 1):
 		var last_place:RacerObject = null
-		for vehicle:RacerVehicle in _racer_vehicles:
+		for vehicle:RacerVehicle in racer_vehicles:
 			if (!leaderboard_data.has(vehicle.racer)):
 				last_place = vehicle.racer
 				break
@@ -85,17 +110,17 @@ func _on_finish_line_crossed(racer:RacerVehicle) -> void:
 	else:
 		# If all remaining racers are AI, add them to the leaderboard based on position and end the race.
 		var all_ai:bool = true
-		for vehicle:RacerVehicle in _racer_vehicles:
+		for vehicle:RacerVehicle in racer_vehicles:
 			if (!leaderboard_data.has(vehicle.racer) && vehicle.racer.device_index != -2):
 				all_ai = false
 				break
 		if (all_ai):
 			var remaining:Array[RacerVehicle] = []
-			for vehicle:RacerVehicle in _racer_vehicles:
+			for vehicle:RacerVehicle in racer_vehicles:
 				if (!leaderboard_data.has(vehicle.racer)):
 					# Keep remaining in order of distance to finish line while adding vehicles.
 					var i:int = 0
-					while (i < remaining.size() && remaining[i].position.z < vehicle.position.z):
+					while (i < remaining.size() && remaining[i].position.z > vehicle.position.z):
 						i += 1
 					remaining.insert(i, vehicle)
 			for vehicle:RacerVehicle in remaining:
@@ -142,6 +167,7 @@ var traffic_spawn_chance:float = 0.2
 var road_object_spawn_chance:float = 1.0
 
 var _finish_line_scene:PackedScene = preload("res://road/road_row_finish_line.tscn")
+var _finish_line:RoadRowFinishLine = null
 
 # Tracks how many road rows need to be placed before a lane is allowed to spawn another traffic vehicle.
 # Lanes with a value of 0 at their index are allowed to spawn a vehicle.
@@ -179,12 +205,12 @@ func _move_world_back(amount:float) -> void:
 # Expects traffic spawn cooldowns array to have size equal to the number of lanes.
 func _handle_traffic_vehicle_placement(z_pos:float) -> void:
 	
-	if (_finish_line_placed):
+	if (_finish_line != null):
 		return
 	if (_traffic_spawn_cooldowns.size() != NUM_LANES):
 		RdrLogger.fatal(self, _handle_traffic_vehicle_placement.get_method() + " expects traffic spawn cooldowns array to have size equal to number of lanes.")
 		return
-	if (!_race_in_progress):
+	if (!race_in_progress):
 		return
 	
 	# Spawn traffic.
@@ -206,7 +232,7 @@ func _handle_traffic_vehicle_placement(z_pos:float) -> void:
 
 func _handle_road_object_placement(z_pos:float) -> void:
 	
-	if (_finish_line_placed):
+	if (_finish_line != null):
 		return
 	
 	if (_road_object_spawned_last_row):
@@ -214,7 +240,7 @@ func _handle_road_object_placement(z_pos:float) -> void:
 		return
 	
 	# During setup, don't spawn objects in the first 5 rows.
-	if (!_race_in_progress && z_pos <= 30.0):
+	if (!race_in_progress && z_pos <= 30.0):
 		return
 	
 	if (randf_range(0.0, 1.0) > road_object_spawn_chance):
@@ -280,17 +306,15 @@ func _handle_road_placement() -> void:
 	
 func _place_finish_line() -> void:
 	
-	var finish:RoadRowFinishLine = _finish_line_scene.instantiate()
-	finish.racer_crossed.connect(_on_finish_line_crossed)
-	_road_parent.add_child(finish)
-	finish.position.z = _next_road_row_z
+	_finish_line = _finish_line_scene.instantiate()
+	_finish_line.racer_crossed.connect(_on_finish_line_crossed)
+	_road_parent.add_child(_finish_line)
+	_finish_line.position.z = _next_road_row_z
 	
 	# Disable any traffic vehicles beyond the finish line when it spawns.
 	traffic_vehicle_pool.run_cleanup(func (n:Node3D) -> bool:
-		return n.global_position.z > finish.global_position.z
+		return n.global_position.z > _finish_line.global_position.z
 	)
-	
-	_finish_line_placed = true
 
 func _handle_cleanup() -> void:
 	
@@ -440,9 +464,9 @@ func play_opening_animation() -> void:
 	
 	# Flip the nameplates on racers, since they will have been facing the opposite direction for the opening animation.
 	# Also set layers on the nameplates so they are invisible on a players own viewport.
-	for i:int in range(_racer_vehicles.size()):
-		_racer_vehicles[i].nameplate.flip()
-		_racer_vehicles[i].nameplate.set_player_number(i + 1)
+	for i:int in range(racer_vehicles.size()):
+		racer_vehicles[i].nameplate.flip()
+		racer_vehicles[i].nameplate.set_player_number(i + 1)
 	
 	# Shut off the lights that were being used in the opening animation.
 	_opening_anim_lights.visible = false
@@ -460,13 +484,13 @@ func play_opening_animation() -> void:
 func start_race() -> void:
 	
 	# Enable input for all racers
-	for vehicle:RacerVehicle in _racer_vehicles:
+	for vehicle:RacerVehicle in racer_vehicles:
 		vehicle.input_enabled = true
 		# Enable ai controllers for any ai racers.
 		if (vehicle.racer.device_index == -2):
 			vehicle.ai_controller.enabled = true
 	
-	_race_in_progress = true
+	race_in_progress = true
 	_race_theme_player.play()
 	_day_night_player.play("day_cycle")
 	RdrLogger.log(self, "Race started.")
@@ -478,7 +502,7 @@ func _setup_player_viewports() -> void:
 	
 	# Get a list of all player controlled vehicles.
 	var player_vehicles:Array[RacerVehicle] = []
-	for vehicle:RacerVehicle in _racer_vehicles:
+	for vehicle:RacerVehicle in racer_vehicles:
 		if (vehicle.racer.device_index == -2):
 			continue
 		player_vehicles.append(vehicle)
@@ -546,7 +570,7 @@ func _spawn_racer_vehicles() -> void:
 			racer.race = self
 			racer.racer = game_state.racer_objects[i]
 			racer.lane_number = (i + 1) * 2
-			_racer_vehicles.append(racer)
+			racer_vehicles.append(racer)
 			# If this is a player, register them as an audio listener.
 			if (game_state.racer_objects[i].device_index != -2):
 				AudioSystem3D.register_listener(racer)
@@ -617,7 +641,7 @@ func _spawn_racer_vehicles() -> void:
 
 func _physics_process(delta: float) -> void:
 
-	if (!_race_in_progress):
+	if (!race_in_progress):
 		return
 
 	_move_racers(delta)

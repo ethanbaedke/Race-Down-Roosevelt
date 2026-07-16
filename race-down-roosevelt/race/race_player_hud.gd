@@ -5,13 +5,18 @@ class_name RacePlayerHud extends Control
 @onready var _jump_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2/SizeFitterControl2/PanelContainer/JumpForeground
 @onready var _item_disabled_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer/SizeFitterControl/PanelContainer/ItemDisabledTexture
 @onready var _jump_disabled_texture_rect:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2/SizeFitterControl2/PanelContainer/JumpDisabledTexture
-@onready var _name_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/NameLabel
+@onready var _name_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/PanelContainer/NameLabel
 @onready var _item_input_glyph:InputGlyph = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer/Control/InputGlyph
 @onready var _jump_input_glyph:InputGlyph = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer2/Control/InputGlyph
 @onready var _item_animator:AnimationPlayer = $ItemAnimator
 @onready var _jump_animator:AnimationPlayer = $JumpAnimator
 @onready var _item_name:Label = $ItemName
 @onready var _item_name_animator:AnimationPlayer = $ItemNameAnimator
+@onready var _progress_tracker:RaceProgressTracker = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RaceProgressTracker
+
+func initialize_progress_tracker(race:Race, owning_vehicle:RacerVehicle) -> void:
+	
+	_progress_tracker.initialize(race, owning_vehicle)
 
 func display_item_name(data:ItemData) -> void:
 

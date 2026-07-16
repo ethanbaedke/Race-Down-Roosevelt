@@ -7,6 +7,7 @@ signal tournament_selected
 @onready var _single_race_button:Button = $MarginContainer/HBoxContainer/SingleRaceButton
 @onready var _manage_profiles_button:Button = $MarginContainer/HBoxContainer/ManageProfilesButton
 @onready var _tournament_button:Button = $MarginContainer/HBoxContainer/Tournament
+@onready var _quit_button:Button = $MarginContainer/HBoxContainer/Quit
 
 func _ready() -> void:
 	
@@ -18,3 +19,5 @@ func _ready() -> void:
 		manage_profiles_selected.emit())
 	_tournament_button.pressed.connect(func() -> void:
 		tournament_selected.emit())
+	_quit_button.pressed.connect(func() -> void:
+		get_tree().quit())

@@ -19,9 +19,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 500
-theme_override_constants/margin_top = 300
+theme_override_constants/margin_top = 200
 theme_override_constants/margin_right = 500
-theme_override_constants/margin_bottom = 300
+theme_override_constants/margin_bottom = 200
 
 [node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=376511534]
 layout_mode = 2
@@ -41,3 +41,8 @@ text = "Manage Profiles"
 layout_mode = 2
 size_flags_vertical = 3
 text = "Tournament"
+
+[node name="Quit" type="Button" parent="MarginContainer/HBoxContainer" unique_id=1041859723]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Exit to Desktop"

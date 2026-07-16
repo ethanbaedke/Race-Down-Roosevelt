@@ -6,7 +6,7 @@ signal ready_for_cleanup
 const NUM_LANES:int = 9
 const LANE_SPACING:float = 3.0
 # Number of road rows to be placed before the finish line.
-const RACE_LENGTH:int = 150
+const RACE_LENGTH:int = 1500
 const LEADERBOARD_DISPLAY_TIME:float = 5.0
 
 var game_state:GameState = null

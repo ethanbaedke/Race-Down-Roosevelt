@@ -10,7 +10,7 @@
 [ext_resource type="Material" uid="uid://8ala27u8ily3" path="res://vehicles/racer_vehicles/wheel_rim_material.tres" id="8_mjvf7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3fq0q"]
-size = Vector3(0.89, 0.634, 2.7939482)
+size = Vector3(0.89, 0.634, 0.699)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1qba"]
 albedo_color = Color(0.5, 0.5, 0.5, 1)
@@ -38,6 +38,7 @@ _vehicle_model = NodePath("CybertruckModel")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40587777, -0.025)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1414403268]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.047)
 shape = SubResource("BoxShape3D_3fq0q")
 
 [node name="CybertruckModel" parent="." unique_id=102932695 instance=ExtResource("3_3fq0q")]

@@ -66,6 +66,3 @@ transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-
 
 [node name="CybertruckModel" parent="." unique_id=834419295 instance=ExtResource("6_dt0ys")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 59.456, 0, 1.381)
-
-[node name="CybertruckModel2" parent="." unique_id=6402835 instance=ExtResource("6_dt0ys")]
-transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 59.456, 0, 1.381)

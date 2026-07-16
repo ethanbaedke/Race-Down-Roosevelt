@@ -10,7 +10,7 @@
 [ext_resource type="Material" uid="uid://8ala27u8ily3" path="res://vehicles/racer_vehicles/wheel_rim_material.tres" id="8_708g1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_by02n"]
-size = Vector3(0.89, 0.634, 2.313)
+size = Vector3(0.89, 0.634, 0.579)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o2dyf"]
 albedo_color = Color(0.9, 0.9, 0.9, 1)
@@ -31,6 +31,7 @@ _vehicle_model = NodePath("HondaCivicModel")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40587777, -0.025)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=223287468]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.867)
 shape = SubResource("BoxShape3D_by02n")
 
 [node name="HondaCivicModel" parent="." unique_id=1671646187 instance=ExtResource("2_ugfde")]

@@ -10,7 +10,7 @@
 [ext_resource type="Material" uid="uid://8ala27u8ily3" path="res://vehicles/racer_vehicles/wheel_rim_material.tres" id="7_ljqgc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ia38m"]
-size = Vector3(0.917, 0.685, 2.312)
+size = Vector3(0.917, 0.685, 0.578)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3n12c"]
 albedo_color = Color(0, 0.83333325, 1, 1)
@@ -31,6 +31,7 @@ _vehicle_model = NodePath("SubaruForesterModel")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5016584, -0.025)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=962662507]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.867)
 shape = SubResource("BoxShape3D_ia38m")
 
 [node name="SubaruForesterModel" parent="." unique_id=1946182605 instance=ExtResource("2_oduem")]

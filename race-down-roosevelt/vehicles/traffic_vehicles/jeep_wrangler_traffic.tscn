@@ -10,7 +10,7 @@
 [ext_resource type="Material" uid="uid://8ala27u8ily3" path="res://vehicles/racer_vehicles/wheel_rim_material.tres" id="8_3juc1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_meqtm"]
-size = Vector3(0.917, 0.754, 2.07)
+size = Vector3(0.917, 0.754, 0.518)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32son"]
 albedo_color = Color(1, 0.8333334, 0, 1)
@@ -31,6 +31,7 @@ _vehicle_model = NodePath("JeepWranglerModel")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.57163775, -0.015970374)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=228510056]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.776)
 shape = SubResource("BoxShape3D_meqtm")
 
 [node name="JeepWranglerModel" parent="." unique_id=128489693 instance=ExtResource("3_l4kve")]

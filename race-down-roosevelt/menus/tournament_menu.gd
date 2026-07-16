@@ -40,6 +40,8 @@ func _ready() -> void:
 		RdrLogger.fatal(self, _ready.get_method() + " expects an active tournament to be set on GameState.")
 		return
 	
+	_bottom_button.grab_focus()
+	
 	if (game_state.active_tournament.winner != null):
 		_top_label.text = "WINNER"
 		_bottom_button.text = "Return to Main Menu"

@@ -21,6 +21,9 @@ func _ready() -> void:
 			game_state.active_tournament = tournament_state
 			continue_tournament_requested.emit())
 		_list.add_child(button)
+	
+	if (_list.get_child_count() != 0):
+		(_list.get_child(0) as Button).grab_focus()
 
 func _unhandled_input(event: InputEvent) -> void:
 	

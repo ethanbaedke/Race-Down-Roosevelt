@@ -14,7 +14,9 @@ func _ready() -> void:
 	if (game_state == null):
 		RdrLogger.fatal(self, _ready.get_method() + " expects class to have a reference to GameState.")
 		return
-		
+	
+	_new_tournament_button.grab_focus()
+	
 	_new_tournament_button.pressed.connect(func() -> void:
 		new_tournament_requested.emit())
 	

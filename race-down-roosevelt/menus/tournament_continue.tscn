@@ -25,6 +25,7 @@ theme_override_constants/margin_bottom = 300
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer" unique_id=9520423]
 layout_mode = 2
+follow_focus = true
 
 [node name="SavedTournamentList" type="VBoxContainer" parent="MarginContainer/ScrollContainer" unique_id=1235228716]
 layout_mode = 2

@@ -41,6 +41,10 @@ func _go_back() -> void:
 
 func _on_profile_name_text_submitted(new_text:String) -> void:
 	
+	_exit_profile_name_editing()
+	
+func _exit_profile_name_editing() -> void:
+	
 	_profile_name.editable = false
 	_profile_copy.name = _profile_name.text
 	_change_name_button.grab_focus.call_deferred()
@@ -69,8 +73,14 @@ func _handle_icon_button_pressed(index:int) -> void:
 	_profile_copy.icon = sbt.texture
 	_update_profile_ui()
 	
+	_exit_icon_selection()
+
+func _exit_icon_selection() -> void:
+	
 	_icon_selection.visible = false
 	_default_options.visible = true
+	
+	_change_icon_button.grab_focus.call_deferred()
 
 func _on_save_changes_button_pressed() -> void:
 	
@@ -89,6 +99,8 @@ func _ready() -> void:
 	if (game_state == null):
 		RdrLogger.fatal(self, _ready.get_method() + " expects class to have a reference to GameState.")
 		return
+	
+	_change_name_button.grab_focus()
 	
 	_profile_name.text_submitted.connect(_on_profile_name_text_submitted)
 	_profile_name.focus_exited.connect(_on_profile_name_focus_exited)
@@ -115,11 +127,21 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if (event is InputEventKey):
 		if (event.keycode == KEY_ESCAPE):
-			_go_back()
+			if (_profile_name.editable):
+				_exit_profile_name_editing()
+			elif (_icon_selection.visible):
+				_exit_icon_selection()
+			else:
+				_go_back()
 			get_viewport().set_input_as_handled()
 			return
 	elif (event is InputEventJoypadButton):
 		if (event.button_index == JOY_BUTTON_B):
-			_go_back()
+			if (_profile_name.editable):
+				_exit_profile_name_editing()
+			elif (_icon_selection.visible):
+				_exit_icon_selection()
+			else:
+				_go_back()
 			get_viewport().set_input_as_handled()
 			return

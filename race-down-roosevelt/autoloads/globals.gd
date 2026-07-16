@@ -56,6 +56,42 @@ const PROFILE_ICONS:Array[CompressedTexture2D] = [
 	preload("res://vehicles/racer_vehicles/cybertruck_data.tres")
 ]
 
+@onready var _place_1_item_pool:Array[ItemData] = [
+	preload("res://items/boost_item_data.tres"),
+	preload("res://items/invincibility_item_data.tres"),
+]
+
+@onready var _place_2_item_pool:Array[ItemData] = [
+	preload("res://items/boost_item_data.tres"),
+	preload("res://items/invincibility_item_data.tres"),
+	preload("res://items/speed_item_data.tres"),
+]
+
+@onready var _place_3_item_pool:Array[ItemData] = [
+	preload("res://items/invincibility_item_data.tres"),
+	preload("res://items/speed_item_data.tres"),
+	preload("res://items/ai_item_data.tres"),
+]
+
+@onready var _place_4_item_pool:Array[ItemData] = [
+	preload("res://items/speed_item_data.tres"),
+	preload("res://items/ai_item_data.tres"),
+]
+
+func get_item_for_place(place:int) -> ItemData:
+	
+	match (place):
+		0:
+			return _place_1_item_pool.pick_random()
+		1:
+			return _place_2_item_pool.pick_random()
+		2:
+			return _place_3_item_pool.pick_random()
+		3:
+			return _place_4_item_pool.pick_random()
+		_:
+			return _place_1_item_pool.pick_random()
+
 func device_type_from_index(device_index:int) -> DeviceType:
 	
 	match (device_index):

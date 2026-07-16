@@ -6,7 +6,7 @@ signal ready_for_cleanup
 const NUM_LANES:int = 9
 const LANE_SPACING:float = 3.0
 # Number of road rows to be placed before the finish line.
-const RACE_LENGTH:int = 150
+const RACE_LENGTH:int = 1500
 const LEADERBOARD_DISPLAY_TIME:float = 5.0
 
 var game_state:GameState = null
@@ -54,6 +54,14 @@ func get_vehicle_progress(vehicle:RacerVehicle) -> float:
 	var total_dist:float = RACE_LENGTH * ROAD_ROW_SPACING
 	
 	return min(1.0 - (vehicle_to_end / total_dist), 1.0)
+
+func get_vehicle_place(vehicle:RacerVehicle) -> int:
+	
+	var order:Array[RacerVehicle] = get_racer_order()
+	var place:int = order.find(vehicle)
+	if (place == -1):
+		place = 0
+	return place
 
 # Expects at least one racer vehicle to exist.
 func _move_racers(delta:float) -> void:

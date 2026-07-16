@@ -5,17 +5,11 @@ class_name Item extends Node3D
 @onready var _animation_player:AnimationPlayer = $AnimationPlayer
 @onready var _pickup_player:AudioStreamPlayer3D = $PickupPlayer
 
-var item_data:ItemData = null
-
 func _on_collision_area_entered(area:Area3D) -> void:
-
-	if (item_data == null):
-		RdrLogger.error(self, "Item hit but item data is null.")
-		return
 
 	var parent:Node3D = area.get_parent()
 	if (parent is RacerVehicle):
-		var result:bool = parent.try_give_item(item_data)
+		var result:bool = parent.try_give_item()
 		if (result):
 			_collision_shape.disabled = true
 			parent.give_world_pickup(self)

@@ -256,11 +256,13 @@ var _jump_initial_y:float = 0.0
 var _current_jump_time:float = 0.0
 var _in_air:bool = false
 
-func try_give_item(data:ItemData) -> bool:
+func try_give_item() -> bool:
 	
 	if (_held_item != null):
 		return false
-		
+	
+	var current_place:int = race.get_vehicle_place(self)
+	var data:ItemData = Globals.get_item_for_place(current_place)
 	_held_item = data
 	if (_hud != null):
 		_hud.update_item(data)

@@ -206,6 +206,6 @@ libraries/ = SubResource("AnimationLibrary_mgww7")
 
 [node name="PickupPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1033683200]
 stream = ExtResource("3_ax7uy")
-max_db = -4.0
+max_db = -5.0
 
 [editable path="GasCanModel"]

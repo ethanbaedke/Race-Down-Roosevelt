@@ -32,6 +32,7 @@ gdscript/warnings/untyped_declaration=2
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
+window/stretch/mode="canvas_items"
 
 [input]
 
@@ -66,3 +67,4 @@ ui_cancel={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+anti_aliasing/quality/use_taa=true

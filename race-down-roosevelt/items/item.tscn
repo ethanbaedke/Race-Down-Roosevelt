@@ -150,6 +150,6 @@ libraries/ = SubResource("AnimationLibrary_buahv")
 
 [node name="PickupPlayer" type="AudioStreamPlayer3D" parent="." unique_id=796006757]
 stream = ExtResource("3_k7rtb")
-max_db = -12.0
+max_db = -14.0
 
 [editable path="UnknownItemModel"]

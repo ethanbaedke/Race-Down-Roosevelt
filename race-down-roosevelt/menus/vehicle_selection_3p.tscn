@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://40efplcfedui" path="res://vehicles/subaru_forester.glb" id="4_eggol"]
 [ext_resource type="PackedScene" uid="uid://5525td7tv2km" path="res://vehicles/jeep_wrangler.glb" id="5_eggol"]
 [ext_resource type="PackedScene" uid="uid://cag4gxseexopt" path="res://vehicles/cybertruck.glb" id="6_dt0ys"]
+[ext_resource type="PackedScene" uid="uid://cmlv6mquobb1t" path="res://vehicles/mini_cooper.glb" id="7_11hoi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yiuc0"]
 bg_color = Color(0.5, 0.5, 0.5, 1)
@@ -66,3 +67,6 @@ transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-
 
 [node name="CybertruckModel" parent="." unique_id=834419295 instance=ExtResource("6_dt0ys")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 59.456, 0, 1.381)
+
+[node name="MiniCooperModel" parent="." unique_id=2123239534 instance=ExtResource("7_11hoi")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 79.545, 0, 0.974)

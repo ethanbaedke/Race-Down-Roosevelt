@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RacerVehicleData" format=3 uid="uid://b2ovjpit5os1a"]
+
+[ext_resource type="PackedScene" uid="uid://4l7117xrvqka" path="res://vehicles/racer_vehicles/mini_cooper.tscn" id="1_cdhe2"]
+[ext_resource type="Script" uid="uid://cng61qyitlqib" path="res://vehicles/racer_vehicle_data.gd" id="2_uvdjl"]
+
+[resource]
+script = ExtResource("2_uvdjl")
+scene = ExtResource("1_cdhe2")
+top_speed = 29
+acceleration = 15
+durability = 2
+weight = 1
+metadata/_custom_type_script = "uid://cng61qyitlqib"

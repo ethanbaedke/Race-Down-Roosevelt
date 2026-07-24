@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://8t5pwnixghwp" path="res://road/boost_pad_row.tscn" id="5_g0dry"]
 [ext_resource type="PackedScene" uid="uid://kavq5hucvvej" path="res://vehicles/traffic_vehicles/jeep_wrangler_traffic.tscn" id="5_vhq2c"]
 [ext_resource type="PackedScene" uid="uid://citqde56c7r8t" path="res://vehicles/traffic_vehicles/cybertruck_traffic.tscn" id="6_xt8ap"]
+[ext_resource type="PackedScene" uid="uid://cv2v2aad7xrcy" path="res://vehicles/traffic_vehicles/mini_cooper_traffic.tscn" id="7_klqtr"]
 [ext_resource type="Script" uid="uid://7psf6ks7j2k4" path="res://race/leaderboard.gd" id="8_c8320"]
 [ext_resource type="PackedScene" uid="uid://ukdsd8n4p20e" path="res://road/item_row.tscn" id="8_vhq2c"]
 [ext_resource type="PackedScene" uid="uid://b3mpgd28w21q2" path="res://road/gas_row.tscn" id="9_cyu3u"]
@@ -39,9 +40,14 @@ script = ExtResource("2_c8320")
 scene = ExtResource("6_xt8ap")
 metadata/_custom_type_script = "uid://clyn63xl4tio5"
 
+[sub_resource type="Resource" id="Resource_g63gw"]
+script = ExtResource("2_c8320")
+scene = ExtResource("7_klqtr")
+metadata/_custom_type_script = "uid://clyn63xl4tio5"
+
 [sub_resource type="Resource" id="Resource_cyu3u"]
 script = ExtResource("4_01boi")
-entries = Array[ExtResource("2_c8320")]([SubResource("Resource_g0dry"), SubResource("Resource_c8320"), SubResource("Resource_01boi"), SubResource("Resource_yiuc0")])
+entries = Array[ExtResource("2_c8320")]([SubResource("Resource_g0dry"), SubResource("Resource_c8320"), SubResource("Resource_01boi"), SubResource("Resource_yiuc0"), SubResource("Resource_g63gw")])
 debug_name = "Traffic Vehicle"
 metadata/_custom_type_script = "uid://bonfni7lag8hs"
 
@@ -323,7 +329,7 @@ shader_parameter/MoonDirection = Vector3(-0.25, -0.25, 1)
 [sub_resource type="Sky" id="Sky_g63gw"]
 sky_material = SubResource("ShaderMaterial_klqtr")
 
-[sub_resource type="Environment" id="Environment_yiuc0"]
+[sub_resource type="Environment" id="Environment_mudrt"]
 resource_local_to_scene = true
 background_mode = 2
 sky = SubResource("Sky_g63gw")
@@ -1604,7 +1610,7 @@ theme_override_font_sizes/font_size = 64
 text = "Name"
 
 [node name="WorldEnvironment" parent="." unique_id=849873186 instance=ExtResource("14_yiuc0")]
-environment = SubResource("Environment_yiuc0")
+environment = SubResource("Environment_mudrt")
 
 [node name="Sunlight" type="DirectionalLight3D" parent="." unique_id=327752361]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)

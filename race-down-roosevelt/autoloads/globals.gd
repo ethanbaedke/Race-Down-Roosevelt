@@ -53,7 +53,8 @@ const PROFILE_ICONS:Array[CompressedTexture2D] = [
 	preload("res://vehicles/racer_vehicles/honda_civic_data.tres"),
 	preload("res://vehicles/racer_vehicles/subaru_forester_data.tres"),
 	preload("res://vehicles/racer_vehicles/jeep_wrangler_data.tres"),
-	preload("res://vehicles/racer_vehicles/cybertruck_data.tres")
+	preload("res://vehicles/racer_vehicles/cybertruck_data.tres"),
+	preload("res://vehicles/racer_vehicles/mini_cooper_data.tres")
 ]
 
 @onready var _place_1_item_pool:Array[ItemData] = [

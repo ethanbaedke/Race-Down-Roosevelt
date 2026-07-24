@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://cv2v2aad7xrcy"]
+
+[ext_resource type="Script" uid="uid://bqi1740ikajnm" path="res://vehicles/traffic_vehicles/traffic_vehicle.gd" id="1_tppm5"]
+[ext_resource type="PackedScene" uid="uid://cmlv6mquobb1t" path="res://vehicles/mini_cooper.glb" id="2_xaj6p"]
+[ext_resource type="Material" uid="uid://bqmd5s7ioykar" path="res://vehicles/racer_vehicles/headlight_material.tres" id="3_y0bfo"]
+[ext_resource type="Material" uid="uid://c2abq63w460su" path="res://vehicles/racer_vehicles/glass_material.tres" id="4_pxu2k"]
+[ext_resource type="Material" uid="uid://cqhl8e7t4qblg" path="res://vehicles/racer_vehicles/taillight_material.tres" id="5_jhxwx"]
+[ext_resource type="Material" uid="uid://d112u1couco11" path="res://vehicles/racer_vehicles/wheel_rubber_material.tres" id="6_v4f7m"]
+[ext_resource type="Material" uid="uid://8ala27u8ily3" path="res://vehicles/racer_vehicles/wheel_rim_material.tres" id="7_cdawo"]
+[ext_resource type="AudioStream" uid="uid://b8b8kfajvkt86" path="res://sound_effects/crash.wav" id="8_trojq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xaj6p"]
+size = Vector3(0.917, 0.637, 0.488)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tppm5"]
+albedo_color = Color(0, 0, 1, 1)
+metallic = 0.6
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4wbn3"]
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+metallic = 0.5
+roughness = 0.6
+
+[node name="MiniCooperTraffic" type="Node3D" unique_id=1093534000 node_paths=PackedStringArray("_vehicle_model")]
+script = ExtResource("1_tppm5")
+speed = 8
+_vehicle_model = NodePath("MiniCooperModel")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1670068600]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.408, -0.031)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=415061852]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.732)
+shape = SubResource("BoxShape3D_xaj6p")
+
+[node name="MiniCooperModel" parent="." unique_id=2123239534 instance=ExtResource("2_xaj6p")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.45453215, 0, 0.9742204)
+
+[node name="Car" parent="MiniCooperModel" index="0" unique_id=1644405789]
+surface_material_override/0 = SubResource("StandardMaterial3D_tppm5")
+surface_material_override/1 = SubResource("StandardMaterial3D_4wbn3")
+surface_material_override/2 = ExtResource("4_pxu2k")
+surface_material_override/3 = ExtResource("3_y0bfo")
+surface_material_override/4 = ExtResource("5_jhxwx")
+
+[node name="Wheel" parent="MiniCooperModel" index="1" unique_id=342028010]
+surface_material_override/0 = ExtResource("6_v4f7m")
+surface_material_override/1 = ExtResource("7_cdawo")
+
+[node name="Wheel_001" parent="MiniCooperModel" index="2" unique_id=1946378550]
+surface_material_override/0 = ExtResource("6_v4f7m")
+surface_material_override/1 = ExtResource("7_cdawo")
+
+[node name="Wheel_002" parent="MiniCooperModel" index="3" unique_id=1451063727]
+surface_material_override/0 = ExtResource("6_v4f7m")
+surface_material_override/1 = ExtResource("7_cdawo")
+
+[node name="Wheel_003" parent="MiniCooperModel" index="4" unique_id=2117684311]
+surface_material_override/0 = ExtResource("6_v4f7m")
+surface_material_override/1 = ExtResource("7_cdawo")
+
+[node name="ExplodePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1741418440]
+stream = ExtResource("8_trojq")
+max_db = -2.0
+
+[editable path="MiniCooperModel"]

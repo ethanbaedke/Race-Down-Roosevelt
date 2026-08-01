@@ -564,6 +564,7 @@ func _setup_player_viewports() -> void:
 		controller.camera = cameras[i]
 		player_vehicles[i].set_camera_controller(controller)
 		player_vehicles[i].set_hud(huds[i])
+		player_vehicles[i].set_camera(cameras[i])
 		
 	RdrLogger.log(self, "Player viewport setup complete.")
 

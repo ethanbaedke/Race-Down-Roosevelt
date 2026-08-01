@@ -8,7 +8,10 @@ var camera:Camera3D = null
 func _sync_camera_position_and_orientation() -> void:
 	
 	camera.global_position = self.global_position
-	camera.global_rotation = self.global_rotation
+	camera.global_rotation.x = self.global_rotation.x
+	camera.global_rotation.y = self.global_rotation.y
+	# Turned off to support camera shake.
+	#camera.global_rotation.z = self.global_rotation.z
 
 func _ready() -> void:
 	

@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://8d08w1au8lsc" path="res://music/race_theme.wav" id="11_hkrbr"]
 [ext_resource type="AudioStream" uid="uid://bkt6k1nkh8j76" path="res://music/race_intro.wav" id="12_0lns8"]
 [ext_resource type="AudioStream" uid="uid://cnojsshdw3m23" path="res://sound_effects/countdown_low.wav" id="12_xiy3d"]
+[ext_resource type="Script" uid="uid://ljrpr08pxgd8" path="res://race/player_camera.gd" id="13_g63gw"]
 [ext_resource type="AudioStream" uid="uid://bvtm4cbq20pwu" path="res://sound_effects/countdown_high.wav" id="13_ru474"]
 [ext_resource type="PackedScene" uid="uid://cu32ofcaom0gu" path="res://race/race_environment.tscn" id="14_yiuc0"]
 
@@ -1167,6 +1168,7 @@ render_target_update_mode = 0
 
 [node name="P1Cam1p" type="Camera3D" parent="ViewportSetup1p/P1SubViewportContainer/SubViewport" unique_id=368035240]
 cull_mask = 1048547
+script = ExtResource("13_g63gw")
 
 [node name="RacePlayerHud" parent="ViewportSetup1p/P1SubViewportContainer/SubViewport" unique_id=365328423 instance=ExtResource("10_hkrbr")]
 
@@ -1203,6 +1205,7 @@ render_target_update_mode = 0
 
 [node name="P1Cam2p" type="Camera3D" parent="ViewportSetup2p/SplitContainer/P1SubViewportContainer/SubViewport" unique_id=1614703854]
 cull_mask = 1048547
+script = ExtResource("13_g63gw")
 
 [node name="RacePlayerHud" parent="ViewportSetup2p/SplitContainer/P1SubViewportContainer/SubViewport" unique_id=1563171209 instance=ExtResource("10_hkrbr")]
 
@@ -1218,6 +1221,7 @@ render_target_update_mode = 0
 
 [node name="P2Cam2p" type="Camera3D" parent="ViewportSetup2p/SplitContainer/P2SubViewportContainer/SubViewport" unique_id=950310841]
 cull_mask = 1048549
+script = ExtResource("13_g63gw")
 
 [node name="RacePlayerHud" parent="ViewportSetup2p/SplitContainer/P2SubViewportContainer/SubViewport" unique_id=244374586 instance=ExtResource("10_hkrbr")]
 
@@ -1254,6 +1258,7 @@ render_target_update_mode = 0
 
 [node name="P1Cam3p" type="Camera3D" parent="ViewportSetup3p/SplitContainer/P1SubViewportContainer/SubViewport" unique_id=279638826]
 cull_mask = 1048547
+script = ExtResource("13_g63gw")
 
 [node name="RacePlayerHud" parent="ViewportSetup3p/SplitContainer/P1SubViewportContainer/SubViewport" unique_id=2011513084 instance=ExtResource("10_hkrbr")]
 
@@ -1277,6 +1282,7 @@ render_target_update_mode = 0
 
 [node name="P2Cam3p" type="Camera3D" parent="ViewportSetup3p/SplitContainer/SplitContainer/P2SubViewportContainer/SubViewport" unique_id=1010377993]
 cull_mask = 1048549
+script = ExtResource("13_g63gw")
 
 [node name="RacePlayerHud" parent="ViewportSetup3p/SplitContainer/SplitContainer/P2SubViewportContainer/SubViewport" unique_id=859023197 instance=ExtResource("10_hkrbr")]
 
@@ -1293,6 +1299,7 @@ render_target_update_mode = 0
 
 [node name="P3Cam3p" type="Camera3D" parent="ViewportSetup3p/SplitContainer/SplitContainer/P3SubViewportContainer/SubViewport" unique_id=484191211]
 cull_mask = 1048553
+script = ExtResource("13_g63gw")
 
 [node name="RacePlayerHud" parent="ViewportSetup3p/SplitContainer/SplitContainer/P3SubViewportContainer/SubViewport" unique_id=1748070139 instance=ExtResource("10_hkrbr")]
 
@@ -1339,6 +1346,7 @@ render_target_update_mode = 0
 
 [node name="P1Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerTop/P1SubViewportContainer/SubViewport" unique_id=1962248314]
 cull_mask = 1048547
+script = ExtResource("13_g63gw")
 
 [node name="RacePlayerHud" parent="ViewportSetup4p/SplitContainer/SplitContainerTop/P1SubViewportContainer/SubViewport" unique_id=2047375211 instance=ExtResource("10_hkrbr")]
 
@@ -1355,6 +1363,7 @@ render_target_update_mode = 0
 
 [node name="P2Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerTop/P2SubViewportContainer/SubViewport" unique_id=14345126]
 cull_mask = 1048549
+script = ExtResource("13_g63gw")
 
 [node name="RacePlayerHud" parent="ViewportSetup4p/SplitContainer/SplitContainerTop/P2SubViewportContainer/SubViewport" unique_id=1649782683 instance=ExtResource("10_hkrbr")]
 
@@ -1378,6 +1387,7 @@ render_target_update_mode = 0
 
 [node name="P3Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P3SubViewportContainer/SubViewport" unique_id=1996853780]
 cull_mask = 1048553
+script = ExtResource("13_g63gw")
 
 [node name="RacePlayerHud" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P3SubViewportContainer/SubViewport" unique_id=1980372517 instance=ExtResource("10_hkrbr")]
 
@@ -1394,6 +1404,7 @@ render_target_update_mode = 0
 
 [node name="P4Cam4p" type="Camera3D" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P4SubViewportContainer/SubViewport" unique_id=1975362]
 cull_mask = 1048561
+script = ExtResource("13_g63gw")
 
 [node name="RacePlayerHud" parent="ViewportSetup4p/SplitContainer/SplitContainerBottom/P4SubViewportContainer/SubViewport" unique_id=2142799666 instance=ExtResource("10_hkrbr")]
 

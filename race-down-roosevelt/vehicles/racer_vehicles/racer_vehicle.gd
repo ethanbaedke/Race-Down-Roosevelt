@@ -35,6 +35,7 @@ var nameplate:Nameplate = null
 var item_plate:ItemPlate = null
 
 var _hud:RacePlayerHud = null
+var cam:PlayerCamera = null
 
 # Reparents a world pickup above this object so it moves with it during its pickup animation.
 func give_world_pickup(pickup:Node3D) -> void:
@@ -54,6 +55,10 @@ func set_hud(hud:RacePlayerHud) -> void:
 	_hud.update_name(racer.profile.name)
 	_hud.update_device_type(Globals.device_type_from_index(racer.device_index))
 	_hud.initialize_progress_tracker(race, self)
+
+func set_camera(cam:PlayerCamera) -> void:
+	
+	self.cam = cam
 
 # Important for the camera initializing at the correct position.
 func set_initial_position(global_pos:Vector3) -> void:
@@ -79,6 +84,8 @@ func calculate_speed(delta:float) -> float:
 func boost(force:float) -> void:
 	
 	speed += force
+	if (cam != null):
+		cam.add_trauma(force / 90.0)
 
 func try_switch_lanes(dir:int) -> bool:
 	
@@ -197,6 +204,11 @@ func _handle_racer_bump(other:RacerVehicle) -> void:
 		
 	self.speed = new_s1
 	other.speed = new_s2
+	
+	if (self.cam != null):
+		self.cam.add_trauma(0.5)
+	if (other.cam != null):
+		other.cam.add_trauma(0.5)
 
 func _handle_traffic_vehicle_hit(vehicle:TrafficVehicle) -> void:
 	
@@ -214,6 +226,8 @@ func _handle_traffic_vehicle_hit(vehicle:TrafficVehicle) -> void:
 		speed = speed * ((durability as float) / (MAX_DURABILITY * 1.5))
 		# Spin the racers nameplate.
 		nameplate.spin()
+		if (cam != null):
+			cam.add_trauma(1.0)
 
 func _collision_area_entered(area: Area3D) -> void:
 	

@@ -9,7 +9,9 @@
 [ext_resource type="Material" uid="uid://d112u1couco11" path="res://vehicles/racer_vehicles/wheel_rubber_material.tres" id="7_p6hkl"]
 [ext_resource type="Material" uid="uid://8ala27u8ily3" path="res://vehicles/racer_vehicles/wheel_rim_material.tres" id="8_fukp8"]
 [ext_resource type="PackedScene" uid="uid://d10eiktcruj47" path="res://vehicles/racer_vehicles/nameplate.tscn" id="9_q2t3u"]
+[ext_resource type="PackedScene" uid="uid://dvmbdc5ap2jlm" path="res://vehicles/racer_vehicles/item_plate.tscn" id="10_4vi1x"]
 [ext_resource type="PackedScene" uid="uid://dcf6mvjwffjpe" path="res://vehicles/racer_vehicles/ai_racer_controller.tscn" id="10_ne6vy"]
+[ext_resource type="Script" uid="uid://dsniftr7tc0wm" path="res://vehicles/racer_vehicles/item_plate.gd" id="11_3jsfj"]
 [ext_resource type="AudioStream" uid="uid://ddlj6v8eofqxe" path="res://sound_effects/ai_item_activate.wav" id="11_kl74g"]
 [ext_resource type="AudioStream" uid="uid://cjwktwn57enty" path="res://sound_effects/invincibility_item_activate.wav" id="12_i677r"]
 [ext_resource type="AudioStream" uid="uid://dd061nab8s5ws" path="res://sound_effects/speed_item_activate.wav" id="13_bc4rv"]
@@ -43,31 +45,35 @@ shape = SubResource("BoxShape3D_meqtm")
 [node name="MiniCooperModel" parent="VehicleModelController" unique_id=2123239534 instance=ExtResource("3_3bq1v")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.45453215, 0, 0.9742204)
 
-[node name="Car" parent="VehicleModelController/MiniCooperModel" index="0" unique_id=1644405789]
+[node name="Car" parent="VehicleModelController/MiniCooperModel" index="0" unique_id=1415365515]
 surface_material_override/0 = SubResource("StandardMaterial3D_3bq1v")
 surface_material_override/1 = SubResource("StandardMaterial3D_pbf1d")
 surface_material_override/2 = ExtResource("5_ebowk")
 surface_material_override/3 = ExtResource("4_3jsfj")
 surface_material_override/4 = ExtResource("6_b327g")
 
-[node name="Wheel" parent="VehicleModelController/MiniCooperModel" index="1" unique_id=342028010]
+[node name="Wheel" parent="VehicleModelController/MiniCooperModel" index="1" unique_id=1782308939]
 surface_material_override/0 = ExtResource("7_p6hkl")
 surface_material_override/1 = ExtResource("8_fukp8")
 
-[node name="Wheel_001" parent="VehicleModelController/MiniCooperModel" index="2" unique_id=1946378550]
+[node name="Wheel_001" parent="VehicleModelController/MiniCooperModel" index="2" unique_id=1151417688]
 surface_material_override/0 = ExtResource("7_p6hkl")
 surface_material_override/1 = ExtResource("8_fukp8")
 
-[node name="Wheel_002" parent="VehicleModelController/MiniCooperModel" index="3" unique_id=1451063727]
+[node name="Wheel_002" parent="VehicleModelController/MiniCooperModel" index="3" unique_id=1308446032]
 surface_material_override/0 = ExtResource("7_p6hkl")
 surface_material_override/1 = ExtResource("8_fukp8")
 
-[node name="Wheel_003" parent="VehicleModelController/MiniCooperModel" index="4" unique_id=2117684311]
+[node name="Wheel_003" parent="VehicleModelController/MiniCooperModel" index="4" unique_id=1298577262]
 surface_material_override/0 = ExtResource("7_p6hkl")
 surface_material_override/1 = ExtResource("8_fukp8")
 
 [node name="Nameplate" parent="VehicleModelController" unique_id=932594312 instance=ExtResource("9_q2t3u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.181, 0)
+
+[node name="ItemPlate" parent="VehicleModelController" unique_id=1552830014 instance=ExtResource("10_4vi1x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.181, 0)
+script = ExtResource("11_3jsfj")
 
 [node name="AiRacerController" parent="." unique_id=590700889 instance=ExtResource("10_ne6vy")]
 

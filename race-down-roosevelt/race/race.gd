@@ -450,6 +450,11 @@ func setup_race() -> void:
 	# We also do one round of cleanup since it handles moving the road back.
 	_handle_cleanup()
 	
+	# Set layers on item plates so they are only visible to their owning players.
+	for i:int in range(racer_vehicles.size()):
+		racer_vehicles[i].item_plate.set_player_number(i + 1)
+		racer_vehicles[i].item_plate.set_item(null)
+	
 	RdrLogger.log(self, "Race setup complete.")
 
 func play_opening_animation() -> void:

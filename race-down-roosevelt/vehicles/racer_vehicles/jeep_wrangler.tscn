@@ -11,6 +11,8 @@
 [ext_resource type="Material" uid="uid://cqhl8e7t4qblg" path="res://vehicles/racer_vehicles/taillight_material.tres" id="6_unmob"]
 [ext_resource type="Material" uid="uid://d112u1couco11" path="res://vehicles/racer_vehicles/wheel_rubber_material.tres" id="7_akw67"]
 [ext_resource type="Material" uid="uid://8ala27u8ily3" path="res://vehicles/racer_vehicles/wheel_rim_material.tres" id="8_rf8rf"]
+[ext_resource type="PackedScene" uid="uid://dvmbdc5ap2jlm" path="res://vehicles/racer_vehicles/item_plate.tscn" id="10_4bg7n"]
+[ext_resource type="Script" uid="uid://dsniftr7tc0wm" path="res://vehicles/racer_vehicles/item_plate.gd" id="11_7vl7e"]
 [ext_resource type="AudioStream" uid="uid://ddlj6v8eofqxe" path="res://sound_effects/ai_item_activate.wav" id="11_20x6q"]
 [ext_resource type="AudioStream" uid="uid://cjwktwn57enty" path="res://sound_effects/invincibility_item_activate.wav" id="12_gu0aq"]
 [ext_resource type="AudioStream" uid="uid://dd061nab8s5ws" path="res://sound_effects/speed_item_activate.wav" id="13_beays"]
@@ -72,6 +74,10 @@ surface_material_override/1 = ExtResource("8_rf8rf")
 
 [node name="Nameplate" parent="VehicleModelController" unique_id=932594312 instance=ExtResource("6_r2w1j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.181, 0)
+
+[node name="ItemPlate" parent="VehicleModelController" unique_id=1224010143 instance=ExtResource("10_4bg7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.181, 0)
+script = ExtResource("11_7vl7e")
 
 [node name="AiRacerController" parent="." unique_id=590700889 instance=ExtResource("4_8h12p")]
 

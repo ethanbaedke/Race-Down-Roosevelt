@@ -29,8 +29,10 @@ var weight:float = 0.0
 
 var speed:float = 0
 var input_enabled:bool = false
-# Set on ready since we have to search the tree for it.
+
+# These are set on ready since we have to search the tree for them.
 var nameplate:Nameplate = null
+var item_plate:ItemPlate = null
 
 var _hud:RacePlayerHud = null
 
@@ -272,6 +274,7 @@ func try_give_item() -> bool:
 	_held_item = data
 	if (_hud != null):
 		_hud.update_item(data)
+	item_plate.set_item(data)
 	return true
 	
 func try_use_item() -> bool:
@@ -436,6 +439,7 @@ func _ready() -> void:
 	
 	nameplate = _model_controller.find_child("Nameplate", true, false)
 	nameplate.set_display_name(racer.profile.name)
+	item_plate = _model_controller.find_child("ItemPlate", true, false)
 
 func _process(delta: float) -> void:
 	
@@ -444,6 +448,7 @@ func _process(delta: float) -> void:
 		if (_current_item_time <= 0):
 			_current_item_time = 0
 			_handle_timed_item_finished()
+		item_plate.update_item_time(_current_item_time)
 	
 	if (_current_jump_time > 0):
 		_current_jump_time -= delta

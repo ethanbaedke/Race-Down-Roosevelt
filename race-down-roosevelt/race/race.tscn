@@ -87,27 +87,27 @@ bg_color = Color(0.5, 0.5, 0.5, 1)
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c8320"]
 load_path = "res://.godot/imported/road_straight.png-d12ae04bb66e2d3dcf9149b3edf0378b.s3tc.ctex"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhq2c"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mudrt"]
 albedo_texture = SubResource("CompressedTexture2D_c8320")
 uv1_scale = Vector3(9, 1, 1)
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_01boi"]
-material = SubResource("StandardMaterial3D_vhq2c")
+material = SubResource("StandardMaterial3D_mudrt")
 size = Vector2(27, 3)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ru474"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqwes"]
 albedo_color = Color(0.48235294, 0.56078434, 0.6, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_iqn4a"]
-material = SubResource("StandardMaterial3D_ru474")
+material = SubResource("StandardMaterial3D_yqwes")
 size = Vector3(3, 0.2, 3)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xiy3d"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ff1w"]
 albedo_color = Color(0.48235294, 0.56078434, 0.6, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_g0dry"]
-material = SubResource("StandardMaterial3D_xiy3d")
+material = SubResource("StandardMaterial3D_6ff1w")
 size = Vector3(3, 0.2, 3)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_klqtr"]
@@ -330,7 +330,7 @@ shader_parameter/MoonDirection = Vector3(-0.25, -0.25, 1)
 [sub_resource type="Sky" id="Sky_g63gw"]
 sky_material = SubResource("ShaderMaterial_klqtr")
 
-[sub_resource type="Environment" id="Environment_mudrt"]
+[sub_resource type="Environment" id="Environment_xd1nj"]
 resource_local_to_scene = true
 background_mode = 2
 sky = SubResource("Sky_g63gw")
@@ -1621,7 +1621,7 @@ theme_override_font_sizes/font_size = 64
 text = "Name"
 
 [node name="WorldEnvironment" parent="." unique_id=849873186 instance=ExtResource("14_yiuc0")]
-environment = SubResource("Environment_mudrt")
+environment = SubResource("Environment_xd1nj")
 
 [node name="Sunlight" type="DirectionalLight3D" parent="." unique_id=327752361]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)

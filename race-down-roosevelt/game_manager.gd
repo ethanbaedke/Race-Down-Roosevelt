@@ -1,12 +1,22 @@
 class_name GameManager extends Node
 
+const SKIP_OPENING_ANIMATION:bool = false
+
 @onready var _menu_manager_scene:PackedScene = preload("res://menus/menu_manager.tscn")
 @onready var _race_scene:PackedScene = preload("res://race/race.tscn")
+@onready var _opening_cutscene_scene:PackedScene = preload("res://opening_cutscene.tscn")
 
 var _menu_manager:MenuManager = null
 var _race:Race = null
 
 var _game_state:GameState = null
+
+func _play_opening_animation() -> void:
+	
+	var cut:OpeningCutscene = _opening_cutscene_scene.instantiate()
+	self.add_child(cut)
+	await cut.finished
+	cut.queue_free()
 
 func _ready() -> void:
 
@@ -21,7 +31,10 @@ func _ready() -> void:
 		
 	_game_state = GameState.new()
 	_game_state.save_data = save_data
-
+	
+	if (!SKIP_OPENING_ANIMATION):
+		await _play_opening_animation()
+	
 	while (true):
 		# Create the menu manager.
 		_menu_manager = _menu_manager_scene.instantiate()

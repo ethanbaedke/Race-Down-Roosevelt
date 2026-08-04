@@ -2,6 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://cu32ofcaom0gu" path="res://race/race_environment.tscn" id="1_acnil"]
 [ext_resource type="Script" uid="uid://crhetb4t1bmbr" path="res://opening_cutscene.gd" id="1_e8074"]
+[ext_resource type="Script" uid="uid://ljrpr08pxgd8" path="res://race/player_camera.gd" id="3_4u653"]
+[ext_resource type="PackedScene" uid="uid://cag4gxseexopt" path="res://vehicles/cybertruck.glb" id="3_ufc1a"]
+[ext_resource type="Material" uid="uid://c2abq63w460su" path="res://vehicles/racer_vehicles/glass_material.tres" id="4_j1kcy"]
+[ext_resource type="Material" uid="uid://bqmd5s7ioykar" path="res://vehicles/racer_vehicles/headlight_material.tres" id="5_22m7d"]
+[ext_resource type="Material" uid="uid://cqhl8e7t4qblg" path="res://vehicles/racer_vehicles/taillight_material.tres" id="6_1c3wt"]
+[ext_resource type="Material" uid="uid://d112u1couco11" path="res://vehicles/racer_vehicles/wheel_rubber_material.tres" id="7_s1cif"]
+[ext_resource type="Material" uid="uid://8ala27u8ily3" path="res://vehicles/racer_vehicles/wheel_rim_material.tres" id="8_cfkx6"]
+[ext_resource type="PackedScene" uid="uid://uvhx5awql1e8" path="res://vehicles/honda_civic.glb" id="9_22m7d"]
+[ext_resource type="PackedScene" uid="uid://5525td7tv2km" path="res://vehicles/jeep_wrangler.glb" id="10_1c3wt"]
+[ext_resource type="PackedScene" uid="uid://cmlv6mquobb1t" path="res://vehicles/mini_cooper.glb" id="11_s1cif"]
+[ext_resource type="PackedScene" uid="uid://40efplcfedui" path="res://vehicles/subaru_forester.glb" id="12_cfkx6"]
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_xiy3d"]
 parameter_name = "DayNightBlend"
@@ -211,7 +222,7 @@ shader_parameter/MoonDirection = Vector3(-0.25, -0.25, 1)
 [sub_resource type="Sky" id="Sky_g63gw"]
 sky_material = SubResource("ShaderMaterial_klqtr")
 
-[sub_resource type="Environment" id="Environment_acnil"]
+[sub_resource type="Environment" id="Environment_68hdd"]
 resource_local_to_scene = true
 background_mode = 2
 sky = SubResource("Sky_g63gw")
@@ -364,7 +375,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("MeshInstance3D:mesh:material:emission_energy_multiplier")
+tracks/10/path = NodePath("Title:mesh:material:emission_energy_multiplier")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -376,10 +387,130 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("MeshInstance3D2:mesh:material:emission_energy_multiplier")
+tracks/11/path = NodePath("CybertruckModel:position")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-6.544021, 0, -100)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("HondaCivicModel:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.5384078, 0, -100)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("JeepWranglerModel:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-8.466817, 0, -103)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("MiniCooperModel:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(8.545467, 0, -100)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("SubaruForesterModel:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.46786118, 0, -100)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Bad:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0.008333334),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Key:visible")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0.008333334),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Presents:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0.008333334),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Bad:mesh:material:emission_energy_multiplier")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Key:mesh:material:emission_energy_multiplier")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Presents:mesh:material:emission_energy_multiplier")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -388,7 +519,7 @@ tracks/11/keys = {
 
 [sub_resource type="Animation" id="Animation_acnil"]
 resource_name = "opening"
-length = 15.0
+length = 14.0
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -396,9 +527,9 @@ tracks/0/path = NodePath("Camera3D:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(2, 2, 2),
+"handle_modes": PackedInt32Array(2, 2, 0),
 "points": PackedFloat32Array(-30, -0.24999882, -0.010064639, 4.133333, 0.16640282, 15.88, -1.1666667, -7.6466675, 0, 0, 18.1, -0.5, -0.37000003, 0, 0),
-"times": PackedFloat32Array(0, 7, 10)
+"times": PackedFloat32Array(0, 7, 8)
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
@@ -408,7 +539,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(2, 2, 0, 2, 0, 2),
-"points": PackedFloat32Array(10, -0.2499992, 0.0033550938, 3.8666666, -0.05189228, 3, -0.35253984, 2.282685, 0.44493675, -2.8809524, 1, -0.4333334, -0.026251554, 0.3333335, 0.09584856, 6, -0.3741417, -5.3925505, 0, 0, 8, -1.6741419, 4.512212, 0.41111112, -1.7814816, -5, -0.5, 2.5, 0, 0),
+"points": PackedFloat32Array(10, -0.2499992, 0.0033550938, 3.8666666, -0.05189228, 3, -0.35253984, 2.282685, 0.44493675, -2.8809524, 1, -0.4333334, -0.026251554, 0.3333335, 0.09584856, 10, -0.54609394, -8.965198, 0, 0, 10, -2.0127606, 2.0848637, 0.25390625, -0.051888466, -5, -0.5, 2.5, 0, 0),
 "times": PackedFloat32Array(0, 4, 6, 7, 9, 10)
 }
 tracks/2/type = "bezier"
@@ -430,8 +561,8 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "handle_modes": PackedInt32Array(2, 2, 0, 0, 0, 2),
-"points": PackedFloat32Array(1.5707964, -0.24999385, 0.0011624835, 3.9, -0.01813519, 0, -0.6666667, 0.22938615, 0.5, -0.17203961, 0, -0.3166667, 0.088430025, 0.5999999, -0.0059882607, -0.8392285, -1.8333335, -0.011273265, 0, 0, -0.31967872, -0.722415, -0.49994415, 0.07222223, 0.030252378, 0, -0.59495354, -0.0059882607, 0, 0),
-"times": PackedFloat32Array(0, 4, 6, 8, 9.6, 10)
+"points": PackedFloat32Array(1.5707964, -0.24999385, 0.0011624835, 3.9, -0.01813519, 0, -0.6666667, 0.22938615, 0.5, -0.17203961, 0, -0.3166667, 0.088430025, 0.2610278, -0.015969753, -0.7, -0.30563927, 0.007218361, 0.32769394, -0.0012738109, 0, -1.328969, -0.015791088, 0, 0, 0, -0.59495354, -0.0059882607, 0, 0),
+"times": PackedFloat32Array(0, 4, 5.5, 6.5, 8, 10)
 }
 tracks/4/type = "bezier"
 tracks/4/imported = false
@@ -497,31 +628,177 @@ tracks/9/loop_wrap = true
 tracks/9/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0),
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.29444444, 0, 1.7055557, 0, 0, -1.8277777, 0, 0, 0, 1, -0.33333334, 0, 0, 0),
-"times": PackedFloat32Array(0, 2, 13, 15)
+"times": PackedFloat32Array(0, 2, 12, 14)
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("MeshInstance3D:mesh:material:emission_energy_multiplier")
+tracks/10/path = NodePath("Title:mesh:material:emission_energy_multiplier")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0, 10.5, 11),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 10, 10.25, 12),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0, 5.0]
+"values": [0.0, 1.0, 6.0, 3.0]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("MeshInstance3D2:mesh:material:emission_energy_multiplier")
+tracks/11/path = NodePath("CybertruckModel:position")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0, 10, 11, 11.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 5.366667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 0.0, 0.0, 7.0]
+"values": [Vector3(-12.544, 0, -200), Vector3(-12.544, 0, 50)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("HondaCivicModel:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 6.4333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-6.462, 0, -200), Vector3(-6.462, 0, 50)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("JeepWranglerModel:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 6.733333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.533, 0, -200), Vector3(0.533, 0, 50)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("MiniCooperModel:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 8.033334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(8.538, 0, -200), Vector3(8.538, 0, 50)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("SubaruForesterModel:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 7.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(5.538, 0, -200), Vector3(5.538, 0, 50)]
+}
+tracks/16/type = "method"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Camera3D")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(4.26, 5.16, 5.34, 6.366667, 6.46),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": [0.5],
+"method": &"add_trauma"
+}, {
+"args": [0.5],
+"method": &"add_trauma"
+}, {
+"args": [1.0],
+"method": &"add_trauma"
+}, {
+"args": [0.25],
+"method": &"add_trauma"
+}, {
+"args": [0.25],
+"method": &"add_trauma"
+}]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Bad:visible")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 6.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Key:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 6.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Presents:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 6.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Bad:mesh:material:emission_energy_multiplier")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 7.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.0, 1.0]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Key:mesh:material:emission_energy_multiplier")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.0, 1.0]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Presents:mesh:material:emission_energy_multiplier")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0, 8.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.0, 4.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e8074"]
@@ -530,36 +807,117 @@ _data = {
 &"opening": SubResource("Animation_acnil")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_acnil"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_acnil"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4u653"]
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+metallic = 0.6
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dtyr3"]
+albedo_color = Color(0.5, 0.5, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+emission_energy_multiplier = 16.0
+rim_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b65of"]
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+metallic = 0.5
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1c3wt"]
+albedo_color = Color(0.9, 0.9, 0.9, 1)
+metallic = 0.6
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s1cif"]
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+metallic = 0.5
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cfkx6"]
+albedo_color = Color(1, 0.8333334, 0, 1)
+metallic = 0.6
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m4fd7"]
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+metallic = 0.5
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iwt24"]
+albedo_color = Color(0, 0, 1, 1)
+metallic = 0.6
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6q2sl"]
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+metallic = 0.5
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_my7i4"]
+albedo_color = Color(0, 0.83333325, 1, 1)
+metallic = 0.6
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n17r4"]
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+metallic = 0.5
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6le7"]
 albedo_color = Color(0.7294118, 0.047058824, 0.18431373, 1)
 emission_enabled = true
 emission = Color(0.7294118, 0.047058824, 0.18431373, 1)
 emission_energy_multiplier = 0.0
 
-[sub_resource type="TextMesh" id="TextMesh_acnil"]
-material = SubResource("StandardMaterial3D_acnil")
+[sub_resource type="TextMesh" id="TextMesh_4u653"]
+material = SubResource("StandardMaterial3D_o6le7")
 text = "BAD"
 font_size = 64
+line_spacing = -32.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8074"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_31c4s"]
 albedo_color = Color(0.65882355, 0.6, 0.40784314, 1)
 emission_enabled = true
 emission = Color(0.65882355, 0.6, 0.40784314, 1)
 emission_energy_multiplier = 0.0
 
-[sub_resource type="TextMesh" id="TextMesh_ufc1a"]
-material = SubResource("StandardMaterial3D_e8074")
+[sub_resource type="TextMesh" id="TextMesh_dtyr3"]
+material = SubResource("StandardMaterial3D_31c4s")
 text = "KEY"
 font_size = 64
+line_spacing = -32.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_acnil"]
-bg_color = Color(0, 0, 0, 0)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yboeh"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="TextMesh" id="TextMesh_b65of"]
+material = SubResource("StandardMaterial3D_yboeh")
+text = "PRESENTS"
+font_size = 64
+line_spacing = -32.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_acnil"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="TextMesh" id="TextMesh_acnil"]
+material = SubResource("StandardMaterial3D_acnil")
+text = "RACE DOWN
+ROOSEVELT"
+font_size = 32
 
 [node name="OpeningCutscene" type="Node3D" unique_id=1772789213]
 script = ExtResource("1_e8074")
 
 [node name="WorldEnvironment" parent="." unique_id=849873186 instance=ExtResource("1_acnil")]
-environment = SubResource("Environment_acnil")
+environment = SubResource("Environment_68hdd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1665114787]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
@@ -576,18 +934,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9, -9.91, 0)
 mesh = SubResource("BoxMesh_68hdd")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2016575082]
+script = ExtResource("3_4u653")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=228397449]
 libraries/ = SubResource("AnimationLibrary_e8074")
 autoplay = &"opening"
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2083473159]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 16.5, -5, 0.6)
-mesh = SubResource("TextMesh_acnil")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=67270692]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 16.5, -5, -0.6)
-mesh = SubResource("TextMesh_ufc1a")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1211915458]
 
@@ -598,3 +949,151 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_acnil")
+
+[node name="CybertruckModel" parent="." unique_id=102932695 instance=ExtResource("3_ufc1a")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -6.544021, 0, -100)
+
+[node name="Car" parent="CybertruckModel" index="0" unique_id=551574782]
+surface_material_override/0 = SubResource("StandardMaterial3D_4u653")
+surface_material_override/1 = ExtResource("4_j1kcy")
+surface_material_override/2 = ExtResource("5_22m7d")
+surface_material_override/3 = SubResource("StandardMaterial3D_dtyr3")
+surface_material_override/4 = ExtResource("6_1c3wt")
+surface_material_override/5 = SubResource("StandardMaterial3D_b65of")
+
+[node name="Wheel" parent="CybertruckModel" index="1" unique_id=1850213362]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="Wheel_001" parent="CybertruckModel" index="2" unique_id=1174885064]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="Wheel_002" parent="CybertruckModel" index="3" unique_id=649242232]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="Wheel_003" parent="CybertruckModel" index="4" unique_id=767372845]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="HondaCivicModel" parent="." unique_id=1671646187 instance=ExtResource("9_22m7d")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 2.5384078, 0, -100)
+
+[node name="Car" parent="HondaCivicModel" index="0" unique_id=1032396022]
+surface_material_override/0 = SubResource("StandardMaterial3D_1c3wt")
+surface_material_override/1 = ExtResource("4_j1kcy")
+surface_material_override/2 = ExtResource("5_22m7d")
+surface_material_override/3 = SubResource("StandardMaterial3D_s1cif")
+surface_material_override/4 = ExtResource("6_1c3wt")
+
+[node name="Wheel" parent="HondaCivicModel" index="1" unique_id=869785292]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="JeepWranglerModel" parent="." unique_id=128489693 instance=ExtResource("10_1c3wt")]
+transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-08, -8.466817, 0, -103)
+
+[node name="Car" parent="JeepWranglerModel" index="0" unique_id=972316620]
+surface_material_override/0 = SubResource("StandardMaterial3D_cfkx6")
+surface_material_override/1 = ExtResource("5_22m7d")
+surface_material_override/2 = SubResource("StandardMaterial3D_m4fd7")
+surface_material_override/3 = ExtResource("4_j1kcy")
+surface_material_override/4 = ExtResource("6_1c3wt")
+
+[node name="Wheel" parent="JeepWranglerModel" index="1" unique_id=1900539099]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="Wheel_001" parent="JeepWranglerModel" index="2" unique_id=1327568564]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="Wheel_002" parent="JeepWranglerModel" index="3" unique_id=813251960]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="Wheel_003" parent="JeepWranglerModel" index="4" unique_id=162368818]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="Wheel_004" parent="JeepWranglerModel" index="5" unique_id=56359366]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="MiniCooperModel" parent="." unique_id=69504884 instance=ExtResource("11_s1cif")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 8.545467, 0, -100)
+
+[node name="Car" parent="MiniCooperModel" index="0" unique_id=1415365515]
+surface_material_override/0 = SubResource("StandardMaterial3D_iwt24")
+surface_material_override/1 = SubResource("StandardMaterial3D_6q2sl")
+surface_material_override/2 = ExtResource("4_j1kcy")
+surface_material_override/3 = ExtResource("5_22m7d")
+surface_material_override/4 = ExtResource("6_1c3wt")
+
+[node name="Wheel" parent="MiniCooperModel" index="1" unique_id=1782308939]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="Wheel_001" parent="MiniCooperModel" index="2" unique_id=1151417688]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="Wheel_002" parent="MiniCooperModel" index="3" unique_id=1308446032]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="Wheel_003" parent="MiniCooperModel" index="4" unique_id=1298577262]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="SubaruForesterModel" parent="." unique_id=1946182605 instance=ExtResource("12_cfkx6")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, -0.46786118, 0, -100)
+
+[node name="Car" parent="SubaruForesterModel" index="0" unique_id=855582764]
+surface_material_override/0 = SubResource("StandardMaterial3D_my7i4")
+surface_material_override/1 = SubResource("StandardMaterial3D_n17r4")
+surface_material_override/2 = ExtResource("4_j1kcy")
+surface_material_override/3 = ExtResource("5_22m7d")
+surface_material_override/4 = ExtResource("6_1c3wt")
+
+[node name="Wheel" parent="SubaruForesterModel" index="1" unique_id=1499226399]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="Wheel_001" parent="SubaruForesterModel" index="2" unique_id=1948993672]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="Wheel_002" parent="SubaruForesterModel" index="3" unique_id=1530365537]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="Wheel_003" parent="SubaruForesterModel" index="4" unique_id=432397097]
+surface_material_override/0 = ExtResource("7_s1cif")
+surface_material_override/1 = ExtResource("8_cfkx6")
+
+[node name="Bad" type="MeshInstance3D" parent="." unique_id=264025388]
+transform = Transform3D(-4.371139e-06, 0, 100, 0, 100, 0, -100, 0, -4.371139e-06, -161.37, 85.11, 58.655)
+visible = false
+mesh = SubResource("TextMesh_4u653")
+
+[node name="Key" type="MeshInstance3D" parent="." unique_id=1080010889]
+transform = Transform3D(-4.371139e-06, 0, 100, 0, 100, 0, -100, 0, -4.371139e-06, -161.37, 85.37, -60.98)
+visible = false
+mesh = SubResource("TextMesh_dtyr3")
+
+[node name="Presents" type="MeshInstance3D" parent="." unique_id=4266459]
+transform = Transform3D(-4.371139e-06, 0, 100, 0, 100, 0, -100, 0, -4.371139e-06, -161.37, 29.545, 0)
+visible = false
+mesh = SubResource("TextMesh_b65of")
+
+[node name="Title" type="MeshInstance3D" parent="." unique_id=2083473159]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 16.5, -5, 0)
+mesh = SubResource("TextMesh_acnil")
+
+[editable path="CybertruckModel"]
+[editable path="HondaCivicModel"]
+[editable path="JeepWranglerModel"]
+[editable path="MiniCooperModel"]
+[editable path="SubaruForesterModel"]

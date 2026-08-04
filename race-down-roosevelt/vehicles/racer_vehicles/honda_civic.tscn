@@ -12,7 +12,6 @@
 [ext_resource type="Material" uid="uid://d112u1couco11" path="res://vehicles/racer_vehicles/wheel_rubber_material.tres" id="7_3rkw2"]
 [ext_resource type="Material" uid="uid://8ala27u8ily3" path="res://vehicles/racer_vehicles/wheel_rim_material.tres" id="8_6348r"]
 [ext_resource type="PackedScene" uid="uid://dvmbdc5ap2jlm" path="res://vehicles/racer_vehicles/item_plate.tscn" id="10_b7obu"]
-[ext_resource type="Script" uid="uid://dsniftr7tc0wm" path="res://vehicles/racer_vehicles/item_plate.gd" id="11_4m2nk"]
 [ext_resource type="AudioStream" uid="uid://ddlj6v8eofqxe" path="res://sound_effects/ai_item_activate.wav" id="11_ndli4"]
 [ext_resource type="AudioStream" uid="uid://cjwktwn57enty" path="res://sound_effects/invincibility_item_activate.wav" id="12_84qfn"]
 [ext_resource type="AudioStream" uid="uid://dd061nab8s5ws" path="res://sound_effects/speed_item_activate.wav" id="13_2ivt8"]
@@ -61,7 +60,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.971, 0)
 
 [node name="ItemPlate" parent="VehicleModelController" unique_id=946264226 instance=ExtResource("10_b7obu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.971, 0)
-script = ExtResource("11_4m2nk")
 
 [node name="AiRacerController" parent="." unique_id=590700889 instance=ExtResource("4_mjgcb")]
 

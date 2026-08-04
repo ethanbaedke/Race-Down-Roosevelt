@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://crhetb4t1bmbr" path="res://opening_cutscene.gd" id="1_e8074"]
 [ext_resource type="Script" uid="uid://ljrpr08pxgd8" path="res://race/player_camera.gd" id="3_4u653"]
 [ext_resource type="PackedScene" uid="uid://cag4gxseexopt" path="res://vehicles/cybertruck.glb" id="3_ufc1a"]
+[ext_resource type="AudioStream" uid="uid://dnsubcie43rdm" path="res://music/opening_animation.wav" id="4_dtyr3"]
 [ext_resource type="Material" uid="uid://c2abq63w460su" path="res://vehicles/racer_vehicles/glass_material.tres" id="4_j1kcy"]
 [ext_resource type="Material" uid="uid://bqmd5s7ioykar" path="res://vehicles/racer_vehicles/headlight_material.tres" id="5_22m7d"]
 [ext_resource type="Material" uid="uid://cqhl8e7t4qblg" path="res://vehicles/racer_vehicles/taillight_material.tres" id="6_1c3wt"]
@@ -222,7 +223,7 @@ shader_parameter/MoonDirection = Vector3(-0.25, -0.25, 1)
 [sub_resource type="Sky" id="Sky_g63gw"]
 sky_material = SubResource("ShaderMaterial_klqtr")
 
-[sub_resource type="Environment" id="Environment_68hdd"]
+[sub_resource type="Environment" id="Environment_dtyr3"]
 resource_local_to_scene = true
 background_mode = 2
 sky = SubResource("Sky_g63gw")
@@ -516,6 +517,20 @@ tracks/21/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/22/type = "method"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("OpeningTheme")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_acnil"]
 resource_name = "opening"
@@ -637,7 +652,7 @@ tracks/10/path = NodePath("Title:mesh:material:emission_energy_multiplier")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0, 10, 10.25, 12),
+"times": PackedFloat32Array(0, 10.5, 10.75, 12),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 1.0, 6.0, 3.0]
@@ -771,7 +786,7 @@ tracks/20/path = NodePath("Bad:mesh:material:emission_energy_multiplier")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
-"times": PackedFloat32Array(0, 7.5),
+"times": PackedFloat32Array(0, 7.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0.0, 1.0]
@@ -783,7 +798,7 @@ tracks/21/path = NodePath("Key:mesh:material:emission_energy_multiplier")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
-"times": PackedFloat32Array(0, 8),
+"times": PackedFloat32Array(0, 8.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0.0, 1.0]
@@ -795,10 +810,24 @@ tracks/22/path = NodePath("Presents:mesh:material:emission_energy_multiplier")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
-"times": PackedFloat32Array(0, 8.5),
+"times": PackedFloat32Array(0, 8.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0.0, 4.0]
+}
+tracks/23/type = "method"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("OpeningTheme")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e8074"]
@@ -917,7 +946,7 @@ font_size = 32
 script = ExtResource("1_e8074")
 
 [node name="WorldEnvironment" parent="." unique_id=849873186 instance=ExtResource("1_acnil")]
-environment = SubResource("Environment_68hdd")
+environment = SubResource("Environment_dtyr3")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1665114787]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
@@ -1091,6 +1120,9 @@ mesh = SubResource("TextMesh_b65of")
 [node name="Title" type="MeshInstance3D" parent="." unique_id=2083473159]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 16.5, -5, 0)
 mesh = SubResource("TextMesh_acnil")
+
+[node name="OpeningTheme" type="AudioStreamPlayer3D" parent="." unique_id=1628206210]
+stream = ExtResource("4_dtyr3")
 
 [editable path="CybertruckModel"]
 [editable path="HondaCivicModel"]

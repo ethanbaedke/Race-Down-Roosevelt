@@ -1,6 +1,6 @@
 class_name GameManager extends Node
 
-const SKIP_OPENING_ANIMATION:bool = false
+const SKIP_OPENING_ANIMATION:bool = true
 
 @onready var _menu_manager_scene:PackedScene = preload("res://menus/menu_manager.tscn")
 @onready var _race_scene:PackedScene = preload("res://race/race.tscn")

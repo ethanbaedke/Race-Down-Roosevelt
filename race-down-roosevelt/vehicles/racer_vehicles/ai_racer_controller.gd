@@ -2,6 +2,7 @@ class_name AiRacerController extends Node3D
 
 enum Intelligence {
 	LOW,
+	MEDIUM,
 	HIGH
 }
 
@@ -10,7 +11,7 @@ enum Intelligence {
 @onready var _right_raycast:RayCast3D = $RightCast
 
 var racer_vehicle:RacerVehicle = null
-var intelligence:Intelligence = Intelligence.LOW
+var intelligence:Intelligence = Intelligence.MEDIUM
 var enabled:bool = false
 
 # Gets how often the ai should be able to make a decision.
@@ -18,7 +19,9 @@ func _get_decision_cooldown() -> float:
 	
 	match (intelligence):
 		Intelligence.LOW:
-			return 0.5
+			return 1.0
+		Intelligence.MEDIUM:
+			return 0.25
 		Intelligence.HIGH:
 			return 0.025
 		_:
@@ -29,7 +32,9 @@ func _get_raycast_distance() -> float:
 	
 	match (intelligence):
 		Intelligence.LOW:
-			return 20.0
+			return 15.0
+		Intelligence.MEDIUM:
+			return 10.0
 		Intelligence.HIGH:
 			return 5.0
 		_:
@@ -49,7 +54,7 @@ func _start_decision_loop() -> void:
 		if (!racer_vehicle.input_enabled):
 			continue
 		
-		# Try to avoid vehicles in front.
+		# Highest priority is avoiding vehicles in front.
 		_forward_raycast.target_position.z = _get_raycast_distance()
 		var area_hit:Object = _forward_raycast.get_collider()
 		if (area_hit is Node):
@@ -57,6 +62,14 @@ func _start_decision_loop() -> void:
 			if (object_hit is RacerVehicle || object_hit is TrafficVehicle):
 				if (_try_move()):
 					continue
+		
+		# Use item if available.
+		if (racer_vehicle.try_use_item()):
+			continue
+		
+		# Use jump if available.
+		if (racer_vehicle.try_use_gas()):
+			continue
 
 func _try_move() -> bool:
 	

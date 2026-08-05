@@ -1,4 +1,4 @@
-class_name MenuManager extends Control
+class_name MenuManager extends Node3D
 
 signal ready_for_race
 
@@ -15,9 +15,9 @@ enum MenuType {
 	TOURNAMENT_CONTINUE,
 }
 
-const CAMERA_OFFSET:Vector2 = Vector2(1920.0 * 0.5, 1080.0 * 0.5)
+#const CAMERA_OFFSET:Vector3 = Vector3(1920.0 * 0.5, 1080.0 * 0.5, 0.0)
 
-@onready var _camera:Camera2D = $Camera2D
+@onready var _ui_parent:Control = $CanvasLayer/Control
 
 @onready var _main_menu_scene:PackedScene = preload("res://menus/main_menu.tscn")
 @onready var _player_count_selection_scene:PackedScene = preload("res://menus/player_count_selection.tscn")
@@ -48,6 +48,7 @@ var _menu_type_stack:Array[MenuType] = []
 var _current_menu:Control = null
 var _next_menu_position:Vector2 = Vector2.ZERO
 var _previous_menu_position:Vector2 = Vector2(-1920.0 * 2.0, 0.0)
+var _ui_parent_target_position:Vector2 = Vector2(1920.0, 0.0)
 
 # TODO: Cleanup old menu.
 # TODO: Keep stack of old menu types to allow back navigation from any menu.
@@ -95,15 +96,17 @@ func _go_to_new_menu(type:MenuType, back_navigate:bool = false) -> void:
 			
 	if (new_menu != null):
 		_current_menu = new_menu
-		self.add_child(new_menu)
+		_ui_parent.add_child(new_menu)
 		if (!back_navigate):
 			new_menu.position = _next_menu_position
-			_camera.position = _next_menu_position + CAMERA_OFFSET
+			# UI has to move the opposite direction.
+			_ui_parent_target_position.x -= 1920.0
 			_next_menu_position.x += 1920.0
 			_previous_menu_position.x += 1920.0
 		else:
 			new_menu.position = _previous_menu_position
-			_camera.position = _previous_menu_position + CAMERA_OFFSET
+			# UI has to move the opposite direction.
+			_ui_parent_target_position.x += 1920.0
 			_next_menu_position.x -= 1920.0
 			_previous_menu_position.x -= 1920.0
 
@@ -345,3 +348,15 @@ func _ready() -> void:
 		_menu_type_stack.append(MenuType.MAIN_MENU)
 		_menu_type_stack.append(MenuType.TOURNAMENT_START)
 		_go_to_new_menu(MenuType.TOURNAMENT_MENU)
+
+func _process(delta:float) -> void:
+	
+	var ui_move_dir:Vector2 = _ui_parent_target_position - _ui_parent.position
+	var vel:float = ui_move_dir.length() * delta * 20.0
+	vel = min(vel, 100.0)
+	vel = max(vel, 1.0)
+	var new_pos:Vector2 = _ui_parent.position + (ui_move_dir.normalized() * vel)
+	if ((_ui_parent_target_position - new_pos).dot(ui_move_dir) <= 0):
+		_ui_parent.position = _ui_parent_target_position
+	else:
+		_ui_parent.position = new_pos

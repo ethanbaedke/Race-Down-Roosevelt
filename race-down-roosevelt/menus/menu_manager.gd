@@ -15,9 +15,10 @@ enum MenuType {
 	TOURNAMENT_CONTINUE,
 }
 
-#const CAMERA_OFFSET:Vector3 = Vector3(1920.0 * 0.5, 1080.0 * 0.5, 0.0)
-
 @onready var _ui_parent:Control = $CanvasLayer/Control
+@onready var _fade_player:AnimationPlayer = $FadePlayer
+@onready var _garage:Node3D = $Garage
+@onready var _garage_cam:Camera3D = $Camera3D
 
 @onready var _main_menu_scene:PackedScene = preload("res://menus/main_menu.tscn")
 @onready var _player_count_selection_scene:PackedScene = preload("res://menus/player_count_selection.tscn")
@@ -46,6 +47,7 @@ var game_state:GameState = null
 
 var _menu_type_stack:Array[MenuType] = []
 var _current_menu:Control = null
+var _menu_queued_for_cleanup:Control = null
 var _next_menu_position:Vector2 = Vector2.ZERO
 var _previous_menu_position:Vector2 = Vector2(-1920.0 * 2.0, 0.0)
 var _ui_parent_target_position:Vector2 = Vector2(1920.0, 0.0)
@@ -53,14 +55,19 @@ var _ui_parent_target_position:Vector2 = Vector2(1920.0, 0.0)
 # TODO: Cleanup old menu.
 # TODO: Keep stack of old menu types to allow back navigation from any menu.
 # TODO: Disable old input/input-navigation from previous menu IMMEDIATELY after the menu begins moving.
-func _go_to_new_menu(type:MenuType, back_navigate:bool = false) -> void:
+# Returns the newely created menu.
+func _go_to_new_menu(type:MenuType, back_navigate:bool = false) -> Control:
+	
+	# Do not allow navigation to a menu we are already on.
+	if (_menu_type_stack.size() > 0 && _menu_type_stack[_menu_type_stack.size() - 1] == type):
+		return null
 	
 	# If we are going forward, append our new menu type to our stack.
 	if (!back_navigate):
 		_menu_type_stack.append(type)
 	else:
 		if (_menu_type_stack.size() < 2):
-			return
+			return null
 		# If we are going backwards, remove our current page from the front of the stack and navigate back to the previous page on the stack.
 		else:
 			_menu_type_stack.remove_at(_menu_type_stack.size() - 1)
@@ -69,12 +76,12 @@ func _go_to_new_menu(type:MenuType, back_navigate:bool = false) -> void:
 	# Disable input navigation on the old menu so we can't get back to it during the transition.
 	if (_current_menu != null):
 		_current_menu.focus_behavior_recursive = Control.FOCUS_BEHAVIOR_DISABLED
-		_queue_menu_for_cleanup(_current_menu)
+		_menu_queued_for_cleanup = _current_menu
 	
 	var new_menu:Control = null
 	match (type):
 		MenuType.NONE:
-			return
+			return null
 		MenuType.MAIN_MENU:
 			new_menu = _setup_main_menu()
 		MenuType.PLAYER_COUNT_SELECTION:
@@ -109,12 +116,44 @@ func _go_to_new_menu(type:MenuType, back_navigate:bool = false) -> void:
 			_ui_parent_target_position.x += 1920.0
 			_next_menu_position.x -= 1920.0
 			_previous_menu_position.x -= 1920.0
-
-func _queue_menu_for_cleanup(menu:Control) -> void:
 	
-	# This is lazy, but is probably fine given our use case.
-	await get_tree().create_timer(0.25).timeout
-	menu.queue_free()
+	return new_menu
+
+# DEPRECATED
+#func _queue_menu_for_cleanup(menu:Control) -> void:
+#	
+#	# This is lazy, but is probably fine given our use case.
+#	await get_tree().create_timer(0.25).timeout
+#	menu.queue_free()
+
+# Returns the newely created menu.
+func _fade_to_new_menu(new_menu_type:MenuType, garage_enabled:bool, back_navigate:bool = false) -> Control:
+	
+	_current_menu.process_mode = Node.PROCESS_MODE_DISABLED
+	_fade_player.play("fade_out")
+	await _fade_player.animation_finished
+	
+	# Switch menus and disable the garage.
+	var new_menu:Control = null
+	if (!back_navigate):
+		new_menu = _go_to_new_menu(new_menu_type)
+	else:
+		new_menu = _go_to_new_menu(MenuType.NONE, true)
+	
+	if (new_menu == null):
+		return null
+	
+	_garage.visible = garage_enabled
+	_garage_cam.current = garage_enabled
+	
+	# Fade in.
+	_ui_parent.position = _ui_parent_target_position
+	new_menu.process_mode = Node.PROCESS_MODE_DISABLED
+	_fade_player.play("fade_in")
+	await _fade_player.animation_finished
+	new_menu.process_mode = Node.PROCESS_MODE_INHERIT
+	
+	return new_menu
 
 #region Main Menu
 
@@ -156,7 +195,7 @@ func _on_player_count_selection_back_requested() -> void:
 func _on_player_count_selection_count_chosen(count:int) -> void:
 	
 	game_state.num_players = count
-	_go_to_new_menu(MenuType.VEHICLE_SELECTION)
+	await _fade_to_new_menu(MenuType.VEHICLE_SELECTION, false)
 
 #endregion
 
@@ -189,11 +228,16 @@ func _setup_vehicle_selection() -> Control:
 
 func _on_vehicle_selection_back_requested() -> void:
 	
-	_go_to_new_menu(MenuType.NONE, true)
+	await _fade_to_new_menu(MenuType.NONE, true, true)
 
 func _on_vehicle_selection_all_players_ready(racer_objects:Array[RacerObject]) -> void:
 	
 	game_state.racer_objects = racer_objects
+	
+	_current_menu.process_mode = Node.PROCESS_MODE_DISABLED
+	_fade_player.play("fade_out")
+	await _fade_player.animation_finished
+	
 	ready_for_race.emit()
 
 #endregion
@@ -279,7 +323,7 @@ func _on_tournament_setup_back_requested() -> void:
 
 func _on_tournament_setup_start_tournament_requested() -> void:
 	
-	_go_to_new_menu(MenuType.TOURNAMENT_MENU)
+	await _fade_to_new_menu(MenuType.TOURNAMENT_MENU, false)
 	# It doesn't make sense to go back to tournament setup. Remove it from the stack after the tournament menu is created.
 	_menu_type_stack.remove_at(_menu_type_stack.size() - 2)
 
@@ -299,7 +343,7 @@ func _setup_tournament_menu() -> Control:
 func _on_tournament_menu_back_requested() -> void:
 	
 	game_state.active_tournament = null
-	_go_to_new_menu(MenuType.NONE, true)
+	await _fade_to_new_menu(MenuType.NONE, true, true)
 
 func _on_tournament_menu_start_match_requested() -> void:
 	
@@ -311,7 +355,7 @@ func _on_tournament_menu_return_to_menu_requested() -> void:
 	_menu_type_stack.clear()
 	_menu_type_stack.append(MenuType.MAIN_MENU)
 	_menu_type_stack.append(MenuType.TOURNAMENT_MENU)
-	_go_to_new_menu(MenuType.NONE, true)
+	await _fade_to_new_menu(MenuType.NONE, true, true)
 
 #endregion
 
@@ -331,7 +375,7 @@ func _on_tournament_continue_back_requested() -> void:
 
 func _on_tournament_continue_continue_tournament_requested() -> void:
 	
-	_go_to_new_menu(MenuType.TOURNAMENT_MENU)
+	await _fade_to_new_menu(MenuType.TOURNAMENT_MENU, false)
 
 #endregion
 
@@ -345,9 +389,16 @@ func _ready() -> void:
 		_go_to_new_menu(MenuType.MAIN_MENU)
 	else:
 		# If we are currently in a tournament, we should begin on the tournament menu, with our menu stack set accordingly.
+		_garage.visible = false
+		_garage_cam.current = false
 		_menu_type_stack.append(MenuType.MAIN_MENU)
 		_menu_type_stack.append(MenuType.TOURNAMENT_START)
 		_go_to_new_menu(MenuType.TOURNAMENT_MENU)
+	
+	_current_menu.process_mode = Node.PROCESS_MODE_DISABLED
+	_fade_player.play("fade_in")
+	await _fade_player.animation_finished
+	_current_menu.process_mode = Node.PROCESS_MODE_INHERIT
 
 func _process(delta:float) -> void:
 	
@@ -358,5 +409,7 @@ func _process(delta:float) -> void:
 	var new_pos:Vector2 = _ui_parent.position + (ui_move_dir.normalized() * vel)
 	if ((_ui_parent_target_position - new_pos).dot(ui_move_dir) <= 0):
 		_ui_parent.position = _ui_parent_target_position
+		if (_menu_queued_for_cleanup != null):
+			_menu_queued_for_cleanup.queue_free()
 	else:
 		_ui_parent.position = new_pos

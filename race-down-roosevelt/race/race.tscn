@@ -330,7 +330,7 @@ shader_parameter/MoonDirection = Vector3(-0.25, -0.25, 1)
 [sub_resource type="Sky" id="Sky_g63gw"]
 sky_material = SubResource("ShaderMaterial_klqtr")
 
-[sub_resource type="Environment" id="Environment_xd1nj"]
+[sub_resource type="Environment" id="Environment_g63gw"]
 resource_local_to_scene = true
 background_mode = 2
 sky = SubResource("Sky_g63gw")
@@ -361,7 +361,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0, 0, 0, 0)]
+"values": [Color(0, 0, 0, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -468,6 +468,18 @@ tracks/10/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("OpeningAnimationPlayer/OpeningAnimationCamera:current")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_01boi"]
 resource_name = "countdown"
@@ -534,6 +546,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OpeningAnimationPlayer/OpeningAnimationCamera:current")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_g7srd"]
 resource_name = "fade_to_black"
@@ -548,6 +572,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OpeningAnimationPlayer/OpeningAnimationCamera:current")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_hkrbr"]
@@ -1621,7 +1657,7 @@ theme_override_font_sizes/font_size = 64
 text = "Name"
 
 [node name="WorldEnvironment" parent="." unique_id=849873186 instance=ExtResource("14_yiuc0")]
-environment = SubResource("Environment_xd1nj")
+environment = SubResource("Environment_g63gw")
 
 [node name="Sunlight" type="DirectionalLight3D" parent="." unique_id=327752361]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
@@ -1634,6 +1670,7 @@ libraries/ = SubResource("AnimationLibrary_hkrbr")
 
 [node name="OpeningAnimationCamera" type="Camera3D" parent="OpeningAnimationPlayer" unique_id=900515783]
 transform = Transform3D(1, 0, 0, 0, 0.0007962743, -0.9999997, 0, 0.9999997, 0.0007962743, -9, 1, 4)
+current = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="OpeningAnimationPlayer" unique_id=1838710824]
 
@@ -1643,7 +1680,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0)
+color = Color(0, 0, 0, 1)
 
 [node name="Countdown" type="Label" parent="OpeningAnimationPlayer/CanvasLayer" unique_id=156906141]
 self_modulate = Color(1, 1, 1, 0)

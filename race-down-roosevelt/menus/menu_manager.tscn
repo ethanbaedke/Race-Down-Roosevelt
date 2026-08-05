@@ -3,6 +3,97 @@
 [ext_resource type="Script" uid="uid://ct418ki6s0o41" path="res://menus/menu_manager.gd" id="1_xrek7"]
 [ext_resource type="AudioStream" uid="uid://ckc6jvdqwpylt" path="res://music/menu_theme.wav" id="2_g7wb1"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7wb1"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_1pii1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/FadePanel:theme_override_styles/panel:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/FadePanel:mouse_filter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_em31k"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/FadePanel:theme_override_styles/panel:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/FadePanel:mouse_filter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_g7wb1"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/FadePanel:theme_override_styles/panel:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/FadePanel:mouse_filter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1pii1"]
+_data = {
+&"RESET": SubResource("Animation_1pii1"),
+&"fade_in": SubResource("Animation_em31k"),
+&"fade_out": SubResource("Animation_g7wb1")
+}
+
 [sub_resource type="BoxMesh" id="BoxMesh_g7wb1"]
 
 [node name="MenuManager" type="Node3D" unique_id=558694831]
@@ -18,6 +109,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="FadePanel" type="Panel" parent="CanvasLayer" unique_id=1320696639]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g7wb1")
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=187016936]
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Camera3D" unique_id=757251880]
@@ -26,6 +126,11 @@ stream = ExtResource("2_g7wb1")
 autoplay = true
 panning_strength = 0.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1250550719]
+[node name="FadePlayer" type="AnimationPlayer" parent="." unique_id=496168374]
+libraries/ = SubResource("AnimationLibrary_1pii1")
+
+[node name="Garage" type="Node3D" parent="." unique_id=1609979636]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Garage" unique_id=1250550719]
 transform = Transform3D(0.8660254, 0.25, -0.4330127, 0, 0.8660254, 0.5, 0.5, -0.4330127, 0.75, 0, 0, -3)
 mesh = SubResource("BoxMesh_g7wb1")

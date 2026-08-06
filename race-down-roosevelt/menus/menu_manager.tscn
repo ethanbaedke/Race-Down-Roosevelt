@@ -315,10 +315,9 @@ background_mode = 2
 sky = SubResource("Sky_g63gw")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.1
+ambient_light_energy = 0.05
 reflected_light_source = 2
-ssao_enabled = true
-ssil_enabled = true
+sdfgi_enabled = true
 glow_enabled = true
 
 [node name="MenuManager" type="Node3D" unique_id=558694831]
@@ -344,7 +343,7 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_g7wb1")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=187016936]
-transform = Transform3D(-1, -1.3003837e-15, 8.742276e-08, 2.2626674e-08, 0.9659259, 0.25881907, -8.4443904e-08, 0.25881907, -0.9659258, 0, 4, -16)
+transform = Transform3D(-1, -3.0767405e-15, 8.742276e-08, 2.2626674e-08, 0.9659259, 0.25881907, -8.4443904e-08, 0.25881907, -0.9659258, 0, 4, -14)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Camera3D" unique_id=757251880]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -960, -540, 2)
@@ -355,23 +354,33 @@ panning_strength = 0.0
 [node name="FadePlayer" type="AnimationPlayer" parent="." unique_id=496168374]
 libraries/ = SubResource("AnimationLibrary_1pii1")
 
-[node name="Garage" parent="." unique_id=61257773 instance=ExtResource("3_1pii1")]
+[node name="Garage" parent="." unique_id=766975791 instance=ExtResource("3_1pii1")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="CybertruckModel" parent="Garage" unique_id=102932695 instance=ExtResource("5_yda36")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 6.618597, 0, 12.604298)
+
+[node name="JeepWranglerModel" parent="Garage" unique_id=128489693 instance=ExtResource("6_maawb")]
+transform = Transform3D(-1.2262279, 0, 1.579989, 0, 2, 0, -1.579989, 0, -1.2262279, 0.55089045, 0, 3.0783844)
+
+[node name="HondaCivicModel" parent="Garage" unique_id=1671646187 instance=ExtResource("7_maawb")]
+transform = Transform3D(2.6226832e-07, 0, 2, 0, 2, 0, -2, 0, 2.6226832e-07, -17.187376, 6.54204, -10.27695)
+
+[node name="SubaruForesterModel" parent="Garage" unique_id=1946182605 instance=ExtResource("8_cmp6p")]
+transform = Transform3D(-8.742278e-08, 0, 2, 0, 2, 0, -2, 0, -8.742278e-08, -17.114677, 6.5591173, 10.035921)
+
+[node name="MiniCooperModel" parent="Garage" unique_id=69504884 instance=ExtResource("9_66q65")]
+transform = Transform3D(-8.742278e-08, 0, -2, 0, 2, 0, 2, 0, -8.742278e-08, 17.07329, 6.518058, -9.242027)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Garage" unique_id=1863822004]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 6, -10)
+light_energy = 2.0
+light_specular = 0.25
+shadow_enabled = true
+omni_range = 30.0
+omni_attenuation = 2.0
 
 [node name="WorldEnvironment" parent="." unique_id=849873186 instance=ExtResource("4_em31k")]
 environment = SubResource("Environment_t82j1")
 
-[node name="CybertruckModel" parent="." unique_id=102932695 instance=ExtResource("5_yda36")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3092985, 0, 6.302149)
-
-[node name="JeepWranglerModel" parent="." unique_id=128489693 instance=ExtResource("6_maawb")]
-transform = Transform3D(-0.61311394, 0, 0.7899945, 0, 1, 0, -0.7899945, 0, -0.61311394, 0.27544522, 0, -2.4608078)
-
-[node name="HondaCivicModel" parent="." unique_id=1671646187 instance=ExtResource("7_maawb")]
-transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -8.593688, 3.27102, -5.138475)
-
-[node name="SubaruForesterModel" parent="." unique_id=1946182605 instance=ExtResource("8_cmp6p")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8.557339, 3.2795587, 5.0179605)
-
-[node name="MiniCooperModel" parent="." unique_id=69504884 instance=ExtResource("9_66q65")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8.536645, 3.259029, -4.6210136)
+[editable path="Garage/JeepWranglerModel"]

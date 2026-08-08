@@ -309,7 +309,7 @@ shader_parameter/MoonDirection = Vector3(0, -0.15, 1)
 [sub_resource type="Sky" id="Sky_g63gw"]
 sky_material = SubResource("ShaderMaterial_klqtr")
 
-[sub_resource type="Environment" id="Environment_t82j1"]
+[sub_resource type="Environment" id="Environment_66q65"]
 resource_local_to_scene = true
 background_mode = 2
 sky = SubResource("Sky_g63gw")
@@ -381,6 +381,6 @@ omni_range = 30.0
 omni_attenuation = 2.0
 
 [node name="WorldEnvironment" parent="." unique_id=849873186 instance=ExtResource("4_em31k")]
-environment = SubResource("Environment_t82j1")
+environment = SubResource("Environment_66q65")
 
 [editable path="Garage/JeepWranglerModel"]

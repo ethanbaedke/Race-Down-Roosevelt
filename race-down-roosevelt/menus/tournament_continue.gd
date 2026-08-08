@@ -3,7 +3,7 @@ class_name TournamentContinue extends Control
 signal back_requested
 signal continue_tournament_requested
 
-@onready var _list:VBoxContainer = $MarginContainer/ScrollContainer/SavedTournamentList
+@onready var _list:VBoxContainer = $ScrollContainer/SavedTournamentList
 
 var game_state:GameState = null
 

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d5ckyhheyh0c"]
 
 [ext_resource type="Script" uid="uid://ba1lj8e4howte" path="res://menus/tournament_continue.gd" id="1_db3lh"]
+[ext_resource type="Theme" uid="uid://dhvuiivaejiah" path="res://menus/menu_theme.tres" id="1_fiqgg"]
 
 [node name="TournamentContinue" type="Control" unique_id=615543724]
 layout_mode = 3
@@ -9,26 +10,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_fiqgg")
 script = ExtResource("1_db3lh")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1781335648]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=9520423]
+custom_minimum_size = Vector2(1600, 800)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -800.0
+offset_top = -100.0
+offset_right = 800.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 500
-theme_override_constants/margin_top = 300
-theme_override_constants/margin_right = 500
-theme_override_constants/margin_bottom = 300
-
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer" unique_id=9520423]
-layout_mode = 2
 follow_focus = true
 
-[node name="SavedTournamentList" type="VBoxContainer" parent="MarginContainer/ScrollContainer" unique_id=1235228716]
+[node name="SavedTournamentList" type="VBoxContainer" parent="ScrollContainer" unique_id=1718610303]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 theme_override_constants/separation = 32
+alignment = 1

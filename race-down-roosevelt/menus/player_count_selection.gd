@@ -3,10 +3,10 @@ class_name PlayerCountSelection extends Control
 signal back_requested
 signal count_chosen(count:int)
 
-@onready var _button_1p:Button = $MarginContainer/VBoxContainer/Button1P
-@onready var _button_2p:Button = $MarginContainer/VBoxContainer/Button2P
-@onready var _button_3p:Button = $MarginContainer/VBoxContainer/Button3P
-@onready var _button_4p:Button = $MarginContainer/VBoxContainer/Button4P
+@onready var _button_1p:Button = $HBoxContainer/Button1P
+@onready var _button_2p:Button = $HBoxContainer/Button2P
+@onready var _button_3p:Button = $HBoxContainer/Button3P
+@onready var _button_4p:Button = $HBoxContainer/Button4P
 
 func _ready() -> void:
 

@@ -4,8 +4,8 @@ signal back_requested
 signal new_tournament_requested
 signal continue_tournament_requested
 
-@onready var _new_tournament_button:Button = $MarginContainer/HBoxContainer/NewTournamentButton
-@onready var _continue_tournament_button:Button = $MarginContainer/HBoxContainer/ContinueTournamentButton
+@onready var _new_tournament_button:Button = $HBoxContainer/NewTournamentButton
+@onready var _continue_tournament_button:Button = $HBoxContainer/ContinueTournamentButton
 
 var game_state:GameState = null
 

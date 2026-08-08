@@ -22,7 +22,6 @@ signal profile_freed(profile:Profile)
 @export var _stat_bar_color_gradient:GradientTexture1D
 
 @onready var _profile_name:Label = $ProfileName
-@onready var _vehicle_model_viewport:SubViewportContainer = $VehicleModelViewport
 @onready var _vehicle_model_camera:Camera3D = $VehicleModelViewport/SubViewport/VehicleModelCamera
 @onready var _speed_bar:ProgressBar = $VehicleSelection/MarginContainer/VBoxContainer/Top/Left/SpeedBar
 @onready var _acceleration_bar:ProgressBar = $VehicleSelection/MarginContainer/VBoxContainer/Top/Right/AccelerationBar
@@ -40,6 +39,7 @@ var state:PanelState = PanelState.WAITING_FOR_DEVICE
 var racer:RacerObject = RacerObject.new()
 
 var _vehicle_ind:int = 0
+var _camera_target_pos:Vector3 = Vector3(4.5, 3.0, -15.0)
 
 func transition_state(newstate:PanelState) -> void:
 	
@@ -57,11 +57,9 @@ func transition_state(newstate:PanelState) -> void:
 		
 		PanelState.VEHICLE_SELECTION:
 			_vehicle_selection_ui.visible = false
-			_vehicle_model_viewport.visible = false
 		
 		PanelState.READY:
 			_ready_ui.visible = false
-			_vehicle_model_viewport.visible = false
 			
 	state = newstate
 	
@@ -77,12 +75,10 @@ func transition_state(newstate:PanelState) -> void:
 		
 		PanelState.VEHICLE_SELECTION:
 			_vehicle_selection_ui.visible = true
-			_vehicle_model_viewport.visible = true
 			update_vehicle()
 		
 		PanelState.READY:
 			_ready_ui.visible = true
-			_vehicle_model_viewport.visible = true
 			player_ready.emit()
 
 func set_device(index:int) -> void:
@@ -136,7 +132,7 @@ func move_vehicle_selection_right() -> void:
 func update_vehicle() -> void:
 	
 	# Show the new vehicle model.
-	_vehicle_model_camera.position.x = 2.0 + (20.0 * _vehicle_ind)
+	_camera_target_pos.z = -15.0 + (10.0 * _vehicle_ind)
 	
 	# Display stats.
 	var data:RacerVehicleData = VEHICLE_DATA[_vehicle_ind]
@@ -169,6 +165,18 @@ func _ready() -> void:
 		set_profile(profile))
 	
 	_profile_name.text = ""
+
+func _process(delta: float) -> void:
+	
+	var cam_move_dir:Vector3 = _camera_target_pos - _vehicle_model_camera.position
+	var vel:float = cam_move_dir.length() * delta * 20.0
+	vel = min(vel, 0.5)
+	vel = max(vel, 0.01)
+	var new_pos:Vector3 = _vehicle_model_camera.position + (cam_move_dir.normalized() * vel)
+	if ((_camera_target_pos - new_pos).dot(cam_move_dir) <= 0):
+		_vehicle_model_camera.position = _camera_target_pos
+	else:
+		_vehicle_model_camera.position = new_pos
 
 var _left_joystick_active:bool = false
 var _right_joystick_active:bool = false

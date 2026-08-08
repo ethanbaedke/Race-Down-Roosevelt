@@ -159,6 +159,7 @@ func _fade_to_new_menu(new_menu_type:MenuType, garage_enabled:bool, back_navigat
 
 func _setup_main_menu() -> Control:
 	
+	
 	_main_menu = _main_menu_scene.instantiate()
 	_main_menu.single_race_selected.connect(_on_main_menu_single_race_selected)
 	_main_menu.manage_profiles_selected.connect(_on_main_menu_manage_profiles_selected)
@@ -386,6 +387,8 @@ func _ready() -> void:
 		return
 	
 	if (game_state.active_tournament == null):
+		_garage.visible = true
+		_garage_cam.current = true
 		_go_to_new_menu(MenuType.MAIN_MENU)
 	else:
 		# If we are currently in a tournament, we should begin on the tournament menu, with our menu stack set accordingly.

@@ -109,6 +109,8 @@ func set_profile(profile:Profile) -> void:
 	
 	if (racer.profile != null):
 		profile_freed.emit(racer.profile)
+		if (profile == null):
+			_profile_selector.try_select_specific_profile(racer.profile)
 	
 	racer.profile = profile
 	

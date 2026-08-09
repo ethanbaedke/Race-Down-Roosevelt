@@ -8,7 +8,7 @@ signal profile_selected(profile:Profile)
 @onready var _left_label:Label = $MarginContainer/Control/Left/Label
 @onready var _right_container:PanelContainer = $MarginContainer/Control/Right
 @onready var _right_label:Label = $MarginContainer/Control/Right/Label
-@onready var _no_profiles_label:Label = $MarginContainer/NoProfilesLabel
+@onready var _no_profiles_container:PanelContainer = $MarginContainer/NoProfilesContainer
 
 @export var profiles:Array[Profile] = []
 var _profile_ind:int = 0
@@ -43,21 +43,29 @@ func get_selected_profile() -> Profile:
 	
 	return profiles[_profile_ind]
 
+func try_select_specific_profile(profile:Profile) -> void:
+	
+	var profile_ind:int = profiles.find(profile)
+	if (profile_ind != -1):
+		_profile_ind = profile_ind
+		_update_container_visibilities()
+		_update_container_text()
+
 func _update_container_visibilities() -> void:
 	
 	match (profiles.size()):
 		0:
-			_no_profiles_label.visible = true
+			_no_profiles_container.visible = true
 			_center_container.visible = false
 			_left_container.visible = false
 			_right_container.visible = false
 		1:
-			_no_profiles_label.visible = false
+			_no_profiles_container.visible = false
 			_center_container.visible = true
 			_left_container.visible = false
 			_right_container.visible = false
 		2:
-			_no_profiles_label.visible = false
+			_no_profiles_container.visible = false
 			_center_container.visible = true
 			if (_profile_ind == 0):
 				_left_container.visible = false
@@ -66,7 +74,7 @@ func _update_container_visibilities() -> void:
 				_left_container.visible = true
 				_right_container.visible = false
 		_:
-			_no_profiles_label.visible = false
+			_no_profiles_container.visible = false
 			_center_container.visible = true
 			_left_container.visible = true
 			_right_container.visible = true

@@ -1,11 +1,11 @@
 class_name VehicleSelectionPanel extends Control
 
 const VEHICLE_DATA:Array[RacerVehicleData] = [
-	preload("res://vehicles/racer_vehicles/honda_civic_data.tres"),
-	preload("res://vehicles/racer_vehicles/subaru_forester_data.tres"),
 	preload("res://vehicles/racer_vehicles/jeep_wrangler_data.tres"),
-	preload("res://vehicles/racer_vehicles/cybertruck_data.tres"),
-	preload("res://vehicles/racer_vehicles/mini_cooper_data.tres")
+	preload("res://vehicles/racer_vehicles/subaru_forester_data.tres"),
+	preload("res://vehicles/racer_vehicles/mini_cooper_data.tres"),
+	preload("res://vehicles/racer_vehicles/honda_civic_data.tres"),
+	preload("res://vehicles/racer_vehicles/cybertruck_data.tres")
 ]
 
 enum PanelState {

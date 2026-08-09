@@ -126,9 +126,27 @@ func _navigate_right() -> void:
 	_update_container_visibilities()
 	_update_container_text()
 
+func _ready() -> void:
+	
+	self.focus_entered.connect(_focus_entered)
+	self.focus_exited.connect(_focus_exited)
+
+func _focus_entered() -> void:
+	
+	(_center_container.get_theme_stylebox("panel") as StyleBoxFlat).border_color = Color.GOLDENROD
+	_center_container.scale = Vector2(1.3, 1.3)
+
+func _focus_exited() -> void:
+	
+	(_center_container.get_theme_stylebox("panel") as StyleBoxFlat).border_color = Color("bfbfbf")
+	_center_container.scale = Vector2(1.2, 1.2)
+
 var _left_joystick_active:bool = false
 var _right_joystick_active:bool = false
 func _unhandled_input(event: InputEvent) -> void:
+	
+	if (!self.has_focus()):
+		return
 	
 	if (!self.visible):
 		return

@@ -4,17 +4,27 @@ signal back_requested
 signal add_new_requested
 signal edit_profile_requested()
 
-@onready var _add_new_button:Button = $MarginContainer/VBoxContainer/AddNewButton
-@onready var _profile_selector:ProfileSelector = $MarginContainer/VBoxContainer/ProfileSelector
-@onready var _edit_profile_button:Button = $MarginContainer/VBoxContainer/EditProfileButton
-@onready var _delete_profile_button:Button = $MarginContainer/VBoxContainer/DeleteProfileButton
+@onready var _add_new_button:Button = $MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer2/AddNewButton
+@onready var _profile_selector:ProfileSelector = $MarginContainer/VBoxContainer/VBoxContainer/ProfileSelector
+@onready var _edit_profile_button:Button = $MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer2/EditProfileButton
+@onready var _delete_profile_button:Button = $MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer2/DeleteProfileButton
 
 var game_state:GameState = null
 
 func _update_profile_option_disabled_states() -> void:
 
-	_edit_profile_button.disabled = game_state.save_data.profiles.size() == 0
-	_delete_profile_button.disabled = game_state.save_data.profiles.size() == 0
+	if (game_state.save_data.profiles.size() == 0):
+		_edit_profile_button.disabled = true
+		_edit_profile_button.focus_mode = Control.FOCUS_NONE
+		_delete_profile_button.disabled = true
+		_delete_profile_button.focus_mode = Control.FOCUS_NONE
+		_profile_selector.focus_mode = Control.FOCUS_NONE
+	else:
+		_edit_profile_button.disabled = false
+		_edit_profile_button.focus_mode = Control.FOCUS_ALL
+		_delete_profile_button.disabled = false
+		_delete_profile_button.focus_mode = Control.FOCUS_ALL
+		_profile_selector.focus_mode = Control.FOCUS_ALL
 
 func _on_add_new_button_pressed() -> void:
 	
@@ -36,17 +46,24 @@ func _on_delete_profile_button_pressed() -> void:
 	game_state.save_data.save()
 	_profile_selector.set_profiles(game_state.save_data.profiles)
 	_update_profile_option_disabled_states()
+	if (game_state.save_data.profiles.size() == 0):
+		_add_new_button.grab_focus()
 
 func _ready() -> void:
 	
 	if (game_state == null):
 		RdrLogger.fatal(self, _ready.get_method() + " expects class to have a reference to GameState.")
 	
-	_add_new_button.grab_focus()
+	if (game_state.save_data.profiles.size() == 0):
+		_add_new_button.grab_focus()
+	else:
+		_profile_selector.grab_focus()
 	
 	_add_new_button.pressed.connect(_on_add_new_button_pressed)
 	
 	_profile_selector.set_profiles(game_state.save_data.profiles, game_state.profile_to_edit)
+	_profile_selector.profile_selected.connect(func(profile:Profile) -> void:
+		_edit_profile_button.grab_focus())
 	
 	_edit_profile_button.pressed.connect(_on_edit_profile_button_pressed)
 	_delete_profile_button.pressed.connect(_on_delete_profile_button_pressed)

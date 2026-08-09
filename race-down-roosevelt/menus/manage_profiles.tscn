@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ckqhdjgmrgm8s"]
 
 [ext_resource type="Script" uid="uid://dlltxdjohlsig" path="res://menus/manage_profiles.gd" id="1_jkb0r"]
+[ext_resource type="Theme" uid="uid://dhvuiivaejiah" path="res://menus/menu_theme.tres" id="1_qdvys"]
 [ext_resource type="PackedScene" uid="uid://dp7f35xelw7qo" path="res://user_controls/profile_selector.tscn" id="2_yuol2"]
 
 [node name="ManageProfiles" type="Control" unique_id=118366318]
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_qdvys")
 script = ExtResource("1_jkb0r")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2118562129]
@@ -19,31 +21,50 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1862977410]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=601660368]
 layout_mode = 2
 
-[node name="AddNewButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=920305940]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Add New"
-
-[node name="ProfileSelector" parent="MarginContainer/VBoxContainer" unique_id=878384072 instance=ExtResource("2_yuol2")]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer" unique_id=462765560]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
 
-[node name="EditProfileButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=521791611]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1020735247]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="ProfileSelector" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=878384072 instance=ExtResource("2_yuol2")]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 2
+
+[node name="VBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=92946548]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="DeleteProfileButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer2" unique_id=1143943515]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_right = NodePath("../EditProfileButton")
+disabled = true
+text = "Delete Profile"
+
+[node name="EditProfileButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer2" unique_id=521791611]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../DeleteProfileButton")
+focus_neighbor_right = NodePath("../AddNewButton")
 disabled = true
 text = "Edit Profile"
 
-[node name="DeleteProfileButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1143943515]
+[node name="AddNewButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer2" unique_id=920305940]
 layout_mode = 2
-size_flags_vertical = 3
-disabled = true
-text = "Delete Profile"
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../EditProfileButton")
+text = "Add New"

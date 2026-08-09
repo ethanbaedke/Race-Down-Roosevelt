@@ -1,12 +1,12 @@
 [gd_resource type="Theme" format=3 uid="uid://dhvuiivaejiah"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufynx"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wp64h"]
 bg_color = Color(0.2509804, 0.2509804, 0.2509804, 1)
 border_width_left = 8
 border_width_top = 8
 border_width_right = 8
 border_width_bottom = 8
-border_color = Color(0.7490196, 0.7490196, 0.7490196, 1)
+border_color = Color(0.4, 0.4, 0.4, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -17,12 +17,29 @@ expand_margin_right = 16.0
 expand_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o2r72"]
+resource_local_to_scene = true
 bg_color = Color(0.2509804, 0.2509804, 0.2509804, 1)
 border_width_left = 8
 border_width_top = 8
 border_width_right = 8
 border_width_bottom = 8
 border_color = Color(0.85490197, 0.64705884, 0.1254902, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 16.0
+expand_margin_top = 8.0
+expand_margin_right = 16.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufynx"]
+bg_color = Color(0.2509804, 0.2509804, 0.2509804, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.7490196, 0.7490196, 0.7490196, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -62,7 +79,7 @@ expand_margin_bottom = 16.0
 
 [resource]
 Button/font_sizes/font_size = 48
-Button/styles/disabled = SubResource("StyleBoxFlat_ufynx")
+Button/styles/disabled = SubResource("StyleBoxFlat_wp64h")
 Button/styles/focus = SubResource("StyleBoxFlat_o2r72")
 Button/styles/hover = SubResource("StyleBoxFlat_o2r72")
 Button/styles/normal = SubResource("StyleBoxFlat_ufynx")

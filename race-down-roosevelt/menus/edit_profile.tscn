@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dtl5swjkwa6ra"]
 
+[ext_resource type="Theme" uid="uid://dhvuiivaejiah" path="res://menus/menu_theme.tres" id="1_0plei"]
 [ext_resource type="Script" uid="uid://dsjwco4kyuqf" path="res://menus/edit_profile.gd" id="1_ukwib"]
 [ext_resource type="Texture2D" uid="uid://bkju8odrm63cv" path="res://profiles/empty_profile_icon.png" id="2_ukwib"]
 [ext_resource type="Texture2D" uid="uid://b75uxwdkbh7gr" path="res://profiles/skull_and_crossbones_profile_icon.png" id="3_5btie"]
@@ -12,47 +13,82 @@
 [ext_resource type="Texture2D" uid="uid://cvxbigetu68rh" path="res://profiles/flower_profile_icon.png" id="10_d6ole"]
 [ext_resource type="Texture2D" uid="uid://btequw2l11vhd" path="res://profiles/pizza_profile_icon.png" id="11_5478v"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0plei"]
+bg_color = Color(0.25, 0.25, 0.25, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.7490196, 0.7490196, 0.7490196, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4cm7"]
+bg_color = Color(0.25, 0.25, 0.25, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.41960785, 0.31764707, 0.0627451, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6ole"]
+bg_color = Color(0.25, 0.25, 0.25, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.85490197, 0.64705884, 0.1254902, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5478v"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ukwib"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x3pl6"]
-texture = ExtResource("3_5btie")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qn7r7"]
-texture = ExtResource("4_x3pl6")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_at0ge"]
-texture = ExtResource("5_at0ge")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_evhhj"]
-texture = ExtResource("6_ml02p")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cgkl4"]
-texture = ExtResource("7_c00ds")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ijafm"]
-texture = ExtResource("8_0plei")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vj4b0"]
-texture = ExtResource("9_f4cm7")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x8lb0"]
-texture = ExtResource("10_d6ole")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1a0m3"]
-texture = ExtResource("11_5478v")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vtqc1"]
-texture = ExtResource("2_ukwib")
-
-[node name="EditProfile" type="Control" unique_id=447221519 node_paths=PackedStringArray("_icon_buttons")]
+[node name="EditProfile" type="Control" unique_id=447221519 node_paths=PackedStringArray("_icon_textures", "_icon_buttons")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_0plei")
 script = ExtResource("1_ukwib")
-_icon_buttons = [NodePath("MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon1/Button"), NodePath("MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon2/Button"), NodePath("MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon3/Button"), NodePath("MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon4/Button"), NodePath("MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon5/Button"), NodePath("MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon6/Button"), NodePath("MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon7/Button"), NodePath("MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon8/Button"), NodePath("MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon9/Button"), NodePath("MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon10/Button")]
+_icon_textures = [NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon1/TextureRect"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon2/TextureRect"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon3/TextureRect"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon4/TextureRect"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon5/TextureRect"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon6/TextureRect"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon7/TextureRect"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon8/TextureRect"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon9/TextureRect"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon10/TextureRect")]
+_icon_buttons = [NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon1/Button"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon2/Button"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon3/Button"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon4/Button"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon5/Button"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon6/Button"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon7/Button"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon8/Button"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon9/Button"), NodePath("MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon10/Button")]
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2119804497]
 layout_mode = 1
@@ -61,28 +97,255 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=453736334]
 layout_mode = 2
-theme_override_constants/separation = 100
+theme_override_constants/separation = 64
+alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1297302663]
+[node name="IconSelectContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1583351252]
+visible = false
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 50
+size_flags_horizontal = 4
+
+[node name="IconSelection" type="CenterContainer" parent="MarginContainer/VBoxContainer/IconSelectContainer" unique_id=501025754]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection" unique_id=30741041]
+layout_mode = 2
+columns = 5
+
+[node name="Icon1" type="MarginContainer" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer" unique_id=1678064615]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon1" unique_id=2107189642]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("3_5btie")
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon1" unique_id=329309678]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0plei")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f4cm7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_d6ole")
+theme_override_styles/focus = SubResource("StyleBoxFlat_d6ole")
+
+[node name="Icon2" type="MarginContainer" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer" unique_id=683589135]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon2" unique_id=1741579469]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("4_x3pl6")
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon2" unique_id=146993574]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0plei")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f4cm7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_d6ole")
+theme_override_styles/focus = SubResource("StyleBoxFlat_d6ole")
+
+[node name="Icon3" type="MarginContainer" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer" unique_id=1242700878]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon3" unique_id=287866410]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("5_at0ge")
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon3" unique_id=87779268]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0plei")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f4cm7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_d6ole")
+theme_override_styles/focus = SubResource("StyleBoxFlat_d6ole")
+
+[node name="Icon4" type="MarginContainer" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer" unique_id=722522017]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon4" unique_id=1063068484]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("6_ml02p")
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon4" unique_id=94735467]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0plei")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f4cm7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_d6ole")
+theme_override_styles/focus = SubResource("StyleBoxFlat_d6ole")
+
+[node name="Icon5" type="MarginContainer" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer" unique_id=563374029]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon5" unique_id=1694860514]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("7_c00ds")
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon5" unique_id=1765276224]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0plei")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f4cm7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_d6ole")
+theme_override_styles/focus = SubResource("StyleBoxFlat_d6ole")
+
+[node name="Icon6" type="MarginContainer" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer" unique_id=1102226177]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 32
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon6" unique_id=1251841552]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("8_0plei")
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon6" unique_id=1208667140]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0plei")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f4cm7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_d6ole")
+theme_override_styles/focus = SubResource("StyleBoxFlat_d6ole")
+
+[node name="Icon7" type="MarginContainer" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer" unique_id=1664805178]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 32
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon7" unique_id=819831989]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("9_f4cm7")
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon7" unique_id=1924057111]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0plei")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f4cm7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_d6ole")
+theme_override_styles/focus = SubResource("StyleBoxFlat_d6ole")
+
+[node name="Icon8" type="MarginContainer" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer" unique_id=392382348]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 32
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon8" unique_id=461689029]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("10_d6ole")
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon8" unique_id=1015724482]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0plei")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f4cm7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_d6ole")
+theme_override_styles/focus = SubResource("StyleBoxFlat_d6ole")
+
+[node name="Icon9" type="MarginContainer" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer" unique_id=1686773851]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 32
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon9" unique_id=1270301254]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("11_5478v")
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon9" unique_id=1408312513]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0plei")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f4cm7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_d6ole")
+theme_override_styles/focus = SubResource("StyleBoxFlat_d6ole")
+
+[node name="Icon10" type="MarginContainer" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer" unique_id=1444023868]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 32
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon10" unique_id=1033729358]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("2_ukwib")
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/IconSelectContainer/IconSelection/GridContainer/Icon10" unique_id=1124497784]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0plei")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f4cm7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_d6ole")
+theme_override_styles/focus = SubResource("StyleBoxFlat_d6ole")
+
+[node name="NameContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=50242206]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/NameContainer" unique_id=1297302663]
+layout_mode = 2
+theme_override_constants/separation = 32
 alignment = 1
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=973451610]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/NameContainer/HBoxContainer" unique_id=2051504263]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/NameContainer/HBoxContainer/MarginContainer" unique_id=973451610]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("2_ukwib")
 expand_mode = 3
 
-[node name="Name" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=839673888]
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/NameContainer/HBoxContainer/MarginContainer" unique_id=1504353490]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5478v")
+
+[node name="Name" type="LineEdit" parent="MarginContainer/VBoxContainer/NameContainer/HBoxContainer" unique_id=839673888]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_uneditable_color = Color(1, 1, 1, 1)
@@ -100,209 +363,30 @@ selecting_enabled = false
 drag_and_drop_selection_enabled = false
 flat = true
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1266795223]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1398221544]
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 4.0
+theme_override_constants/separation = 64
 
-[node name="DefaultOptions" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer" unique_id=1312389358]
+[node name="ChangeNameButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1939663945]
 layout_mode = 2
-theme_override_constants/margin_left = 600
-theme_override_constants/margin_right = 600
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/DefaultOptions" unique_id=1124018389]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 50
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer" unique_id=107503551]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 6.0
-theme_override_constants/separation = 50
-
-[node name="ChangeNameButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/VBoxContainer" unique_id=1939663945]
-layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Change Name"
 
-[node name="ChangeIconButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/VBoxContainer" unique_id=1055759844]
+[node name="ChangeIconButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1055759844]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Change Profile Picture"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer" unique_id=1330648335]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
-theme_override_constants/separation = 50
-
-[node name="DiscardChangesButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/HBoxContainer" unique_id=1138258764]
+[node name="DiscardChangesButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1138258764]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Discard Changes"
 
-[node name="SaveChangesButton2" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/HBoxContainer" unique_id=720457625]
+[node name="SaveChangesButton2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=720457625]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Save Changes"
-
-[node name="IconSelection" type="CenterContainer" parent="MarginContainer/VBoxContainer/MarginContainer" unique_id=501025754]
-visible = false
-layout_mode = 2
-
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection" unique_id=30741041]
-layout_mode = 2
-columns = 5
-
-[node name="Icon1" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer" unique_id=1678064615]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon1" unique_id=1934936687]
-texture_filter = 1
-custom_minimum_size = Vector2(156, 156)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_x3pl6")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_x3pl6")
-theme_override_styles/hover = SubResource("StyleBoxTexture_x3pl6")
-
-[node name="Icon2" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer" unique_id=1241039730]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon2" unique_id=815390314]
-texture_filter = 1
-custom_minimum_size = Vector2(156, 156)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_qn7r7")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_qn7r7")
-theme_override_styles/hover = SubResource("StyleBoxTexture_qn7r7")
-
-[node name="Icon3" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer" unique_id=1338460379]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon3" unique_id=873247863]
-texture_filter = 1
-custom_minimum_size = Vector2(156, 156)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_at0ge")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_at0ge")
-theme_override_styles/hover = SubResource("StyleBoxTexture_at0ge")
-
-[node name="Icon4" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer" unique_id=1434854175]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon4" unique_id=1378452762]
-texture_filter = 1
-custom_minimum_size = Vector2(156, 156)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_evhhj")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_evhhj")
-theme_override_styles/hover = SubResource("StyleBoxTexture_evhhj")
-
-[node name="Icon5" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer" unique_id=377924624]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon5" unique_id=715246095]
-texture_filter = 1
-custom_minimum_size = Vector2(156, 156)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_cgkl4")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_cgkl4")
-theme_override_styles/hover = SubResource("StyleBoxTexture_cgkl4")
-
-[node name="Icon6" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer" unique_id=730295942]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon6" unique_id=30647942]
-texture_filter = 1
-custom_minimum_size = Vector2(156, 156)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_ijafm")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_ijafm")
-theme_override_styles/hover = SubResource("StyleBoxTexture_ijafm")
-
-[node name="Icon7" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer" unique_id=1559431672]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon7" unique_id=880955846]
-texture_filter = 1
-custom_minimum_size = Vector2(156, 156)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_vj4b0")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_vj4b0")
-theme_override_styles/hover = SubResource("StyleBoxTexture_vj4b0")
-
-[node name="Icon8" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer" unique_id=514599056]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon8" unique_id=864501239]
-texture_filter = 1
-custom_minimum_size = Vector2(156, 156)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_x8lb0")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_x8lb0")
-theme_override_styles/hover = SubResource("StyleBoxTexture_x8lb0")
-
-[node name="Icon9" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer" unique_id=163417203]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon9" unique_id=718899481]
-texture_filter = 1
-custom_minimum_size = Vector2(156, 156)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_1a0m3")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_1a0m3")
-theme_override_styles/hover = SubResource("StyleBoxTexture_1a0m3")
-
-[node name="Icon10" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer" unique_id=795385501]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/IconSelection/GridContainer/Icon10" unique_id=1215745362]
-texture_filter = 1
-custom_minimum_size = Vector2(156, 156)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_vtqc1")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_vtqc1")
-theme_override_styles/hover = SubResource("StyleBoxTexture_vtqc1")

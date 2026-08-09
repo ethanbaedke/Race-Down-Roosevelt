@@ -72,9 +72,9 @@ corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
-expand_margin_left = 32.0
+expand_margin_left = 48.0
 expand_margin_top = 16.0
-expand_margin_right = 32.0
+expand_margin_right = 48.0
 expand_margin_bottom = 16.0
 
 [resource]

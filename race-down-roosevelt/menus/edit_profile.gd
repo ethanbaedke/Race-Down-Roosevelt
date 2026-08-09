@@ -2,16 +2,15 @@ class_name EditProfile extends Control
 
 signal back_requested
 
-@onready var _profile_icon:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/Icon
-@onready var _profile_name:LineEdit = $MarginContainer/VBoxContainer/HBoxContainer/Name
-@onready var _change_name_button:Button = $MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/VBoxContainer/ChangeNameButton
-@onready var _change_icon_button:Button = $MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/VBoxContainer/ChangeIconButton
-@onready var _discard_changes_button:Button = $MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/HBoxContainer/DiscardChangesButton
-@onready var _save_changes_button:Button = $MarginContainer/VBoxContainer/MarginContainer/DefaultOptions/VBoxContainer/HBoxContainer/SaveChangesButton2
+@onready var _profile_icon:TextureRect = $MarginContainer/VBoxContainer/NameContainer/HBoxContainer/MarginContainer/Icon
+@onready var _profile_name:LineEdit = $MarginContainer/VBoxContainer/NameContainer/HBoxContainer/Name
+@onready var _change_name_button:Button = $MarginContainer/VBoxContainer/HBoxContainer2/ChangeNameButton
+@onready var _change_icon_button:Button = $MarginContainer/VBoxContainer/HBoxContainer2/ChangeIconButton
+@onready var _discard_changes_button:Button = $MarginContainer/VBoxContainer/HBoxContainer2/DiscardChangesButton
+@onready var _save_changes_button:Button = $MarginContainer/VBoxContainer/HBoxContainer2/SaveChangesButton2
+@onready var _icon_selection:PanelContainer = $MarginContainer/VBoxContainer/IconSelectContainer
 
-@onready var _default_options:MarginContainer = $MarginContainer/VBoxContainer/MarginContainer/DefaultOptions
-@onready var _icon_selection:CenterContainer = $MarginContainer/VBoxContainer/MarginContainer/IconSelection
-
+@export var _icon_textures:Array[TextureRect] = []
 @export var _icon_buttons:Array[Button] = []
 
 var game_state:GameState = null
@@ -62,15 +61,13 @@ func _on_change_name_button_pressed() -> void:
 
 func _on_change_icon_button_pressed() -> void:
 	
-	_default_options.visible = false
 	_icon_selection.visible = true
 	if (_icon_buttons.size() > 0):
 		_icon_buttons[0].grab_focus()
 
 func _handle_icon_button_pressed(index:int) -> void:
 	
-	var sbt:StyleBoxTexture = _icon_buttons[index].get_theme_stylebox("normal", "")
-	_profile_copy.icon = sbt.texture
+	_profile_copy.icon = _icon_textures[index].texture
 	_update_profile_ui()
 	
 	_exit_icon_selection()
@@ -78,8 +75,6 @@ func _handle_icon_button_pressed(index:int) -> void:
 func _exit_icon_selection() -> void:
 	
 	_icon_selection.visible = false
-	_default_options.visible = true
-	
 	_change_icon_button.grab_focus.call_deferred()
 
 func _on_save_changes_button_pressed() -> void:

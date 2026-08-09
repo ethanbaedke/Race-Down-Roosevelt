@@ -18,6 +18,33 @@ func _play_opening_animation() -> void:
 	await cut.finished
 	cut.queue_free()
 
+func _create_new_save_data() -> SaveData:
+	
+	var data:SaveData = SaveData.new()
+	
+	var guest1:Profile = Profile.new()
+	guest1.name = "Guest 1"
+	guest1.icon = Globals.PROFILE_ICONS[0]
+	
+	var guest2:Profile = Profile.new()
+	guest2.name = "Guest 2"
+	guest2.icon = Globals.PROFILE_ICONS[1]
+	
+	var guest3:Profile = Profile.new()
+	guest3.name = "Guest 3"
+	guest3.icon = Globals.PROFILE_ICONS[2]
+	
+	var guest4:Profile = Profile.new()
+	guest4.name = "Guest 4"
+	guest4.icon = Globals.PROFILE_ICONS[3]
+	
+	data.profiles.append(guest1)
+	data.profiles.append(guest2)
+	data.profiles.append(guest3)
+	data.profiles.append(guest4)
+	
+	return data
+
 func _ready() -> void:
 
 	# Try and load save data.
@@ -25,9 +52,9 @@ func _ready() -> void:
 	if (ResourceLoader.exists(Globals.SAVE_DATA_PATH)):
 		save_data = ResourceLoader.load(Globals.SAVE_DATA_PATH)
 		if (save_data == null):
-			save_data = SaveData.new()
+			save_data = _create_new_save_data()
 	else:
-		save_data = SaveData.new()
+		save_data = _create_new_save_data()
 		
 	_game_state = GameState.new()
 	_game_state.save_data = save_data

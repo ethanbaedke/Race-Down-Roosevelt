@@ -19,19 +19,27 @@ signal player_ready
 signal profile_selected(profile:Profile)
 signal profile_freed(profile:Profile)
 
+@export var text_scaling:float = 1.0
+
 @export var _stat_bar_color_gradient:GradientTexture1D
 
-@onready var _profile_name:Label = $ProfileName
+@onready var _waiting_label:Label = $MarginContainer/VBoxContainer/Control2/WaitingForDevice/WaitingLabel
+@onready var _profile_name_container:PanelContainer = $MarginContainer/VBoxContainer/Control3/ProfileNameContainer
+@onready var _profile_name:Label = $MarginContainer/VBoxContainer/Control3/ProfileNameContainer/ProfileName
 @onready var _vehicle_model_camera:Camera3D = $VehicleModelViewport/SubViewport/VehicleModelCamera
-@onready var _speed_bar:ProgressBar = $VehicleSelection/MarginContainer/VBoxContainer/Top/Left/SpeedBar
-@onready var _acceleration_bar:ProgressBar = $VehicleSelection/MarginContainer/VBoxContainer/Top/Right/AccelerationBar
-@onready var _durability_bar:ProgressBar = $VehicleSelection/MarginContainer/VBoxContainer/Bottom/Left/DurabilityBar
-@onready var _weight_bar:ProgressBar = $VehicleSelection/MarginContainer/VBoxContainer/Bottom/Right/WeightBar
-
-@onready var _waiting_for_device_ui:Control = $WaitingForDevice
-@onready var _profile_selector:ProfileSelector = $ProfileSelector
-@onready var _vehicle_selection_ui:Control = $VehicleSelection
-@onready var _ready_ui:Control = $Ready
+@onready var _speed_bar:ProgressBar = $MarginContainer/VBoxContainer/Control/VehicleStats/Speed/SpeedBar
+@onready var _speed_label:Label = $MarginContainer/VBoxContainer/Control/VehicleStats/Speed/Label
+@onready var _acceleration_bar:ProgressBar = $MarginContainer/VBoxContainer/Control/VehicleStats/Acceleration/AccelerationBar
+@onready var _acceleration_label:Label = $MarginContainer/VBoxContainer/Control/VehicleStats/Acceleration/Label
+@onready var _durability_bar:ProgressBar = $MarginContainer/VBoxContainer/Control/VehicleStats/Durability/DurabilityBar
+@onready var _durability_label:Label = $MarginContainer/VBoxContainer/Control/VehicleStats/Durability/Label
+@onready var _weight_bar:ProgressBar = $MarginContainer/VBoxContainer/Control/VehicleStats/Weight/WeightBar
+@onready var _weight_label:Label = $MarginContainer/VBoxContainer/Control/VehicleStats/Weight/Label
+@onready var _waiting_for_device_ui:Control = $MarginContainer/VBoxContainer/Control2/WaitingForDevice
+@onready var _profile_selector:ProfileSelector = $MarginContainer/VBoxContainer/Control2/ProfileSelector
+@onready var _vehicle_selection_ui:Control = $MarginContainer/VBoxContainer/Control/VehicleStats
+@onready var _ready_ui:Control = $MarginContainer/VBoxContainer/Control2/ReadyContainer
+@onready var _ready_label:Label = $MarginContainer/VBoxContainer/Control2/ReadyContainer/Label
 
 var game_state:GameState = null
 
@@ -78,6 +86,8 @@ func transition_state(newstate:PanelState) -> void:
 			update_vehicle()
 		
 		PanelState.READY:
+			# Keep car stats visible when player readys up.
+			_vehicle_selection_ui.visible = true
 			_ready_ui.visible = true
 			player_ready.emit()
 
@@ -103,10 +113,12 @@ func set_profile(profile:Profile) -> void:
 	racer.profile = profile
 	
 	if (profile == null):
+		_profile_name_container.visible = false
 		_profile_name.text = ""
 		transition_state(PanelState.PROFILE_SELECTION)
 	else:
 		profile_selected.emit(profile)
+		_profile_name_container.visible = true
 		_profile_name.text = profile.name
 		transition_state(PanelState.VEHICLE_SELECTION)
 
@@ -164,7 +176,16 @@ func _ready() -> void:
 	_profile_selector.profile_selected.connect(func(profile:Profile) -> void:
 		set_profile(profile))
 	
+	_profile_name_container.visible = false
 	_profile_name.text = ""
+	
+	_waiting_label.add_theme_font_size_override("font_size", (48.0 * text_scaling) as int)
+	_profile_name.add_theme_font_size_override("font_size", (48.0 * text_scaling) as int)
+	_speed_label.add_theme_font_size_override("font_size", (32.0 * text_scaling) as int)
+	_acceleration_label.add_theme_font_size_override("font_size", (32.0 * text_scaling) as int)
+	_durability_label.add_theme_font_size_override("font_size", (32.0 * text_scaling) as int)
+	_weight_label.add_theme_font_size_override("font_size", (32.0 * text_scaling) as int)
+	_ready_label.add_theme_font_size_override("font_size", (64.0 * text_scaling) as int)
 
 func _process(delta: float) -> void:
 	

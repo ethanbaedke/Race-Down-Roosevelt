@@ -259,11 +259,13 @@ dragging_enabled = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+text_scaling = 0.75
 
 [node name="VehicleSelectionPanel2" parent="HSplitContainer" unique_id=1003487227 instance=ExtResource("2_6aqfg")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+text_scaling = 0.75
 
 [node name="garage" parent="." unique_id=766975791 instance=ExtResource("3_6aqfg")]
 

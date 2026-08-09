@@ -48,6 +48,18 @@ expand_margin_top = 8.0
 expand_margin_right = 16.0
 expand_margin_bottom = 8.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0ilo"]
+bg_color = Color(0.5, 0.5, 0.5, 1)
+border_color = Color(0.7490196, 0.7490196, 0.7490196, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+expand_margin_left = 32.0
+expand_margin_top = 16.0
+expand_margin_right = 32.0
+expand_margin_bottom = 16.0
+
 [resource]
 Button/font_sizes/font_size = 48
 Button/styles/disabled = SubResource("StyleBoxFlat_ufynx")
@@ -55,3 +67,5 @@ Button/styles/focus = SubResource("StyleBoxFlat_o2r72")
 Button/styles/hover = SubResource("StyleBoxFlat_o2r72")
 Button/styles/normal = SubResource("StyleBoxFlat_ufynx")
 Button/styles/pressed = SubResource("StyleBoxFlat_lxfm7")
+Label/font_sizes/font_size = 48
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_e0ilo")

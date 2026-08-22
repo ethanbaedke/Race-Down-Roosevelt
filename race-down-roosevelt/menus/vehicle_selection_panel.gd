@@ -80,6 +80,7 @@ func transition_state(newstate:PanelState) -> void:
 		PanelState.PROFILE_SELECTION:
 			_profile_selector.visible = true
 			_profile_selector.device_ind = racer.device_index
+			_profile_selector.give_fake_focus()
 		
 		PanelState.VEHICLE_SELECTION:
 			_vehicle_selection_ui.visible = true

@@ -16,6 +16,9 @@ var _profile_ind:int = 0
 # This is the device that is controlling the profile selector.
 var device_ind:int = -2
 
+# Used in splitscreen when multiple selectors are visible at once (focus doesn't work)
+var _has_fake_focus:bool = false
+
 func set_profiles(new_profiles:Array[Profile], starting_profile:Profile = null) -> void:
 	
 	profiles = new_profiles
@@ -50,6 +53,17 @@ func try_select_specific_profile(profile:Profile) -> void:
 		_profile_ind = profile_ind
 		_update_container_visibilities()
 		_update_container_text()
+
+# Used in splitscreen when multiple selectors are visible at once (focus doesn't work)
+func give_fake_focus() -> void:
+	
+	_has_fake_focus = true
+	_apply_highlight()
+
+func remove_fake_focus() -> void:
+	
+	_has_fake_focus = false
+	_remove_highlight()
 
 func _update_container_visibilities() -> void:
 	
@@ -131,21 +145,31 @@ func _ready() -> void:
 	self.focus_entered.connect(_focus_entered)
 	self.focus_exited.connect(_focus_exited)
 
-func _focus_entered() -> void:
+func _apply_highlight() -> void:
 	
 	(_center_container.get_theme_stylebox("panel") as StyleBoxFlat).border_color = Color.GOLDENROD
 	_center_container.scale = Vector2(1.3, 1.3)
 
-func _focus_exited() -> void:
+func _remove_highlight() -> void:
 	
 	(_center_container.get_theme_stylebox("panel") as StyleBoxFlat).border_color = Color("bfbfbf")
 	_center_container.scale = Vector2(1.2, 1.2)
+
+func _focus_entered() -> void:
+	
+	_has_fake_focus = false
+	_apply_highlight()
+
+func _focus_exited() -> void:
+	
+	_has_fake_focus = false
+	_remove_highlight()
 
 var _left_joystick_active:bool = false
 var _right_joystick_active:bool = false
 func _unhandled_input(event: InputEvent) -> void:
 	
-	if (!self.has_focus()):
+	if (!self.has_focus() && !_has_fake_focus):
 		return
 	
 	if (!self.visible):

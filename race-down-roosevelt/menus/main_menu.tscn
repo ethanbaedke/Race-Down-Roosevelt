@@ -23,7 +23,7 @@ offset_top = -183.0
 offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = 96
+theme_override_constants/separation = 64
 alignment = 1
 
 [node name="SingleRaceButton" type="Button" parent="HBoxContainer" unique_id=985711683]
@@ -40,6 +40,11 @@ text = "Tournament"
 layout_mode = 2
 size_flags_vertical = 3
 text = "Manage Profiles"
+
+[node name="Settings" type="Button" parent="HBoxContainer" unique_id=267041889]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Settings"
 
 [node name="Quit" type="Button" parent="HBoxContainer" unique_id=1379614687]
 layout_mode = 2

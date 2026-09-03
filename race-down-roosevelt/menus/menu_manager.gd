@@ -13,6 +13,7 @@ enum MenuType {
 	TOURNAMENT_SETUP,
 	TOURNAMENT_MENU,
 	TOURNAMENT_CONTINUE,
+	SETTINGS,
 }
 
 @onready var _ui_parent:Control = $CanvasLayer/Control
@@ -32,6 +33,7 @@ enum MenuType {
 @onready var _tournament_setup_scene:PackedScene = preload("res://menus/tournament_setup.tscn")
 @onready var _tournament_menu_scene:PackedScene = preload("res://menus/tournament_menu.tscn")
 @onready var _tournament_continue_scene:PackedScene = preload("res://menus/tournament_continue.tscn")
+@onready var _settings_scene:PackedScene = preload("res://menus/settings.tscn")
 
 var _main_menu:MainMenu = null
 var _player_count_selection:PlayerCountSelection = null
@@ -42,6 +44,7 @@ var _tournament_start:TournamentStart = null
 var _tournament_setup:TournamentSetup = null
 var _tournament_menu:TournamentMenu = null
 var _tournament_continue:TournamentContinue = null
+var _settings:Settings = null
 
 var game_state:GameState = null
 
@@ -100,6 +103,8 @@ func _go_to_new_menu(type:MenuType, back_navigate:bool = false) -> Control:
 			new_menu = _setup_tournament_menu()
 		MenuType.TOURNAMENT_CONTINUE:
 			new_menu = _setup_tournament_continue()
+		MenuType.SETTINGS:
+			new_menu = _setup_settings()
 			
 	if (new_menu != null):
 		_current_menu = new_menu
@@ -159,11 +164,11 @@ func _fade_to_new_menu(new_menu_type:MenuType, garage_enabled:bool, back_navigat
 
 func _setup_main_menu() -> Control:
 	
-	
 	_main_menu = _main_menu_scene.instantiate()
 	_main_menu.single_race_selected.connect(_on_main_menu_single_race_selected)
 	_main_menu.manage_profiles_selected.connect(_on_main_menu_manage_profiles_selected)
 	_main_menu.tournament_selected.connect(_on_tournament_selected)
+	_main_menu.settings_selected.connect(_on_settings_selected)
 	return _main_menu
 	
 func _on_main_menu_single_race_selected() -> void:
@@ -178,6 +183,10 @@ func _on_tournament_selected() -> void:
 	
 	_go_to_new_menu(MenuType.TOURNAMENT_START)
 	
+func _on_settings_selected() -> void:
+	
+	_go_to_new_menu(MenuType.SETTINGS)
+
 #endregion
 
 #region Player Count Selection
@@ -377,6 +386,21 @@ func _on_tournament_continue_back_requested() -> void:
 func _on_tournament_continue_continue_tournament_requested() -> void:
 	
 	await _fade_to_new_menu(MenuType.TOURNAMENT_MENU, false)
+
+#endregion
+
+#region Settings
+
+func _setup_settings() -> Control:
+	
+	_settings = _settings_scene.instantiate()
+	_settings.game_state = game_state
+	_settings.back_requested.connect(_on_tournament_start_back_requested)
+	return _settings
+
+func _on_settings_back_requested() -> void:
+	
+	_go_to_new_menu(MenuType.NONE, true)
 
 #endregion
 

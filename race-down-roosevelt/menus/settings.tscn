@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://bbsejijyt623s"]
+
+[ext_resource type="Theme" uid="uid://dhvuiivaejiah" path="res://menus/menu_theme.tres" id="1_kot5a"]
+[ext_resource type="Script" uid="uid://kgveg6bufhkk" path="res://menus/settings.gd" id="1_urrvo"]
+
+[node name="Settings" type="Control" unique_id=2128703468]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_kot5a")
+script = ExtResource("1_urrvo")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1479616403]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 256
+theme_override_constants/margin_top = 256
+theme_override_constants/margin_right = 256
+theme_override_constants/margin_bottom = 256
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1380608606]
+layout_mode = 2
+
+[node name="MusicVolume" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1861438642]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/MusicVolume" unique_id=1670113907]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MusicVolume/PanelContainer" unique_id=1342609157]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Music Volume"
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MusicVolume" unique_id=1289270209]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 50.0
+
+[node name="SfxVolume" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=900126116]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/SfxVolume" unique_id=34616443]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/SfxVolume/PanelContainer" unique_id=1310562949]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sound Effects Volume"
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/SfxVolume" unique_id=723111038]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 50.0
+
+[node name="GraphicsQuality" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=772817982]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/GraphicsQuality" unique_id=407944912]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GraphicsQuality/PanelContainer" unique_id=2060367562]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Graphics Quality"
+
+[node name="Control" type="CenterContainer" parent="MarginContainer/VBoxContainer/GraphicsQuality" unique_id=159315377]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/GraphicsQuality/Control" unique_id=2028460291]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+selected = 1
+item_count = 3
+popup/item_0/text = "High"
+popup/item_0/id = 0
+popup/item_1/text = "Normal"
+popup/item_1/id = 1
+popup/item_2/text = "Low"
+popup/item_2/id = 2
+
+[node name="AiDifficulty" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1664663290]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/AiDifficulty" unique_id=1757314599]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/AiDifficulty/PanelContainer" unique_id=2039744446]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "AI Difficulty"
+
+[node name="Control" type="CenterContainer" parent="MarginContainer/VBoxContainer/AiDifficulty" unique_id=1966385966]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/AiDifficulty/Control" unique_id=203603030]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+selected = 1
+item_count = 3
+popup/item_0/text = "High"
+popup/item_0/id = 0
+popup/item_1/text = "Normal"
+popup/item_1/id = 1
+popup/item_2/text = "Low"
+popup/item_2/id = 2

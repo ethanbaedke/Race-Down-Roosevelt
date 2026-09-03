@@ -3,10 +3,12 @@ class_name MainMenu extends Control
 signal single_race_selected
 signal manage_profiles_selected
 signal tournament_selected
+signal settings_selected
 
 @onready var _single_race_button:Button = $HBoxContainer/SingleRaceButton
 @onready var _manage_profiles_button:Button = $HBoxContainer/ManageProfilesButton
 @onready var _tournament_button:Button = $HBoxContainer/Tournament
+@onready var _settings_button:Button = $HBoxContainer/Settings
 @onready var _quit_button:Button = $HBoxContainer/Quit
 
 func _ready() -> void:
@@ -19,5 +21,7 @@ func _ready() -> void:
 		manage_profiles_selected.emit())
 	_tournament_button.pressed.connect(func() -> void:
 		tournament_selected.emit())
+	_settings_button.pressed.connect(func() -> void:
+		settings_selected.emit())
 	_quit_button.pressed.connect(func() -> void:
 		get_tree().quit())

@@ -94,11 +94,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 selected = 1
 item_count = 3
-popup/item_0/text = "High"
+popup/item_0/text = "Low"
 popup/item_0/id = 0
 popup/item_1/text = "Normal"
 popup/item_1/id = 1
-popup/item_2/text = "Low"
+popup/item_2/text = "High"
 popup/item_2/id = 2
 
 [node name="AiDifficulty" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1664663290]
@@ -125,9 +125,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 selected = 1
 item_count = 3
-popup/item_0/text = "High"
+popup/item_0/text = "Low"
 popup/item_0/id = 0
-popup/item_1/text = "Normal"
+popup/item_1/text = "Medium"
 popup/item_1/id = 1
-popup/item_2/text = "Low"
+popup/item_2/text = "High"
 popup/item_2/id = 2

@@ -395,11 +395,13 @@ func _setup_settings() -> Control:
 	
 	_settings = _settings_scene.instantiate()
 	_settings.game_state = game_state
-	_settings.back_requested.connect(_on_tournament_start_back_requested)
+	_settings.back_requested.connect(_on_settings_back_requested)
 	return _settings
 
 func _on_settings_back_requested() -> void:
 	
+	# Save data that may have been changed on the settings menu.
+	game_state.save_data.save()
 	_go_to_new_menu(MenuType.NONE, true)
 
 #endregion
